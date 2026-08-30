@@ -1,0 +1,128 @@
+{
+  "category": "science_reasoning",
+  "category_code": "SCI",
+  "weight_in_scorecard": 15,
+  "description": "Evaluates NCTB Class 6-10 General Science & Physics/Chemistry/Biology conceptual understanding, formula application, and Bengali scientific explanations.",
+  "items": [
+    {
+      "id": "SCI-001",
+      "title": "Newton's First Law of Motion",
+      "prompt": "নিউটনের গতির প্রথম সূত্রটি লেখো এবং এর থেকে কীভাবে জড়তা ও বলের ধারণা পাওয়া যায় তা বাংলায় ব্যাখ্যা করো।",
+      "expected_concepts": ["জড়তা", "বাহ্যিক বল", "স্থির জড়তা", "গতি জড়তা"]
+    },
+    {
+      "id": "SCI-002",
+      "title": "Newton's Second Law & Formula Derivation",
+      "prompt": "নিউটনের গতির দ্বিতীয় সূত্রটি লেখো এবং F = ma সমীকরণটি কীভাবে প্রতিপাদন করা হয় তা ধাপে ধাপে দেখাও।",
+      "expected_concepts": ["ভরবেগের পরিবর্তন", "ত্বরণ a = (v-u)/t", "F = ma"]
+    },
+    {
+      "id": "SCI-003",
+      "title": "Work and Kinetic Energy Calculation",
+      "prompt": "১০ কেজি ভরের একটি বস্তু ৫ মিটার/সেকেন্ড বেগে গতিশীল হলে এর গতিশক্তি (Kinetic Energy) কত জুল হবে? (সূত্র: Ek = 1/2 m v^2)",
+      "expected_concepts": ["Ek = 1/2 * 10 * 5^2", "Ek = 125 জুল"]
+    },
+    {
+      "id": "SCI-004",
+      "title": "Universal Gravitation Formula",
+      "prompt": "মহাকর্ষ সূত্রটি লেখো এবং দুটি বস্তুর মধ্যকার দূরত্ব দ্বিগুণ করা হলে মহাকর্ষ বলের কী পরিবর্তন হবে তা হিসাব করে দেখাও।",
+      "expected_concepts": ["F = G(m1 m2)/d^2", "দূরত্ব দ্বিগুণ হলে বল এক-চতুর্থাংশ (1/4) হবে"]
+    },
+    {
+      "id": "SCI-005",
+      "title": "Ohm's Law & Electric Current",
+      "prompt": "ওহমের সূত্রটি লেখো। একটি পরিবাহীর দুই প্রান্তের বিভব পার্থক্য ২০ ভোল্ট এবং রোধ ৪ ওহম হলে তড়িৎ প্রবাহ (I) কত অ্যাম্পিয়ার হবে?",
+      "expected_concepts": ["V = IR", "I = V / R", "I = 20 / 4 = 5 অ্যাম্পিয়ার"]
+    },
+    {
+      "id": "SCI-006",
+      "title": "Archimedes' Principle & Buoyancy",
+      "prompt": "আর্কিমিডিসের নীতিটি লেখো। একটি বস্তু পানিতে কেন ভাসে বা ডোবে তা প্লবতার ভিত্তিতে ব্যাখ্যা করো।",
+      "expected_concepts": ["অপসারিত তরলের ওজন", "উর্ধ্বমুখী বল বা প্লবতা", "ঘনত্ব"]
+    },
+    {
+      "id": "SCI-007",
+      "title": "Light Reflection Laws",
+      "prompt": "আলোর প্রতিফলনের দুটি সূত্র বাংলায় লেখো এবং আপতন কোণ ৬০° হলে প্রতিফলন কোণ কত হবে তা বলো।",
+      "expected_concepts": ["আপতন কোণ = প্রতিফলন কোণ", "প্রতিফলন কোণ = ৬০°", "একই সমতলে থাকে"]
+    },
+    {
+      "id": "SCI-008",
+      "title": "Atomic Structure & Subatomic Particles",
+      "prompt": "পরমাণুর তিনটি মূল কণা (ইলেকট্রন, প্রোটন, নিউট্রন) এর অবস্থান ও আধান (Charge) সম্পর্কে সংক্ষেপে লেখো।",
+      "expected_concepts": ["নিউক্লিয়াস", "প্রোটন ধনাত্মক", "ইলেকট্রন ঋণাত্মক", "নিউট্রন নিরপেক্ষ"]
+    },
+    {
+      "id": "SCI-009",
+      "title": "Ionic vs Covalent Bonding",
+      "prompt": "আয়নিক বন্ধন এবং সমযোজী বন্ধনের মধ্যে মূল পার্থক্য কী? সোডিয়াম ক্লোরাইড (NaCl) এ কোন বন্ধন বিদ্যমান?",
+      "expected_concepts": ["ইলেকট্রন আদান-প্রদান (আয়নিক)", "ইলেকট্রন ভাগাভাগি (সমযোজী)", "NaCl আয়নিক"]
+    },
+    {
+      "id": "SCI-010",
+      "title": "Acid-Base Neutralization",
+      "prompt": "প্রশমন বিক্রিয়া (Neutralization Reaction) কাকে বলে? হাইড্রোক্লোরিক এসিড ও সোডিয়াম হাইড্রোক্সাইডের বিক্রিয়ার সমীকরণটি লেখো।",
+      "expected_concepts": ["এসিড + ক্ষার = লবণ + পানি", "HCl + NaOH -> NaCl + H2O"]
+    },
+    {
+      "id": "SCI-011",
+      "title": "pH Scale and Acidity",
+      "prompt": "pH স্কেল কী? নিরপেক্ষ পানির pH কত এবং কোনো দ্রবণের pH ৫ হলে দ্রবণটি অম্লীয় নাকি ক্ষারীয়?",
+      "expected_concepts": ["হাইড্রোজেন আয়নের ঘনমাত্রা", "নিরপেক্ষ pH = 7", "pH 5 হলো অম্লীয়"]
+    },
+    {
+      "id": "SCI-012",
+      "title": "Chemical Equation Balancing",
+      "prompt": "রাসায়নিক সমীকরণটি সমতা বিধান করো: H2 + O2 -> H2O। প্রতিটি পরমাণুর সংখ্যা গণনা করে দেখাও।",
+      "expected_concepts": ["2H2 + O2 -> 2H2O", "হাইড্রোজেন 4টি", "অক্সিজেন 2টি"]
+    },
+    {
+      "id": "SCI-013",
+      "title": "Plant vs Animal Cell",
+      "prompt": "উদ্ভিদকোষ এবং প্রাণীকোষের মধ্যে ৩টি প্রধান পার্থক্য উল্লেখ করো।",
+      "expected_concepts": ["কোষপ্রাচীর", "প্লাস্টিড/ক্লোরোপ্লাস্ট", "কোষগহ্বর"]
+    },
+    {
+      "id": "SCI-014",
+      "title": "Photosynthesis Chemical Process",
+      "prompt": "সালোকসংশ্লেষণ প্রক্রিয়ার সামগ্রিক রাসায়নিক সমীকরণটি বাংলায় বা সমীকরণে লেখো এবং প্রয়োজনীয় শর্তগুলো উল্লেখ করো।",
+      "expected_concepts": ["6CO2 + 12H2O + আলো/ক্লোরোফিল -> C6H12O6 + 6O2 + 6H2O"]
+    },
+    {
+      "id": "SCI-015",
+      "title": "Cellular Respiration (Aerobic)",
+      "prompt": "সবাত শ্বসন ও অবাত শ্বসনের মূল পার্থক্য কী? সবাত শ্বসনে ১ অণু গ্লুকোজ জারিত হয়ে প্রধান কী উৎপন্ন করে?",
+      "expected_concepts": ["অক্সিজেনের উপস্থিতি/অনুপস্থিতি", "CO2, H2O এবং শক্তি (ATP)"]
+    },
+    {
+      "id": "SCI-016",
+      "title": "Human Digestive Enzymes",
+      "prompt": "পাকস্থলীতে খাদ্য পরিপাকে হাইড্রোক্লোরিক এসিড (HCl) এবং পেপসিন এনজাইমের ভূমিকা কী?",
+      "expected_concepts": ["জীবাণু ধ্বংস", "অম্লীয় মাধ্যম তৈরি", "আমিষ পরিপাক"]
+    },
+    {
+      "id": "SCI-017",
+      "title": "Mendel's Laws & Genetics Basic",
+      "prompt": "ক্রোমোজোম ও জিন কী? সন্তানের লিঙ্গ নির্ধারণে বাবার ভূমিকা কেন প্রধান?",
+      "expected_concepts": ["DNA ও বংশগতির ধারক", "মায়ের XX, বাবার XY", "Y ক্রোমোজোম ছেলে সন্তান নির্ধারণ করে"]
+    },
+    {
+      "id": "SCI-018",
+      "title": "Ecosystem and Food Chain",
+      "prompt": "একটি পুকুরের বাস্তুতন্ত্রের খাদ্য শৃঙ্খলের উদাহরণ দাও (উৎপাদক, প্রথম স্তরের খাদক, দ্বিতীয় স্তরের খাদক, তৃতীয় স্তরের খাদক)।",
+      "expected_concepts": ["ফাইটোপ্লাঙ্কটন/শ্যাওলা -> ছোট মাছ/জুপ্লাঙ্কটন -> বড় মাছ -> বক/মানুষ"]
+    },
+    {
+      "id": "SCI-019",
+      "title": "Global Warming & Greenhouse Effect",
+      "prompt": "গ্রিনহাউস প্রভাব কী এবং এর প্রধান গ্যাসগুলো কী কী? এর ফলে বাংলাদেশের কী ক্ষতি হতে পারে?",
+      "expected_concepts": ["তাপ আটকে রাখা", "CO2, মিথেন", "সমুদ্রপৃষ্ঠের উচ্চতা বৃদ্ধি, বন্যা"]
+    },
+    {
+      "id": "SCI-020",
+      "title": "Sound Waves & Frequency",
+      "prompt": "শব্দ তরঙ্গ কোন ধরনের তরঙ্গ? মানুষের শ্রাব্যতার সীমা কত হার্টজ (Hz)?",
+      "expected_concepts": ["অনুদৈর্ঘ্য বা লম্বিক তরঙ্গ", "২০ Hz থেকে ২০,০০০ Hz (20 kHz)"]
+    }
+  ]
+}

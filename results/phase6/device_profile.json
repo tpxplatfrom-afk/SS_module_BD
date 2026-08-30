@@ -1,0 +1,20 @@
+{
+  "status": "VERIFIED",
+  "device_id": "100713836F004822",
+  "manufacturer": "ITEL",
+  "model": "itel A662L",
+  "android_version": "12",
+  "sdk_level": 31,
+  "primary_abi": "armeabi-v7a",
+  "secondary_abi": "armeabi",
+  "board_platform": "sp9832e",
+  "total_ram_mb": 1911.39,
+  "available_ram_mb": 847.38,
+  "total_ram_gb": 1.87,
+  "data_storage_total": "26G",
+  "data_storage_available": "8.4G",
+  "is_2gb_ram_class": true,
+  "target_pss_budget_mb": 150.0,
+  "hard_pss_ceiling_mb": 200.0,
+  "emergency_pss_ceiling_mb": 250.0
+}

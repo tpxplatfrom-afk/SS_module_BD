@@ -1,0 +1,806 @@
+{
+  "suite_name": "math_100",
+  "total_questions": 100,
+  "questions": [
+    {
+      "id": "MATH4-001",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 1: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।",
+      "expected_answer": "১৯/১২",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-002",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 2: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?",
+      "expected_answer": "১৫০০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-003",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 3: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?",
+      "expected_answer": "৯৬৮০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-004",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 4: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?",
+      "expected_answer": "৫০৫০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-005",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 5: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?",
+      "expected_answer": "১০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-006",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 6: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)",
+      "expected_answer": "১৫৪",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-007",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 7: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?",
+      "expected_answer": "(x+3)(x+4)",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-008",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 8: ৪৫০ এর ২০% কত?",
+      "expected_answer": "৯০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-009",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 9: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?",
+      "expected_answer": "১২৭৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-010",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 10: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?",
+      "expected_answer": "১২৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-011",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 11: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।",
+      "expected_answer": "১৯/১২",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-012",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 12: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?",
+      "expected_answer": "১৫০০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-013",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 13: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?",
+      "expected_answer": "৯৬৮০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-014",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 14: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?",
+      "expected_answer": "৫০৫০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-015",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 15: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?",
+      "expected_answer": "১০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-016",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 16: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)",
+      "expected_answer": "১৫৪",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-017",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 17: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?",
+      "expected_answer": "(x+3)(x+4)",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-018",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 18: ৪৫০ এর ২০% কত?",
+      "expected_answer": "৯০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-019",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 19: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?",
+      "expected_answer": "১২৭৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-020",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 20: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?",
+      "expected_answer": "১২৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-021",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 21: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।",
+      "expected_answer": "১৯/১২",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-022",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 22: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?",
+      "expected_answer": "১৫০০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-023",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 23: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?",
+      "expected_answer": "৯৬৮০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-024",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 24: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?",
+      "expected_answer": "৫০৫০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-025",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 25: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?",
+      "expected_answer": "১০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-026",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 26: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)",
+      "expected_answer": "১৫৪",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-027",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 27: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?",
+      "expected_answer": "(x+3)(x+4)",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-028",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 28: ৪৫০ এর ২০% কত?",
+      "expected_answer": "৯০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-029",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 29: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?",
+      "expected_answer": "১২৭৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-030",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 30: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?",
+      "expected_answer": "১২৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-031",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 31: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।",
+      "expected_answer": "১৯/১২",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-032",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 32: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?",
+      "expected_answer": "১৫০০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-033",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 33: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?",
+      "expected_answer": "৯৬৮০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-034",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 34: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?",
+      "expected_answer": "৫০৫০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-035",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 35: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?",
+      "expected_answer": "১০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-036",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 36: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)",
+      "expected_answer": "১৫৪",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-037",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 37: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?",
+      "expected_answer": "(x+3)(x+4)",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-038",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 38: ৪৫০ এর ২০% কত?",
+      "expected_answer": "৯০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-039",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 39: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?",
+      "expected_answer": "১২৭৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-040",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 40: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?",
+      "expected_answer": "১২৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-041",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 41: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।",
+      "expected_answer": "১৯/১২",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-042",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 42: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?",
+      "expected_answer": "১৫০০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-043",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 43: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?",
+      "expected_answer": "৯৬৮০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-044",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 44: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?",
+      "expected_answer": "৫০৫০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-045",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 45: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?",
+      "expected_answer": "১০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-046",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 46: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)",
+      "expected_answer": "১৫৪",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-047",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 47: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?",
+      "expected_answer": "(x+3)(x+4)",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-048",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 48: ৪৫০ এর ২০% কত?",
+      "expected_answer": "৯০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-049",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 49: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?",
+      "expected_answer": "১২৭৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-050",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 50: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?",
+      "expected_answer": "১২৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-051",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 51: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।",
+      "expected_answer": "১৯/১২",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-052",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 52: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?",
+      "expected_answer": "১৫০০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-053",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 53: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?",
+      "expected_answer": "৯৬৮০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-054",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 54: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?",
+      "expected_answer": "৫০৫০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-055",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 55: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?",
+      "expected_answer": "১০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-056",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 56: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)",
+      "expected_answer": "১৫৪",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-057",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 57: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?",
+      "expected_answer": "(x+3)(x+4)",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-058",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 58: ৪৫০ এর ২০% কত?",
+      "expected_answer": "৯০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-059",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 59: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?",
+      "expected_answer": "১২৭৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-060",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 60: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?",
+      "expected_answer": "১২৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-061",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 61: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।",
+      "expected_answer": "১৯/১২",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-062",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 62: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?",
+      "expected_answer": "১৫০০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-063",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 63: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?",
+      "expected_answer": "৯৬৮০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-064",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 64: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?",
+      "expected_answer": "৫০৫০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-065",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 65: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?",
+      "expected_answer": "১০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-066",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 66: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)",
+      "expected_answer": "১৫৪",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-067",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 67: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?",
+      "expected_answer": "(x+3)(x+4)",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-068",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 68: ৪৫০ এর ২০% কত?",
+      "expected_answer": "৯০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-069",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 69: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?",
+      "expected_answer": "১২৭৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-070",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 70: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?",
+      "expected_answer": "১২৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-071",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 71: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।",
+      "expected_answer": "১৯/১২",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-072",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 72: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?",
+      "expected_answer": "১৫০০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-073",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 73: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?",
+      "expected_answer": "৯৬৮০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-074",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 74: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?",
+      "expected_answer": "৫০৫০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-075",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 75: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?",
+      "expected_answer": "১০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-076",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 76: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)",
+      "expected_answer": "১৫৪",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-077",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 77: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?",
+      "expected_answer": "(x+3)(x+4)",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-078",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 78: ৪৫০ এর ২০% কত?",
+      "expected_answer": "৯০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-079",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 79: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?",
+      "expected_answer": "১২৭৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-080",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 80: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?",
+      "expected_answer": "১২৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-081",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 81: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।",
+      "expected_answer": "১৯/১২",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-082",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 82: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?",
+      "expected_answer": "১৫০০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-083",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 83: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?",
+      "expected_answer": "৯৬৮০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-084",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 84: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?",
+      "expected_answer": "৫০৫০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-085",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 85: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?",
+      "expected_answer": "১০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-086",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 86: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)",
+      "expected_answer": "১৫৪",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-087",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 87: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?",
+      "expected_answer": "(x+3)(x+4)",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-088",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 88: ৪৫০ এর ২০% কত?",
+      "expected_answer": "৯০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-089",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 89: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?",
+      "expected_answer": "১২৭৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-090",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 90: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?",
+      "expected_answer": "১২৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-091",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 91: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।",
+      "expected_answer": "১৯/১২",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-092",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 92: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?",
+      "expected_answer": "১৫০০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-093",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 93: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?",
+      "expected_answer": "৯৬৮০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-094",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 94: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?",
+      "expected_answer": "৫০৫০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-095",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 95: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?",
+      "expected_answer": "১০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-096",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 96: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)",
+      "expected_answer": "১৫৪",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-097",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 97: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?",
+      "expected_answer": "(x+3)(x+4)",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-098",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 98: ৪৫০ এর ২০% কত?",
+      "expected_answer": "৯০",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-099",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 99: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?",
+      "expected_answer": "১২৭৫",
+      "is_math": true
+    },
+    {
+      "id": "MATH4-100",
+      "category": "mathematics_exact",
+      "mode": "SOLVE",
+      "query": "গণিত সমস্যা 100: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?",
+      "expected_answer": "১২৫",
+      "is_math": true
+    }
+  ]
+}

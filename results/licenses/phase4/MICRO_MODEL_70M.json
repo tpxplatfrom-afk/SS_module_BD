@@ -1,0 +1,11 @@
+{
+  "component_id": "MICRO_MODEL_70M",
+  "name": "SS Tutor BD Bengali 70M Transformer Backbone",
+  "source": "Custom compact Transformer initialized and trained with PyTorch/HF Tokenizers",
+  "license": "Apache-2.0",
+  "commercial_use": true,
+  "redistribution": true,
+  "training_use_permitted": true,
+  "license_gate_status": "LICENSE_PASSED",
+  "decision": "APPROVED_FOR_PRODUCTION"
+}

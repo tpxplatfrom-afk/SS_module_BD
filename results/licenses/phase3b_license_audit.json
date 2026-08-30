@@ -1,0 +1,47 @@
+{
+  "phase": "3B",
+  "audit_date": "2026-08-30",
+  "distribution_target": "Offline Android Application (FOSS / Modular Edu Engine)",
+  "audited_candidates": [
+    {
+      "candidate_id": "CAND-03",
+      "model_name": "SmolLM2-135M-Instruct",
+      "publisher": "Hugging Face",
+      "license": "Apache-2.0",
+      "redistribution_permitted": true,
+      "commercial_use_permitted": true,
+      "modifications_permitted": true,
+      "license_gate_status": "LICENSE_PASSED"
+    },
+    {
+      "candidate_id": "CAND-04",
+      "model_name": "SmolLM2-360M-Instruct",
+      "publisher": "Hugging Face",
+      "license": "Apache-2.0",
+      "redistribution_permitted": true,
+      "commercial_use_permitted": true,
+      "modifications_permitted": true,
+      "license_gate_status": "LICENSE_PASSED"
+    },
+    {
+      "candidate_id": "CAND-01",
+      "model_name": "Qwen2.5-0.5B-Instruct",
+      "publisher": "Alibaba Cloud",
+      "license": "Apache-2.0",
+      "redistribution_permitted": true,
+      "commercial_use_permitted": true,
+      "modifications_permitted": true,
+      "license_gate_status": "LICENSE_PASSED"
+    },
+    {
+      "candidate_id": "CAND-02",
+      "model_name": "Qwen2.5-1.5B-Instruct",
+      "publisher": "Alibaba Cloud",
+      "license": "Apache-2.0",
+      "redistribution_permitted": true,
+      "commercial_use_permitted": true,
+      "modifications_permitted": true,
+      "license_gate_status": "LICENSE_PASSED"
+    }
+  ]
+}

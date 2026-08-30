@@ -1,0 +1,62 @@
+{
+  "core_master_bundle_bytes": 286251495,
+  "core_master_bundle_mb": 272.99,
+  "files": {
+    "checksums.sha256": {
+      "size_bytes": 555,
+      "size_mb": 0.0,
+      "sha256": "933f54f2227be364a2bf22d5cdc8dadf2a48f1306a5812abd17770d3124a3dd0"
+    },
+    "lineage.json": {
+      "size_bytes": 772,
+      "size_mb": 0.0,
+      "sha256": "3b6f20d500ba500ee4b1fc243a160d5a7bc4cb83c7fb517edfeaeca2a5a1119e"
+    },
+    "manifest.json": {
+      "size_bytes": 2137,
+      "size_mb": 0.0,
+      "sha256": "bac68d1b700d3f5ddf68ba9909b9971c67628d6dce80b568ca7041b733aaa39a"
+    },
+    "README.md": {
+      "size_bytes": 1824,
+      "size_mb": 0.0,
+      "sha256": "d83d323dc003c17dc2e0cd79eacd82347421ee13c2f17d174876ea39a8facbc9"
+    },
+    "config/architecture.json": {
+      "size_bytes": 841,
+      "size_mb": 0.0,
+      "sha256": "da751b609a49610721a11ea474894c234b4ab07849cba3b431c27ae83e88d2eb"
+    },
+    "model/config.json": {
+      "size_bytes": 751,
+      "size_mb": 0.0,
+      "sha256": "21cfc88d04f88eb8c87766b187dde6db798397331886da1fe7cf972b916e0364"
+    },
+    "model/generation_config.json": {
+      "size_bytes": 226,
+      "size_mb": 0.0,
+      "sha256": "fe20b9ee19352c9ed8e48e05166112cb50b419cfef5f0e31aabf48e99f822099"
+    },
+    "model/model.safetensors": {
+      "size_bytes": 286123304,
+      "size_mb": 272.87,
+      "sha256": "bb2f9e7cd79ef83546fd70ea97d8845cff17a7a8482580c3e63e36c4614119bb"
+    },
+    "tokenizer/tokenizer.json": {
+      "size_bytes": 120845,
+      "size_mb": 0.12,
+      "sha256": "962a759ddaa4c0e177b9ad3b866a54e4c2f5d3e810261872ddb16288b84f6848"
+    },
+    "tokenizer/tokenizer_config.json": {
+      "size_bytes": 240,
+      "size_mb": 0.0,
+      "sha256": "bf0f80de3e181b74df7c6d2c3a27370da554dd005fc56b5ff479150e469c7d45"
+    }
+  },
+  "comparison": {
+    "core_master_fp32_mb": 272.99,
+    "ss_tutor_bd_spec_mb": 207.33,
+    "int4_quantized_export_mb": 0.0,
+    "int4_compression_ratio": 402604.07
+  }
+}

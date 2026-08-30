@@ -1,0 +1,18 @@
+{
+  "training_script": "training/train_micro_model.py",
+  "trainer_framework": "HuggingFace Transformers Trainer",
+  "hardware_environment": "Intel CPU (Local, $0 Cost)",
+  "training_objective": "Causal Language Modeling (Prompt Masked Cross-Entropy)",
+  "learning_rate": 0.0003,
+  "optimizer": "AdamW",
+  "batch_size": 4,
+  "gradient_accumulation_steps": 2,
+  "steps": 100,
+  "training_dataset_summary": {
+    "total_examples": 13000,
+    "unique_templates": 500,
+    "template_repetition_rate_pct": 96.15,
+    "curriculum_focus": "NCTB Class 8 Mathematics Only",
+    "license": "CC0-1.0 Public Domain"
+  }
+}

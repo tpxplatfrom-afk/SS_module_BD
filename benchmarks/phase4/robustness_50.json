@@ -1,0 +1,306 @@
+{
+  "suite_name": "robustness_50",
+  "total_questions": 50,
+  "questions": [
+    {
+      "id": "ROB4-001",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "shorol munafa formula ki? banglay bolo (টেস্ট কেস 1)"
+    },
+    {
+      "id": "ROB4-002",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "fraction kivabe jog korbo? help (টেস্ট কেস 2)"
+    },
+    {
+      "id": "ROB4-003",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "pythagoras theorem er formula ta bujhay daw (টেস্ট কেস 3)"
+    },
+    {
+      "id": "ROB4-004",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "britto er area koto hobe? r=7 hole (টেস্ট কেস 4)"
+    },
+    {
+      "id": "ROB4-005",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "l.sa.gu kivabe ber kore? (টেস্ট কেস 5)"
+    },
+    {
+      "id": "ROB4-006",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "shorol munafa formula ki? banglay bolo (টেস্ট কেস 6)"
+    },
+    {
+      "id": "ROB4-007",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "fraction kivabe jog korbo? help (টেস্ট কেস 7)"
+    },
+    {
+      "id": "ROB4-008",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "pythagoras theorem er formula ta bujhay daw (টেস্ট কেস 8)"
+    },
+    {
+      "id": "ROB4-009",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "britto er area koto hobe? r=7 hole (টেস্ট কেস 9)"
+    },
+    {
+      "id": "ROB4-010",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "l.sa.gu kivabe ber kore? (টেস্ট কেস 10)"
+    },
+    {
+      "id": "ROB4-011",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "shorol munafa formula ki? banglay bolo (টেস্ট কেস 11)"
+    },
+    {
+      "id": "ROB4-012",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "fraction kivabe jog korbo? help (টেস্ট কেস 12)"
+    },
+    {
+      "id": "ROB4-013",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "pythagoras theorem er formula ta bujhay daw (টেস্ট কেস 13)"
+    },
+    {
+      "id": "ROB4-014",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "britto er area koto hobe? r=7 hole (টেস্ট কেস 14)"
+    },
+    {
+      "id": "ROB4-015",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "l.sa.gu kivabe ber kore? (টেস্ট কেস 15)"
+    },
+    {
+      "id": "ROB4-016",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "shorol munafa formula ki? banglay bolo (টেস্ট কেস 16)"
+    },
+    {
+      "id": "ROB4-017",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "fraction kivabe jog korbo? help (টেস্ট কেস 17)"
+    },
+    {
+      "id": "ROB4-018",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "pythagoras theorem er formula ta bujhay daw (টেস্ট কেস 18)"
+    },
+    {
+      "id": "ROB4-019",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "britto er area koto hobe? r=7 hole (টেস্ট কেস 19)"
+    },
+    {
+      "id": "ROB4-020",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "l.sa.gu kivabe ber kore? (টেস্ট কেস 20)"
+    },
+    {
+      "id": "ROB4-021",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "shorol munafa formula ki? banglay bolo (টেস্ট কেস 21)"
+    },
+    {
+      "id": "ROB4-022",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "fraction kivabe jog korbo? help (টেস্ট কেস 22)"
+    },
+    {
+      "id": "ROB4-023",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "pythagoras theorem er formula ta bujhay daw (টেস্ট কেস 23)"
+    },
+    {
+      "id": "ROB4-024",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "britto er area koto hobe? r=7 hole (টেস্ট কেস 24)"
+    },
+    {
+      "id": "ROB4-025",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "l.sa.gu kivabe ber kore? (টেস্ট কেস 25)"
+    },
+    {
+      "id": "ROB4-026",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "shorol munafa formula ki? banglay bolo (টেস্ট কেস 26)"
+    },
+    {
+      "id": "ROB4-027",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "fraction kivabe jog korbo? help (টেস্ট কেস 27)"
+    },
+    {
+      "id": "ROB4-028",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "pythagoras theorem er formula ta bujhay daw (টেস্ট কেস 28)"
+    },
+    {
+      "id": "ROB4-029",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "britto er area koto hobe? r=7 hole (টেস্ট কেস 29)"
+    },
+    {
+      "id": "ROB4-030",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "l.sa.gu kivabe ber kore? (টেস্ট কেস 30)"
+    },
+    {
+      "id": "ROB4-031",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "shorol munafa formula ki? banglay bolo (টেস্ট কেস 31)"
+    },
+    {
+      "id": "ROB4-032",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "fraction kivabe jog korbo? help (টেস্ট কেস 32)"
+    },
+    {
+      "id": "ROB4-033",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "pythagoras theorem er formula ta bujhay daw (টেস্ট কেস 33)"
+    },
+    {
+      "id": "ROB4-034",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "britto er area koto hobe? r=7 hole (টেস্ট কেস 34)"
+    },
+    {
+      "id": "ROB4-035",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "l.sa.gu kivabe ber kore? (টেস্ট কেস 35)"
+    },
+    {
+      "id": "ROB4-036",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "shorol munafa formula ki? banglay bolo (টেস্ট কেস 36)"
+    },
+    {
+      "id": "ROB4-037",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "fraction kivabe jog korbo? help (টেস্ট কেস 37)"
+    },
+    {
+      "id": "ROB4-038",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "pythagoras theorem er formula ta bujhay daw (টেস্ট কেস 38)"
+    },
+    {
+      "id": "ROB4-039",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "britto er area koto hobe? r=7 hole (টেস্ট কেস 39)"
+    },
+    {
+      "id": "ROB4-040",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "l.sa.gu kivabe ber kore? (টেস্ট কেস 40)"
+    },
+    {
+      "id": "ROB4-041",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "shorol munafa formula ki? banglay bolo (টেস্ট কেস 41)"
+    },
+    {
+      "id": "ROB4-042",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "fraction kivabe jog korbo? help (টেস্ট কেস 42)"
+    },
+    {
+      "id": "ROB4-043",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "pythagoras theorem er formula ta bujhay daw (টেস্ট কেস 43)"
+    },
+    {
+      "id": "ROB4-044",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "britto er area koto hobe? r=7 hole (টেস্ট কেস 44)"
+    },
+    {
+      "id": "ROB4-045",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "l.sa.gu kivabe ber kore? (টেস্ট কেস 45)"
+    },
+    {
+      "id": "ROB4-046",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "shorol munafa formula ki? banglay bolo (টেস্ট কেস 46)"
+    },
+    {
+      "id": "ROB4-047",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "fraction kivabe jog korbo? help (টেস্ট কেস 47)"
+    },
+    {
+      "id": "ROB4-048",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "pythagoras theorem er formula ta bujhay daw (টেস্ট কেস 48)"
+    },
+    {
+      "id": "ROB4-049",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "britto er area koto hobe? r=7 hole (টেস্ট কেস 49)"
+    },
+    {
+      "id": "ROB4-050",
+      "category": "linguistic_robustness_banglish",
+      "mode": "EXPLAIN",
+      "query": "l.sa.gu kivabe ber kore? (টেস্ট কেস 50)"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "experiment_id": "EXP-08-BASELINE-70M",
+  "phase": 8,
+  "model_architecture": "LlamaForCausalLM",
+  "vocab_size": 16000,
+  "hidden_size": 576,
+  "intermediate_size": 2304,
+  "num_hidden_layers": 10,
+  "num_attention_heads": 8,
+  "num_key_value_heads": 8,
+  "max_position_embeddings": 256,
+  "quantization_target": "INT4",
+  "training_parameters": {
+    "num_steps": 100,
+    "per_device_train_batch_size": 4,
+    "gradient_accumulation_steps": 2,
+    "learning_rate": 0.0003,
+    "warmup_steps": 10,
+    "weight_decay": 0.01,
+    "optimizer": "AdamW",
+    "use_cpu": true
+  },
+  "dataset_config": {
+    "total_examples": 13000,
+    "active_grade": 8,
+    "active_subject": "mathematics",
+    "modes": ["tool_result", "hint", "grounded", "explanation"]
+  },
+  "reproducibility": {
+    "seed": 42,
+    "cost_usd": 0.0,
+    "environment": "Local CPU"
+  }
+}

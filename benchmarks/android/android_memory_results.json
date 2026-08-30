@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-08-30T21:50:28.699929",
+  "environment": "python_emulated",
+  "note": "EMULATED - NOT PRODUCTION PROOF. Real Android PSS measurement requires adb.",
+  "results": [
+    {
+      "test": "cold_launch",
+      "latency_ms": 1.53,
+      "rss_mb": 0.0,
+      "verdict": "EMULATED - NOT PRODUCTION PROOF"
+    },
+    {
+      "test": "10_turn_session",
+      "n_turns": 10,
+      "start_rss_mb": 0.0,
+      "end_rss_mb": 0.0,
+      "peak_rss_mb": 0.01,
+      "growth_mb_per_turn": 0.0003,
+      "total_ms": 3.59,
+      "avg_ms_per_turn": 0.36,
+      "gate_d_growth_pass": true,
+      "verdict": "EMULATED - NOT PRODUCTION PROOF"
+    },
+    {
+      "test": "25_turn_session",
+      "n_turns": 25,
+      "start_rss_mb": 0.0,
+      "end_rss_mb": 0.0,
+      "peak_rss_mb": 0.0,
+      "growth_mb_per_turn": 0.0,
+      "total_ms": 4.95,
+      "avg_ms_per_turn": 0.2,
+      "gate_d_growth_pass": true,
+      "verdict": "EMULATED - NOT PRODUCTION PROOF"
+    },
+    {
+      "test": "50_turn_session",
+      "n_turns": 50,
+      "start_rss_mb": 0.0,
+      "end_rss_mb": 0.0,
+      "peak_rss_mb": 0.0,
+      "growth_mb_per_turn": 0.0,
+      "total_ms": 9.77,
+      "avg_ms_per_turn": 0.2,
+      "gate_d_growth_pass": true,
+      "verdict": "EMULATED - NOT PRODUCTION PROOF"
+    },
+    {
+      "test": "100_turn_session",
+      "n_turns": 100,
+      "start_rss_mb": 0.0,
+      "end_rss_mb": 0.0,
+      "peak_rss_mb": 0.01,
+      "growth_mb_per_turn": 0.0,
+      "total_ms": 55.46,
+      "avg_ms_per_turn": 0.55,
+      "gate_d_growth_pass": true,
+      "verdict": "EMULATED - NOT PRODUCTION PROOF"
+    },
+    {
+      "test": "model_load_unload",
+      "loaded_rss_mb": 0.0,
+      "unloaded_rss_mb": 0.0,
+      "memory_released_mb": -0.0,
+      "gate_f_pass": true,
+      "total_ms": 5.75,
+      "verdict": "EMULATED - NOT PRODUCTION PROOF"
+    }
+  ]
+}

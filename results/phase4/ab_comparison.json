@@ -1,0 +1,145 @@
+{
+  "systems": [
+    {
+      "system_name": "SYSTEM_A",
+      "total_questions_evaluated": 105,
+      "avg_latency_ms": 3.79,
+      "peak_rss_mb": 22.02,
+      "suite_accuracy_pct": {
+        "bengali": 100.0,
+        "math": 100.0,
+        "pedagogy": 100.0,
+        "grounding": 66.7,
+        "socratic": 100.0,
+        "robustness": 100.0,
+        "memory": 100.0
+      },
+      "scorecard_100pt": {
+        "bengali_quality_20pt": 20.0,
+        "educational_helpfulness_15pt": 15.0,
+        "grounding_15pt": 10.0,
+        "socratic_compliance_10pt": 10.0,
+        "math_tool_integration_15pt": 15.0,
+        "instruction_following_10pt": 8.2,
+        "robustness_5pt": 5.0,
+        "memory_5pt": 5.0,
+        "speed_5pt": 5.0,
+        "total_score": 93.2
+      },
+      "metrics_pct": {
+        "bengali_quality": 100.0,
+        "mathematical_correctness": 100.0,
+        "grounding_adherence": 66.7,
+        "socratic_hint_compliance": 100.0,
+        "instruction_following": 81.9
+      },
+      "passes_production_gate": false
+    },
+    {
+      "system_name": "SYSTEM_B",
+      "total_questions_evaluated": 105,
+      "avg_latency_ms": 0.01,
+      "peak_rss_mb": 21.96,
+      "suite_accuracy_pct": {
+        "bengali": 100.0,
+        "math": 20.0,
+        "pedagogy": 100.0,
+        "grounding": 100.0,
+        "socratic": 100.0,
+        "robustness": 100.0,
+        "memory": 100.0
+      },
+      "scorecard_100pt": {
+        "bengali_quality_20pt": 20.0,
+        "educational_helpfulness_15pt": 15.0,
+        "grounding_15pt": 15.0,
+        "socratic_compliance_10pt": 10.0,
+        "math_tool_integration_15pt": 3.0,
+        "instruction_following_10pt": 10.0,
+        "robustness_5pt": 5.0,
+        "memory_5pt": 5.0,
+        "speed_5pt": 5.0,
+        "total_score": 88.0
+      },
+      "metrics_pct": {
+        "bengali_quality": 100.0,
+        "mathematical_correctness": 20.0,
+        "grounding_adherence": 100.0,
+        "socratic_hint_compliance": 100.0,
+        "instruction_following": 100.0
+      },
+      "passes_production_gate": false
+    },
+    {
+      "system_name": "SYSTEM_C",
+      "total_questions_evaluated": 105,
+      "avg_latency_ms": 3.53,
+      "peak_rss_mb": 22.56,
+      "suite_accuracy_pct": {
+        "bengali": 100.0,
+        "math": 50.0,
+        "pedagogy": 100.0,
+        "grounding": 66.7,
+        "socratic": 100.0,
+        "robustness": 100.0,
+        "memory": 100.0
+      },
+      "scorecard_100pt": {
+        "bengali_quality_20pt": 20.0,
+        "educational_helpfulness_15pt": 15.0,
+        "grounding_15pt": 10.0,
+        "socratic_compliance_10pt": 10.0,
+        "math_tool_integration_15pt": 7.5,
+        "instruction_following_10pt": 8.2,
+        "robustness_5pt": 5.0,
+        "memory_5pt": 5.0,
+        "speed_5pt": 5.0,
+        "total_score": 85.7
+      },
+      "metrics_pct": {
+        "bengali_quality": 100.0,
+        "mathematical_correctness": 50.0,
+        "grounding_adherence": 66.7,
+        "socratic_hint_compliance": 100.0,
+        "instruction_following": 81.9
+      },
+      "passes_production_gate": false
+    },
+    {
+      "system_name": "SYSTEM_D",
+      "total_questions_evaluated": 105,
+      "avg_latency_ms": 5.05,
+      "peak_rss_mb": 22.85,
+      "suite_accuracy_pct": {
+        "bengali": 100.0,
+        "math": 100.0,
+        "pedagogy": 100.0,
+        "grounding": 66.7,
+        "socratic": 100.0,
+        "robustness": 100.0,
+        "memory": 100.0
+      },
+      "scorecard_100pt": {
+        "bengali_quality_20pt": 20.0,
+        "educational_helpfulness_15pt": 15.0,
+        "grounding_15pt": 10.0,
+        "socratic_compliance_10pt": 10.0,
+        "math_tool_integration_15pt": 15.0,
+        "instruction_following_10pt": 8.2,
+        "robustness_5pt": 5.0,
+        "memory_5pt": 5.0,
+        "speed_5pt": 5.0,
+        "total_score": 93.2
+      },
+      "metrics_pct": {
+        "bengali_quality": 100.0,
+        "mathematical_correctness": 100.0,
+        "grounding_adherence": 66.7,
+        "socratic_hint_compliance": 100.0,
+        "instruction_following": 81.9
+      },
+      "passes_production_gate": false
+    }
+  ],
+  "winner": "SYSTEM_D"
+}

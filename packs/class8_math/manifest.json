@@ -1,0 +1,46 @@
+{
+  "pack_id": "ssp-nctb-cl8-math-v1",
+  "name": "NCTB Class 8 Mathematics Core Knowledge Pack",
+  "version": "1.0.0",
+  "class_level": "Class 8",
+  "subject": "Mathematics",
+  "language": "bn",
+  "curriculum": "NCTB (Bangladesh)",
+  "chapters": [
+    {
+      "id": "CH-01",
+      "title": "প্যাটার্ন (Patterns)",
+      "file": "ch01_patterns.md"
+    },
+    {
+      "id": "CH-02",
+      "title": "মুনাফা (Profit & Interest)",
+      "file": "ch02_profit.md"
+    },
+    {
+      "id": "CH-03",
+      "title": "পরিমাপ (Measurement)",
+      "file": "ch03_measurement.md"
+    },
+    {
+      "id": "CH-04",
+      "title": "বীজগণিতীয় সূত্রাবলী ও প্রয়োগ (Algebraic Formulae)",
+      "file": "ch04_algebraic_formulae.md"
+    },
+    {
+      "id": "CH-05",
+      "title": "বীজগণিতীয় ভগ্নাংশ (Algebraic Fractions)",
+      "file": "ch05_fractions.md"
+    },
+    {
+      "id": "CH-06",
+      "title": "সরল সহসমীকরণ (Linear Simultaneous Equations)",
+      "file": "ch06_equations.md"
+    },
+    {
+      "id": "CH-08",
+      "title": "চতুর্ভুজ ও জ্যামিতিক পরিমাপ (Geometry)",
+      "file": "ch08_geometry.md"
+    }
+  ]
+}

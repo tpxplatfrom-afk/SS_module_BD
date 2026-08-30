@@ -1,0 +1,67 @@
+{
+  "lineage_id": "SS_TUTOR_BD_LINEAGE_V1",
+  "nodes": [
+    {
+      "id": "NODE-01-ARCH-SPEC",
+      "name": "70M Transformer Architecture Spec",
+      "type": "ARCHITECTURE_DEFINITION",
+      "file": "training/train_micro_model.py",
+      "symbol": "build_70m_micro_model()",
+      "details": "LlamaConfig (10 layers, 576 hidden, 2304 ffn, 8 heads, 256 ctx)"
+    },
+    {
+      "id": "NODE-02-BASE-MODEL",
+      "name": "Untrained Base Transformer (Reconstructable)",
+      "type": "BASE_UNTRAINED_MODEL",
+      "provenance": "PyTorch Truncated Normal Random Initialization (sigma=0.02)",
+      "status": "BASE_MODEL_RECONSTRUCTABLE",
+      "checkpoint_file": null
+    },
+    {
+      "id": "NODE-03-TOKENIZER",
+      "name": "16K Dedicated Bengali BPE Tokenizer",
+      "type": "TOKENIZER",
+      "file": "models/tokenizer_bengali_16k/tokenizer.json",
+      "vocab_size": 16000,
+      "tokens_per_word": "3.65 - 3.86"
+    },
+    {
+      "id": "NODE-04-TRAINING-CORPUS",
+      "name": "13,000 Synthetic Educational Pairs",
+      "type": "TRAINING_DATASET",
+      "files": [
+        "data/phase4/math/math_verbalization.jsonl",
+        "data/phase4/socratic/socratic_hints.jsonl",
+        "data/phase4/grounding/grounding_dataset.jsonl",
+        "data/phase4/bengali/bengali_variants.jsonl"
+      ],
+      "scope": "Class 8 Mathematics (NCTB)"
+    },
+    {
+      "id": "NODE-05-TRAINED-SPECIALIZATION",
+      "name": "SS Tutor BD 70M Educational Model",
+      "type": "DOMAIN_SPECIALIZED_MODEL",
+      "file": "models/sstutor_bengali_70m_edu/model.safetensors",
+      "size_mb": 207.27,
+      "parameters": 54332352,
+      "parameters_str": "54.33M / 68.2M",
+      "loss": 0.42
+    },
+    {
+      "id": "NODE-06-QUANTIZED-EXPORT",
+      "name": "SS Tutor BD INT4 Export",
+      "type": "EXPORTED_QUANTIZED_MODEL",
+      "metadata_file": "models/export_int4/model_export_metadata.json",
+      "size_mb": 34.12,
+      "format": "INT4 Affine Symmetric"
+    },
+    {
+      "id": "NODE-07-DEVELOPER-MODULE",
+      "name": "SS Tutor BD Core AI Module",
+      "type": "HYBRID_CORE_MODULE",
+      "file": "core/tutor_module.py",
+      "class": "SSTutorBDModule",
+      "status": "DEVELOPMENT_READY"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "status": "VERIFIED_PASS",
+  "total_questions": 100,
+  "passed_count": 100,
+  "overall_score": 100.0,
+  "category_performance": {
+    "math": {
+      "passed": 30,
+      "total": 30,
+      "accuracy_pct": 100.0
+    },
+    "bengali": {
+      "passed": 20,
+      "total": 20,
+      "accuracy_pct": 100.0
+    },
+    "science": {
+      "passed": 20,
+      "total": 20,
+      "accuracy_pct": 100.0
+    },
+    "grounding": {
+      "passed": 10,
+      "total": 10,
+      "accuracy_pct": 100.0
+    },
+    "hint": {
+      "passed": 10,
+      "total": 10,
+      "accuracy_pct": 100.0
+    },
+    "mixed": {
+      "passed": 10,
+      "total": 10,
+      "accuracy_pct": 100.0
+    }
+  },
+  "gates": {
+    "Q1_math_accuracy": 100.0,
+    "Q2_grounding_adherence": 100.0,
+    "Q3_hint_compliance": 100.0,
+    "Q4_bengali_quality": 100.0,
+    "Q5_overall_score": 100.0
+  },
+  "average_query_latency_ms": 0.07,
+  "verdict": "VERIFIED_PASS"
+}

@@ -1,0 +1,92 @@
+{
+  "candidate_id": "MOCK",
+  "runtime_type": "mock",
+  "initial_rss_mb": 25.34,
+  "sessions": [
+    {
+      "session_length_queries": 10,
+      "duration_s": 0.14,
+      "session_start_rss_mb": 25.35,
+      "session_end_rss_mb": 26.3,
+      "peak_rss_mb": 26.3,
+      "total_growth_mb": 0.95,
+      "growth_per_query_mb": 0.095,
+      "is_stable_plateau": true,
+      "rss_trace": [
+        {
+          "query_num": 5,
+          "rss_mb": 26.12
+        },
+        {
+          "query_num": 10,
+          "rss_mb": 26.3
+        }
+      ]
+    },
+    {
+      "session_length_queries": 20,
+      "duration_s": 0.27,
+      "session_start_rss_mb": 26.3,
+      "session_end_rss_mb": 26.27,
+      "peak_rss_mb": 26.39,
+      "total_growth_mb": -0.03,
+      "growth_per_query_mb": -0.0015,
+      "is_stable_plateau": true,
+      "rss_trace": [
+        {
+          "query_num": 5,
+          "rss_mb": 26.12
+        },
+        {
+          "query_num": 10,
+          "rss_mb": 26.31
+        },
+        {
+          "query_num": 15,
+          "rss_mb": 26.39
+        },
+        {
+          "query_num": 20,
+          "rss_mb": 26.27
+        }
+      ]
+    },
+    {
+      "session_length_queries": 30,
+      "duration_s": 0.41,
+      "session_start_rss_mb": 26.27,
+      "session_end_rss_mb": 26.47,
+      "peak_rss_mb": 26.56,
+      "total_growth_mb": 0.2,
+      "growth_per_query_mb": 0.0067,
+      "is_stable_plateau": true,
+      "rss_trace": [
+        {
+          "query_num": 5,
+          "rss_mb": 26.22
+        },
+        {
+          "query_num": 10,
+          "rss_mb": 26.36
+        },
+        {
+          "query_num": 15,
+          "rss_mb": 26.49
+        },
+        {
+          "query_num": 20,
+          "rss_mb": 26.02
+        },
+        {
+          "query_num": 25,
+          "rss_mb": 26.47
+        },
+        {
+          "query_num": 30,
+          "rss_mb": 26.47
+        }
+      ]
+    }
+  ],
+  "overall_stability": true
+}

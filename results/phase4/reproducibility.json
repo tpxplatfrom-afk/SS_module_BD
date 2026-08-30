@@ -1,0 +1,60 @@
+{
+  "phase": "4",
+  "project": "SS Tutor BD",
+  "reproducibility_metadata": {
+    "timestamp": "2026-08-30T20:47:00Z",
+    "host_hardware": {
+      "cpu": "Intel Core i5-6500 @ 3.20GHz",
+      "cores_physical": 4,
+      "cores_logical": 4,
+      "gpu": "None (CPU Inference & Training Only)",
+      "os": "Windows 10 Pro x64",
+      "budget_usd": 0.0
+    },
+    "software_stack": {
+      "python": "3.14 / CPython",
+      "pytorch": "2.13.0+cpu",
+      "transformers": "5.16.1",
+      "tokenizers": "0.22.x",
+      "sqlite": "3.x with FTS5",
+      "onnxruntime": "1.28.0"
+    },
+    "random_seed": 42,
+    "tokenizer_config": {
+      "vocab_size": 16000,
+      "algorithm": "Byte-level BPE",
+      "special_tokens": ["<|pad|>", "<|unk|>", "<|bos|>", "<|eos|>", "[TASK]", "[FACT]", "[RESULT]", "[GOAL]", "[HINT]", "[CONSTRAINT]"],
+      "measured_tokens_per_bengali_word": 3.86
+    },
+    "model_architecture": {
+      "model_type": "LlamaForCausalLM",
+      "parameter_count": 68244480,
+      "hidden_size": 576,
+      "num_hidden_layers": 10,
+      "num_attention_heads": 8,
+      "intermediate_size": 2304,
+      "quantization_format": "INT4",
+      "export_binary_size_mb": 34.12
+    },
+    "dataset_provenance": {
+      "total_synthetic_examples": 13000,
+      "math_verbalization_count": 5000,
+      "socratic_hints_count": 3000,
+      "grounding_pairs_count": 3000,
+      "bengali_variants_count": 2000,
+      "license": "CC0-1.0 (Public Domain)"
+    },
+    "benchmarking": {
+      "total_evaluation_questions": 550,
+      "suites": [
+        "bengali_100.json",
+        "math_100.json",
+        "pedagogy_100.json",
+        "grounding_100.json",
+        "socratic_50.json",
+        "robustness_50.json",
+        "memory_50.json"
+      ]
+    }
+  }
+}

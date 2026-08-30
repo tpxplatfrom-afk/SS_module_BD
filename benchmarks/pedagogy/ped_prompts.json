@@ -1,0 +1,148 @@
+{
+  "category": "pedagogical_and_tutor_behavior",
+  "category_code": "PED",
+  "weight_in_scorecard": 15,
+  "description": "Evaluates Socratic tutor behavior, hint progression, negative constraints (withholding final answers), misconception diagnosis, and step-by-step scaffolding.",
+  "items": [
+    {
+      "id": "PED-001",
+      "title": "Strict Negative Constraint - Hint Only",
+      "prompt": "প্রশ্ন: x^2 - 5x + 6 = 0 এর সমাধান কী? আমাকে কিন্তু সরাসরি উত্তর বলবে না, শুধু সমাধান করার জন্য প্রথম দরকারি ইঙ্গিত (Hint 1) দাও।",
+      "negative_constraints": ["do_not_reveal_final_answer_x_equals_2_or_3"],
+      "expected_behavior": "Provides middle-term splitting clue without stating x=2,3."
+    },
+    {
+      "id": "PED-002",
+      "title": "Progressive 3-Tier Hint Generation",
+      "prompt": "প্রশ্ন: উৎপাদকে বিশ্লেষণ করো: a^2 - b^2 + 2bc - c^2। সরাসরি সমাধান না দিয়ে ৩টি ক্রমিক ইঙ্গিত (Hint 1, Hint 2, Hint 3) তৈরি করো।",
+      "negative_constraints": ["do_not_dump_full_solution_immediately"],
+      "expected_behavior": "Hint 1: Group (b^2 - 2bc + c^2), Hint 2: Identify (b-c)^2, Hint 3: Apply x^2 - y^2."
+    },
+    {
+      "id": "PED-003",
+      "title": "Common Misconception Diagnosis - (a+b)^2",
+      "prompt": "এক শিক্ষার্থী লিখেছে: '(a + b)^2 = a^2 + b^2'। একজন শিক্ষক হিসেবে তাকে বুঝিয়ে বলো কেন এটি ভুল এবং 2ab পদটি কোথা থেকে আসল।",
+      "negative_constraints": [],
+      "expected_behavior": "Compassionately explains (a+b)(a+b) expansion showing the middle ab+ba=2ab."
+    },
+    {
+      "id": "PED-004",
+      "title": "Common Misconception Diagnosis - Negative Exponent",
+      "prompt": "শিক্ষার্থী ভাবছে: 2^{-3} এর মান হলো -8 বা -6। তাকে সহজ ভাষায় বুঝিয়ে বলো ঋণাত্মক সূচক (Negative Exponent) কীভাবে কাজ করে।",
+      "negative_constraints": [],
+      "expected_behavior": "Explains 2^{-3} = 1/(2^3) = 1/8."
+    },
+    {
+      "id": "PED-005",
+      "title": "Step-by-Step Guided Linear Equation",
+      "prompt": "Class 8 এর সমীকরণ: 3x + 7 = 22। সরাসরি উত্তর না দিয়ে শিক্ষার্থীকে কীভাবে নিজে করতে হবে তা ৩টি নির্দেশনামূলক ধাপে বলো।",
+      "negative_constraints": ["scaffold_steps_without_one_word_dump"],
+      "expected_behavior": "Step 1: Subtract 7, Step 2: Simplify to 3x=15, Step 3: Divide by 3."
+    },
+    {
+      "id": "PED-006",
+      "title": "Real-World Analogy - LCM",
+      "prompt": "ক্লাস ৬ এর শিক্ষার্থীকে লসাগু (LCM) কী তা একটি বাস্তব জীবনের উদাহরণের মাধ্যমে বুঝিয়ে বলো (যেমন দৌড় প্রতিযোগিতা বা ঘণ্টার শব্দ)।",
+      "negative_constraints": [],
+      "expected_behavior": "Uses intuitive real-world interval sync analogy without abstract jargon."
+    },
+    {
+      "id": "PED-007",
+      "title": "Real-World Analogy - Negative Numbers",
+      "prompt": "ধনাত্মক ও ঋণাত্মক সংখ্যার যোগ-বিয়োগ বুঝতে সমস্যা হওয়া শিক্ষার্থীকে টাকা ধার নেওয়া বা তাপমাত্রার মাধ্যমে বুঝিয়ে বলো।",
+      "negative_constraints": [],
+      "expected_behavior": "Uses debt / temperature scale analogy clearly."
+    },
+    {
+      "id": "PED-008",
+      "title": "Socratic Questioning Strategy",
+      "prompt": "শিক্ষার্থী জিজ্ঞেস করল: 'সব সমকোণী ত্রিভুজই কি সদৃশ?' তাকে সরাসরি 'হ্যাঁ' বা 'না' না বলে চিন্তা করার জন্য একটি প্রশ্ন করো।",
+      "negative_constraints": ["do_not_answer_with_simple_yes_no"],
+      "expected_behavior": "Asks student about the other two acute angles."
+    },
+    {
+      "id": "PED-009",
+      "title": "Overcoming Math Anxiety",
+      "prompt": "শিক্ষার্থী বলল: 'আমি গণিতে খুব দুর্বল, আমার অংক করতে ভয় লাগে।' তাকে কীভাবে সাহস দেবে এবং একটি সহজ প্রশ্ন দিয়ে শুরু করবে?",
+      "negative_constraints": [],
+      "expected_behavior": "Empathetic, encouraging tone followed by a confidence-building warmup question."
+    },
+    {
+      "id": "PED-010",
+      "title": "Follow-Up Multi-Turn Memory",
+      "prompt": "পূর্ববর্তী আলোচনায় তুমি বৃত্তের ক্ষেত্রফল শিখিয়েছিলে। এখন শিক্ষার্থী জিজ্ঞেস করল: 'তাহলে অর্ধবৃত্তের ক্ষেত্রফল কত হবে?' সংক্ষেপে বুঝিয়ে বলো।",
+      "negative_constraints": [],
+      "expected_behavior": "Connects directly to prior formula: Area = 1/2 * \\pi r^2."
+    },
+    {
+      "id": "PED-011",
+      "title": "Wrong Arithmetic Error Diagnosis",
+      "prompt": "শিক্ষার্থী 1/2 + 1/3 = 2/5 লিখেছে (লব লব যোগ, হর হর যোগ)। তাকে বুঝিয়ে বলো কেন এভাবে যোগ করা যায় না এবং সঠিক নিয়ম কী।",
+      "negative_constraints": [],
+      "expected_behavior": "Explains why common denominator is required using pizza/cake slice analogy."
+    },
+    {
+      "id": "PED-012",
+      "title": "Teaching Scientific Method",
+      "prompt": "একটি উদ্ভিদ সূর্যের আলো ছাড়া বাঁচতে পারে কি না তা পরীক্ষা করার একটি ছোট বিজ্ঞান প্রজেক্ট কীভাবে করতে হবে ৩টি ধাপে বলো।",
+      "negative_constraints": [],
+      "expected_behavior": "Controls, variable testing, hypothesis verification in Bengali."
+    },
+    {
+      "id": "PED-013",
+      "title": "Adaptive Explanation - Two Tiers",
+      "prompt": "নিউটনের ৩য় সূত্রটি প্রথমে একজন ক্লাস ৬ এর বাচ্চার জন্য ১ বাক্যে বলো, তারপর ক্লাস ৯ এর জন্য বৈজ্ঞানিক ব্যাখ্যা দাও।",
+      "negative_constraints": [],
+      "expected_behavior": "Two clear tiers: Simple push/rebound -> Action and Reaction vector forces."
+    },
+    {
+      "id": "PED-014",
+      "title": "Structured Quiz Generation",
+      "prompt": "Class 9 এর সূচক অধ্যায় থেকে ৩টি বহুনির্বাচনী প্রশ্ন (MCQ) সঠিক উত্তর ও সংক্ষিপ্ত ব্যাখ্যাসহ তৈরি করো।",
+      "negative_constraints": [],
+      "expected_behavior": "Generates 3 structured MCQs with option keys (ক, খ, গ, ঘ) and explanations."
+    },
+    {
+      "id": "PED-015",
+      "title": "Teacher Lesson Outline",
+      "prompt": "ক্লাস ৮ এর গণিত শিক্ষক হিসেবে 'পিথাগোরাসের উপপাদ্য' পড়ানোর জন্য ২০ মিনিটের একটি ক্লাস লেকচার আউটলাইন তৈরি করো।",
+      "negative_constraints": [],
+      "expected_behavior": "Introduction (5m), Proof Demonstration (10m), Practice & Assessment (5m)."
+    },
+    {
+      "id": "PED-016",
+      "title": "Interactive Check for Understanding",
+      "prompt": "লগারিদমের ভিত্তি ১০ হলে log 100 = 2 কেন হয় তা বুঝিয়ে বলো এবং শেষে শিক্ষার্থী বুঝেছে কি না যাচাই করতে একটি সহজ প্রশ্ন করো।",
+      "negative_constraints": ["must_end_with_checking_question"],
+      "expected_behavior": "Explains 10^2=100 and ends with a question like 'তাহলে log_10 1000 কত হবে?'"
+    },
+    {
+      "id": "PED-017",
+      "title": "Guiding Proof Logic without Memorization",
+      "prompt": "'ত্রিভুজের তিন কোণের সমষ্টি দুই সমকোণ' - এই উপপাদ্যটি মুখস্থ না করে কীভাবে নিজে আঁকা দিয়ে মনে রাখা যায় তা বলো।",
+      "negative_constraints": [],
+      "expected_behavior": "Draws parallel line through vertex, shows alternate and corresponding angles."
+    },
+    {
+      "id": "PED-018",
+      "title": "Handling Incomplete Query Politely",
+      "prompt": "শিক্ষার্থী বলল: 'ভাইয়া, এই অংকটা হচ্ছে না।' কিন্তু সে কোনো অংক বা প্রশ্ন লেখেনি। তাকে কীভাবে উত্তর দেবে?",
+      "negative_constraints": ["do_not_hallucinate_question"],
+      "expected_behavior": "Politely asks the student to write down the problem statement, class, or chapter."
+    },
+    {
+      "id": "PED-019",
+      "title": "Summary Revision Cheat-Sheet",
+      "prompt": "Class 8 এর বৃত্ত সংক্রান্ত ৩টি মূল সূত্র (ব্যাস, পরিধি, ক্ষেত্রফল) একটি ছোট রিভিশন চার্ট আকারে লেখো।",
+      "negative_constraints": [],
+      "expected_behavior": "Compact table / bulleted list of 2r, 2*pi*r, pi*r^2."
+    },
+    {
+      "id": "PED-020",
+      "title": "Student Self-Correction Prompt",
+      "prompt": "শিক্ষার্থী 3x = 12 সমাধান করে x = 9 লিখেছে (বিয়োগ করে ফেলেছে)। তাকে সরাসরি ভুল না বলে তার ভুলটি নিজেই খুঁজে পেতে সাহায্য করো।",
+      "negative_constraints": [],
+      "expected_behavior": "Prompts student: '3 এবং x এর মধ্যে কোন চিহ্ন আছে? গুণ থাকলে পক্ষান্তর করলে কী হয়?'"
+    }
+  ]
+}

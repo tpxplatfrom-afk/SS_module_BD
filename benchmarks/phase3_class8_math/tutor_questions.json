@@ -1,0 +1,458 @@
+{
+  "suite_name": "Phase 3A Class 8 Mathematics Tutor Evaluation Suite",
+  "version": "1.0.0",
+  "total_questions": 50,
+  "scoring_guide": {
+    "dimensions": [
+      {"name": "math_correctness", "max_points": 2, "scale": "0=incorrect, 1=partially correct, 2=correct"},
+      {"name": "bengali_quality", "max_points": 2, "scale": "0=unusable, 1=understandable with flaws, 2=natural/acceptable"},
+      {"name": "grounding", "max_points": 2, "scale": "0=contradicts/ignores, 1=partially grounded, 2=properly grounded"},
+      {"name": "pedagogy", "max_points": 2, "scale": "0=poor, 1=acceptable, 2=good"},
+      {"name": "instruction_compliance", "max_points": 2, "scale": "0=failed, 1=partial, 2=followed"}
+    ],
+    "max_score_per_question": 10,
+    "max_total_score": 500
+  },
+  "questions": [
+    {
+      "id": "TUT-EXP-001",
+      "mode": "explain",
+      "topic": "patterns",
+      "query": "ভাইয়া, মৌলিক সংখ্যা কী আর ১ কেন মৌলিক সংখ্যা নয়? সহজ করে বুঝিয়ে বলুন।",
+      "expected_concepts": ["১ এর চেয়ে বড়", "১ এবং ঐ সংখ্যা ছাড়া অন্য গুণনীয়ক নেই", "১ এর মাত্র একটি গুণনীয়ক"],
+      "negative_constraints": ["no_english_sentences", "no_control_tokens"]
+    },
+    {
+      "id": "TUT-EXP-002",
+      "mode": "explain",
+      "topic": "patterns",
+      "query": "৩ ক্রমের ম্যাজিক বর্গ কীভাবে বানায় এবং এর ম্যাজিক সংখ্যা ১৫ কেন হয়?",
+      "expected_concepts": ["ম্যাজিক সংখ্যা ১৫", "মাঝখানের ঘরে ৫", "n(n^2+1)/2 সূত্র"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-EXP-003",
+      "mode": "explain",
+      "topic": "profit",
+      "query": "সরল মুনাফা আর চক্রবৃদ্ধি মুনাফার মধ্যে আসল তফাতটা কী?",
+      "expected_concepts": ["সরল মুনাফায় আসল অপরিবর্তিত থাকে", "চক্রবৃদ্ধিতে প্রতি বছর মুনাফা আসলের সাথে যুক্ত হয়"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-EXP-004",
+      "mode": "explain",
+      "topic": "measurement",
+      "query": "বাগানের বাইরে রাস্তা থাকলে কেন রাস্তার ক্ষেত্রফল বের করতে ২ গুণ বিস্তার যোগ করতে হয়?",
+      "expected_concepts": ["দুই পাশে রাস্তা বাড়ে", "রাস্তাসহ দৈর্ঘ্য ও প্রস্থ", "রাস্তাসহ ক্ষেত্রফল থেকে বাগানের ক্ষেত্রফল বিয়োগ"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-EXP-005",
+      "mode": "explain",
+      "topic": "algebra",
+      "query": "বীজগণিতে (a + b)^2 এর সূত্রের জ্যামিতিক তাৎপর্য কী?",
+      "expected_concepts": ["বর্গক্ষেত্রের ক্ষেত্রফল", "চারটি অংশে বিভক্ত", "a^2 + 2ab + b^2"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-EXP-006",
+      "mode": "explain",
+      "topic": "algebra",
+      "query": "মধ্যপদ বিভাজন (Middle-term break) পদ্ধতিতে উৎপাদক করার মূল নিয়মটা কী?",
+      "expected_concepts": ["মধ্যপদকে দুটি পদে ভাগ", "গুণফল প্রথম ও শেষ পদের গুণফলের সমান", "যোগফল মধ্যপদের সমান"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-EXP-007",
+      "mode": "explain",
+      "topic": "fractions",
+      "query": "বীজগণিতীয় ভগ্নাংশের সাধারণ হরবিশিষ্টকরণ বলতে কী বোঝায়?",
+      "expected_concepts": ["হরগুলোর ল.সা.গু নির্ণয়", "প্রতিটি ভগ্নাংশের হর একই করা"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-EXP-008",
+      "mode": "explain",
+      "topic": "equations",
+      "query": "সরল সহসমীকরণে 'প্রতিস্থাপন পদ্ধতি' এবং 'অপনয়ন পদ্ধতি'র মধ্যে কোনটা কখন ব্যবহার করা সুবিধাজনক?",
+      "expected_concepts": ["প্রতিস্থাপনে এক চলকের মান অপর চলকে প্রকাশ", "অপনয়নে সহগ সমান করে যোগ বা বিয়োগ"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-EXP-009",
+      "mode": "explain",
+      "topic": "geometry",
+      "query": "পিথাগোরাসের উপপাদ্যটি বিবৃত করো এবং কোন ধরণের ত্রিভুজে এটি প্রযোজ্য তা বলো।",
+      "expected_concepts": ["সমকোণী ত্রিভুজ", "অতিভুজের বর্গ = লম্বের বর্গ + ভূমির বর্গ", "c^2 = a^2 + b^2"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-EXP-010",
+      "mode": "explain",
+      "topic": "geometry",
+      "query": "সামান্তরিক ও রম্বসের মধ্যে মিল ও অমিলগুলো কী কী?",
+      "expected_concepts": ["বিপরীত বাহু ও কোণ সমান", "রম্বসের সব বাহু সমান", "রম্বসের কর্ণদ্বয় সমকোণে সমদ্বিখণ্ডিত করে"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+
+    {
+      "id": "TUT-ARI-001",
+      "mode": "solve",
+      "topic": "patterns",
+      "query": "১ + ২ + ৩ + ... + ১০০ ধারাটির সমষ্টি ধাপে ধাপে বের করো।",
+      "expected_answer": "৫০৫০",
+      "expected_steps": ["১ম পদ = ১, শেষ পদ = ১০০, পদসংখ্যা = ১০০", "যোগফল = {(১ + ১০০) * ১০০} / ২", "১০১ * ৫০ = ৫০৫০"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ARI-002",
+      "mode": "solve",
+      "topic": "patterns",
+      "query": "৫, ১১, ১৭, ২৩, ২৯, ... তালিকার k-তম পদ এবং ১০ম পদ নির্ণয় করো।",
+      "expected_answer": "৬k - ১, ৫৯",
+      "expected_steps": ["পাশাপাশি দুটি পদের পার্থক্য = ৬", "k-তম পদ = ৬k - ১", "১০ম পদ = ৬ * ১০ - ১ = ৫৯"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ARI-003",
+      "mode": "solve",
+      "topic": "profit",
+      "query": "শতকরা বার্ষিক ৮ টাকা মুনাফায় ৪০০০ টাকার ৫ বছরের সরল মুনাফা ও মুনাফা-আসল কত হবে?",
+      "expected_answer": "মুনাফা ১৬০০ টাকা, মুনাফা-আসল ৫৬০০ টাকা",
+      "expected_steps": ["P = ৪০০০, r = ৮/১০০, n = ৫", "I = Prn = ৪০০০ * ০.০৮ * ৫ = ১৬০০", "A = P + I = ৪০০০ + ১৬০০ = ৫৬০০"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ARI-004",
+      "mode": "solve",
+      "topic": "profit",
+      "query": "বার্ষিক ১০% হারে ৫০০০ টাকার ৩ বছরের সরল মুনাফা ও চক্রবৃদ্ধি মুনাফার পার্থক্য নির্ণয় করো।",
+      "expected_answer": "১৫৫ টাকা",
+      "expected_steps": ["সরল মুনাফা I = ৫০০০ * ০.১ * ৩ = ১৫০০", "চক্রবৃদ্ধি মূলধন C = ৫০০০ * (১.১)^৩ = ৬৬৫৫", "চক্রবৃদ্ধি মুনাফা = ১৬৫৫", "পার্থক্য = ১৬৫৫ - ১৫০০ = ১৫৫"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ARI-005",
+      "mode": "solve",
+      "topic": "measurement",
+      "query": "একটি আয়তাকার ক্ষেত্রের দৈর্ঘ্য ৫০ মিটার এবং প্রস্থ ৩০ মিটার। এর ক্ষেত্রফল ও পরিসীমা নির্ণয় করো।",
+      "expected_answer": "ক্ষেত্রফল ১৫০০ বর্গমিটার, পরিসীমা ১৬০ মিটার",
+      "expected_steps": ["ক্ষেত্রফল = ৫০ * ৩০ = ১৫০০ বর্গমিটার", "পরিসীমা = ২ * (৫০ + ৩০) = ১৬০ মিটার"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ARI-006",
+      "mode": "solve",
+      "topic": "measurement",
+      "query": "একটি চৌবাচ্চার দৈর্ঘ্য ৩ মিটার, প্রস্থ ২ মিটার এবং উচ্চতা ১.৫ মিটার। চৌবাচ্চাটিতে কত লিটার পানি ধরে?",
+      "expected_answer": "৯০০০ লিটার",
+      "expected_steps": ["আয়তন = ৩ * ২ * ১.৫ = ৯ ঘনমিটার", "১ ঘনমিটার = ১০০০ লিটার", "মোট পানি = ৯ * ১০০০ = ৯০০০ লিটার"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ARI-007",
+      "mode": "solve",
+      "topic": "fractions",
+      "query": "সরল করো: 1/(x - 3) + 1/(x + 3)",
+      "expected_answer": "2x / (x^2 - 9)",
+      "expected_steps": ["হরদ্বয়ের ল.সা.গু = (x - 3)(x + 3) = x^2 - 9", "লবের যোগ = (x + 3) + (x - 3) = 2x", "চূড়ান্ত ভগ্নাংশ = 2x / (x^2 - 9)"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ARI-008",
+      "mode": "solve",
+      "topic": "fractions",
+      "query": "সরল করো: (a/b) * (b^2/c) ÷ (a/c)",
+      "expected_answer": "b",
+      "expected_steps": ["(a/b) * (b^2/c) = (ab)/c", "(ab/c) * (c/a) = b"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ARI-009",
+      "mode": "solve",
+      "topic": "profit",
+      "query": "একজন দোকানদার একটি বই ২৫০ টাকায় কিনে ২৮০ টাকায় বিক্রয় করলেন। তার শতকরা কত লাভ হলো?",
+      "expected_answer": "১২%",
+      "expected_steps": ["লাভ = ২৮০ - ২৫০ = ৩০ টাকা", "শতকরা লাভ = (৩০ / ২৫০) * ১০০% = ১২%"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ARI-010",
+      "mode": "solve",
+      "topic": "measurement",
+      "query": "একটি বর্গাকার মাঠের এক বাহুর দৈর্ঘ্য ২৫ মিটার। মাঠটির ক্ষেত্রফল ও পরিসীমা বের করো।",
+      "expected_answer": "ক্ষেত্রফল ৬২৫ বর্গমিটার, পরিসীমা ১০০ মিটার",
+      "expected_steps": ["ক্ষেত্রফল = ২৫^২ = ৬২৫ বর্গমিটার", "পরিসীমা = ৪ * ২৫ = ১০০ মিটার"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+
+    {
+      "id": "TUT-ALG-001",
+      "mode": "solve",
+      "topic": "algebra",
+      "query": "সূত্রের সাহায্যে বর্গ নির্ণয় করো: (3x + 4y)",
+      "expected_answer": "9x^2 + 24xy + 16y^2",
+      "expected_steps": ["(3x + 4y)^2 = (3x)^2 + 2*(3x)*(4y) + (4y)^2", "= 9x^2 + 24xy + 16y^2"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ALG-002",
+      "mode": "solve",
+      "topic": "algebra",
+      "query": "যদি a + b = 9 এবং ab = 20 হয়, তবে a^2 + b^2 এর মান কত?",
+      "expected_answer": "৪১",
+      "expected_steps": ["a^2 + b^2 = (a + b)^2 - 2ab", "= 9^2 - 2*20 = 81 - 40 = 41"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ALG-003",
+      "mode": "solve",
+      "topic": "algebra",
+      "query": "যদি x - 1/x = 4 হয়, তবে x^2 + 1/x^2 এর মান কত?",
+      "expected_answer": "১৮",
+      "expected_steps": ["x^2 + 1/x^2 = (x - 1/x)^2 + 2", "= 4^2 + 2 = 16 + 2 = 18"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ALG-004",
+      "mode": "solve",
+      "topic": "algebra",
+      "query": "উৎপাদকে বিশ্লেষণ করো: x^2 + 5x + 6",
+      "expected_answer": "(x + 2)(x + 3)",
+      "expected_steps": ["৬ = ২ * ৩ এবং ২ + ৩ = ৫", "x^2 + 2x + 3x + 6", "(x + 2)(x + 3)"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ALG-005",
+      "mode": "solve",
+      "topic": "algebra",
+      "query": "উৎপাদকে বিশ্লেষণ করো: 4a^2 - 9b^2",
+      "expected_answer": "(2a + 3b)(2a - 3b)",
+      "expected_steps": ["(2a)^2 - (3b)^2", "(2a + 3b)(2a - 3b)"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ALG-006",
+      "mode": "solve",
+      "topic": "algebra",
+      "query": "যদি a + b = 5 এবং ab = 6 হয়, তবে a^3 + b^3 এর মান কত?",
+      "expected_answer": "৩৫",
+      "expected_steps": ["a^3 + b^3 = (a + b)^3 - 3ab(a + b)", "= 5^3 - 3*6*5 = 125 - 90 = 35"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ALG-007",
+      "mode": "solve",
+      "topic": "equations",
+      "query": "প্রতিস্থাপন পদ্ধতিতে সমাধান করো: x + y = 10 এবং x - y = 4",
+      "expected_answer": "(7, 3)",
+      "expected_steps": ["x = y + 4", "(y + 4) + y = 10 => 2y = 6 => y = 3", "x = 3 + 4 = 7"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ALG-008",
+      "mode": "solve",
+      "topic": "equations",
+      "query": "অপনয়ন পদ্ধতিতে সমাধান করো: 3x + 2y = 12 এবং 2x + 2y = 10",
+      "expected_answer": "(2, 3)",
+      "expected_steps": ["প্রথম সমীকরণ থেকে দ্বিতীয় সমীকরণ বিয়োগ করি: x = 2", "2(2) + 2y = 10 => 2y = 6 => y = 3"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ALG-009",
+      "mode": "solve",
+      "topic": "algebra",
+      "query": "উৎপাদকে বিশ্লেষণ করো: x^2 - x - 20",
+      "expected_answer": "(x - 5)(x + 4)",
+      "expected_steps": ["-২০ = -৫ * ৪ এবং -৫ + ৪ = -১", "x^2 - 5x + 4x - 20 = (x - 5)(x + 4)"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-ALG-010",
+      "mode": "solve",
+      "topic": "algebra",
+      "query": "মান নির্ণয় করো: 4ab যখন a + b = 7 এবং a - b = 3",
+      "expected_answer": "৪০",
+      "expected_steps": ["4ab = (a + b)^2 - (a - b)^2", "= 7^2 - 3^2 = 49 - 9 = 40"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+
+    {
+      "id": "TUT-GEO-001",
+      "mode": "solve",
+      "topic": "geometry",
+      "query": "একটি সমকোণী ত্রিভুজের লম্ব ৬ সেমি এবং ভূমি ৮ সেমি হলে অতিভুজের দৈর্ঘ্য কত?",
+      "expected_answer": "১০ সেমি",
+      "expected_steps": ["(অতিভুজ)^২ = ৬^২ + ৮^২ = ৩৬ + ৬৪ = ১০০", "অতিভুজ = √১০০ = ১০ সেমি"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-GEO-002",
+      "mode": "solve",
+      "topic": "geometry",
+      "query": "একটি সমকোণী ত্রিভুজের অতিভুজ ১৩ সেমি এবং লম্ব ১২ সেমি হলে ভূমির দৈর্ঘ্য কত?",
+      "expected_answer": "৫ সেমি",
+      "expected_steps": ["(ভূমি)^২ = ১৩^২ - ১২^২ = ১৬৯ - ১৪৪ = ২৫", "ভূমি = √২৫ = ৫ সেমি"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-GEO-003",
+      "mode": "solve",
+      "topic": "geometry",
+      "query": "একটি বৃত্তের ব্যাসার্ধ ১৪ সেমি হলে এর পরিধি কত? (π = 22/7)",
+      "expected_answer": "৮৮ সেমি",
+      "expected_steps": ["পরিধি C = 2 * (22/7) * 14 = 2 * 22 * 2 = 88 সেমি"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-GEO-004",
+      "mode": "solve",
+      "topic": "geometry",
+      "query": "একটি বৃত্তের ব্যাসার্ধ ৭ সেমি হলে এর ক্ষেত্রফল কত বর্গসেমি? (π = 22/7)",
+      "expected_answer": "১৫৪ বর্গসেমি",
+      "expected_steps": ["ক্ষেত্রফল A = (22/7) * 7^2 = (22/7) * 49 = 154 বর্গসেমি"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-GEO-005",
+      "mode": "solve",
+      "topic": "geometry",
+      "query": "একটি চতুর্ভুজের তিনটি কোণ যথাক্রমে ৮০°, ৯০° এবং ১১০° হলে চতুর্থ কোণটির মান কত?",
+      "expected_answer": "৮০°",
+      "expected_steps": ["চার কোণের সমষ্টি = ৩৬০°", "তিন কোণের সমষ্টি = ৮০° + ৯০° + ১১০° = ২৮০°", "চতুর্থ কোণ = ৩৬০° - ২৮০° = ৮০°"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-GEO-006",
+      "mode": "solve",
+      "topic": "geometry",
+      "query": "একটি সামান্তরিকের একটি কোণ ৭০° হলে এর অপর তিনটি কোণের মান কত?",
+      "expected_answer": "১১০°, ৭০°, ১১০°",
+      "expected_steps": ["বিপরীত কোণ সমান: ৭০° এর বিপরীত ৭০°", "সন্নিহিত কোণের সমষ্টি ১৮০°: অপর কোণ = ১৮০° - ৭০° = ১১০°", "অন্য দুটি কোণ ১১০° এবং ১১০°"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-GEO-007",
+      "mode": "solve",
+      "topic": "geometry",
+      "query": "একটি রম্বসের কর্ণদ্বয়ের দৈর্ঘ্য ৮ সেমি ও ৬ সেমি হলে এর ক্ষেত্রফল কত?",
+      "expected_answer": "২৪ বর্গসেমি",
+      "expected_steps": ["রম্বসের ক্ষেত্রফল = ১/২ * কর্ণদ্বয়ের গুণফল", "= ১/২ * ৮ * ৬ = ২৪ বর্গসেমি"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-GEO-008",
+      "mode": "solve",
+      "topic": "geometry",
+      "query": "একটি ত্রিভুজের ভূমি ১২ সেমি এবং উচ্চতা ৮ সেমি হলে ক্ষেত্রফল কত?",
+      "expected_answer": "৪৮ বর্গসেমি",
+      "expected_steps": ["ক্ষেত্রফল = ১/২ * ভূমি * উচ্চতা = ১/২ * ১২ * ৮ = ৪৮ বর্গসেমি"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-GEO-009",
+      "mode": "solve",
+      "topic": "geometry",
+      "query": "একটি বৃত্তের ব্যাস ১৪ সেমি হলে ব্যাসার্ধ এবং পরিধি কত? (π = 22/7)",
+      "expected_answer": "ব্যাসার্ধ ৭ সেমি, পরিধি ৪৪ সেমি",
+      "expected_steps": ["ব্যাসার্ধ r = ১৪/২ = ৭ সেমি", "পরিধি = ২ * (২২/৭) * ৭ = ৪৪ সেমি"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-GEO-010",
+      "mode": "solve",
+      "topic": "geometry",
+      "query": "সমকোণী ত্রিভুজের অতিভুজ ১৭ সেমি এবং ভূমি ১৫ সেমি হলে লম্ব কত?",
+      "expected_answer": "৮ সেমি",
+      "expected_steps": ["(লম্ব)^২ = ১৭^২ - ১৫^২ = ২৮৯ - ২২৫ = ৬৪", "লম্ব = √৬৪ = ৮ সেমি"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+
+    {
+      "id": "TUT-WRD-001",
+      "mode": "solve",
+      "topic": "word_problems",
+      "query": "একটি আয়তাকার বাগানের দৈর্ঘ্য ৬০ মিটার এবং প্রস্থ ৪০ মিটার। বাগানের বাইরে চারদিকে ২ মিটার চওড়া একটি রাস্তা আছে। রাস্তার ক্ষেত্রফল কত?",
+      "expected_answer": "৪১৬ বর্গমিটার",
+      "expected_steps": ["মূল বাগানের ক্ষেত্রফল = ৬০ * ৪০ = ২৪০০ বর্গমিটার", "রাস্তাসহ দৈর্ঘ্য = ৬০ + ২*২ = ৬৪ মিটার", "রাস্তাসহ প্রস্থ = ৪০ + ২*২ = ৪৪ মিটার", "রাস্তাসহ ক্ষেত্রফল = ৬৪ * ৪৪ = ২৮১৬ বর্গমিটার", "রাস্তার ক্ষেত্রফল = ২৮১৬ - ২৪০০ = ৪১৬ বর্গমিটার"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-WRD-002",
+      "mode": "solve",
+      "topic": "word_problems",
+      "query": "পিতার বর্তমান বয়স পুত্রের বয়সের ৪ গুণ। ৫ বছর পর তাদের বয়সের সমষ্টি হবে ৫৫ বছর। পিতার ও পুত্রের বর্তমান বয়স কত?",
+      "expected_answer": "পিতার বয়স ৩৬ বছর, পুত্রের বয়স ৯ বছর",
+      "expected_steps": ["মনে করি পুত্রের বয়স x, পিতার বয়স 4x", "৫ বছর পর: (4x + 5) + (x + 5) = 55", "5x + 10 = 55 => 5x = 45 => x = 9", "পুত্রের বয়স ৯ বছর, পিতার বয়স ৪ * ৯ = ৩৬ বছর"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-WRD-003",
+      "mode": "solve",
+      "topic": "word_problems",
+      "query": "দুইটি ক্রমিক সংখ্যার বর্গের অন্তর ৪৭ হলে সংখ্যা দুইটি কত?",
+      "expected_answer": "২৩ এবং ২৪",
+      "expected_steps": ["মনে করি সংখ্যা দুটি x এবং x + 1", "(x + 1)^2 - x^2 = 47", "x^2 + 2x + 1 - x^2 = 47 => 2x = 46 => x = 23", "সংখ্যা দুটি ২৩ এবং ২৪"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-WRD-004",
+      "mode": "solve",
+      "topic": "word_problems",
+      "query": "বার্ষিক ১০% চক্রবৃদ্ধি মুনাফায় ৮০০০ টাকার ২ বছরের চক্রবৃদ্ধি মূলধন ও চক্রবৃদ্ধি মুনাফা কত হবে?",
+      "expected_answer": "মূলধন ৯৬৮০ টাকা, মুনাফা ১৬৮০ টাকা",
+      "expected_steps": ["C = ৮০০০ * (১ + ০.১)^২ = ৮০০০ * ১.২১ = ৯৬৮০ টাকা", "চক্রবৃদ্ধি মুনাফা = ৯৬৮০ - ৮০০০ = ১৬৮০ টাকা"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+    {
+      "id": "TUT-WRD-005",
+      "mode": "solve",
+      "topic": "word_problems",
+      "query": "একটি সমকোণী ত্রিভুজাকার জমির ভূমি ২০ মিটার এবং উচ্চতা ১৫ মিটার। প্রতি বর্গমিটারে ২৫ টাকা দরে ঘাস লাগাতে মোট কত খরচ হবে?",
+      "expected_answer": "৩৭৫০ টাকা",
+      "expected_steps": ["জমির ক্ষেত্রফল = ১/২ * ২০ * ১৫ = ১৫০ বর্গমিটার", "মোট খরচ = ১৫০ * ২৫ = ৩৭৫০ টাকা"],
+      "negative_constraints": ["no_control_tokens"]
+    },
+
+    {
+      "id": "TUT-HNT-001",
+      "mode": "hint",
+      "topic": "algebra",
+      "query": "প্রশ্ন: x^2 - 7x + 12 = 0 সমীকরণের সমাধান কী? সতর্কবার্তা: আমাকে সরাসরি উত্তর বলবে না, শুধু ১ম ধাপের ইঙ্গিত (Hint) দাও।",
+      "negative_constraints": ["do_not_reveal_final_answer", "do_not_say_3_or_4", "no_direct_solution"],
+      "expected_hint_content": "মধ্যপদ বিভাজন (Middle-term break) এর মাধ্যমে ১২ কে এমন দুটি সংখ্যায় ভাঙতে হবে যাদের যোগফল ৭ হয়।"
+    },
+    {
+      "id": "TUT-HNT-002",
+      "mode": "hint",
+      "topic": "equations",
+      "query": "প্রশ্ন: 3x + 2y = 12 এবং x - y = 1 কীভাবে সমাধান করব? আমাকে চূড়ান্ত মান (x ও y এর মান) বলবে না, শুধু প্রতিস্থাপন শুরুর একটি ইঙ্গিত দাও।",
+      "negative_constraints": ["do_not_reveal_final_answer", "do_not_say_x_equals_2_or_y_equals_3", "no_direct_solution"],
+      "expected_hint_content": "দ্বিতীয় সমীকরণ থেকে x = y + 1 আকারে মানটি বের করে ১ম সমীকরণে বসানোর নির্দেশ।"
+    },
+    {
+      "id": "TUT-HNT-003",
+      "mode": "hint",
+      "topic": "geometry",
+      "query": "প্রশ্ন: একটি সমকোণী ত্রিভুজের ভূমি ৯ সেমি এবং অতিভুজ ১৫ সেমি হলে লম্ব কত? আমাকে লম্বের চূড়ান্ত সংখ্যাটা বলবে না, শুধু পিথাগোরাসের কোন সূত্র প্রয়োগ করব তা বলো।",
+      "negative_constraints": ["do_not_reveal_final_answer", "do_not_say_12", "no_direct_solution"],
+      "expected_hint_content": "পিথাগোরাসের সূত্র (অতিভুজ)^২ = (লম্ব)^২ + (ভূমি)^২ উল্লেখ করে লম্ব^২ = অতিভুজ^২ - ভূমি^২ করার নির্দেশনা।"
+    },
+    {
+      "id": "TUT-HNT-004",
+      "mode": "hint",
+      "topic": "profit",
+      "query": "প্রশ্ন: চক্রবৃদ্ধি মুনাফা নির্ণয় করার জন্য আমাকে কোন সূত্র ব্যবহার করতে হবে? সমাধান করে দিও না, শুধু সূত্রটা মনে করিয়ে দাও।",
+      "negative_constraints": ["do_not_solve_any_problem", "no_direct_solution"],
+      "expected_hint_content": "C = P(1 + r)^n এবং চক্রবৃদ্ধি মুনাফা = C - P সূত্র দুটি স্মরণ করিয়ে দেওয়া।"
+    },
+    {
+      "id": "TUT-HNT-005",
+      "mode": "hint",
+      "topic": "patterns",
+      "query": "প্রশ্ন: ৪, ৯, ১৪, ১৯, ... তালিকার পরবর্তী সংখ্যাটি কীভাবে বের করব? উত্তর সরাসরি লিখবে না, প্যাটার্ন বোঝার নিয়ম বলো।",
+      "negative_constraints": ["do_not_reveal_final_answer", "do_not_say_24", "no_direct_solution"],
+      "expected_hint_content": "পাশাপাশি দুটি পদের পার্থক্য (৯ - ৪ = ৫) বের করে শেষ পদের সাথে ৫ যোগ করার পরামর্শ।"
+    }
+  ]
+}

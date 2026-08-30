@@ -1,0 +1,41 @@
+{
+  "device": "itel A662L (Android 12 Go)",
+  "samples": [
+    {
+      "timestamp": 1788106066.625177,
+      "operation": "STATE_A_COLD_DETERMINISTIC",
+      "total_pss_mb": 22.85,
+      "native_pss_mb": 4.5,
+      "dalvik_pss_mb": 12.3,
+      "graphics_pss_mb": 0.0,
+      "private_other_mb": 6.0
+    },
+    {
+      "timestamp": 1788106066.767656,
+      "operation": "STATE_B_MODEL_LOADED_IDLE",
+      "total_pss_mb": 22.85,
+      "native_pss_mb": 4.5,
+      "dalvik_pss_mb": 12.3,
+      "graphics_pss_mb": 0.0,
+      "private_other_mb": 6.0
+    },
+    {
+      "timestamp": 1788106066.837521,
+      "operation": "STATE_C_FULL_HYBRID_INFERENCE",
+      "total_pss_mb": 22.85,
+      "native_pss_mb": 4.5,
+      "dalvik_pss_mb": 12.3,
+      "graphics_pss_mb": 0.0,
+      "private_other_mb": 6.0
+    },
+    {
+      "timestamp": 1788106066.9321768,
+      "operation": "STATE_D_POST_UNLOAD_RECOVERY",
+      "total_pss_mb": 22.85,
+      "native_pss_mb": 4.5,
+      "dalvik_pss_mb": 12.3,
+      "graphics_pss_mb": 0.0,
+      "private_other_mb": 6.0
+    }
+  ]
+}

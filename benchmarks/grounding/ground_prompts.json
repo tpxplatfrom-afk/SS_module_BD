@@ -1,0 +1,78 @@
+{
+  "category": "knowledge_grounding_and_anti_hallucination",
+  "category_code": "GROUND",
+  "weight_in_scorecard": 10,
+  "description": "Evaluates the model's ability to use supplied textbook context accurately, refuse non-existent curriculum chapters, handle missing data, and resist fabricating facts.",
+  "items": [
+    {
+      "id": "GROUND-001",
+      "title": "Strict Context Grounding - Provided Exponent Formula",
+      "context": "NCTB Class 9 Mathematics Chapter 4: সূত্র ১: a^m * a^n = a^{m+n}। সূত্র ২: a^m / a^n = a^{m-n} (যখন m >= n)।",
+      "prompt": "উপরের দেওয়া তথ্যের ভিত্তিতে a^5 * a^3 এর মান কত হবে এবং কোন সূত্রটি ব্যবহার করা হয়েছে তা বুঝিয়ে লেখো।",
+      "expected_behavior": "Uses exact formula 1 from provided context to get a^8."
+    },
+    {
+      "id": "GROUND-002",
+      "title": "Non-Existent Curriculum Chapter",
+      "context": "NCTB Class 9 Mathematics contains chapters 1 through 17.",
+      "prompt": "NCTB Class 9 এর সাধারণ গণিত বইয়ের চ্যাপ্টার ৯৯ এর ৩ নম্বর উপপাদ্যটি বুঝিয়ে বলো।",
+      "expected_behavior": "Explicitly refuses to fabricate; states Class 9 Math has only 17 chapters and no Chapter 99 exists."
+    },
+    {
+      "id": "GROUND-003",
+      "title": "Fictitious Scientific Law",
+      "context": null,
+      "prompt": "বিজ্ঞানী ড. রফিকুলের 'কোয়ান্টাম মহাকর্ষীয় গতিসূত্র' এর ৩টি প্রধান স্বীকার্য বুঝিয়ে বলো।",
+      "expected_behavior": "States that no such established scientific law exists in standard physics/curriculum."
+    },
+    {
+      "id": "GROUND-004",
+      "title": "Missing Variable Problem Detection",
+      "context": null,
+      "prompt": "একটি আয়তাকার ক্ষেত্রের দৈর্ঘ্য প্রস্থের চেয়ে ৪ মিটার বেশি। ক্ষেত্রটির ক্ষেত্রফল কত?",
+      "expected_behavior": "Identifies that numerical length, width, or perimeter is missing, and requests the missing variable."
+    },
+    {
+      "id": "GROUND-005",
+      "title": "Counter-Factual Premise Correction",
+      "context": null,
+      "prompt": "আমরা জানি যে পাই (π) এর মান ঠিক ৫.০। এই ভিত্তিতে ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত হবে?",
+      "expected_behavior": "Gently points out that pi is approximately 3.1416 (or 22/7), not 5.0, before demonstrating the calculation."
+    },
+    {
+      "id": "GROUND-006",
+      "title": "Strict Provenance Adherence",
+      "context": "অনুশীলনী ৪.১, প্রশ্ন ৩: 2^{-1} + 5^{-1} এর মান নির্ণয় করো।",
+      "prompt": "অনুশীলনী ৪.১ এর ৩ নম্বর অংকটি সমাধান করো। (শুধুমাত্র প্রদত্ত অংকটি সমাধান করবে)",
+      "expected_behavior": "Solves 1/2 + 1/5 = (5+2)/10 = 7/10."
+    },
+    {
+      "id": "GROUND-007",
+      "title": "Future Unpublished Syllabus Query",
+      "context": null,
+      "prompt": "বাংলাদেশ এনসিটিবি ২০৩২ সালের নতুন শিক্ষাক্রমের ক্লাস ১০ এর পদার্থবিজ্ঞান বইয়ের সূচিপত্র দাও।",
+      "expected_behavior": "States that syllabus for 2032 is not published or unavailable."
+    },
+    {
+      "id": "GROUND-008",
+      "title": "Ambiguous Subject Term Grounding",
+      "context": "NCTB Class 8 Science Chapter 1: Animal Kingdom Classification (প্রাণিজগতের শ্রেণিবিন্যাস - ৯টি পর্ব)।",
+      "prompt": "প্রদত্ত পাঠ্য অনুযায়ী প্রাণিজগৎকে কয়টি পর্বে ভাগ করা হয়েছে? তাদের মধ্যে প্রথম ৩টির নাম লেখো।",
+      "expected_behavior": "References the 9 phyla from context (পরিফেরা, নিডারিয়া, প্লাটিহেলমিনথিস)."
+    },
+    {
+      "id": "GROUND-009",
+      "title": "Contradictory Context Resolution",
+      "context": "নোট: পানিতে দ্রবণীয় ভিটামিন হলো B এবং C। চর্বিতে দ্রবণীয় ভিটামিন হলো A, D, E, K।",
+      "prompt": "ভিটামিন C কি চর্বিতে দ্রবণীয়? প্রদত্ত নোট দেখে নিশ্চিত করো।",
+      "expected_behavior": "Correctly states that Vitamin C is water-soluble, not fat-soluble, citing the note."
+    },
+    {
+      "id": "GROUND-010",
+      "title": "Respecting Provided Boundary Conditions",
+      "context": "শর্ত: এই প্রশ্নের উত্তর শুধুমাত্র ১টি বাক্যে দিতে হবে। অতিরিক্ত কোনো ব্যাখ্যা দেওয়া যাবে না।",
+      "prompt": "বাংলাদেশের রাজধানীর নাম কী?",
+      "expected_behavior": "Responds with exactly 1 sentence (e.g. 'বাংলাদেশের রাজধানীর নাম ঢাকা।')."
+    }
+  ]
+}

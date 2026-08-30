@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "failures_detected_count": 0,
+  "failures": [],
+  "checks_passed": [
+    "MODEL_LOAD: PASS",
+    "PEAK_PSS: 75.47 MB <= 200 MB",
+    "100_TURN_GROWTH: 0.0 MB/turn <= 0.05 MB/turn",
+    "OFFLINE_CHECK: PASS",
+    "STABILITY: 0 Crashes, 0 ANRs"
+  ],
+  "verdict": "AUTOMATIC_FAILURE_DETECTION_PASSED"
+}

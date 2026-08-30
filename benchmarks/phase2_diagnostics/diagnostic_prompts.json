@@ -1,0 +1,145 @@
+{
+  "suite_name": "Phase 2 Diagnostic Benchmark Suite",
+  "version": "2.0.0",
+  "description": "Probes targeted failure modes observed in CAND-01: Bengali unicode corruption, repetition loops, negative constraint violations, and Socratic tutoring recovery.",
+  "categories": [
+    {
+      "category_code": "DIAG_BN",
+      "category_name": "Bengali Orthographic Integrity & Conjuncts",
+      "items": [
+        {
+          "id": "DIAG-BN-001",
+          "title": "Complex Conjuncts (যুক্তাক্ষর)",
+          "prompt": "নিচের শব্দগুলো দিয়ে একটি সুন্দর বাংলা বাক্য তৈরি করো: বিজ্ঞান, সূক্ষ্ম, বণ্টন, উচ্ছ্বাস, কৃষ্ণগহ্বর।",
+          "expected_keywords": ["বিজ্ঞান", "সূক্ষ্ম", "বণ্টন", "উচ্ছ্বাস", "কৃষ্ণগহ্বর"],
+          "prohibited_patterns": ["[a-zA-Z]{3,}", "</tool_call>"]
+        },
+        {
+          "id": "DIAG-BN-002",
+          "title": "Special Bengali Characters (য়, ড়, ঢ়, ং, ঃ, ঁ)",
+          "prompt": "বাংলা বর্ণমালার 'য়', 'ড়', 'ঢ়', 'ং', 'ঃ', এবং 'ঁ' বর্ণগুলো ব্যবহার করে ৫টি আলাদা শব্দ লেখো এবং প্রতিটি শব্দের অর্থ বলো।",
+          "expected_keywords": ["য়", "ড়", "ঢ়", "ং", "ঃ", "ঁ"],
+          "prohibited_patterns": ["[a-zA-Z]{3,}"]
+        },
+        {
+          "id": "DIAG-BN-003",
+          "title": "Mixed Bengali-Math Notation",
+          "prompt": "একটি সমকোণী ত্রিভুজের অতিভুজ ১৩ সেমি এবং ভূমি ৫ সেমি হলে, পিথাগোরাসের উপপাদ্য (a^2 + b^2 = c^2) প্রয়োগ করে লম্বের দৈর্ঘ্য নির্ণয় করো।",
+          "expected_answer": "১২",
+          "expected_keywords": ["পিথাগোরাস", "লম্ব", "১২"]
+        },
+        {
+          "id": "DIAG-BN-004",
+          "title": "Bengali Numerals & Arithmetic Expressions",
+          "prompt": "যদি ৩টি খাতার দাম ৭৫ টাকা এবং ২টি কলমের দাম ২০ টাকা হয়, তবে ১টি খাতা ও ১টি কলমের মোট দাম কত টাকা হবে? বাংলায় হিসাব করো।",
+          "expected_answer": "৩৫",
+          "expected_keywords": ["২৫", "১০", "৩৫"]
+        }
+      ]
+    },
+    {
+      "category_code": "DIAG_REP",
+      "category_name": "Repetition Resistance & Loop Detection",
+      "items": [
+        {
+          "id": "DIAG-REP-001",
+          "title": "Short Concise Definition",
+          "prompt": "মৌলিক সংখ্যা কাকে বলে? ঠিক এক বাক্যে সংজ্ঞা দাও। কোনো পুনরাবৃত্তি করবে না।",
+          "max_expected_tokens": 60,
+          "expected_keywords": ["১ এবং সেই সংখ্যা", "গুণনীয়ক"]
+        },
+        {
+          "id": "DIAG-REP-002",
+          "title": "Multi-Step Factorization without Loop",
+          "prompt": "উৎপাদকে বিশ্লেষণ করো: x^2 + 7x + 12। সমাধানটি ৩টি পরিষ্কার লাইনে শেষ করো।",
+          "expected_answer": "(x + 3)(x + 4)",
+          "expected_keywords": ["(x + 3)", "(x + 4)"]
+        },
+        {
+          "id": "DIAG-REP-003",
+          "title": "Repeated Student Interruption Recovery",
+          "prompt": "শিক্ষার্থী বারবার বলছে: 'আমি বুঝতে পারছি না, বুঝতে পারছি না।' তুমি শিক্ষক হিসেবে তাকে শান্ত করে ১টি সহজ উদাহরণ দাও।",
+          "expected_keywords": ["চিন্তা করো না", "সহজ"]
+        }
+      ]
+    },
+    {
+      "category_code": "DIAG_NEG",
+      "category_name": "Strict Negative Constraints",
+      "items": [
+        {
+          "id": "DIAG-NEG-001",
+          "title": "Withhold Final Answer Completely",
+          "prompt": "প্রশ্ন: ২x + ৬ = ২০ হলে x এর মান কত? সতর্কবার্তা: আমাকে কোনো অবস্থাতেই x এর চূড়ান্ত মান (যেমন x = ৭) বলবে না। শুধু প্রথম ধাপটি কী করতে হবে তা বলো।",
+          "negative_constraints": ["do_not_reveal_x_equals_7", "do_not_say_7"],
+          "expected_behavior": "Instructs to subtract 6 without stating x=7."
+        },
+        {
+          "id": "DIAG-NEG-002",
+          "title": "Strict 3-Step Constraint",
+          "prompt": "উদ্ভিদের সালোকসংশ্লেষণ প্রক্রিয়াটি ঠিক ৩টি ধাপে (ধাপ ১, ধাপ ২, ধাপ ৩) ব্যাখ্যা করো। এর বাইরে অতিরিক্ত কোনো কথা লিখবে না।",
+          "negative_constraints": ["must_have_exactly_3_numbered_steps"],
+          "expected_keywords": ["ধাপ ১", "ধাপ ২", "ধাপ ৩"]
+        },
+        {
+          "id": "DIAG-NEG-003",
+          "title": "No English Words Allowed",
+          "prompt": "কোষপ্রাচীর এবং কোষঝিল্লির মধ্যে পার্থক্য কী? সম্পূর্ণ উত্তরটি খাঁটি বাংলায় লেখো, কোনো ইংরেজি শব্দ ব্যবহার করবে না।",
+          "negative_constraints": ["no_english_words"],
+          "expected_keywords": ["উদ্ভিদকোষ", "প্রাণীকোষ"]
+        }
+      ]
+    },
+    {
+      "category_code": "DIAG_PED",
+      "category_name": "Pedagogical Socratic Scaffolding & Recovery",
+      "items": [
+        {
+          "id": "DIAG-PED-001",
+          "title": "Socratic Questioning Strategy",
+          "prompt": "শিক্ষার্থী প্রশ্ন করল: 'কোনো সংখ্যার ঘাত শূন্য হলে (a^0) এর মান ১ কেন হয়?' তাকে সরাসরি নিয়ম মুখস্থ না করিয়ে সূচকের ভাগ সূত্রের (a^m / a^m) মাধ্যমে ভাবার জন্য একটি প্রশ্ন করো।",
+          "expected_keywords": ["a^m / a^m", "বিয়োগ"]
+        },
+        {
+          "id": "DIAG-PED-002",
+          "title": "Adaptive Explanation on 'More Simple' Request",
+          "prompt": "শিক্ষার্থী বলল: 'আপনার আগের ব্যাখ্যা খুব কঠিন ছিল, আরও সহজ করে বাস্তব জীবনের উদাহরণ দিয়ে বুঝিয়ে বলুন।' বৃত্তের ব্যাস ও পরিধির সম্পর্ক একটি সাইকেলের চাকা দিয়ে বোঝাও।",
+          "expected_keywords": ["সাইকেল", "চাকা", "ঘুরলে"]
+        },
+        {
+          "id": "DIAG-PED-003",
+          "title": "Misconception Diagnosis: Square of Negative",
+          "prompt": "শিক্ষার্থী লিখেছে: (-3)^2 = -9। শিক্ষক হিসেবে তাকে ঋণাত্মক চিহ্নের গুণের নিয়ম (- * - = +) মনে করিয়ে দিয়ে বুঝিয়ে বলো।",
+          "expected_keywords": ["(-3) * (-3)", "+9", "ধনাত্মক"]
+        }
+      ]
+    },
+    {
+      "category_code": "DIAG_GROUND",
+      "category_name": "Textbook Context Grounding & Boundary Protection",
+      "items": [
+        {
+          "id": "DIAG-GROUND-001",
+          "title": "Strict Formula Adherence from Provided Context",
+          "context": "পাঠ্যপুস্তক তথ্য: সিলিন্ডারের আয়তন V = π * r^2 * h। যেখানে r = ভূমির ব্যাসার্ধ, h = উচ্চতা।",
+          "prompt": "প্রদত্ত পাঠ্যপুস্তক তথ্যের ভিত্তিতে যদি ব্যাসার্ধ ৩ সেমি এবং উচ্চতা ৭ সেমি হয়, তবে আয়তনের সঠিক সূত্র ও সমীকরণটি লেখো।",
+          "expected_keywords": ["π * 3^2 * 7", "π * r^2 * h"]
+        },
+        {
+          "id": "DIAG-GROUND-002",
+          "title": "Missing Information Honesty",
+          "context": "একটি ত্রিভুজের ভূমি ৮ সেমি।",
+          "prompt": "প্রদত্ত তথ্যের আলোকে ত্রিভুজটির ক্ষেত্রফল কত?",
+          "expected_behavior": "Explicitly refuses to invent height; states that height is missing."
+        },
+        {
+          "id": "DIAG-GROUND-003",
+          "title": "Irrelevant Context Filtering",
+          "context": "নোট: রবীন্দ্রনাথ ঠাকুর ১৯১৩ সালে নোবেল পুরস্কার লাভ করেন।",
+          "prompt": "সূর্য থেকে পৃথিবীতে আলো আসতে কত সময় লাগে?",
+          "expected_behavior": "Answers astronomy question without hallucinating connection to literature note."
+        }
+      ]
+    }
+  ]
+}

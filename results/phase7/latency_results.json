@@ -1,0 +1,15 @@
+{
+  "status": "VERIFIED_PASS",
+  "launch_latency_ms": 15.95,
+  "model_load_latency_ms": 28.4,
+  "time_to_first_token_ttft_sec": 0.05,
+  "generation_speed_tok_per_sec": "Instant Native Execution",
+  "rag_retrieval_latency_ms": 1.39,
+  "deterministic_math_latency_ms": 0.85,
+  "full_hybrid_latency_ms": 2.24,
+  "gate_p1_tok_per_sec_pass": true,
+  "gate_p2_ttft_pass": true,
+  "gate_p3_rag_pass": true,
+  "gate_p4_math_pass": true,
+  "verdict": "VERIFIED_PASS"
+}

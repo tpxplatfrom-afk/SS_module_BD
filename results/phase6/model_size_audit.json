@@ -1,0 +1,12 @@
+{
+  "status": "VERIFIED",
+  "model_binary_int4_mb": 34.12,
+  "target_model_ceiling_mb": 50.0,
+  "model_size_gate_passed": true,
+  "knowledge_pack_size_kb": 164.0,
+  "tokenizer_size_kb": 42.0,
+  "total_assets_mb": 34.32,
+  "device_available_storage_mb": 8400.0,
+  "storage_safety_margin_mb": 8365.68,
+  "16gb_device_compatible": true
+}

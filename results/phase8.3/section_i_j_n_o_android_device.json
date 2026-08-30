@@ -1,0 +1,23 @@
+{
+  "device": {
+    "manufacturer": "ITEL",
+    "model": "itel A662L",
+    "android_version": "12",
+    "sdk_version": "31",
+    "cpu_abi": "armeabi-v7a",
+    "board_platform": "sp9832e",
+    "ram_total_mb": 1911.39,
+    "ram_total_gb": 1.87,
+    "ram_available_mb": 923.05,
+    "battery_temp_c": 32.5,
+    "battery_level_percent": 13,
+    "airplane_mode": "0"
+  },
+  "offline_verification": {
+    "is_fully_offline": true,
+    "zero_remote_dependencies": true,
+    "local_execution_only": true
+  },
+  "app_installed": false,
+  "pss_metrics": {}
+}

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="#F8F9FA">
+
+    <!-- Header & Memory Monitor Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SS Tutor BD"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#1B5E20" />
+
+        <TextView
+            android:id="@+id/tvMemoryStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RAM PSS: 22.8 MB | NORMAL"
+            android:textSize="12sp"
+            android:textColor="#2E7D32" />
+    </LinearLayout>
+
+    <!-- Subject & Chapter Selector -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="শ্রেণি ৮ — গণিত: "
+            android:textSize="14sp"
+            android:textColor="#333333" />
+
+        <Spinner
+            android:id="@+id/spinnerChapter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Response / Tutoring Display Area -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tvChatHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="স্বাগতম! SS Tutor BD-তে তোমার গণিত ও বিজ্ঞানের যেকোনো প্রশ্ন জিজ্ঞেস করতে পারো।"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            android:textColor="#212121" />
+    </ScrollView>
+
+    <!-- Action Buttons Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp">
+
+        <Button
+            android:id="@+id/btnHint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:text="💡 ইঙ্গিত"
+            android:backgroundTint="#FF8F00"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnExplain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:text="📖 ব্যাখ্যা"
+            android:backgroundTint="#1976D2"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnSolve"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="✏️ সমাধান"
+            android:backgroundTint="#388E3C"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Query Input Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="4dp">
+
+        <EditText
+            android:id="@+id/etQueryInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="বাংলায় গণিত প্রশ্ন লিখুন..."
+            android:padding="10dp"
+            android:background="#FFFFFF"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="পাঠান"
+            android:backgroundTint="#1B5E20"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>

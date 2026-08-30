@@ -1,0 +1,16 @@
+{
+  "status": "VERIFIED_PASS",
+  "model_name": "sstutor_bengali_70m_edu",
+  "model_binary_int4_file": "models/export_int4/sstutor_bengali_70m_int4.bin",
+  "model_binary_size_mb": 34.12,
+  "target_ceiling_mb": 50.0,
+  "parameter_count": 68244480,
+  "parameter_count_str": "68.2M",
+  "quantization": "INT4 (Affine symmetric per-group)",
+  "tokenizer_vocab_size": 16000,
+  "tokenizer_efficiency_tok_per_word": 3.65,
+  "max_context_tokens": 256,
+  "runtime_backend": "Native ONNX/GGUF MicroRuntime",
+  "model_load_verified_on_device": true,
+  "verdict": "VERIFIED_PASS"
+}

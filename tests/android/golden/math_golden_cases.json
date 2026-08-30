@@ -1,0 +1,35 @@
+{
+  "category": "golden_mathematics_cases",
+  "cases": [
+    {
+      "query": "৩/৪ + ৫/৬ এর যোগফল কত?",
+      "expected_exact": "১৯/১২",
+      "expected_type": "fraction_addition"
+    },
+    {
+      "query": "৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?",
+      "expected_exact": "১৫০০",
+      "expected_type": "simple_interest"
+    },
+    {
+      "query": "৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?",
+      "expected_exact": "৯৬৮০",
+      "expected_type": "compound_interest"
+    },
+    {
+      "query": "একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?",
+      "expected_exact": "১০",
+      "expected_type": "pythagoras"
+    },
+    {
+      "query": "১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার সমষ্টি কত?",
+      "expected_exact": "৫০৫০",
+      "expected_type": "series_sum"
+    },
+    {
+      "query": "৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত?",
+      "expected_exact": "১৫৪",
+      "expected_type": "circle_area"
+    }
+  ]
+}

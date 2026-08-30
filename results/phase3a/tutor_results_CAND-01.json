@@ -1,0 +1,1249 @@
+{
+  "candidate_id": "CAND-01",
+  "total_questions": 50,
+  "total_score": 340,
+  "max_score": 500,
+  "score_percentage": 68.0,
+  "passed_target_70_pct": false,
+  "hint_compliance_rate_pct": 100.0,
+  "parameters": {
+    "temperature": 0.1,
+    "repeat_penalty": 1.15,
+    "max_tokens": 256
+  },
+  "performance": {
+    "tokens_per_second": 9.94,
+    "total_tokens_generated": 12670,
+    "total_inference_time_s": 1274.28,
+    "peak_rss_mb": 738.07
+  },
+  "rubric_breakdown": {
+    "math_correctness": {
+      "score": 58,
+      "max": 100,
+      "percentage": 58.0
+    },
+    "bengali_quality": {
+      "score": 10,
+      "max": 100,
+      "percentage": 10.0
+    },
+    "grounding": {
+      "score": 100,
+      "max": 100,
+      "percentage": 100.0
+    },
+    "pedagogy": {
+      "score": 72,
+      "max": 100,
+      "percentage": 72.0
+    },
+    "instruction_compliance": {
+      "score": 100,
+      "max": 100,
+      "percentage": 100.0
+    }
+  },
+  "results": [
+    {
+      "question_id": "TUT-EXP-001",
+      "mode": "explain",
+      "topic": "patterns",
+      "total_score": 8,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 2,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": false,
+      "generated_tokens": 256,
+      "latency_ms": 31401.92,
+      "response_text": "প্রদত্ত পাঠ্যপুস্তক অংশের নির্দেশনাবলী:\n1. শুধুমাত্র উপরের দেওdbufা পাঠ্যপুস্তক অংশের তথ্যের ভিত্তিতে উত্তর তৈরি করো।\n\n2. সহজ মৌলিক সংখ্যা নbows এবং বীজগাণিতিক রাশি পদ্ধতি ভাষাDCF উপস্থাপন করে দেওdbufা সময় হলো।\n\n3. মৌলিক সংখ্যা চেনার সহজ উপাDP হলো ইরাট",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-01-sec-02-c002",
+        "ssp-nctb-cl8-math-v1-ch-01-sec-03-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-EXP-002",
+      "mode": "explain",
+      "topic": "patterns",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 24500.21,
+      "response_text": "[উৎস: Class 8 - Mathematics - NCTB Class 8]\n\n### প্যাটার্ন (Patterns) - ১.৪ ম্যাজিক বর্গ (Magic Square)\n\n#### [CH-01: প্যাটার্ন (Patterns) - ১.৪ ম্যাজিক বর্গ (Magic Square)]\n\n**প্রশ্ন:** 3 ক্রমের ম্যাজিক বর্গ এবং সংখ্যা 15 হandum।\n\n**কঠোর নির্দেশনাবলী:**\n\n- **প্রদত্ত পাঠ্যপুস্তক:** Class 8 - Mathematics - NCTB Class 8\n- **অংশের সময়:** 3 ক্রমের ম্যাজিক বর্গ এবং সং",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-01-sec-07-c007",
+        "ssp-nctb-cl8-math-v1-ch-01-sec-02-c002"
+      ]
+    },
+    {
+      "question_id": "TUT-EXP-003",
+      "mode": "explain",
+      "topic": "profit",
+      "total_score": 8,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 0,
+        "bengali_quality": 2,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": false,
+      "generated_tokens": 256,
+      "latency_ms": 23595.15,
+      "response_text": "প্রদত্ত পাঠ্যপুস্তক অংশের উল্লেখ নেই।\n\nমোট 2 বছরের চক্রবৃদ্ধি মূলধন ও চক্রবৃদ্ধি মুনাফা কত?\n\nচক্রবৃদ্ধি মূলধন C = P * (১ + r)^n\nC = ৫০০০ * (১.২% + ৩) = ৫০০০ * (১.৬%) = ৫০০০ * ৪.७৮ = ৫০০০ টাকা\n\nচক্রবৃদ্ধি মুনাফা C - P = ৫০০০ - ৫০০০ = ৪৩২ ট",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-02-sec-05-c006",
+        "ssp-nctb-cl8-math-v1-ch-02-sec-03-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-EXP-004",
+      "mode": "explain",
+      "topic": "measurement",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 257,
+      "latency_ms": 27567.21,
+      "response_text": "[উৎস: Class 8 - Mathematics - NCTB Class 8]\n\n## ৩.২ আ-wwwতাকার বাগানের চতুর্দিকের রাস্তার ক্ষেত্রফল\n\n### পদ্ধতি (Elimination Method)\n\nঅপনয়ন পদ্ধতি এমনভাবে গুণ করা হলে, যেকোনো চলকের সহগের পরম মান সমান হandum বিস্তার এবং অপর চলকের মান বের করা যেকোনো মূল সমীকরণে বসাতে হandum আবিষ্কার করতে হandum পদ্ধতি এই তথ্য",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-03-sec-04-c004",
+        "ssp-nctb-cl8-math-v1-ch-06-sec-04-c004"
+      ]
+    },
+    {
+      "question_id": "TUT-EXP-005",
+      "mode": "explain",
+      "topic": "algebra",
+      "total_score": 8,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 2,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 20297.01,
+      "response_text": "১. শুধুমাত্র উপরের দেওstras পদ্ধতি অংশের ভিত্তিতে উত্তর তৈরি করা।\n\n[CH-04: বীজগণিতীয় সূত্রাবলী ও প্রয়োগ (Algebraic Formulae) - ৪.১ বীজগণিতিক রাশির বর্গ সংক্রান্ত সূত্রাবলী]\nউদাহরণ ১: যদি a + b = 8 এবং ab = 15 হDMI, তবে a^2 + b^2 এর মান কত?\n\nসমাধান:\nএই প্রশ্নটি সুনয়া দ",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-05-sec-03-c004",
+        "ssp-nctb-cl8-math-v1-ch-04-sec-02-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-EXP-006",
+      "mode": "explain",
+      "topic": "algebra",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 24144.31,
+      "response_text": "প্রদত্ত পাঠ্যপুস্তক অংশে এই তথ্যের উল্লেখ নেই।\n\nএটি বা মধ্যপদ বিভাজন (Middle-term break) পদ্ধতিতে উৎপাদক করো।\n\nমধ্যপদ বিভাজন সংখ্যার অন্তরগুলির মধ্যে এবং প্রতিটি নিচা করা হয়।\n\nএই বা দুটি বর্গের অন্তরগুলির মধ্যপদ বিভাজন সংখ্যার অন্তরগুলির প্রতিটি নিচা করে।\n\nএই একট",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-04-sec-05-c005",
+        "ssp-nctb-cl8-math-v1-ch-04-sec-05-c006"
+      ]
+    },
+    {
+      "question_id": "TUT-EXP-007",
+      "mode": "explain",
+      "topic": "fractions",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 2,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 28380.57,
+      "response_text": "প্রদত্ত পাঠ্যপুস্তক অংশের সময়, এই বিশ্লন করা হলো:\n\n1. ভগ্নাংশগুলোর হরগুলোর ল.সা.গু নির্ণstras করতে হবে।\n\n2. একই পদগুলোকে যোগ বা বিোগ চিহ্নের মাধ্যমে সরল করতে হবে।\n\n3. প্রাপ্ত ভাগফল দিServletContext এcams লব ও হর উভstras বা অন্তর নিশ্চিত করে সংশ্লিষ্ট ভগ্নাংশের লব ও হর",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-05-sec-02-c002",
+        "ssp-nctb-cl8-math-v1-ch-05-sec-03-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-EXP-008",
+      "mode": "explain",
+      "topic": "equations",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 23390.84,
+      "response_text": "[উৎস: Class 8 - Mathematics - NCTB Class 8]\n\n## ৬.১ প্রতিস্থাপন পদ্ধতি (Substitution Method)\n\nধাপ ১: যেকোনো একটি সমীকরণ থেকে একটি চলকের মান অপর চলকের মাধ্যমে প্রকাশ করতে হবে (যেমন x = f(y))।\n\nধাপ ২: এই প্রাপ্ত মানটি অপর সমীকরণে বসিwald ()\nউদাহরণ ১: যদি x = f(y) থেকে কিছু চলকবিশিষ্ট সমীকরণে রূপান্তর করা এই",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-06-sec-02-c002",
+        "ssp-nctb-cl8-math-v1-ch-06-sec-04-c005"
+      ]
+    },
+    {
+      "question_id": "TUT-EXP-009",
+      "mode": "explain",
+      "topic": "geometry",
+      "total_score": 10,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 2,
+        "bengali_quality": 2,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": false,
+      "generated_tokens": 256,
+      "latency_ms": 24723.43,
+      "response_text": "পিথাগোরাসের উপপাদ্যটি বিবৃত করা হল:\n\nc^2 = a^2 + b^2\n\nএখন, একটি সমকোণী ত্রিভুজের অতিভুজ ১৩ সেমি এবং ভূমি ৫ সেমি হলে, লম্বের দৈর্ঘ্য কত?\n\nএই তথ্যের উল্লেখ নেই।\n\nপ্রidal পাঠ্যপুস্তক অংশে এটি প্রযোজিত হবে:\n\nc^2 = a^2 + b^2\n\nএখন, আমরা জানি, (অতিভুজ)^২ = (লম্ব)^২ + (ভূ",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-08-sec-03-c003",
+        "ssp-nctb-cl8-math-v1-ch-08-sec-03-c004"
+      ]
+    },
+    {
+      "question_id": "TUT-EXP-010",
+      "mode": "explain",
+      "topic": "geometry",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 257,
+      "latency_ms": 25227.69,
+      "response_text": "[উৎস: Class 8 - Mathematics - NCTB Class 8]\n\n### নির্ভরযোগ্য অংশ উদ্ধৃত\n\n#### ৮.১ চতুর্ভুজের মৌলিক ধর্ম ও বৈশিষ্ট্য\n- **চতুর্ভুজের চারটি কোণের সমষ্টি**:\n  - এই পদ্ধতি হলো মৌলিক উপপাদ্য ও বৈশিষ্ট্য।\n  - চতুর্ভুজের সমষ্টি এই পদ্ধতি হয় নbows (bows) কাড়া অন্তরিক বাহু ও কোণগুলো পরস্প",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-08-sec-02-c002",
+        "ssp-nctb-cl8-math-v1-ch-01-sec-02-c002"
+      ]
+    },
+    {
+      "question_id": "TUT-ARI-001",
+      "mode": "solve",
+      "topic": "patterns",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 26985.99,
+      "response_text": "[CH-06: সরল সহসমীকরণ (Linear Simultaneous Equations) - ৬.২ অপনয়ন পদ্ধতি (Elimination Method)]\n\nঅপনয়ন পদ্ধতিতে সমাধানের ধাপসমূহ:\nধাপ ১: সুবিধাজনক সংখ্যা দিammen এমনভাবে গুণ করতে হবে যেন যেকোনো একটি চলকের সহগের পরম মান সমান হdbuf।\n\nধাপ ২: চলকটির সহগগুলোর চিহ্ন বিপরীত (+ ও -) হলে সমীকরণ দুটি যো",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-06-sec-04-c004",
+        "ssp-nctb-cl8-math-v1-ch-06-sec-02-c002"
+      ]
+    },
+    {
+      "question_id": "TUT-ARI-002",
+      "mode": "solve",
+      "topic": "patterns",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 25725.04,
+      "response_text": "[CH-01: প্যাটার্ন (Patterns) - ১.২ সংখ্যা প্যাটার্ন ও বীজগাণিতিক রাশি তৈরি]\n\nউদাহরণ ১: ৩, ৭, ১১, ১৫, ১৯, ... তালিকার পরবর্তী পদ এবং বীজগাণিতিক রাশি নির্ণstras করো।\n\nপাশাপাশি দুটি পদের পার্থক্য = ৩ - ৭ = ৪, ১১ - ৭ = ৫।\nএখন, পার্থক্য ৪।\n\n১ম পদ = ৪ * ১ - ১ =",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-01-sec-03-c004",
+        "ssp-nctb-cl8-math-v1-ch-01-sec-03-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-ARI-003",
+      "mode": "solve",
+      "topic": "profit",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 257,
+      "latency_ms": 26623.09,
+      "response_text": "[CH-02: মুনাফা (Profit & Interest) - ২.৩ চক্রবৃদ্ধি মুনাফা (Compound Interest)]\nউদাহরণ ২: বার্ষিক ৮% চক্রবৃদ্ধি মুনাফা.VideoCapture = P = ৪০০০ টাকা, r = ৮% = ৮/১০০ = ০.০৮, n = ২ বছর।\nচক্রবৃদ্ধি মূলধন C = P * (১ + r)^n\nC = ৪০০০ * (১ + ০.০৮)^২ = ৪০০০ * (১.০৮)^২ = ৪০০০ * ১.১৬৩৫ = ৪০",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-02-sec-03-c004",
+        "ssp-nctb-cl8-math-v1-ch-02-sec-05-c006"
+      ]
+    },
+    {
+      "question_id": "TUT-ARI-004",
+      "mode": "solve",
+      "topic": "profit",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 27061.95,
+      "response_text": "[CH-02: মুনাফা (Profit & Interest) - ২.৩ চক্রবৃদ্ধি মুনাফা (Compound Interest)]\nউদাহরণ ২: বার্ষিক ৮% চক্রবৃদ্ধি মুনাফা.VideoCapture = ৪.৩ টাকা, সম n = ২ বছর।\nচক্রবৃদ্ধি মূলধন C = P * (১ + r)^n\nC = ৪.৩ * (১.০৮)^২ = ৪.৩ * ১.১৬৬৪ = ৪.৩ টাকা।\n\n[CH-02: মুনাফা (Profit & Interest) - ২.২ সরল মুনাফা (Simple Interest)]\nউদাহরণ ১",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-02-sec-05-c006",
+        "ssp-nctb-cl8-math-v1-ch-02-sec-03-c004"
+      ]
+    },
+    {
+      "question_id": "TUT-ARI-005",
+      "mode": "solve",
+      "topic": "measurement",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 257,
+      "latency_ms": 25699.15,
+      "response_text": "[CH-03: পরিমাপ (Measurement) - ৩.১ ক্ষেত্রফল পরিমাপ সংক্রান্ত সূত্রাবলী]\n\nউদাহরণ ১: একটি আovah দৈর্ঘ্য = ৫০ মিটার, প্রস্থ = ৩০ মিটার।\n\nপরিসীমা = (এক বাহুর দৈর্ঘ্য)^2\n= ৫০^2\n= ২७,400 মিটার\n\nআovah ক্ষেত্রফল = এক বাহুর দৈর্ঘ্য * প্রস্থ\n= ৫০ * ৩০\n= ২७,000 মিটার\n\nপরিস",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-03-sec-02-c003",
+        "ssp-nctb-cl8-math-v1-ch-03-sec-02-c002"
+      ]
+    },
+    {
+      "question_id": "TUT-ARI-006",
+      "mode": "solve",
+      "topic": "measurement",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 257,
+      "latency_ms": 28804.08,
+      "response_text": "[CH-03: পরিমাপ (Measurement) - ৩.১ ক্ষেত্রফল পরিমাপ সংক্রান্ত সূত্রাবলী]\nউদাহরণ ১: একটি আuParam চৌবাচ্চার দৈর্ঘ্য ৩ মিটার, প্রস্থ ২ মিটার এবং উচ্চতা ১.৫ মিটার। কেলের = ০.৬১ কিলোমিটার (প্রা)।\n\nএর ক্ষেত্রফল = ৩ * (দৈর্ঘ্য + প্রস্থ) = ২ * (০.৬১ + ১.৫) = ২ * ২.৬৭",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-03-sec-05-c005",
+        "ssp-nctb-cl8-math-v1-ch-03-sec-02-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-ARI-007",
+      "mode": "solve",
+      "topic": "fractions",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 19887.96,
+      "response_text": "[CH-05: বীজগণিতীয় ভগ্নাংশ (Algebraic Fractions) - ৫.৩ বীজগণিতীacco সরল করো।]\n\nউদাহরণ ১: 1/(x - 2) + 1/(x + 2)\n\nএই প্রশ্নটি উল্লেখ করা যেমন:\n\n- x = a তবে, (a - 2)/(a + 2)\n- x = b তবে, (b - 2)/(b + 2)\n\nএই পাঠ্যপুস্তকের সরল করা হয়:\n\n1/(x - 2) + 1/(x + 2) = [(a - 2)/(a + 2)] + [b/(b + 2)]\n\nএখন, যদি a = b তবে, (a - 2)/(a + 2) =",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-05-sec-03-c004",
+        "ssp-nctb-cl8-math-v1-ch-06-sec-01-c001"
+      ]
+    },
+    {
+      "question_id": "TUT-ARI-008",
+      "mode": "solve",
+      "topic": "fractions",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 2,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 28704.64,
+      "response_text": "[CH-04: বীজগণিতীয় সূত্রাবলী ও প্রয়োগ (Algebraic Formulae) - ৪.১ বীজগণিতিক রাশির বর্গ সংক্রান্ত সূত্রাবলী]\n## ৪.১ বীজগণিতিক রাশির বর্গ সংক্রান্ত সূত্রাবলী\nবর্গ নির্ণstrasম:\nসূত্র ১: (a + b)^2 = a^2 + 2ab + b^2\n\nপ্রয়োগ করা হলো:\n(a - b)^2 = a^2 - 2ab + b^2\n\nএই সূত্রের পাঠ্যপু",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-04-sec-02-c002",
+        "ssp-nctb-cl8-math-v1-ch-05-sec-05-c005"
+      ]
+    },
+    {
+      "question_id": "TUT-ARI-009",
+      "mode": "solve",
+      "topic": "profit",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 27255.77,
+      "response_text": "[CH-02: মুনাফা (Profit & Interest) - ২.১ লাভ ও ক্ষতি]\n\n## ২.১ লাভ ও ক্ষতি\nব্যবসাammen্য্সমূহ:\nধাপ ১: মোট লাভ / বিক্রwüns = (290 - 280) / 150\n\nধাপ ২: চলকের উপনয়ন সমীকরণ দুটি যোগ এবং একই চিহ্ন করে বিugu করে একটি চলক অপনীত করতে হবে।\n\nধাপ ৩: এক চলকবিশিষ্ট সরল সমীকরণ সমাধান করে ম",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-02-sec-02-c002",
+        "ssp-nctb-cl8-math-v1-ch-06-sec-04-c004"
+      ]
+    },
+    {
+      "question_id": "TUT-ARI-010",
+      "mode": "solve",
+      "topic": "measurement",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 25855.22,
+      "response_text": "[CH-03: পরিমাপ (Measurement) - ৩.১ ক্ষেত্রফল পরিমাপ সংক্রান্ত সূত্রাবলী]\nউদাহরণ ১: একটি আndern দৈর্ঘ্য ৩৫ মিটার। পরিসীমা = (এক বাহুর দৈর্ঘ্য)^২ = 35^2 = 1,225 ক্ষেত্রফল।\n\n[CH-03: পরिमাপ (Measurement) - ৩.১ ক্ষেত্রফল পরিমাপ সংক্রান্ত সূত্রাবলী]\nউদাহরণ ২: একটি আndern দৈর্ঘ্য ৩৫",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-03-sec-02-c002",
+        "ssp-nctb-cl8-math-v1-ch-03-sec-02-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-ALG-001",
+      "mode": "solve",
+      "topic": "algebra",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 24618.93,
+      "response_text": "[উৎস: Class 8 - Mathematics - NCTB Class 8]\n\nশিক্ষার্থীর প্রশ্ন:\nগাণিতিক সমস্যা:\n(3x + 4y)\n\nনির্দেশনা:\n১. শুধুমাত্র উপরের দেওstras পদ্ধতি অংশের সর্বদা কিছু নিজের থেকে কোনো মনগড়া বা ভুল তথ্য আবিষ্কার করতে সাহায্য করি।\n\n(3x + 4y) = (2*15 + 4*y) = (8+4)y = 12y.\n\nএখন, নির্দেশনা:\n১. শুধুমাত্র উপরে",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-04-sec-05-c006",
+        "ssp-nctb-cl8-math-v1-ch-01-sec-07-c007"
+      ]
+    },
+    {
+      "question_id": "TUT-ALG-002",
+      "mode": "solve",
+      "topic": "algebra",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 30320.64,
+      "response_text": "[CH-04: বীজগণিতীয় সূত্রাবলী ও প্রয়োগ (Algebraic Formulae) - ৪.১ বীজগণিতিক রাশির বর্গ সংক্রান্ত সূত্রাবলী]\nউদাহরণ ১: যদি a + b = 8 এবং ab = 15 হuju, তবে a^2 + b^2 এর মান কত?\n\nসমাধান:\nদেওdbuf।\na^2 + b^2 = (a + b)^2 - 2ab\n\nএখন আমরা প্র uda হuju সূত্রটি উল্লেখ করবে।\n\nউদাহরণ ২: যদি a - b = 5 এবং",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-04-sec-02-c003",
+        "ssp-nctb-cl8-math-v1-ch-04-sec-02-c002"
+      ]
+    },
+    {
+      "question_id": "TUT-ALG-003",
+      "mode": "solve",
+      "topic": "algebra",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 24544.54,
+      "response_text": "[CH-05: বীজগণিতীয় ভগ্নাংশ (Algebraic Fractions) - ৫.৩ বীজগণিতীxcdের যোগ ও প্রয়োগ]\n\nউদাহরণ ১: যদি a + b = 8 এবং ab = 15 হDMI, তবে a^2 + b^2 এর মান কত?\n\nসমাধান:\nদেওstras আছে, a + b = ৮, ab = ৫৬।\nআমরা জানি, (a + b)^2 - 2ab = (8)^^2 - 2 * ৫६ = 64 - ৪३ = ۶ أمريكي।\nঅতএব, নির্ণেecs মান ۶ أمريكي।\n\n[CH-04: বীজগণিতীয",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-05-sec-03-c004",
+        "ssp-nctb-cl8-math-v1-ch-04-sec-02-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-ALG-004",
+      "mode": "solve",
+      "topic": "algebra",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 23727.99,
+      "response_text": "[CH-04: বীজগণিতীয় সূত্রাবলী ও প্রয়োগ (Algebraic Formulae) - ৪.৩ উৎপাদকে বিশ্লেষণ (Factorization)]\nউদাহরণ ২: উৎপাদকে বিশ্লেষণ করো: x^2 + 5x + 6\n\nশিখন পদ্ধতি:\n- সাধারণ পদ বা কমন নেও鲛\n- (Taking common factors)\n\nপ্র Manitoba দেখুয়াছে এবং তথ্যের ভিত্তিতে উত্তর দেবে鲛\n\nউৎপাদকে বিশ্লেষণ করলেখা:\n- x^2 + 5x + 6 = (x + 3",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-04-sec-05-c006",
+        "ssp-nctb-cl8-math-v1-ch-04-sec-05-c005"
+      ]
+    },
+    {
+      "question_id": "TUT-ALG-005",
+      "mode": "solve",
+      "topic": "algebra",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 257,
+      "latency_ms": 17188.95,
+      "response_text": "[CH-04: বীজগণিতীয় সূত্রাবলী ও প্রয়োগ (Algebraic Formulae) - ৪.৩ উৎপাদকে বিশ্লেষণ (Factorization)]\nউদাহরণ ২: যদি কী তথ্য দেওpgsql, আছে তা লেখো।\n\n[CH-04: বীজগণিতীয় সূত্রাবলী ও প্রয়োগ (Algebraic Formulae) - ৪.৩ উৎপাদকে বিশ্লেষণ (Factorization)]\n## ৪.৩ উৎপাদকে বিশ্লেষণ (Factorization)\nবীজগণিতিক রাশিকে দুই বা ত",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-04-sec-05-c006",
+        "ssp-nctb-cl8-math-v1-ch-04-sec-05-c005"
+      ]
+    },
+    {
+      "question_id": "TUT-ALG-006",
+      "mode": "solve",
+      "topic": "algebra",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": true,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 26730.4,
+      "response_text": "[CH-04: বীজগণিতীয় সূত্রাবলী ও প্রয়োগ (Algebraic Formulae) - ৪.২ ঘনফল নির্ণ)((((Cubes)\nউদাহরণ ১: যদি a + b = 5 এবং ab = 6 হuju, তবে a^3 + b^3 এর মান কত?\n\nসমাধান:\nদেওstras আছে, a + b = ৫, ab = ৬।\nআমরা জানি, a³ + b³ = (a + b)(a² - ab + b²) = (5)(6^2 - 3*6*1) = 30 - 18 = 12।\n\nঅতএব, নির্ণ Essex মান ১६।\n--------",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-04-sec-04-c004",
+        "ssp-nctb-cl8-math-v1-ch-04-sec-02-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-ALG-007",
+      "mode": "solve",
+      "topic": "equations",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 257,
+      "latency_ms": 25356.08,
+      "response_text": "[CH-06: সরল সহসমীকরণ (Linear Simultaneous Equations) - ৬.১ প্রতিস্থাপন পদ্ধতি (Substitution Method)]\n\nউদাহরণ ১: এই চলকবিশিষ্ট দুটি সরল সহসমীকরণের তথ্যের ভিত্তিতে উত্তর দেওdbuf।\n\nধাপ ১: এই চলকবিশিষ্ট সমীকরণটি থেকে একটি চলকের মান অপর চলকের মাধ্যমে প্রকাশ করতে হবে।\nধাপ ২: সমীকরণ (x - y = 4) এ বসিwald ছিল ত",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-06-sec-02-c003",
+        "ssp-nctb-cl8-math-v1-ch-06-sec-02-c002"
+      ]
+    },
+    {
+      "question_id": "TUT-ALG-008",
+      "mode": "solve",
+      "topic": "equations",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 23415.57,
+      "response_text": "[CH-06: সরল সহসমীকরণ (Linear Simultaneous Equations) - ৬.২ অপনয়ন পদ্ধতি (Elimination Method)]\n\nউদাহরণ ২: এই উৎপাদকে সরল করা যায়।\n\nসমাধান:\nএখানে, বিভাগ্রহীন পদ্ধতি হয় তবে এই উৎপাদকে সরল করা যায়।\n\nসমীকরণ (২) থেকে বিabwe করা যায়।\n 2x + 3y = 13 ... (১)\n x + y = 5 ... (২)\n\nএখানে, এই উৎপাদকে সমীকরণ (২) থেকে বি",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-06-sec-04-c005",
+        "ssp-nctb-cl8-math-v1-ch-04-sec-05-c006"
+      ]
+    },
+    {
+      "question_id": "TUT-ALG-009",
+      "mode": "solve",
+      "topic": "algebra",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 23610.06,
+      "response_text": "[CH-04: বীজগণিতীয় সূত্রাবলী ও প্রয়োগ (Algebraic Formulae) - ৪.৩ উৎপাদকে বিশ্লেষণ (Factorization)]\nউদাহরণ ২: যদি x^2 + 7x + 12 = x(x + 4) + 3(x + 4), তবে সমাধানটা বলতে পারে এখন:\n\n[CH-04: বীজগণিতীয় সূত্রাবলী ও প্রয়োগ (Algebraic Formulae) - ৪.৩ উৎপাদকে বিশ্লেষণ (Factorization)]\nউদাহরণ ২: x^2 + 7x + 12 = x(x + 4) +",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-04-sec-05-c006",
+        "ssp-nctb-cl8-math-v1-ch-04-sec-05-c005"
+      ]
+    },
+    {
+      "question_id": "TUT-ALG-010",
+      "mode": "solve",
+      "topic": "algebra",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 27884.94,
+      "response_text": "[CH-04: বীজগণিতীয় সূত্রাবলী ও প্রয়োগ (Algebraic Formulae) - ৪.১ বীজগণিতিক রাশির বর্গ সংক্রান্ত সূত্রাবলী]\n\n## ৪.১ বীজগণিতিক রাশির বর্গ সংক্রান্ত সূত্রাবলী\nপ্রয়োগ হল: (a + b)^2 = a^2 + 2ab + b^2\n\nএই প্রয়োগটি একটি মুনাফা বিশেষ কর। তবে, আমরা সরল মুনাফা নির্ণ)((((a",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-04-sec-02-c002",
+        "ssp-nctb-cl8-math-v1-ch-02-sec-03-c004"
+      ]
+    },
+    {
+      "question_id": "TUT-GEO-001",
+      "mode": "solve",
+      "topic": "geometry",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 28353.3,
+      "response_text": "[CH-08: চতুর্ভুজ ও জ्यামিতিক পরিমাপ (Geometry) - ৮.২ পিথাগোরাসের উপপাদ্য ও প্রয়োগ (Pythagoras Theorem)]\n\nউদাহরণ ১: একটি সমকোণী ত্রিভুজের অতিভুজ ২০ সেমি এবং ভূমি ৪ সেমি হলে, লম্বের দৈর্ঘ্য কত?\n\nসমাধান:\nআমরা জানি, (অতিভুজ)^২ = (লম্ব)^২ + (ভূমি)^২\n=> (20)^২ = (৪)^২ + (৫)^২\n=> 4",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-08-sec-03-c004",
+        "ssp-nctb-cl8-math-v1-ch-08-sec-03-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-GEO-002",
+      "mode": "solve",
+      "topic": "geometry",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 17838.12,
+      "response_text": "[CH-08: চতুর্ভুজ ও জ্যামিতিক পরিমাপ (Geometry) - ৮.২ পিথাগোরাসের উপপাদ্য ও প্রয়োগ (Pythagoras Theorem)]\n\nউদাহরণ ১: একটি সমকোণী ত্রিভুজের অতিভুজ ১৩ সেমি এবং লম্ব ১২ সেমি হলে, যদি পাঠকে কোনো মনগড়া দেখিতে চিন্তাভাবনা করতে সাহায্য করবে না, তবে লম্বের দৈর্ঘ্য ১৩ স",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-08-sec-03-c004",
+        "ssp-nctb-cl8-math-v1-ch-08-sec-03-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-GEO-003",
+      "mode": "solve",
+      "topic": "geometry",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 257,
+      "latency_ms": 23719.77,
+      "response_text": "[CH-08: চতুর্ভুজ ও জ्यামিতিক পরিমাপ (Geometry) - ৮.৩ বৃত্তের পরিধি ও ক্ষেত্রফল (Circle)]\nউদাহরণ ২: একটি বৃত্তের ব্যাসার্ধ C = 2 * π * r, জয় দিল। পরিধি A = π * r^2 কমনে আছে।\n\n[CH-08: চতুর্ভুজ ও জ্যামিতিক পরिमাপ (Geometry) - ৮.৩ বৃত্তের পরিধি ও ক্ষেত্রফল (Circle)]\n## ৮.৩ বৃত্তের পরিধি ও ক্ষ",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-08-sec-05-c006",
+        "ssp-nctb-cl8-math-v1-ch-08-sec-05-c005"
+      ]
+    },
+    {
+      "question_id": "TUT-GEO-004",
+      "mode": "solve",
+      "topic": "geometry",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 257,
+      "latency_ms": 17738.77,
+      "response_text": "[CH-08: চতুর্ভুজ ও জ्यামিতিক পরিমাপ (Geometry) - ৮.৩ বৃত্তের পরিধি ও ক্ষেত্রফল (Circle)]\n\nউদাহরণ ২: একটি বৃত্তের ব্যাসার্ধ C = 2 * π * r, ক্ষেত্রফল A = π * r^2\n\nশিক্ষার্থীর প্রশ্ন: [শিক্ষার্থী শ্রেণি: Class 8]\n\nগাণিতিক সমস্যা:\nএকটি বৃত্তের ব্যাসার্ধ C = 2 * π * r, এবং এর ক্ষেত্রফল A = π * r^2\n\nশিক",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-08-sec-05-c006",
+        "ssp-nctb-cl8-math-v1-ch-08-sec-05-c005"
+      ]
+    },
+    {
+      "question_id": "TUT-GEO-005",
+      "mode": "solve",
+      "topic": "geometry",
+      "total_score": 8,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 2,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": false,
+      "generated_tokens": 257,
+      "latency_ms": 29090.9,
+      "response_text": "[CH-08: চতুর্ভুজের মৌলিক ধর্ম ও বৈশিষ্ট্য - ৮.১ চতুর্ভুজের মৌলিক ধর্ম ও বৈশিষ্ট্য]\nচতুর্ভুজ সংক্রান্ত মৌলিক উপপাদ্য ও বৈশিষ্ট্য:\nউপপাদ্য ১: চতুর্ভুजের চারটি কোণের সমষ্টি চার সমকোণ বা ৩৬০ ডিগ্রি (৩৬০°)।\nউপপাদ্য ২: সামান্তরিকের বিপরীত ব",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-08-sec-02-c002",
+        "ssp-nctb-cl8-math-v1-ch-02-sec-03-c004"
+      ]
+    },
+    {
+      "question_id": "TUT-GEO-006",
+      "mode": "solve",
+      "topic": "geometry",
+      "total_score": 8,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 2,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": false,
+      "generated_tokens": 257,
+      "latency_ms": 24145.06,
+      "response_text": "[CH-08: চতুর্ভুজের মৌলিক ধর্ম ও বৈশিষ্ট্য - ৮.১ চতুর্ভুজের মৌলিক ধর্ম ও বৈশিষ্ট্য]\n## ৮.১ চতুর্ভুজের মৌলিক ধর্ম ও বৈশিষ্ট্য\nচতুর্ভুজ সংক্রান্ত মৌলিক উপপাদ্য ও বৈশিষ্ট্য:\nউপপাদ্য ১: চতুর্ভুজের চारটি কোণের সমষ্টি চার সমকোণ বা ৩৬০ ডিগ্র",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-08-sec-02-c002",
+        "ssp-nctb-cl8-math-v1-ch-06-sec-02-c002"
+      ]
+    },
+    {
+      "question_id": "TUT-GEO-007",
+      "mode": "solve",
+      "topic": "geometry",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": true,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 26728.26,
+      "response_text": "[CH-03: পরিমাপ (Measurement) - ৩.১ ক্ষেত্রফল পরিমাপ সংক্রান্ত সূত্রাবলী]\n\nউদাহরণ ১: একটি আndern (A) দৈর্ঘ্য = ৭৩৫৮৪ সেমি, প্রস্থ = ২৬০০ সেমি।\n\nপরিসীমা = ২ * (দৈর্ঘ্য + প্রস্থ) = ২ * (৭৩৫৮৪ + ২৬০০) = ২ * ১৷৩৮৪৪৪৪৪৪৪৪",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-03-sec-02-c003",
+        "ssp-nctb-cl8-math-v1-ch-03-sec-02-c002"
+      ]
+    },
+    {
+      "question_id": "TUT-GEO-008",
+      "mode": "solve",
+      "topic": "geometry",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 25979.23,
+      "response_text": "[CH-08: চতুর্ভুজ ও জ্যামিতিক পরিমাপ (Geometry) - ৮.২ পিথাগোরাসের উপপাদ্য ও প্রয়োগ (Pythagoras Theorem)]\nউদাহরণ ১: একটি ত্রিভুজের অতিভুজ ১৩ সেমি এবং ভূমি ৫ সেমি হলে, লম্বের দৈর্ঘ্য কত?\n\nশিক্ষার্থীর প্রশ্ন: [শিক্ষার্থী শ্রেণি: Class 8]\nগাণিতিক সমস্যা:\nএকটি ত্রিভুজের অতিভুজ",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-03-sec-02-c002",
+        "ssp-nctb-cl8-math-v1-ch-08-sec-03-c004"
+      ]
+    },
+    {
+      "question_id": "TUT-GEO-009",
+      "mode": "solve",
+      "topic": "geometry",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 257,
+      "latency_ms": 22797.32,
+      "response_text": "[CH-08: চতুর্ভুজ ও জ्यামিতিক পরিমাপ (Geometry) - ৮.৩ বৃত্তের পরিধি ও ক্ষেত্রফল (Circle)]\n\nউদাহরণ ২: একটি বৃত্তের ব্যাসার্ধ C = 2 * π * r।\n\nসমাধান:\nপরিধি C = 2 * (22/7) * r = 44/7 সেমি।\nক্ষেত্রফল A = (22/7) * r^2 = 44/7 * r^2 বর্গসেমি।\n\n[CH-08: চতুর্ভুজ ও জ्यামিতিক পরিমাপ (Geometry) - ৮.৩ বৃত্তের প",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-08-sec-05-c006",
+        "ssp-nctb-cl8-math-v1-ch-08-sec-05-c005"
+      ]
+    },
+    {
+      "question_id": "TUT-GEO-010",
+      "mode": "solve",
+      "topic": "geometry",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 29768.14,
+      "response_text": "[CH-08: চতুর্ভুজ ও জ্যামিতিক পরিমাপ (Geometry) - ৮.২ পিথাগোরাসের উপপাদ্য ও প্রয়োগ (Pythagoras Theorem)]\n\nউদাহরণ ১: একটি চতুর্ভুজের অতিভুজ ১৭ সেমি এবং ভূমি ১৫ সেমি হলে, লম্বের দৈর্ঘ্য কত?\n\nসমাধান:\nআমরা জানি, (অতিভুজ)^২ = (লম্ব)^২ + (ভূমি)^২\n=> (১৭)^২ = (লম্ব)^২ + (৫)^২\n=> 27",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-08-sec-03-c004",
+        "ssp-nctb-cl8-math-v1-ch-08-sec-03-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-WRD-001",
+      "mode": "solve",
+      "topic": "word_problems",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 27174.24,
+      "response_text": "[CH-03: পরিমাপ (Measurement) - ৩.১ ক্ষেত্রফল পরিমাপ সংক্রান্ত সূত্রাবলী]\n\nউদাহরণ ১: একটি আabweকার বাগানের দৈর্ঘ্য ৬০ মিটার এবং প্রস্থ ৪০ মিটার। এর ক্ষেত্রফল ও পরিসীমা নির্ণয় করো।\n\nএই বাগানের বাইরে চারদিকে ৩ মিটার চওড়া একটি রাস্তা আছে। রাস্তার ক্ষেত্রফল = (60 +",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-03-sec-02-c003",
+        "ssp-nctb-cl8-math-v1-ch-03-sec-04-c004"
+      ]
+    },
+    {
+      "question_id": "TUT-WRD-002",
+      "mode": "solve",
+      "topic": "word_problems",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 25383.82,
+      "response_text": "[উৎস: Class 8 - Mathematics - NCTB Class 8]\n\n১. প্রথমে, কিছু সাথের দেওstras আছে।\n\n২. একটি বা তwo হাওয়ায় যদি মনগড়া প্রতিফলিত করবে, সম Manitoba অপস্থাপন করবে।\n\n৩. ধাপ ১, ধাপ ২, ধাপ ৩ আকারে হিসাবের ধাপগুলো দেখা যায়।\n\n৪. শেষে, অতএব স্পষ্ট বাংলা/format চূড়ান্ত উত্তর লেখো।\n\nকঠোর নির্দেশনাব",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-01-sec-05-c006",
+        "ssp-nctb-cl8-math-v1-ch-02-sec-03-c004"
+      ]
+    },
+    {
+      "question_id": "TUT-WRD-003",
+      "mode": "solve",
+      "topic": "word_problems",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 113,
+      "latency_ms": 16337.27,
+      "response_text": "[CH-01: প্যাটার্ন (Patterns) - ১.৩ ক্রমিক স্বাভাবিক সংখ্যার যোগফল নির্ণ]\n## ১.৩ ক্রমিক স্বাভাবিক সংখ্যার যোগফল নির্ণ",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-01-sec-05-c005",
+        "ssp-nctb-cl8-math-v1-ch-01-sec-05-c006"
+      ]
+    },
+    {
+      "question_id": "TUT-WRD-004",
+      "mode": "solve",
+      "topic": "word_problems",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 28678.32,
+      "response_text": "[CH-02: মুনাফা (Profit & Interest) - ২.৩ চক্রবৃদ্ধি মুনাফা (Compound Interest)]\nউদাহরণ ২: বার্ষিক ৮% চক্রবৃদ্ধি মুনাফা.VideoCapture = ৪.৩ টাকা, সমstras = ০.০৮, সরল মুনাফা I = P * r * n\nচক্রবৃদ্ধি মূলধন C = P * (১ + r)^n\nC = ৪.৩ * (১.০৮)^২ = ৪.৩ * ১.০৬५२ = ৪.৩ * ১.০৭१२ = ৪.৩ টাকা\n\n[CH-02: মুনাফ",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-02-sec-05-c006",
+        "ssp-nctb-cl8-math-v1-ch-02-sec-03-c004"
+      ]
+    },
+    {
+      "question_id": "TUT-WRD-005",
+      "mode": "solve",
+      "topic": "word_problems",
+      "total_score": 6,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 1,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 29763.8,
+      "response_text": "[CH-03: পরিমাপ (Measurement) - ৩.৩ তরল ও ঘনবস্তুর আ-wwwতন ও একক রূপান্তর]\n\n## ৩.৩ তরল ও ঘনবস্তুর আ-wwwতন ও একক রূপান্তর\n\n### পরিমাপ সংক্রান্ত সূত্রাবলী\nএই ক্ষেত্রে, আ-wwwতন ও একক রূপান্তর হচ্ছে।\n\n### ৩.৩ তরল ও ঘনবস্তুর আ-wwwতন ও একক রূপান্তর\n- দৈর্ঘ্য = ৬০ মিটার\n- প্রस্থ =",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-03-sec-05-c005",
+        "ssp-nctb-cl8-math-v1-ch-03-sec-02-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-HNT-001",
+      "mode": "hint",
+      "topic": "algebra",
+      "total_score": 8,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 2,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 257,
+      "latency_ms": 25026.41,
+      "response_text": "[উৎস: Class 8 - Mathematics - NCTB Class 8]\n\nশিক্ষার্থীর প্রশ্ন: [শিক্ষার্থী শ্রেণি: Class 8]\nসমস্যা / প্রশ্ন:\nপ্রশ্ন: x^2 - 7x + 12 = 0 সমীকরণের সমাধান কী? সতর্কবার্তা: আমাকে সরাসরি উত্তর বলবে না, শুধু ১ম ধাপের ইঙ্গিত (Hint) দাও।\n\nশিক্ষকের বিশেষ নির্দেশনা (সক্র্যাটিক পদ্ধতি):\n- শিক্ষার্থীকে সরাস",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-04-sec-05-c006",
+        "ssp-nctb-cl8-math-v1-ch-05-sec-03-c004"
+      ]
+    },
+    {
+      "question_id": "TUT-HNT-002",
+      "mode": "hint",
+      "topic": "equations",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 2,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 26205.64,
+      "response_text": "[উৎস: Class 8 - Mathematics - NCTB Class 8]\n\nশিক্ষার্থীর প্রশ্ন:\nপ্রশ্ন: 3x + 2y = 12 এবং x - y = 1 কীভাবে সমাধান করব?\n\nআমাকে চুদা মান (x ও y এর মান) বলবে না, শুধু প্রতিস্থাপন শুরুর একটি ইঙ্গিত দাও।\n\nশিক্ষকের বিশেষ নির্দেশনা (সক্র্যাটিক পদ্ধতি):\n- শিক্ষার্থীকে সরাসরি চুদা মান বলে দেবে না",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-06-sec-02-c003",
+        "ssp-nctb-cl8-math-v1-ch-04-sec-05-c006"
+      ]
+    },
+    {
+      "question_id": "TUT-HNT-003",
+      "mode": "hint",
+      "topic": "geometry",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 2,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": true,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 30017.48,
+      "response_text": "[উৎস: Class 8 - Mathematics - NCTB Class 8]\n\nঅংশ উদ্ধৃত:\n- একটি সমকোণী ত্রিভুজের অতিভুজ ২০ সেমি এবং ভূমি ৩৪ সেমি হলে, লম্বের চূড়ান্ত সংখ্যা কত?\n\nঅংশ উদ্ধৃত:\n- একটি সমকোণী ত্রিভুজের অতিভুজ ৩৪ সেমি এবং ভূমি ২০ সেমি হলে, লম্বের চূড়ান্ত সংখ্যা কত?",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-08-sec-03-c004",
+        "ssp-nctb-cl8-math-v1-ch-08-sec-03-c003"
+      ]
+    },
+    {
+      "question_id": "TUT-HNT-004",
+      "mode": "hint",
+      "topic": "profit",
+      "total_score": 7,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 2,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 1,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 28800.24,
+      "response_text": "[উৎস: Class 8 - Mathematics - NCTB Class 8]\n\nচক্রবৃদ্ধি মূলধন C = P * (১ + r)^n\n\nচক্রবৃদ্ধি মুনাফা = C - P = P * (১ + r)^n - P = P * {(১ + r)^n - ১}\n\nশিক্ষার্থীর প্রশ্ন: [শিক্ষার্থী শ্রেণি: Class 8]\n\nসমস্যা / প্রশ্ন:\nপ্রশ্ন: চক্রবৃদ্ধি মুনাফা সংক্রান্ত সূত্রাবলী করে দিও না, শুধু সূত্রটা মনে করিabwe দাও।\n\nশিক্ষক",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-02-sec-05-c006",
+        "ssp-nctb-cl8-math-v1-ch-02-sec-05-c005"
+      ]
+    },
+    {
+      "question_id": "TUT-HNT-005",
+      "mode": "hint",
+      "topic": "patterns",
+      "total_score": 8,
+      "max_score": 10,
+      "rubric_breakdown": {
+        "math_correctness": 2,
+        "bengali_quality": 0,
+        "grounding": 2,
+        "pedagogy": 2,
+        "instruction_compliance": 2
+      },
+      "grounding_status": "GROUNDED",
+      "had_repetition": false,
+      "had_corruption": true,
+      "generated_tokens": 256,
+      "latency_ms": 27647.48,
+      "response_text": "[CH-01: প্যাটার্ন (Patterns) - ১.২ সংখ্যা প্যাটার্ন ও বীজগাণিতিক রাশি তৈরি]\n\nপ্রশ্ন: ৪, ৯, ১৪, ১৯, ... তালিকার পরবর্তী সংখ্যাটি বের করব।\n\nউত্তর সরাসরি লিখবে না, প্যাটার্ন বোঝার নিabwe হbows একটি প্রশ্ন করুন।\n\nপ্রশ্ন: ৪, ৯, ১৪, ১৯, ... তালিকার সংখ্যা বের করব।",
+      "retrieved_chunk_ids": [
+        "ssp-nctb-cl8-math-v1-ch-01-sec-03-c004",
+        "ssp-nctb-cl8-math-v1-ch-01-sec-03-c003"
+      ]
+    }
+  ]
+}

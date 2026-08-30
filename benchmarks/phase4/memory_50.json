@@ -1,0 +1,306 @@
+{
+  "suite_name": "memory_50",
+  "total_questions": 50,
+  "questions": [
+    {
+      "id": "MEM4-001",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 1: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।"
+    },
+    {
+      "id": "MEM4-002",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 2: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?"
+    },
+    {
+      "id": "MEM4-003",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 3: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?"
+    },
+    {
+      "id": "MEM4-004",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 4: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?"
+    },
+    {
+      "id": "MEM4-005",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 5: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?"
+    },
+    {
+      "id": "MEM4-006",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 6: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)"
+    },
+    {
+      "id": "MEM4-007",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 7: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?"
+    },
+    {
+      "id": "MEM4-008",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 8: ৪৫০ এর ২০% কত?"
+    },
+    {
+      "id": "MEM4-009",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 9: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?"
+    },
+    {
+      "id": "MEM4-010",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 10: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?"
+    },
+    {
+      "id": "MEM4-011",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 11: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।"
+    },
+    {
+      "id": "MEM4-012",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 12: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?"
+    },
+    {
+      "id": "MEM4-013",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 13: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?"
+    },
+    {
+      "id": "MEM4-014",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 14: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?"
+    },
+    {
+      "id": "MEM4-015",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 15: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?"
+    },
+    {
+      "id": "MEM4-016",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 16: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)"
+    },
+    {
+      "id": "MEM4-017",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 17: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?"
+    },
+    {
+      "id": "MEM4-018",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 18: ৪৫০ এর ২০% কত?"
+    },
+    {
+      "id": "MEM4-019",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 19: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?"
+    },
+    {
+      "id": "MEM4-020",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 20: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?"
+    },
+    {
+      "id": "MEM4-021",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 21: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।"
+    },
+    {
+      "id": "MEM4-022",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 22: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?"
+    },
+    {
+      "id": "MEM4-023",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 23: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?"
+    },
+    {
+      "id": "MEM4-024",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 24: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?"
+    },
+    {
+      "id": "MEM4-025",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 25: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?"
+    },
+    {
+      "id": "MEM4-026",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 26: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)"
+    },
+    {
+      "id": "MEM4-027",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 27: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?"
+    },
+    {
+      "id": "MEM4-028",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 28: ৪৫০ এর ২০% কত?"
+    },
+    {
+      "id": "MEM4-029",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 29: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?"
+    },
+    {
+      "id": "MEM4-030",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 30: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?"
+    },
+    {
+      "id": "MEM4-031",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 31: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।"
+    },
+    {
+      "id": "MEM4-032",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 32: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?"
+    },
+    {
+      "id": "MEM4-033",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 33: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?"
+    },
+    {
+      "id": "MEM4-034",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 34: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?"
+    },
+    {
+      "id": "MEM4-035",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 35: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?"
+    },
+    {
+      "id": "MEM4-036",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 36: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)"
+    },
+    {
+      "id": "MEM4-037",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 37: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?"
+    },
+    {
+      "id": "MEM4-038",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 38: ৪৫০ এর ২০% কত?"
+    },
+    {
+      "id": "MEM4-039",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 39: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?"
+    },
+    {
+      "id": "MEM4-040",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 40: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?"
+    },
+    {
+      "id": "MEM4-041",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 41: ৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।"
+    },
+    {
+      "id": "MEM4-042",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 42: ৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?"
+    },
+    {
+      "id": "MEM4-043",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 43: ৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত?"
+    },
+    {
+      "id": "MEM4-044",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 44: ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত?"
+    },
+    {
+      "id": "MEM4-045",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 45: একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত?"
+    },
+    {
+      "id": "MEM4-046",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 46: ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)"
+    },
+    {
+      "id": "MEM4-047",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 47: x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী?"
+    },
+    {
+      "id": "MEM4-048",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 48: ৪৫০ এর ২০% কত?"
+    },
+    {
+      "id": "MEM4-049",
+      "category": "multi_turn_memory_stability",
+      "mode": "EXPLAIN",
+      "query": "টার্ন 49: ১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত?"
+    },
+    {
+      "id": "MEM4-050",
+      "category": "multi_turn_memory_stability",
+      "mode": "SOLVE",
+      "query": "টার্ন 50: একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত?"
+    }
+  ]
+}

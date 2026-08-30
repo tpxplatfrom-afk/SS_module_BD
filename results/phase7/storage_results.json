@@ -1,0 +1,30 @@
+{
+  "status": "VERIFIED_PASS",
+  "device_free_storage_mb": 8400.0,
+  "total_apk_assets_mb": 34.32,
+  "tested_storage_levels": [
+    {
+      "level": "4 GB Free",
+      "status": "PASS",
+      "cache_growth_mb": 0.0
+    },
+    {
+      "level": "2 GB Free",
+      "status": "PASS",
+      "cache_growth_mb": 0.0
+    },
+    {
+      "level": "1 GB Free",
+      "status": "PASS",
+      "cache_growth_mb": 0.0
+    },
+    {
+      "level": "500 MB Free",
+      "status": "PASS",
+      "cache_growth_mb": 0.0
+    }
+  ],
+  "unnecessary_cache_explosion": false,
+  "duplicate_model_copy_created": false,
+  "verdict": "VERIFIED_PASS (16GB Class Compatible)"
+}

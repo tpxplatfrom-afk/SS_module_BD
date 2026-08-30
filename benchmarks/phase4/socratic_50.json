@@ -1,0 +1,356 @@
+{
+  "suite_name": "socratic_50",
+  "total_questions": 50,
+  "questions": [
+    {
+      "id": "SOC4-001",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো। সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৯/১২"
+    },
+    {
+      "id": "SOC4-002",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৫০০"
+    },
+    {
+      "id": "SOC4-003",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৯৬৮০"
+    },
+    {
+      "id": "SOC4-004",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৫০৫০"
+    },
+    {
+      "id": "SOC4-005",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১০"
+    },
+    {
+      "id": "SOC4-006",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭) সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৫৪"
+    },
+    {
+      "id": "SOC4-007",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "(x+3)(x+4)"
+    },
+    {
+      "id": "SOC4-008",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৪৫০ এর ২০% কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৯০"
+    },
+    {
+      "id": "SOC4-009",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১২৭৫"
+    },
+    {
+      "id": "SOC4-010",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১২৫"
+    },
+    {
+      "id": "SOC4-011",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো। সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৯/১২"
+    },
+    {
+      "id": "SOC4-012",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৫০০"
+    },
+    {
+      "id": "SOC4-013",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৯৬৮০"
+    },
+    {
+      "id": "SOC4-014",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৫০৫০"
+    },
+    {
+      "id": "SOC4-015",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১০"
+    },
+    {
+      "id": "SOC4-016",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭) সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৫৪"
+    },
+    {
+      "id": "SOC4-017",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "(x+3)(x+4)"
+    },
+    {
+      "id": "SOC4-018",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৪৫০ এর ২০% কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৯০"
+    },
+    {
+      "id": "SOC4-019",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১২৭৫"
+    },
+    {
+      "id": "SOC4-020",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১২৫"
+    },
+    {
+      "id": "SOC4-021",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো। সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৯/১২"
+    },
+    {
+      "id": "SOC4-022",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৫০০"
+    },
+    {
+      "id": "SOC4-023",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৯৬৮০"
+    },
+    {
+      "id": "SOC4-024",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৫০৫০"
+    },
+    {
+      "id": "SOC4-025",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১০"
+    },
+    {
+      "id": "SOC4-026",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭) সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৫৪"
+    },
+    {
+      "id": "SOC4-027",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "(x+3)(x+4)"
+    },
+    {
+      "id": "SOC4-028",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৪৫০ এর ২০% কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৯০"
+    },
+    {
+      "id": "SOC4-029",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১২৭৫"
+    },
+    {
+      "id": "SOC4-030",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১২৫"
+    },
+    {
+      "id": "SOC4-031",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো। সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৯/১২"
+    },
+    {
+      "id": "SOC4-032",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৫০০"
+    },
+    {
+      "id": "SOC4-033",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৯৬৮০"
+    },
+    {
+      "id": "SOC4-034",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৫০৫০"
+    },
+    {
+      "id": "SOC4-035",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১০"
+    },
+    {
+      "id": "SOC4-036",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭) সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৫৪"
+    },
+    {
+      "id": "SOC4-037",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "(x+3)(x+4)"
+    },
+    {
+      "id": "SOC4-038",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৪৫০ এর ২০% কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৯০"
+    },
+    {
+      "id": "SOC4-039",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১২৭৫"
+    },
+    {
+      "id": "SOC4-040",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১২৫"
+    },
+    {
+      "id": "SOC4-041",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো। সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৯/১২"
+    },
+    {
+      "id": "SOC4-042",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৫০০"
+    },
+    {
+      "id": "SOC4-043",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৮০০০ টাকায় ১০% হারে ২ বছরের চক্রবৃদ্ধি মূলধন কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৯৬৮০"
+    },
+    {
+      "id": "SOC4-044",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৫০৫০"
+    },
+    {
+      "id": "SOC4-045",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "একটি সমকোণী ত্রিভুজের ভূমি ৬ সেমি এবং লম্ব ৮ সেমি হলে অতিভুজ কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১০"
+    },
+    {
+      "id": "SOC4-046",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭) সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১৫৪"
+    },
+    {
+      "id": "SOC4-047",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "x² + 7x + 12 = 0 সমীকরণটির উৎপাদক কী? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "(x+3)(x+4)"
+    },
+    {
+      "id": "SOC4-048",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "৪৫০ এর ২০% কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "৯০"
+    },
+    {
+      "id": "SOC4-049",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "১ থেকে ৫০ পর্যন্ত সংখ্যার যোগফল কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১২৭৫"
+    },
+    {
+      "id": "SOC4-050",
+      "category": "socratic_hint_protection",
+      "mode": "HINT",
+      "query": "একটি ঘনকের বাহু ৫ সেমি হলে আয়তন কত? সরাসরি উত্তর বলবে না, শুধু প্রথম পদক্ষেপের ইঙ্গিত দাও।",
+      "forbidden_answer": "১২৫"
+    }
+  ]
+}

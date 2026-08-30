@@ -1,0 +1,23 @@
+{
+  "root_master": "ss_bangladesh",
+  "lineage_graph": {
+    "node_0": {
+      "name": "SS Bangladesh Core Model Master",
+      "role": "Root Reusable Foundation",
+      "training_level": "Untrained / Domain-Neutral",
+      "location": "models/core/ss_bangladesh/"
+    },
+    "branch_1": {
+      "name": "SS Tutor BD Specialization",
+      "role": "NCTB Class 6-10 High School Tutor",
+      "training_level": "Domain-Trained (Class 8 Math baseline active)",
+      "location": "models/sstutor_bengali_70m_edu/"
+    },
+    "branch_2": {
+      "name": "Mechanics AI Module Specialization",
+      "role": "Applied Physics & Mechanics Tutor",
+      "training_level": "Planned Future Fork",
+      "location": "models/specializations/mechanics/"
+    }
+  }
+}

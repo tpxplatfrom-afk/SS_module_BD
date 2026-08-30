@@ -1,0 +1,15 @@
+{
+  "model_id": "sstutor_bengali_70m_edu",
+  "model_version": "v0.8.0-baseline",
+  "parameters": "68.2M",
+  "quantized_size": "34.12 MB INT4",
+  "capabilities": {
+    "math_solving": "FULL_AUTHORITY_EXACT",
+    "socratic_hints": "FULL_ANSWER_WITHHOLDING",
+    "textbook_grounding": "CLASS8_MATH_GROUNDED",
+    "bengali_fluency": "NATIVE_EDUCATIONAL",
+    "conversation_continuity": "BOUNDED_O1_SESSION",
+    "out_of_scope_handling": "POLITE_REFUSAL",
+    "multi_class_coverage": "CLASS_8_ONLY (Grades 6,7,9,10 Planned)"
+  }
+}

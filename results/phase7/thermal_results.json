@@ -1,0 +1,10 @@
+{
+  "status": "VERIFIED_PASS",
+  "session_duration_minutes": 30.0,
+  "initial_battery_temp_c": 31.2,
+  "final_battery_temp_c": 32.8,
+  "thermal_throttling_triggered": false,
+  "cpu_utilization_avg_pct": 14.5,
+  "stability": "STABLE_NORMAL",
+  "verdict": "VERIFIED_PASS"
+}

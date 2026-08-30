@@ -1,0 +1,605 @@
+{
+  "total_files_scanned": 100,
+  "inventory": [
+    {
+      "relative_path": "config/settings.json",
+      "size_bytes": 1025,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "configs/phase4_training.json",
+      "size_bytes": 1142,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "configs/phase8_training.json",
+      "size_bytes": 858,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "models/registry.json",
+      "size_bytes": 7841,
+      "size_mb": 0.007,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "tests/android/golden/math_golden_cases.json",
+      "size_bytes": 1396,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/failures/CAND-01_failures.json",
+      "size_bytes": 62441,
+      "size_mb": 0.06,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/failures/CAND-02_failures.json",
+      "size_bytes": 59679,
+      "size_mb": 0.057,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/licenses/phase3b_license_audit.json",
+      "size_bytes": 1499,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/licenses/phase3c_CAND-01.json",
+      "size_bytes": 497,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/licenses/phase3c_CAND-03.json",
+      "size_bytes": 512,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/licenses/phase3c_CAND-04.json",
+      "size_bytes": 496,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/model_decision/model_decision_phase3b.json",
+      "size_bytes": 3658,
+      "size_mb": 0.003,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/model_decision/model_decision_phase3c.json",
+      "size_bytes": 3699,
+      "size_mb": 0.004,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/model_decision/model_decision_phase4.json",
+      "size_bytes": 2088,
+      "size_mb": 0.002,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase3a/failures.json",
+      "size_bytes": 49379,
+      "size_mb": 0.047,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase3a/parameter_results.json",
+      "size_bytes": 1268,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase3a/performance_results.json",
+      "size_bytes": 767,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase3a/retrieval_results.json",
+      "size_bytes": 31421,
+      "size_mb": 0.03,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase3a/tutor_results_CAND-01.json",
+      "size_bytes": 64806,
+      "size_mb": 0.062,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase3b/memory_stability_CAND-03.json",
+      "size_bytes": 2052,
+      "size_mb": 0.002,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase3b/memory_stability_MOCK.json",
+      "size_bytes": 2014,
+      "size_mb": 0.002,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase3b/phase3b_CAND-03_results.json",
+      "size_bytes": 25367,
+      "size_mb": 0.024,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase3b/phase3b_MOCK_results.json",
+      "size_bytes": 13761,
+      "size_mb": 0.013,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase3c/runtime_comparison.json",
+      "size_bytes": 4872,
+      "size_mb": 0.005,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase3c/tokenizer_benchmark.json",
+      "size_bytes": 6078,
+      "size_mb": 0.006,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase4/ab_comparison.json",
+      "size_bytes": 4283,
+      "size_mb": 0.004,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase4/reproducibility.json",
+      "size_bytes": 1756,
+      "size_mb": 0.002,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase4/tokenizer_benchmark.json",
+      "size_bytes": 828,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase5/release_audit.json",
+      "size_bytes": 108,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase5/validation_results.json",
+      "size_bytes": 918,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase6/device_profile.json",
+      "size_bytes": 548,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase6/final_gate_matrix.json",
+      "size_bytes": 2449,
+      "size_mb": 0.002,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase6/master_validation_results.json",
+      "size_bytes": 840,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase6/model_size_audit.json",
+      "size_bytes": 345,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase6/offline_audit.json",
+      "size_bytes": 224,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase6/real_device_benchmark_results.json",
+      "size_bytes": 4520,
+      "size_mb": 0.004,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/device_profile.json",
+      "size_bytes": 548,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/failure_detection.json",
+      "size_bytes": 335,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/final_gate_matrix.json",
+      "size_bytes": 3572,
+      "size_mb": 0.003,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/latency_results.json",
+      "size_bytes": 473,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/lifecycle_results.json",
+      "size_bytes": 283,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/load_unload_results.json",
+      "size_bytes": 392,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/low_memory_results.json",
+      "size_bytes": 447,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/memory_results.json",
+      "size_bytes": 836,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/memory_timeseries.json",
+      "size_bytes": 1092,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/model_load_verification.json",
+      "size_bytes": 582,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/offline_results.json",
+      "size_bytes": 224,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/quality_results.json",
+      "size_bytes": 972,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/stability_results.json",
+      "size_bytes": 214,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/storage_results.json",
+      "size_bytes": 674,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/stress_100_results.json",
+      "size_bytes": 541,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/stress_500_results.json",
+      "size_bytes": 497,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase7/thermal_results.json",
+      "size_bytes": 280,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase8/baseline_model_evaluation.json",
+      "size_bytes": 3446,
+      "size_mb": 0.003,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase8/curriculum_coverage.json",
+      "size_bytes": 3385,
+      "size_mb": 0.003,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase8/dataset_quality.json",
+      "size_bytes": 1576,
+      "size_mb": 0.002,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase8/experiment_registry.json",
+      "size_bytes": 1036,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase8/model_capability_matrix.json",
+      "size_bytes": 539,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase8/phase8_gate_matrix.json",
+      "size_bytes": 1540,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/raw/CAND-01_Q4_K_M_20260830_094451Z.json",
+      "size_bytes": 120477,
+      "size_mb": 0.115,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/raw/CAND-01_Q4_K_M_20260830_103635Z.json",
+      "size_bytes": 9389,
+      "size_mb": 0.009,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/raw/CAND-01_Q4_K_M_20260830_105513Z.json",
+      "size_bytes": 140635,
+      "size_mb": 0.134,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/raw/CAND-02_Q4_K_M_20260830_115331Z.json",
+      "size_bytes": 143239,
+      "size_mb": 0.137,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase6/memory/memory_results.json",
+      "size_bytes": 1641,
+      "size_mb": 0.002,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/phase6/stability/stability_report.json",
+      "size_bytes": 214,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/licenses/phase4/MICRO_MODEL_70M.json",
+      "size_bytes": 397,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/licenses/phase4/PYTORCH_TRANSFORMERS_STACK.json",
+      "size_bytes": 376,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/licenses/phase4/SYNTHETIC_DATASET_PHASE4.json",
+      "size_bytes": 433,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "results/licenses/phase4/TOKENIZER_BENGALI_16K.json",
+      "size_bytes": 405,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "packs/class8_math/manifest.json",
+      "size_bytes": 1307,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "models/export_int4/model_export_metadata.json",
+      "size_bytes": 711,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "models/sstutor_bengali_70m_edu/config.json",
+      "size_bytes": 751,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "models/sstutor_bengali_70m_edu/generation_config.json",
+      "size_bytes": 226,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "models/sstutor_bengali_70m_edu/model.safetensors",
+      "size_bytes": 217339624,
+      "size_mb": 207.271,
+      "extension": ".safetensors"
+    },
+    {
+      "relative_path": "models/sstutor_bengali_70m_edu/tokenizer.json",
+      "size_bytes": 64651,
+      "size_mb": 0.062,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "models/sstutor_bengali_70m_edu/tokenizer_config.json",
+      "size_bytes": 291,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "models/tokenizer_bengali_16k/tokenizer.json",
+      "size_bytes": 120845,
+      "size_mb": 0.115,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "models/tokenizer_bengali_16k/tokenizer_config.json",
+      "size_bytes": 240,
+      "size_mb": 0.0,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/android/android_memory_results.json",
+      "size_bytes": 1920,
+      "size_mb": 0.002,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/android/android_quality_results.json",
+      "size_bytes": 938,
+      "size_mb": 0.001,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/bengali/bn_prompts.json",
+      "size_bytes": 9703,
+      "size_mb": 0.009,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/grounding/ground_prompts.json",
+      "size_bytes": 5835,
+      "size_mb": 0.006,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/mathematics/math_prompts.json",
+      "size_bytes": 12919,
+      "size_mb": 0.012,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/pedagogy/ped_prompts.json",
+      "size_bytes": 11234,
+      "size_mb": 0.011,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/phase2_diagnostics/diagnostic_prompts.json",
+      "size_bytes": 10024,
+      "size_mb": 0.01,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/phase3b/tutor_100_benchmark.json",
+      "size_bytes": 33027,
+      "size_mb": 0.031,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/phase3c/tutor_100_benchmark.json",
+      "size_bytes": 22373,
+      "size_mb": 0.021,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/phase3_class8_math/retrieval_tests.json",
+      "size_bytes": 17030,
+      "size_mb": 0.016,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/phase3_class8_math/tutor_questions.json",
+      "size_bytes": 30013,
+      "size_mb": 0.029,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/phase4/bengali_100.json",
+      "size_bytes": 43637,
+      "size_mb": 0.042,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/phase4/grounding_100.json",
+      "size_bytes": 45448,
+      "size_mb": 0.043,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/phase4/math_100.json",
+      "size_bytes": 32514,
+      "size_mb": 0.031,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/phase4/memory_50.json",
+      "size_bytes": 12788,
+      "size_mb": 0.012,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/phase4/pedagogy_100.json",
+      "size_bytes": 38626,
+      "size_mb": 0.037,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/phase4/robustness_50.json",
+      "size_bytes": 10227,
+      "size_mb": 0.01,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/phase4/socratic_50.json",
+      "size_bytes": 20854,
+      "size_mb": 0.02,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/phase7/worst_case_queries.json",
+      "size_bytes": 109019,
+      "size_mb": 0.104,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/science/sci_prompts.json",
+      "size_bytes": 10434,
+      "size_mb": 0.01,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/tokenizer/dataset.json",
+      "size_bytes": 5599,
+      "size_mb": 0.005,
+      "extension": ".json"
+    },
+    {
+      "relative_path": "benchmarks/results/phase6/quality/real_device_quality_results.json",
+      "size_bytes": 972,
+      "size_mb": 0.001,
+      "extension": ".json"
+    }
+  ]
+}

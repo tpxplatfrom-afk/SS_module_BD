@@ -1,0 +1,14 @@
+{
+  "tokenizer_name": "Dedicated Bengali 16K BPE Tokenizer",
+  "algorithm": "Byte-level Byte-Pair Encoding (BPE)",
+  "vocab_size": 16000,
+  "files": [
+    "models/tokenizer_bengali_16k/tokenizer.json",
+    "models/tokenizer_bengali_16k/tokenizer_config.json"
+  ],
+  "character_coverage": "Full Bengali Unicode (\\u0980-\\u09FF), English Latin, Bengali/Arabic digits, Math symbols",
+  "special_tokens_count": 18,
+  "reusability_classification": "GENERIC_REUSABLE_BENGALI_CORE_TOKENIZER",
+  "belongs_to": "CORE_MODEL_MASTER",
+  "efficiency": "3.65 - 3.86 tokens per Bengali word"
+}
