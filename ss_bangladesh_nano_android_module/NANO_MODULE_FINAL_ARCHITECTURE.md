@@ -1,8 +1,8 @@
 # THSA-2B: Final V1 Architecture Specification
-## Ternary Hybrid State-Attention 2B Engine for Android
+## Ternary Hybrid State-Attention 2B Engine for Android (Hardened Baseline)
 
 **Document Identifier:** `SPEC-NANO-ARCH-THSA2B-001`  
-**Revision:** `1.0.0` (V1 Final Architecture Baseline)  
+**Revision:** `2.0.0` (Hardened Architecture with Validation & Recovery Protocols)  
 **Status:** FINAL V1 ARCHITECTURE SPECIFICATION — ARCHITECTURE TARGET  
 **Target Subsystem:** `ss_bangladesh_nano_android_module`  
 **Standard Compliance:** RFC 2119 (MUST, MUST NOT, SHOULD, SHOULD NOT, MAY)  
@@ -10,7 +10,7 @@
 ---
 
 > ### **CRITICAL SPECIFICATION NOTICE & RESEARCH DISCIPLINE**
-> 1. **Architecture Target Status:** This document establishes `THSA-2B` as the official, selected Version 1 (V1) architectural design target for the Nano-AI Android Module. All numerical memory, latency, compute, and battery claims herein represent **formal engineering hypotheses and target contracts** that MUST be experimentally validated on physical Android hardware.
+> 1. **Architecture Target Status:** This document establishes `THSA-2B` as the official, selected Version 1 (V1) architectural design target for the Nano-AI Android Module. All numerical memory, latency, compute, power, and thermal claims represent **formal engineering hypotheses and target contracts** that MUST be experimentally validated on physical Android hardware.
 > 2. **Physical Feasibility Mandate:** The project MUST NOT claim or imply that the ~2B parameter class, 10,000-token context length, or <= 250 MB working RAM target have already been achieved prior to complete physical-device benchmarking.
 > 3. **Research Discipline Principle:** *"External models provide evidence, not architecture."* Prior research systems (BitNet b1.58, Mamba-2/SSD, Liquid LFM2, Gemma 3n, KIVI, Gemini Nano MTP) are cited strictly as empirical precedent and design evidence. `THSA-2B` is an independent, clean-room systems architecture derived specifically from the Nano-AI device constraints.
 
@@ -30,6 +30,7 @@
 │ **Context Target**            │ 10,000 TOKENS (10K Context Horizon)             │
 │ **RAM Hard Ceiling**          │ 250 MB Total Working RAM Under Peak Load        │
 │ **Preferred RAM Target**      │ <= 200 MB Total Working RAM                     │
+│ **ROM Target**                │ <= 1.0 GB Total Persistent Package Footprint   │
 │ **Execution Boundary**        │ 100% Offline / Zero Network Dependency          │
 └───────────────────────────────┴─────────────────────────────────────────────────┘
 ```
@@ -50,9 +51,9 @@ The entire `THSA-2B` engine is constrained by four co-equal, first-class physica
 ```
 
 * **RAM (Volatile Working Memory):** Working memory envelope strictly <= 250 MB (preferred <= 200 MB).
-* **ROM (Non-Volatile Storage):** Flash footprint minimization across serialized model, tokenizer, and native `.so` libraries.
+* **ROM (Non-Volatile Storage):** Flash footprint target <= 1.0 GB (model storage target: 400–500 MB for bit-packed ternary weights).
 * **PROCESSOR (Compute & Memory Bandwidth):** Optimized for ARM Cortex-A CPU clusters via NEON vector SIMD; memory bandwidth pressure minimized.
-* **BATTERY (Energy & Thermals):** Minimization of Joules per generated token and mitigation of thermal throttling during continuous decode.
+* **BATTERY (Energy & Thermals):** Energy target of 2.0–3.5 mJ per token, <= 3.5 W peak power draw, and sustained thermal ceiling <= 45°C.
 
 ---
 
@@ -85,28 +86,24 @@ The **Ternary Hybrid State-Attention 2B (THSA-2B)** architecture is a purpose-bu
 * **Pure State-Space Models (SSM) Lack Needle Retrieval:** While pure SSMs achieve O(1) state memory, empirical research shows quality degradation on long-context associative recall, precise copy tasks, and complex multi-hop reasoning over 10K tokens.
 * **The THSA-2B Solution (66.7% State / 33.3% GQA):** By interleaving 16 State/Short-Conv blocks with 8 GQA blocks, THSA-2B achieves O(1) memory complexity across two-thirds of the network while retaining exact token retrieval in the remaining one-third.
 
-> **Directive `REQ-ARCH-001` (No Pure Mamba Lock-In):** The State / Short-Conv block is an **architectural contract and mathematical abstraction**. It MAY be instantiated via Mamba-2/SSD structured state-space mathematics or a mobile-optimized gated short-convolution mechanism. The final kernel choice will be determined by ARM NEON micro-benchmarking.
-
 ---
 
 ## 3. Core Dimensions & Structural Specifications
-
-The structural dimensions of THSA-2B are calibrated to hit the ~2B parameter class horizon while maintaining clean SIMD alignment for ARM64 NEON:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
 │                      THSA-2B STRUCTURAL DIMENSIONS                     │
 ├────────────────────────────────────────┬───────────────────────────────┤
-│ **Total Backbone Blocks ($N_{\\text{blocks}}$)** │ **24**                        │
+│ **Total Backbone Blocks ($N_{\text{blocks}}$)** │ **24**                        │
 │ **State / Short-Conv Blocks**          │ **16** (Blocks 1-2, 4-5, 7-8, etc.)│
 │ **GQA Attention Blocks**               │ **8**  (Every 3rd block: 3, 6, 9... )│
-│ **Hidden Dimension ($d_{\\text{model}}$)**    │ **2560**                      │
-│ **FFN Intermediate Dimension ($d_{\\text{ffn}}$)**│ **6912** ($2.7 \\times d_{\\text{model}}$)     │
+│ **Hidden Dimension ($d_{\text{model}}$)**    │ **2560**                      │
+│ **FFN Intermediate Dimension ($d_{\text{ffn}}$)**│ **6912** ($2.7 \times d_{\text{model}}$)     │
 │ **Attention Query Heads ($N_q$)**      │ **20**                        │
 │ **Attention KV Heads ($N_{kv}$)**      │ **4** (GQA Group Ratio = 5:1) │
-│ **Head Dimension ($d_{\\text{head}}$)**       │ **128** ($20 \\times 128 = 2560$)           │
+│ **Head Dimension ($d_{\text{head}}$)**       │ **128** ($20 \times 128 = 2560$)           │
 │ **Target Context Horizon ($L$)**       │ **10,000 tokens**             │
-│ **Vocabulary Size ($V$)**              │ **TBD — Tokenizer Phase**     │
+│ **Vocabulary Size ($V$)**              │ **TBD — Tokenizer Phase (32k-64k)**│
 │ **Total Parameter Class Target**       │ **1.95B – 2.0B Parameters**   │
 └────────────────────────────────────────┴───────────────────────────────┘
 ```
@@ -115,18 +112,16 @@ The structural dimensions of THSA-2B are calibrated to hit the ~2B parameter cla
 
 ## 4. Parameter Budget Breakdown
 
-The parameter budget targets the **~2B total model class**. The table below establishes exact structural counts and identifies items subject to training/tokenizer discovery:
-
 | Subsystem / Layer Type | Mathematical Formulation | Parameter Count | Precision Tier | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| **Token Embeddings** | $V \\times d_{\\text{model}} = V \\times 2560$ | `TBD` (e.g. $\\approx 81.9\\text{M}$ for $V=32\\text{k}$) | FP16 / INT8 / Ternary | `TBD — Tokenizer Phase` |
-| **8 GQA Self-Attention Layers** | $8 \\times (W_q + W_k + W_v + W_o)$ | $8 \\times (2560^2 + 2 \\cdot 2560 \\cdot 512 + 2560^2) = \\mathbf{125.83\\text{M}}$ | Ternary $\\{-1, 0, +1\\}$ | **EXACT** |
-| **16 State / Short-Conv Layers** | $16 \\times (\\text{Proj}_{\\text{in}} + \\text{State/Conv} + \\text{Proj}_{\\text{out}})$ | $16 \\times (\\sim 20.97\\text{M}) = \\mathbf{\\sim 335.5\\text{M}}$ | Ternary $\\{-1, 0, +1\\}$ | `TBD — State Kernel Phase` |
-| **24 Gated SwiGLU FFN Layers** | $24 \\times (W_{\\text{gate}} + W_{\\text{up}} + W_{\\text{down}})$ | $24 \\times (3 \\times 2560 \\times 6912) = \\mathbf{1{,}274.02\\text{M}}$ | Ternary $\\{-1, 0, +1\\}$ | **EXACT** |
-| **Layer Normalizations (RMSNorm)** | $24 \\times 2 \\times 2560 + 2560$ | $\\mathbf{\\approx 0.25\\text{M}}$ | FP16 / FP32 | **EXACT** |
-| **Output LM Head** | $d_{\\text{model}} \\times V$ (Tied or Untied) | `TBD` ($0$ if tied to embedding, $\\sim 81.9\\text{M}$ if untied) | FP16 / Ternary | `TBD — Training Phase` |
-| **Optional MTP Head** | Consumes $h_{\\text{last}}$, reuses trunk | $\\le \\mathbf{32.00\\text{M}}$ (Cap target) | Ternary / FP16 | `TBD — MTP Training Phase` |
-| **TOTAL TARGET MODEL CLASS** | $\\mathbf{\\sum \\text{All Subsystems}}$ | **$\\mathbf{\\sim 1.95\\text{B} - 2.00\\text{B} \\text{ Parameters}}$** | **Hybrid / Ternary** | **ARCHITECTURE TARGET** |
+| **Token Embeddings** | $V \times d_{\text{model}} = V \times 2560$ | `TBD` (e.g. $\approx 81.9\text{M}$ for $V=32\text{k}$) | FP16 / INT8 / Ternary | `TBD — Tokenizer Phase` |
+| **8 GQA Self-Attention Layers** | $8 \times (W_q + W_k + W_v + W_o)$ | $8 \times (2560^2 + 2 \cdot 2560 \cdot 512 + 2560^2) = \mathbf{125.83\text{M}}$ | Ternary $\{-1, 0, +1\}$ | **EXACT** |
+| **16 State / Short-Conv Layers** | $16 \times (\text{Proj}_{\text{in}} + \text{State/Conv} + \text{Proj}_{\text{out}})$ | $16 \times (\sim 20.97\text{M}) = \mathbf{\sim 335.5\text{M}}$ | Ternary $\{-1, 0, +1\}$ | `TBD — State Kernel Phase` |
+| **24 Gated SwiGLU FFN Layers** | $24 \times (W_{\text{gate}} + W_{\text{up}} + W_{\text{down}})$ | $24 \times (3 \times 2560 \times 6912) = \mathbf{1{,}274.02\text{M}}$ | Ternary $\{-1, 0, +1\}$ | **EXACT** |
+| **Layer Normalizations (RMSNorm)** | $24 \times 2 \times 2560 + 2560$ | $\mathbf{\approx 0.25\text{M}}$ | FP16 / FP32 | **EXACT** |
+| **Output LM Head** | $d_{\text{model}} \times V$ (Tied or Untied) | `TBD` ($0$ if tied to embedding, $\sim 81.9\text{M}$ if untied) | FP16 / Ternary | `TBD — Training Phase` |
+| **Optional MTP Head** | Consumes $h_{\text{last}}$, reuses trunk | $\le \mathbf{32.00\text{M}}$ (Cap target) | Ternary / FP16 | `TBD — MTP Training Phase` |
+| **TOTAL TARGET MODEL CLASS** | $\mathbf{\sum \text{All Subsystems}}$ | **$\mathbf{\sim 1.95\text{B} - 2.00\text{B} \text{ Parameters}}$** | **Hybrid / Ternary** | **ARCHITECTURE TARGET** |
 
 ---
 
@@ -134,7 +129,7 @@ The parameter budget targets the **~2B total model class**. The table below esta
 
 The primary weight representation for all dense linear projections across the 24 backbone blocks MUST be ternary:
 
-$$\\mathbf{W} \\in \\{-1, \\, 0, \\, +1\\}^{M \\times N}$$
+$$\mathbf{W} \in \{-1, \, 0, \, +1\}^{M \times N}$$
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -157,17 +152,13 @@ $$\\mathbf{W} \\in \\{-1, \\, 0, \\, +1\\}^{M \\times N}$$
 ```
 
 ### 5.1 Precision Allocations Across Subsystems
-Not all tensors tolerate aggressive 1.58-bit quantization. THSA-2B strictly differentiates precision tiers:
-
-* **Core Weight Tensors (Ternary Target):** GQA $W_q, W_k, W_v, W_o$; FFN $W_{\\text{gate}}, W_{\\text{up}}, W_{\\text{down}}$; State in/out projections.
+* **Core Weight Tensors (Ternary Target):** GQA $W_q, W_k, W_v, W_o$; FFN $W_{\text{gate}}, W_{\text{up}}, W_{\text{down}}$; State in/out projections.
 * **Sensitive Tensors (Higher Precision Tier):**
   * Token Embeddings: FP16 or INT8 (to preserve semantic input density).
   * Layer Normalization Gains: FP16 / FP32 (to avoid activation drift).
-  * State Recurrence Parameters ($A, B, C$ / $\\Delta$): FP16 / FP32 (to maintain state stability over 10K steps).
+  * State Recurrence Parameters ($A, B, C$ / $\Delta$): FP16 / FP32 (to maintain state stability over 10K steps).
   * Output LM Head / Logits: FP16 or high-accuracy INT8.
   * Softmax & Attention Logits: FP16 / FP32 accumulation.
-
-> **Directive `REQ-TERN-001`:** Ternary weight representation drastically compresses persistent ROM storage and reduces DRAM memory bandwidth traffic. However, developers MUST NOT assume ternary weights automatically guarantee <= 250 MB RAM. RAM is governed by resident working set pages, activations, and KV-cache.
 
 ---
 
@@ -185,9 +176,9 @@ The 8 attention blocks utilize Grouped Query Attention (GQA) with a 5:1 query-to
 ```
 
 ### 6.1 GQA Specifications
-* **Query Dimension:** $20 \\times 128 = 2560$
-* **Key/Value Dimension:** $4 \\times 128 = 512$
-* **Causal Masking:** Standard lower-triangular causal attention over sequence length $L \\le 10{,}000$.
+* **Query Dimension:** $20 \times 128 = 2560$
+* **Key/Value Dimension:** $4 \times 128 = 512$
+* **Causal Masking:** Standard lower-triangular causal attention over sequence length $L \le 10{,}000$.
 * **Sliding Window Status:** Full causal attention over 10K tokens is the V1 baseline. Sliding-window attention is designated strictly as an **optional future optimization branch**.
 
 ---
@@ -197,16 +188,16 @@ The 8 attention blocks utilize Grouped Query Attention (GQA) with a 5:1 query-to
 Only the **8 GQA attention blocks** allocate and maintain Key-Value cache buffers. The 16 State/Short-Conv blocks maintain a fixed-size recurrent state independent of context length.
 
 ### 7.1 Formal KV-Cache Memory Equation
-$$\\mathbf{M_{\\text{KV}}} = 2 \\times L_{\\text{context}} \\times N_{\\text{attention}} \\times N_{\\text{kv\\_heads}} \\times D_{\\text{head}} \\times B_{\\text{KV}}$$
+$$\mathbf{M_{\text{KV}}} = 2 \times L_{\text{context}} \times N_{\text{attention}} \times N_{\text{kv\_heads}} \times D_{\text{head}} \times B_{\text{KV}}$$
 
 ### 7.2 Numerical Calculation for THSA-2B Baseline (INT4 Precision)
-* $L_{\\text{context}} = 10{,}000\\text{ tokens}$
-* $N_{\\text{attention}} = 8\\text{ blocks}$
-* $N_{\\text{kv\\_heads}} = 4\\text{ heads}$
-* $D_{\\text{head}} = 128\\text{ elements}$
-* $B_{\\text{KV}} = 0.5\\text{ bytes (INT4 quantized K and V)}$
+* $L_{\text{context}} = 10{,}000\text{ tokens}$
+* $N_{\text{attention}} = 8\text{ blocks}$
+* $N_{\text{kv\_heads}} = 4\text{ heads}$
+* $D_{\text{head}} = 128\text{ elements}$
+* $B_{\text{KV}} = 0.5\text{ bytes (INT4 quantized K and V)}$
 
-$$\\mathbf{M_{\\text{KV}}} = 2 \\times 10{,}000 \\times 8 \\times 4 \\times 128 \\times 0.5\\text{ bytes} = 40{,}960{,}000\\text{ bytes} = \\mathbf{39.0625\\text{ MB}}$$
+$$\mathbf{M_{\text{KV}}} = 2 \times 10{,}000 \times 8 \times 4 \times 128 \times 0.5\text{ bytes} = 40{,}960{,}000\text{ bytes} = \mathbf{39.0625\text{ MB}}$$
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -219,19 +210,13 @@ $$\\mathbf{M_{\\text{KV}}} = 2 \\times 10{,}000 \\times 8 \\times 4 \\times 128 
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 7.3 Advanced KV Research Horizons (Post-V1)
-* **INT2 KV Quantization:** Potential reduction from $39.1\\text{ MB} \\rightarrow 19.5\\text{ MB}$.
-* **Asymmetric K/V Quantization:** e.g., INT4 Keys + INT2 Values.
-* **Dynamic Token Eviction / Selective KV:** Pruning uninformative historical tokens based on attention scores.
-* **Low-Rank KV Projections:** Factorizing KV state vectors.
-
 ---
 
 ## 8. State / Short-Conv Block Design
 
 The 16 non-attention backbone blocks implement a linear-time sequence mixing transformation:
 
-$$\\mathbf{X} \\in \\mathbb{R}^{B \\times S \\times 2560} \\longrightarrow \\mathbf{Y} \\in \\mathbb{R}^{B \\times S \\times 2560}$$
+$$\mathbf{X} \in \mathbb{R}^{B \times S \times 2560} \longrightarrow \mathbf{Y} \in \mathbb{R}^{B \times S \times 2560}$$
 
 ```
                           ┌──────────────────────────┐
@@ -272,16 +257,23 @@ $$\\mathbf{X} \\in \\mathbb{R}^{B \\times S \\times 2560} \\longrightarrow \\mat
               └───────────────────────────────────────────────────┘
 ```
 
-### 8.1 Architectural Contract vs. Implementation Options
-* **Contract:** Memory consumption per state block MUST be O(1) with respect to sequence length $L$, consuming <= 128 KB of state memory per block during decode.
-* **Option A (Structured State-Space / SSD):** Continuous state evolution $\\mathbf{h}_t = \\mathbf{A} \\mathbf{h}_{t-1} + \\mathbf{B} \\mathbf{x}_t$, $\\mathbf{y}_t = \\mathbf{C} \\mathbf{h}_t + \\mathbf{D} \\mathbf{x}_t$.
-* **Option B (Gated Depthwise Short-Convolution):** 1D causal convolution across temporal kernel window $K \\in [3, 4, 7]$ with gating non-linearities.
+### 8.1 Architectural Contract
+* **Contract:** Memory consumption per state block MUST be $O(1)$ with respect to sequence length $L$, consuming $\le 128\text{ KB}$ of state memory per block during decode.
+* **Option A (Structured State-Space / SSD):** Continuous state evolution $\mathbf{h}_t = \mathbf{A} \mathbf{h}_{t-1} + \mathbf{B} \mathbf{x}_t$, $\mathbf{y}_t = \mathbf{C} \mathbf{h}_t + \mathbf{D} \mathbf{x}_t$.
+* **Option B (Gated Depthwise Short-Convolution):** 1D causal convolution across temporal kernel window $K \in [3, 4, 7]$ with gating non-linearities.
+
+### 8.2 Implementation Selection Phase Gate & Benchmark Protocol
+To resolve the SSM vs. Short-Conv implementation choice empirically without premature lock-in:
+1. **Phase 1 (V1 Architecture):** Freeze the abstract contract ($O(1)$ state, $\le 128\text{ KB}$ per block).
+2. **Phase 2A (Kernel Micro-benchmarks):** Benchmark Mamba-2/SSD recurrence vs. Gated Depthwise Short-Conv on ARM64 NEON for throughput ($\text{tok/sec}$) and cache locality.
+3. **Phase 2B (Long-Context Retrieval Gate):** Measure needle-in-a-haystack retrieval accuracy, associative recall, and perplexity across 10K tokens.
+4. **Formal Selection Gate Criterion:** The selected variant MUST achieve **$\ge 95\%$ of pure-attention retrieval quality** on synthetic needle benchmarks while strictly preserving $O(1)$ memory.
 
 ---
 
 ## 9. Memory Topology: Paged Weight Residency & Arena Allocation
 
-The complete ~2B parameter model ($400\\text{ MB} - 500\\text{ MB}$ on flash) **MUST NOT** be loaded entirely into RAM at startup.
+The complete ~2B parameter model ($400\text{ MB} - 500\text{ MB}$ on flash) **MUST NOT** be loaded entirely into RAM at startup.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -314,11 +306,16 @@ The complete ~2B parameter model ($400\\text{ MB} - 500\\text{ MB}$ on flash) **
 * The hot token generation loop MUST execute with **ZERO dynamic heap allocations** (`0` calls to `malloc`, `calloc`, `realloc`, or C++ `new`).
 * All intermediate activations, scratchpads, and KV-cache blocks MUST reside in pre-allocated static arenas initialized once during model startup.
 
+### 9.2 Memory-Mapped I/O Performance Guarantees & Page Fault Budgets
+To prevent token generation jitter caused by flash read stalls:
+* **Sustained Sequential Read Throughput:** $\ge 800\text{ MB/s}$ on modern Android UFS 2.2/3.1/4.0 flash storage.
+* **P99 Page Fault Latency Budget:** $\le 2.0\text{ ms}$ under standard operating conditions; peak allowable $\le 10\text{ ms}$ under background system pressure.
+* **Sequential Readahead & Prefetch Policy:** The runtime MUST issue asynchronous `madvise(MADV_WILLNEED)` hints for Block $N+1$ while Block $N$ is executing its compute kernel.
+* **Memory Pressure Strategy:** If Android OS broadcasts `onTrimMemory(TRIM_MEMORY_RUNNING_CRITICAL)`, the runtime MUST release cached non-active weight pages and evict temporary scratchpads without dropping active KV context.
+
 ---
 
 ## 10. RAM Budget Allocation (Working Memory Envelope)
-
-The table below defines the formal engineering budget allocated across all physical memory subsystems. The sum of peak resident components MUST remain within the hard ceiling:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -326,11 +323,11 @@ The table below defines the formal engineering budget allocated across all physi
 ├────────────────────────────────────────┬───────────────────────────────┤
 │ **Subsystem / Memory Component**       │ **Target Allocation Ceiling** │
 ├────────────────────────────────────────┼───────────────────────────────┤
-│ **Resident Weight Pages ($M_{\\text{weights}}$)**│ **<= 130.0 MB**               │
-│ **KV-Cache ($M_{\\text{kv\\_cache}}$ - 10K tokens)**│ **<=  45.0 MB** (Nominal 39.1)│
-│ **Activation Tensors ($M_{\\text{activations}}$)**│ **<=  25.0 MB**               │
-│ **Temporary Workspace ($M_{\\text{workspace}}$)** │ **<=  20.0 MB**               │
-│ **Runtime / JNI / Metadata ($M_{\\text{meta}}$)**│ **<=  15.0 MB**               │
+│ **Resident Weight Pages ($M_{\text{weights}}$)**│ **<= 130.0 MB**               │
+│ **KV-Cache ($M_{\text{kv\_cache}}$ - 10K tokens)**│ **<=  45.0 MB** (Nominal 39.1)│
+│ **Activation Tensors ($M_{\text{activations}}$)**│ **<=  25.0 MB**               │
+│ **Temporary Workspace ($M_{\text{workspace}}$)** │ **<=  20.0 MB**               │
+│ **Runtime / JNI / Metadata ($M_{\text{meta}}$)**│ **<=  15.0 MB**               │
 │ **Safety Margin Buffer**               │ **~  15.0 MB**                │
 ├────────────────────────────────────────┼───────────────────────────────┤
 │ **HARD WORKING RAM CEILING**           │ **250.0 MB** (Peak Maximum)   │
@@ -338,16 +335,14 @@ The table below defines the formal engineering budget allocated across all physi
 └────────────────────────────────────────┴───────────────────────────────┘
 ```
 
-> **Directive `REQ-BUDGET-001`:** These values represent rigorous engineering budget allocations, NOT completed physical benchmark measurements. Verification requires empirical validation under peak 10K context load on physical hardware.
-
 ---
 
 ## 11. ROM & Persistent Storage Architecture
 
-$$\\mathbf{TOTAL\\_STORAGE} = S_{\\text{model}} + S_{\\text{tokenizer}} + S_{\\text{runtime}} + S_{\\text{metadata}} + S_{\\text{required\\_assets}}$$
+$$\mathbf{TOTAL\_STORAGE} = S_{\text{model}} + S_{\text{tokenizer}} + S_{\text{runtime}} + S_{\text{metadata}} + S_{\text{required\_assets}}$$
 
-* **Model File ($S_{\\text{model}}$):** Bit-packed ternary weights with quantized scaling headers. Target: $\\approx 400\\text{ MB} - 500\\text{ MB}$ on flash.
-* **Sequential Locality:** Tensors within the model binary MUST be organized sequentially by execution order (Block 0 $\\rightarrow$ Block 23) to maximize flash sequential read throughput and Linux readahead efficiency during `mmap`.
+* **Model File ($S_{\text{model}}$):** Bit-packed ternary weights with quantized scaling headers. Target: $\approx 400\text{ MB} - 500\text{ MB}$ on flash. Total package ceiling: $\le 1.0\text{ GB}$.
+* **Sequential Locality:** Tensors within the model binary MUST be organized sequentially by execution order (Block 0 $\rightarrow$ Block 23) to maximize flash sequential read throughput and Linux readahead efficiency during `mmap`.
 * **Zero Packaging Bloat:** Native libraries (`.so`) MUST be stripped of debug symbols. Test fixtures, golden datasets, and calibration tools MUST NOT be packaged into production APK/AAB builds.
 
 ---
@@ -372,31 +367,27 @@ Version 1 is engineered strictly for **ARM64 CPU execution utilizing NEON vector
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-* **Fallback Mandate:** Every NEON kernel MUST be accompanied by a portable, verified pure C/C++ scalar fallback implementation.
-* **Secondary Accelerators (Deferred):** NPU, Qualcomm Hexagon DSP, MediaTek NeuroPilot, OpenCL, and Vulkan backends are deferred to V2/V3.
+### 12.1 Dynamic SIMD Dispatch & Multi-SoC Heterogeneity Strategy
+Android hardware exhibits diverse CPU microarchitectures (Qualcomm Kryo, ARM Cortex-X/A7xx/A5xx, MediaTek Dimensity, Samsung Exynos). To ensure smooth execution across all tiers:
+1. **Dynamic Capability Detection:** The runtime MUST query `getauxval(AT_HWCAP)` / `AT_HWCAP2` at startup to detect ARMv8.2-A+ features (`FEAT_DotProd`, `FEAT_FP16`, `FEAT_I8MM`).
+2. **Multi-Tier Kernel Dispatch:**
+   * *Tier 1 (High Performance):* NEON `I8MM` / `DotProd` vector instructions (Snapdragon 8 Gen 1/2/3, Dimensity 9000+).
+   * *Tier 2 (Standard ARM64):* Baseline 128-bit NEON vector SIMD (universal across all 64-bit Android chips).
+   * *Tier 3 (Scalar Fallback):* Pure ISO C++17 scalar implementation for verified cross-platform correctness testing.
+3. **Thermal-Aware Core Affinity:** The thread pool MUST monitor core thermal status via `/sys/devices/virtual/thermal/`. Compute threads MUST bind to performance cores during prefill bursts and adaptively balance across efficiency cores during continuous decode if temperature exceeds $40^\circ\text{C}$.
 
 ---
 
 ## 13. Battery & Energy Dissipation Model
 
-Energy efficiency is treated as a first-class architectural metric:
+$$\mathbf{Energy\_per\_token} = \frac{\text{Total Joules Consumed}}{\text{Generated Tokens}}$$
 
-$$\\mathbf{Energy\\_per\\_token} = \\frac{\\text{Total Joules Consumed}}{\\text{Generated Tokens}}$$
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                   BATTERY CONSUMPTION RISK DRIVERS                     │
-├────────────────────────────────────────────────────────────────────────┤
-│ 1. Weight Fetch Bandwidth: Repeatedly streaming hundreds of MBs across │
-│                            the LPDDR bus drains battery rapidly.       │
-│ 2. KV-Cache Read Traffic:  Autoregressive attention reading large KV   │
-│                            buffers on every token multiplies mJ/tok.   │
-│ 3. Frequent CPU Wakeups:   Sub-optimal thread scheduling preventing    │
-│                            CPU cores from entering low-power states.   │
-└────────────────────────────────────────────────────────────────────────┘
-```
-
-* **Thermal Throttling Protection:** Sustained 10-minute generation benchmarks MUST record token generation throughput before and after thermal equilibrium ($\\Delta_{\\text{thermal}}$).
+### 13.1 Concrete Energy & Thermal Target Contracts
+* **Energy Efficiency Target:** **$2.0 - 3.5\text{ mJ}$ per generated token** during the autoregressive decode phase on reference hardware.
+* **Continuous Power Consumption Ceiling:** **$\le 3.5\text{ W}$ peak system power draw** during active generation.
+* **Thermal Throttling Ceiling:** Device skin/package temperature MUST remain **$\le 45^\circ\text{C}$** during sustained 10-minute continuous inference sessions.
+* **Battery Drain Profile:** **$\le 5\%$ total battery consumption** over 1 hour of sustained continuous generation at $10\text{ tokens/sec}$.
+* **Rejection-Aware MTP Profiling:** MTP speculative speedup MUST be measured alongside candidate rejection rates; if verification rejection exceeds $40\%$, the MTP module MUST be throttled dynamically to conserve battery.
 
 ---
 
@@ -424,31 +415,21 @@ Multi-Token Prediction (MTP) is included in THSA-2B as an **optional, integrated
                               └───────────────────────────┘
 ```
 
-* **Architectural Principles:**
-  * **Parameter Budget:** <= 32M parameters dedicated to the MTP module.
-  * **No Separate Drafter Model:** Reuses backbone representations; avoids duplicating 10K KV-caches.
-  * **Exact Verification:** The main backbone verifies speculative candidates in parallel during the next forward step.
-  * **Zero Correctness Compromise:** If speculative tokens fail verification, the runtime falls back seamlessly to standard single-token autoregression.
+* **Architectural Principles:** Parameter budget $\le 32\text{M}$, reuses backbone representations, up to 4 candidate tokens, exact backbone verification pass, zero correctness deviation.
 
 ---
 
 ## 15. Explicit Architectural Deferrals: MoE & MatFormer
 
 ### 15.1 Mixture-of-Experts (MoE) — DEFERRED FOR V1
-* **Decision:** MoE is explicitly excluded from the THSA-2B V1 core architecture.
-* **Technical Rationale:**
-  1. *Paging Disruption:* Dynamic routing to sparse experts forces random, unpredictable flash `mmap` page reads, breaking sequential prefetch.
-  2. *CPU Branch Overhead:* Dynamic dispatching on mobile CPUs creates severe branch misprediction penalties.
-  3. *RAM Unpredictability:* Routing variance creates non-deterministic working RAM spikes exceeding 250 MB.
-* **Roadmap Status:** Deferred to V2/V3 research branches.
+* **Decision:** MoE is explicitly excluded from the THSA-2B V1 core architecture due to random flash page faults, mobile CPU branch misprediction overhead, and non-deterministic working RAM spikes.
 
 ### 15.2 MatFormer / Elastic Parameter Scaling — DEFERRED FOR V1
-* **Decision:** MatFormer-style nested sub-network slicing is deferred.
-* **Technical Rationale:** V1 requires a fixed, deterministic ~2B baseline to establish reproducible benchmarks across physical Android devices.
+* **Decision:** MatFormer-style nested sub-network slicing is deferred to maintain a deterministic, fixed ~2B baseline for V1 physical-device benchmarking.
 
 ---
 
-## 16. Numerical Precision Policy
+## 16. Numerical Precision Policy & Quantization Calibration
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -462,6 +443,14 @@ Multi-Token Prediction (MTP) is included in THSA-2B as an **optional, integrated
 │ **Logits & Sampling**          │ FP16 / FP32                           │
 └────────────────────────────────┴───────────────────────────────────────┘
 ```
+
+### 16.1 Numerical Tolerance Policy & Error Budgets
+To prevent cascading quantization error across the ternary $\rightarrow$ INT8 $\rightarrow$ INT4 chain:
+1. **Ternary Weight Error Budget:** Relative tensor reconstruction error MUST be $\le 2.0\%$ compared to the unquantized FP32 reference.
+2. **INT4 KV-Cache Error Budget:** Softmax output probability divergence MUST remain within a Kullback-Leibler (KL) divergence threshold of $D_{\text{KL}} \le 0.015$ ($\le 1.5\%$ relative softmax error).
+3. **Accumulation Contract:** All ternary dot products MUST accumulate in **INT32 or FP32** before scaling and clamping to avoid intermediate overflow/underflow.
+4. **Post-Training Quantization (PTQ) Calibration:** Min-max symmetric channel-wise quantization calibrated across a standardized 512-sample long-sequence dataset.
+5. **Perplexity Degradation Limit:** End-to-end quantized model perplexity on WikiText-103 / C4 validation subsets MUST exhibit $\le 5.0\%$ degradation compared to the unquantized baseline.
 
 ---
 
@@ -528,17 +517,13 @@ Final Hidden State h_24 [B, 2560]
 
 ## 19. Mathematical Feasibility Formulations
 
-$$\\mathbf{Peak\\_RAM} = M_{\\text{weights}} + M_{\\text{kv\\_cache}} + M_{\\text{activations}} + M_{\\text{workspace}} + M_{\\text{runtime}}$$
+$$\mathbf{Peak\_RAM} = M_{\text{weights}} + M_{\text{kv\_cache}} + M_{\text{activations}} + M_{\text{workspace}} + M_{\text{runtime}}$$
 
-$$\\mathbf{V1\\_Feasibility\\_Condition} = \\begin{cases} \\text{TRUE} & \\text{if } \\mathbf{Peak\\_RAM} \\le 250\\text{ MB} \\;\\land\\; L_{\\text{context}} \\ge 10{,}000 \\;\\land\\; \\theta \\approx 2\\text{B} \\;\\land\\; \\text{Offline} = 1 \\\\ \\text{FALSE} & \\text{otherwise} \\end{cases}$$
-
-$$\\mathbf{Memory\\_Bandwidth\\_Per\\_Token} = \\frac{\\text{Resident\\_Weights\\_Read} + \\text{KV\\_Cache\\_Read\\_Write}}{\\text{Token\\_Duration\\_Seconds}}$$
+$$\mathbf{V1\_Feasibility\_Condition} = \begin{cases} \text{TRUE} & \text{if } \mathbf{Peak\_RAM} \le 250\text{ MB} \;\land\; L_{\text{context}} \ge 10{,}000 \;\land\; \theta \approx 2\text{B} \;\land\; \text{Offline} = 1 \\ \text{FALSE} & \text{otherwise} \end{cases}$$
 
 ---
 
-## 20. Explicit Failure Conditions
-
-The THSA-2B project MUST be declared a **FAILURE** under any of the following conditions:
+## 20. Explicit Failure Conditions & Recovery Protocols
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -548,12 +533,17 @@ The THSA-2B project MUST be declared a **FAILURE** under any of the following co
 │ 2. 10,000-Token Context is unavailable or artificially truncated.       │
 │ 3. Model Correctness / Numerical Tolerance checks fail.                │
 │ 4. Sustained Thermal Throttling renders generation unusable (< TBD).   │
-│ 5. Packaged Storage Footprint exceeds distribution limits.             │
+│ 5. Packaged Storage Footprint exceeds distribution limits (> 1.0 GB).  │
 │ 6. Energy Consumption per token causes excessive battery drain.        │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-> **Directive `REQ-FAIL-001`:** If physical benchmarking reveals a failure condition, engineers MUST report the limitation transparently. Silently reducing the context length (e.g. from 10K to 4K) to pass a RAM test is strictly prohibited.
+### 20.1 Explicit Recovery Strategies & Non-Silent Degraded Modes
+If physical benchmarking encounters memory pressure exceeding the 250 MB ceiling during 10K context execution, the runtime MUST execute the following explicit recovery protocol:
+1. **Immediate Fallback:** Truncate active KV-cache allocation to $8{,}192\text{ tokens}$ (or $4{,}096\text{ tokens}$) and retry generation.
+2. **Mandatory Diagnostic Logging:** Emit structured log event `WARN_DEGRADED_CONTEXT_BUDGET` with exact heap and PSS telemetry (silent truncation is strictly prohibited).
+3. **Application-Facing State Notification:** Propagate degraded status flag (`FLAG_CONTEXT_CONSTRAINED`) across the JNI bridge so host applications can inform the user transparently.
+4. **Root-Cause Telemetry Trigger:** Record memory dump to local test artifact for architectural review (determining if quantization scales or scratchpad arenas caused the regression).
 
 ---
 
@@ -574,8 +564,6 @@ The THSA-2B project MUST be declared a **FAILURE** under any of the following co
 └───────────────────────────────┴────────────────────────────────────────┘
 ```
 
-* **Distinction Mandate:** The external works above provide scientific evidence and validation methodology. `THSA-2B` is an independent architecture tailored specifically to the Nano-AI 250 MB / 10K Android target.
-
 ---
 
 ## 22. Final V1 Architecture Specification Summary
@@ -586,14 +574,14 @@ The THSA-2B project MUST be declared a **FAILURE** under any of the following co
 ├───────────────────────────────────┬────────────────────────────────────┤
 │ **Architecture Name**             │ **THSA-2B (Ternary Hybrid State-Attn)**│
 │ **Target Parameter Class**        │ **~2 BILLION Parameters**          │
-│ **Backbone Blocks ($N_{\\text{blocks}}$)**  │ **24 Total Blocks**                │
+│ **Backbone Blocks ($N_{\text{blocks}}$)**  │ **24 Total Blocks**                │
 │ **State / Short-Conv Blocks**     │ **16 Blocks (~66.7%)**             │
 │ **GQA Attention Blocks**          │ **8 Blocks (~33.3%)**              │
-│ **Hidden Dimension ($d_{\\text{model}}$)**│ **2560**                           │
-│ **FFN Dimension ($d_{\\text{ffn}}$)**     │ **6912**                           │
+│ **Hidden Dimension ($d_{\text{model}}$)**│ **2560**                           │
+│ **FFN Dimension ($d_{\text{ffn}}$)**     │ **6912**                           │
 │ **Attention Query Heads ($N_q$)** │ **20**                             │
 │ **Attention KV Heads ($N_{kv}$)** │ **4**                              │
-│ **Head Dimension ($d_{\\text{head}}$)**   │ **128**                            │
+│ **Head Dimension ($d_{\text{head}}$)**   │ **128**                            │
 │ **Context Target**                │ **10,000 Tokens (10K Context)**    │
 │ **Weight Representation**         │ **BitNet-Style Ternary {-1, 0, +1}**│
 │ **KV-Cache Representation**       │ **INT4 Baseline (39.1 MB @ 10K)**  │
@@ -602,10 +590,30 @@ The THSA-2B project MUST be declared a **FAILURE** under any of the following co
 │ **Multi-Token Prediction (MTP)**  │ **Optional Integrated Drafter (<=32M)**│
 │ **Working RAM Hard Ceiling**      │ **250 MB (Peak Maximum)**          │
 │ **Preferred RAM Target**          │ **<= 200 MB**                      │
+│ **ROM Package Target**            │ **<= 1.0 GB (400-500 MB Model)**   │
+│ **Energy Target**                 │ **2.0 - 3.5 mJ / generated token** │
 │ **Mixture-of-Experts (MoE)**      │ **DEFERRED to V2/V3**              │
 │ **Hardware Accelerators (NPU)**   │ **DEFERRED to V2/V3**              │
 └───────────────────────────────────┴────────────────────────────────────┘
 ```
+
+---
+
+## 23. Training & Quantization-Aware Training (QAT) Strategy
+
+While runtime construction precedes training execution, THSA-2B defines the necessary model training pipeline to guarantee seamless conversion to ternary weights and INT4 KV-caches:
+
+### 23.1 Base Model Pre-Training Pipeline
+* **Token Budget:** Pre-training horizon of $\approx 2.0\text{ Trillion}$ high-quality tokens across multilingual and code corpora.
+* **Tokenizer Configuration:** Byte-Pair Encoding (BPE) or SentencePiece with vocabulary size $V \in [32{,}768, \, 65{,}536]$.
+* **Target Objective:** Causal autoregressive language modeling targeting validation perplexity $\le 10.0$ on standard benchmark distributions.
+
+### 23.2 Quantization-Aware Training (QAT) Protocol
+Naive Post-Training Quantization (PTQ) is insufficient for sub-2-bit ternary weights. THSA-2B enforces Quantization-Aware Training:
+1. **Fake Quantization Forward Pass:** Weights are simulated as ternary values during forward passes using $\text{Round}(\text{Clamp}(W/\gamma, -1, +1))$, with INT8 activation scaling.
+2. **Straight-Through Estimator (STE):** Backward pass gradients flow directly through the rounding operator: $\frac{\partial \text{loss}}{\partial W} \approx \frac{\partial \text{loss}}{\partial W_{\text{quantized}}}$.
+3. **QAT Fine-Tuning Stage:** $20{,}000 - 50{,}000\text{ steps}$ of continuous QAT fine-tuning on high-quality instruct/reasoning datasets.
+4. **Validation Suite:** Continuous evaluation on standard benchmarks (MMLU 5-shot, GSM8K, ARC-Challenge, ANLI) ensuring quantized model score retention $\ge 95\%$ relative to FP32 baseline.
 
 ---
 *Specification formulated and finalized for the `ss_bangladesh_nano_android_module` architecture tree.*
