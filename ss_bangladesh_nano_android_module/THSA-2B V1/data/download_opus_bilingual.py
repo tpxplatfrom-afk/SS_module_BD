@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
 THSA-2B Pre-Training Dataset: Step 2 of 5
-Download & Extract Bilingual Bengali-English Parallel Corpus (OPUS / CCMatrix)
+Download & Extract Bilingual Bengali-English Parallel Corpus (OPUS-100)
 ==============================================================================
-Purpose: Enables the model to seamlessly translate and switch between
-         English and Bengali in the same conversation.
-Target:  data/raw/bilingual/bilingual_bn_en.txt
+Dataset:    Helsinki-NLP/opus-100 (bn-en)
+Target:     data/raw/bilingual/bilingual_bn_en.txt
+Purpose:    Enables seamless English <-> Bengali translation and code-switching.
 """
 
 import sys
@@ -34,39 +34,41 @@ def main():
     log("=" * 60)
     log("THSA-2B DATASET PIPELINE — STEP 2: Bilingual (English-Bengali)")
     log("=" * 60)
-    log("Streaming OPUS Books / Tatoeba / Alt-parallel corpus (bn-en)...")
+    log("Streaming Helsinki-NLP/opus-100 (bn-en parallel pairs)...")
 
     written = 0
     skipped = 0
 
-    try:
-        ds = load_dataset("opus_books", "en-bn", split="train", streaming=True)
-        with open(OUT_FILE, "w", encoding="utf-8", buffering=1024*1024) as out:
-            for item in ds:
-                trans = item.get("translation", {})
-                en = trans.get("en", "").strip()
-                bn = trans.get("bn", "").strip()
+    ds = load_dataset("Helsinki-NLP/opus-100", "bn-en", split="train", streaming=True)
 
-                if len(en) < 10 or len(bn) < 10:
-                    skipped += 1
-                    continue
+    with open(OUT_FILE, "w", encoding="utf-8", buffering=1024*1024) as out:
+        for item in ds:
+            trans = item.get("translation", {})
+            en = trans.get("en", "").strip()
+            bn = trans.get("bn", "").strip()
 
-                out.write(f"English: {en}\nBengali: {bn}\n\n")
-                written += 1
+            # Skip empty or ultra-short noise
+            if len(en) < 3 or len(bn) < 3:
+                skipped += 1
+                continue
 
-                if written % 5000 == 0:
-                    size_mb = os.path.getsize(OUT_FILE) / (1024 * 1024)
-                    log(f"  Pairs written: {written:,} | Current Size: {size_mb:.2f} MB")
-    except Exception as e:
-        log(f"Stream note: {e}")
+            # Format parallel pairs for pre-training
+            out.write(f"English: {en}\n")
+            out.write(f"Bengali: {bn}\n\n")
+            written += 1
 
-    size_mb = os.path.getsize(OUT_FILE) / (1024 * 1024) if os.path.exists(OUT_FILE) else 0.0
+            if written % 25000 == 0:
+                size_mb = os.path.getsize(OUT_FILE) / (1024 * 1024)
+                log(f"  Parallel pairs written: {written:,} | File Size: {size_mb:.2f} MB")
+
+    size_mb = os.path.getsize(OUT_FILE) / (1024 * 1024)
     log("=" * 60)
-    log("STEP 2 COMPLETE: Bilingual Corpus Prepared")
+    log("STEP 2 COMPLETE: Bilingual Corpus Downloaded & Formatted")
     log("=" * 60)
-    log(f"  Output file:   {OUT_FILE}")
-    log(f"  Pairs written: {written:,}")
-    log(f"  File Size:     {size_mb:.2f} MB")
+    log(f"  Output file:      {OUT_FILE}")
+    log(f"  Pairs written:    {written:,}")
+    log(f"  Noise skipped:    {skipped:,}")
+    log(f"  Final File Size:  {size_mb:.2f} MB")
 
 if __name__ == "__main__":
     main()
