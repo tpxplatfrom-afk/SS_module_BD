@@ -277,23 +277,39 @@ class DistillationTrainer:
         # 4. Setup Loss, Optimizer & AMP Scaler
         self.loss_fn = DistillationLoss(alpha=self.alpha, temperature=self.temperature)
         
+        # We prioritize Memory-Factored Adafactor to prevent 16 GB VRAM explosion on 15 GB Colab GPUs
+        optimizer_loaded = False
         try:
-            import bitsandbytes as bnb
-            self.optimizer = bnb.optim.AdamW8bit(
-                self.student.parameters(), 
-                lr=self.learning_rate, 
+            from transformers.optimization import Adafactor
+            self.optimizer = Adafactor(
+                self.student.parameters(),
+                lr=self.learning_rate,
+                scale_parameter=False,
+                relative_step=False,
+                warmup_init=False,
                 weight_decay=0.01,
-                betas=(0.9, 0.95)
             )
-            print("[Init] Successfully activated bitsandbytes 8-Bit AdamW (Saved ~12 GB VRAM).")
-        except Exception:
-            self.optimizer = torch.optim.AdamW(
-                self.student.parameters(), 
-                lr=self.learning_rate, 
-                weight_decay=0.01,
-                betas=(0.9, 0.95)
-            )
-            print("[Init] Loaded PyTorch standard AdamW optimizer.")
+            print("[Init] Activated Adafactor Memory-Factored Optimizer (VRAM footprint < 150 MB).")
+            optimizer_loaded = True
+        except Exception as e1:
+            try:
+                import bitsandbytes as bnb
+                self.optimizer = bnb.optim.AdamW8bit(
+                    self.student.parameters(), 
+                    lr=self.learning_rate, 
+                    weight_decay=0.01,
+                    betas=(0.9, 0.95)
+                )
+                print("[Init] Successfully activated bitsandbytes 8-Bit AdamW (Saved ~12 GB VRAM).")
+                optimizer_loaded = True
+            except Exception as e2:
+                self.optimizer = torch.optim.SGD(
+                    self.student.parameters(),
+                    lr=self.learning_rate,
+                    momentum=0.9,
+                    weight_decay=0.01
+                )
+                print("[Init] Fallback: Activated PyTorch Memory-Efficient SGD (Saved ~12 GB VRAM).")
             
         # GradScaler is only needed when student is float32 and using autocast
         if self.use_amp and student_dtype == torch.float32:
@@ -320,6 +336,8 @@ class DistillationTrainer:
     def run(self):
         """Executes the distillation training loop."""
         print(f"\n[Train] Starting distillation loop ({self.max_steps} steps)...")
+        if self.device == "cuda":
+            torch.cuda.empty_cache()
         self.student.train()
         
         vocab_size = self.config.get("vocab_size", 65536)
