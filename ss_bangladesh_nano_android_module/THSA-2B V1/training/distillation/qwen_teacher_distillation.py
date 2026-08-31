@@ -49,12 +49,45 @@ from distillation.distillation_loss import DistillationLoss
 
 
 class TextCorpusDataset(Dataset):
-    """Memory-efficient streaming dataset from clean pre-train corpus or HF live stream."""
+    """Memory-efficient dataset integrating NCTB curriculum packs, JSONL QA pairs, and corpus."""
     def __init__(self, corpus_path: str, max_samples: int = 50000, max_seq_len: int = 256):
         self.max_seq_len = max_seq_len
         self.lines: List[str] = []
         
-        if os.path.exists(corpus_path):
+        # 1. Load from NCTB Curriculum Knowledge Packs and JSONL datasets
+        curriculum_dir = MODULE_ROOT / "data" / "curriculum"
+        if curriculum_dir.exists():
+            import glob
+            # Load JSONL QA pairs (Class 6-10 Math, Socratic Hints, Grounding)
+            for jf in glob.glob(str(curriculum_dir / "datasets" / "**" / "*.jsonl"), recursive=True):
+                with open(jf, "r", encoding="utf-8", errors="ignore") as f:
+                    for line in f:
+                        line = line.strip()
+                        if line:
+                            try:
+                                d = json.loads(line)
+                                inst = d.get("instruction", "").strip()
+                                resp = d.get("response", "").strip()
+                                ctx = d.get("context", "").strip()
+                                if inst and resp:
+                                    pair = f"{ctx} প্রশ্ন: {inst} সমাধান: {resp}" if ctx else f"প্রশ্ন: {inst} উত্তর: {resp}"
+                                    self.lines.append(pair)
+                            except Exception:
+                                pass
+                                
+            # Load Markdown textbook packs (Class 8 & 9-10 Math, Physics, Chemistry, ICT)
+            for mf in glob.glob(str(curriculum_dir / "packs" / "**" / "*.md"), recursive=True):
+                with open(mf, "r", encoding="utf-8", errors="ignore") as f:
+                    for line in f:
+                        line = line.strip()
+                        if len(line) >= 15 and not line.startswith("```"):
+                            self.lines.append(line)
+                            
+            if self.lines:
+                print(f"[Dataset] Loaded {len(self.lines):,} NCTB textbook curriculum lines from {curriculum_dir}")
+                
+        # 2. Load from corpus_path if present
+        if corpus_path and os.path.exists(corpus_path):
             print(f"[Dataset] Loading text from local file: {corpus_path}...")
             with open(corpus_path, "r", encoding="utf-8", errors="ignore") as f:
                 for idx, line in enumerate(f):
@@ -63,9 +96,10 @@ class TextCorpusDataset(Dataset):
                         self.lines.append(text)
                     if len(self.lines) >= max_samples:
                         break
-            print(f"[Dataset] Loaded {len(self.lines):,} training sentences from local corpus.")
-        else:
-            print(f"[Dataset] Notice: Local '{corpus_path}' not found.")
+            print(f"[Dataset] Total combined dataset size: {len(self.lines):,} training sentences.")
+            
+        # 3. If still empty, stream from HuggingFace
+        if len(self.lines) < 100:
             print("[Dataset] Streaming real multilingual corpus directly from HuggingFace...")
             try:
                 from datasets import load_dataset
