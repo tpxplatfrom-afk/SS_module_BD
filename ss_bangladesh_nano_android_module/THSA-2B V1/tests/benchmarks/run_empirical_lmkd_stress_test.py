@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 THSA-2B Deep Empirical LMKD Reality Audit v2 -- itel A662L (Unisoc SC9832E)
 Reads physical kernel /proc measurements only. No arithmetic inference.
@@ -49,7 +49,7 @@ print(f"  MemTotal:        {total:7.1f} MB  (Physical RAM on board)")
 print(f"  MemAvailable:    {avail:7.1f} MB  (Kernel reclaimable estimate)")
 print(f"  AnonPages:       {anon:7.1f} MB  (Process heap/stack -- CANNOT reclaim)")
 print(f"  PageCache:       {cached:7.1f} MB  (File cache -- kernel CAN reclaim)")
-print(f"  ZRAM Used:       {swused:7.1f} MB  ({swused/swtot*100:.0f}% of {swtot:.0f} MB ZRAM)")
+print(f"  ZRAM Used:       {swused:7.1f} MB  ({(swused/(swtot or 1)*100):.0f}% of {swtot:.0f} MB ZRAM)")
 print(f"  ZRAM Free:       {swfree:7.1f} MB")
 zram_pct = swused / (swtot or 1) * 100
 print(f"  ZRAM Pressure:   {'NORMAL' if zram_pct < 70 else 'HIGH'}  ({zram_pct:.0f}%)")

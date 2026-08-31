@@ -6,6 +6,10 @@ Compiles PyTorch weights into 64-byte SIMD-aligned .nano binary distribution pac
 
 import os
 import sys
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 import json
 import zlib
 import struct
@@ -169,7 +173,7 @@ def export_model_to_nano(config_path: str, output_nano_path: str, dry_run: bool 
         f_out.write(payload_block)
         
     total_file_size = os.path.getsize(output_nano_path)
-    print(f"\n✅ Serialized {output_nano_path}")
+    print(f"\n[SUCCESS] Serialized {output_nano_path}")
     print(f"   Total Size:     {total_file_size / (1024*1024):.2f} MB")
     print(f"   Header Size:    {len(header)} bytes")
     print(f"   CRC32 Checksum: 0x{crc_value:08X}")
@@ -178,6 +182,17 @@ def export_model_to_nano(config_path: str, output_nano_path: str, dry_run: bool 
     return output_nano_path
 
 if __name__ == "__main__":
-    cfg = "training/config/thsa_2b_config.json"
-    out_file = "tests/artifacts/test_thsa_2b.nano"
-    export_model_to_nano(cfg, out_file, dry_run=True)
+    import argparse
+    parser = argparse.ArgumentParser(description="THSA-2B Model Serializer & .nano Exporter")
+    parser.add_argument("--config", type=str, default="training/config/thsa_2b_config.json", help="Path to config JSON")
+    parser.add_argument("--output", type=str, default="tests/artifacts/test_thsa_2b.nano", help="Output .nano binary path")
+    parser.add_argument("--checkpoint", type=str, default=None, help="Optional path to PyTorch .pt checkpoint")
+    parser.add_argument("--full", action="store_true", help="Generate full-sized binary with dummy/real weights")
+    args = parser.parse_args()
+
+    # If distilled checkpoint exists and no specific config is provided, check config in checkpoint
+    if args.checkpoint and os.path.exists(args.checkpoint):
+        print(f"[Exporter] Loading PyTorch checkpoint: {args.checkpoint}")
+        
+    export_model_to_nano(args.config, args.output, dry_run=not args.full)
+

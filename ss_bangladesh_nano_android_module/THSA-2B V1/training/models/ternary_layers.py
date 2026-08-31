@@ -1,8 +1,9 @@
-﻿"""
+"""
 BitNet-Style Ternary Linear Layer with Straight-Through Estimator (STE)
 and Temperature-Annealed Quantization-Aware Training (QAT).
 """
 
+import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

@@ -64,6 +64,8 @@ def clean_and_merge():
     sources = [
         ("Bengali Wikipedia", os.path.join(RAW_DIR, "bengali_wikipedia", "bengali_wiki.txt")),
         ("OPUS-100 Bilingual", os.path.join(RAW_DIR, "bilingual", "bilingual_bn_en.txt")),
+        ("English Wikipedia", os.path.join(RAW_DIR, "english_wikipedia", "english_wiki.txt")),
+        ("Math Reasoning (GSM8K)", os.path.join(RAW_DIR, "math_reasoning", "math_gsm8k.txt")),
     ]
 
     with open(OUT_FILE, "w", encoding="utf-8", buffering=1024*1024) as out:

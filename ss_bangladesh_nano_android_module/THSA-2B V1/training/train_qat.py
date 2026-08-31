@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 THSA-350M Proxy Pilot QAT Pre-Flight Training Runner (Bridge 4).
 Validates quantization-aware training dynamics and teacher-student distillation.
@@ -16,7 +16,7 @@ def run_qat_pilot(config_path="config/proxy_350m_config.json", num_dummy_steps=1
     print("THSA-350M PROXY PILOT: QAT PRE-FLIGHT TRAINING INITIALIZATION")
     print("=" * 80)
     
-    with open(config_path, "r") as f:
+    with open(config_path, "r", encoding="utf-8-sig") as f:
         config = json.load(f)
         
     print(f"Model ID:        {config['model_id']}")
@@ -70,7 +70,7 @@ def run_qat_pilot(config_path="config/proxy_350m_config.json", num_dummy_steps=1
         
         print(f"  Step {step:2d}/{num_dummy_steps} | Beta: {beta:5.1f} | Distillation Loss: {loss.item():.4f}")
         
-    print("\n✅ QAT Pre-Flight Smoke Test Passed Successfully!")
+    print("\n[PASS] QAT Pre-Flight Smoke Test Passed Successfully!")
     return True
 
 if __name__ == "__main__":
