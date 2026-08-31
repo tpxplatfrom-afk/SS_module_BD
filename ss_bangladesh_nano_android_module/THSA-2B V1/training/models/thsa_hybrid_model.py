@@ -1,4 +1,4 @@
-﻿"""
+"""
 THSA Hybrid Model Architecture (Ternary Hybrid State-Attention).
 Interleaves State/Short-Conv Blocks with Grouped Query Attention (GQA) Blocks.
 """
@@ -71,6 +71,16 @@ class GatedSwiGLUFFN(nn.Module):
         y = self.down_proj(swiglu)
         return residual + y
 
+class THSABackboneBlock(nn.Module):
+    """Single backbone block combining sequence mixer (State / GQA) and SwiGLU FFN."""
+    def __init__(self, mixer, ffn):
+        super().__init__()
+        self.mixer = mixer
+        self.ffn = ffn
+
+    def forward(self, x):
+        return self.ffn(self.mixer(x))
+
 class THSAHybridForCausalLM(nn.Module):
     """Complete THSA Hybrid Model Architecture (350M Proxy & 2B Full Scale)."""
     def __init__(self, config):
@@ -79,6 +89,7 @@ class THSAHybridForCausalLM(nn.Module):
         self.vocab_size = config.get("vocab_size", 65536)
         self.d_model = config.get("d_model", 2560)
         self.total_blocks = config.get("total_blocks", 24)
+        self.gradient_checkpointing = False
         
         # Token Embeddings (Sensitive Layer Shield: FP16/INT8)
         self.embed_tokens = nn.Embedding(self.vocab_size, self.d_model)
@@ -102,7 +113,7 @@ class THSAHybridForCausalLM(nn.Module):
                 layer = ShortConvStateBlock(d_model=self.d_model, kernel_size=4)
                 
             ffn = GatedSwiGLUFFN(d_model=self.d_model, d_ffn=config.get("d_ffn", 6912))
-            self.layers.append(nn.ModuleDict({"mixer": layer, "ffn": ffn}))
+            self.layers.append(THSABackboneBlock(layer, ffn))
             
         self.final_norm = RMSNorm(self.d_model)
         
@@ -112,8 +123,11 @@ class THSAHybridForCausalLM(nn.Module):
     def forward(self, input_ids):
         x = self.embed_tokens(input_ids)
         for block in self.layers:
-            x = block["mixer"](x)
-            x = block["ffn"](x)
+            if self.gradient_checkpointing and self.training:
+                import torch.utils.checkpoint
+                x = torch.utils.checkpoint.checkpoint(block, x, use_reentrant=False)
+            else:
+                x = block(x)
         x = self.final_norm(x)
         logits = self.lm_head(x)
         return logits

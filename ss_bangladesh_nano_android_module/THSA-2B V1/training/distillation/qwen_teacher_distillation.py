@@ -9,9 +9,10 @@ Features:
   1. Mixed CE + Soft KL Divergence Distillation Loss:
      L_total = (1 - alpha) * L_CE + alpha * tau^2 * KL(P_student || P_teacher)
   2. Dynamic QAT Annealing (beta: 1.0 -> 100.0) for 1.58-bit ternary weights.
-  3. Memory-efficient gradient accumulation for Free Google Colab / Kaggle T4 GPUs.
+  3. Mixed Precision FP16 (AMP) + Gradient Checkpointing for Free Google Colab / Kaggle T4 GPUs.
   4. Automatic vocabulary projection & alignment (Qwen 152K -> THSA 65K).
-  5. Checkpoint saving ready for direct conversion to .nano binary format.
+  5. Live HuggingFace streaming fallback if local corpus is absent.
+  6. Checkpoint saving ready for direct conversion to .nano binary format.
 """
 
 import sys
@@ -46,29 +47,57 @@ from distillation.distillation_loss import DistillationLoss
 
 
 class TextCorpusDataset(Dataset):
-    """Memory-efficient streaming dataset from clean pre-train corpus."""
+    """Memory-efficient streaming dataset from clean pre-train corpus or HF live stream."""
     def __init__(self, corpus_path: str, max_samples: int = 50000, max_seq_len: int = 256):
         self.max_seq_len = max_seq_len
         self.lines: List[str] = []
         
         if os.path.exists(corpus_path):
-            print(f"[Dataset] Loading text from {corpus_path}...")
+            print(f"[Dataset] Loading text from local file: {corpus_path}...")
             with open(corpus_path, "r", encoding="utf-8", errors="ignore") as f:
                 for idx, line in enumerate(f):
                     text = line.strip()
-                    if len(text) >= 15:
+                    if len(text) >= 15 and not text.startswith("==="):
                         self.lines.append(text)
                     if len(self.lines) >= max_samples:
                         break
-            print(f"[Dataset] Loaded {len(self.lines):,} training sentences.")
+            print(f"[Dataset] Loaded {len(self.lines):,} training sentences from local corpus.")
         else:
-            print(f"[Dataset] Warning: Corpus file '{corpus_path}' not found. Using synthetic dataset for verification.")
-            self.lines = [
-                "বাংলাদেশের শিক্ষা ব্যবস্থার উন্নয়নে কৃত্রিম বুদ্ধিমত্তার ভূমিকা অপরিসীম।",
-                "Mathematics is the foundation of scientific reasoning and logic.",
-                "Simple English Wikipedia provides accessible educational world knowledge.",
-                "সূর্য একটি নক্ষত্র এবং পৃথিবী সূর্যের চারদিকে ঘোরে।"
-            ] * 250
+            print(f"[Dataset] Notice: Local '{corpus_path}' not found.")
+            print("[Dataset] Streaming real multilingual corpus directly from HuggingFace...")
+            try:
+                from datasets import load_dataset
+                # 1. Simple English Wiki
+                ds_en = load_dataset("wikimedia/wikipedia", "20231101.simple", split="train", streaming=True)
+                for item in ds_en:
+                    for s in item.get("text", "").split("\n"):
+                        s = s.strip()
+                        if len(s) >= 20 and not s.startswith("==="):
+                            self.lines.append(s)
+                        if len(self.lines) >= max_samples // 2:
+                            break
+                    if len(self.lines) >= max_samples // 2:
+                        break
+                # 2. Bengali Wiki
+                ds_bn = load_dataset("wikimedia/wikipedia", "20231101.bn", split="train", streaming=True)
+                for item in ds_bn:
+                    for s in item.get("text", "").split("\n"):
+                        s = s.strip()
+                        if len(s) >= 20 and not s.startswith("==="):
+                            self.lines.append(s)
+                        if len(self.lines) >= max_samples:
+                            break
+                    if len(self.lines) >= max_samples:
+                        break
+                print(f"[Dataset] Streamed {len(self.lines):,} real multilingual sentences from HuggingFace.")
+            except Exception as e:
+                print(f"[Dataset] HuggingFace streaming notice ({e}). Using synthetic educational sentences.")
+                self.lines = [
+                    "বাংলাদেশের শিক্ষা ব্যবস্থার উন্নয়নে কৃত্রিম বুদ্ধিমত্তার ভূমিকা অপরিসীম।",
+                    "Mathematics is the foundation of scientific reasoning and logic.",
+                    "Simple English Wikipedia provides accessible educational world knowledge.",
+                    "সূর্য একটি নক্ষত্র এবং পৃথিবী সূর্যের চারদিকে ঘোরে।"
+                ] * 1000
 
     def __len__(self):
         return len(self.lines)
@@ -99,10 +128,10 @@ class QwenTeacherWrapper(nn.Module):
             )
             
             # Load in FP16 or 8-bit to fit in standard 15GB Colab T4 GPU
-            dtype = torch.float16 if device != "cpu" else torch.float32
+            dtype = torch.float16 if device == "cuda" else torch.float32
             self.teacher_model = AutoModelForCausalLM.from_pretrained(
                 model_name_or_path,
-                torch_dtype=dtype,
+                dtype=dtype,
                 trust_remote_code=True,
                 device_map="auto" if device == "cuda" else None
             )
@@ -113,7 +142,7 @@ class QwenTeacherWrapper(nn.Module):
             for p in self.teacher_model.parameters():
                 p.requires_grad = False
                 
-            print(f"[Teacher] Successfully loaded {model_name_or_path} (Frozen).")
+            print(f"[Teacher] Successfully loaded {model_name_or_path} (Frozen FP16).")
         except Exception as e:
             print(f"[Teacher] Notice: Could not load live HuggingFace model ({e}).")
             print("[Teacher] Operating in lightweight offline emulation mode for local verification.")
@@ -123,7 +152,6 @@ class QwenTeacherWrapper(nn.Module):
         """Computes teacher logits aligned with student vocabulary."""
         if self._is_mock or self.teacher_model is None:
             B, S = input_ids.shape
-            # Return synthetic smooth teacher distribution
             return torch.randn(B, S, student_vocab_size, device=input_ids.device)
             
         with torch.no_grad():
@@ -140,7 +168,8 @@ class QwenTeacherWrapper(nn.Module):
                         teacher_logits.shape[0], 
                         teacher_logits.shape[1], 
                         student_vocab_size - V_t, 
-                        device=teacher_logits.device
+                        device=teacher_logits.device,
+                        dtype=teacher_logits.dtype
                     )
                     teacher_logits = torch.cat([teacher_logits, pad], dim=-1)
                     
@@ -160,9 +189,10 @@ class DistillationTrainer:
         alpha: float = 0.65,
         temperature: float = 2.0,
         learning_rate: float = 3e-4,
-        batch_size: int = 4,
-        grad_accum_steps: int = 4,
+        batch_size: int = 2,
+        grad_accum_steps: int = 8,
         max_steps: int = 100,
+        use_amp: bool = True,
         device: str = "cuda" if torch.cuda.is_available() else "cpu"
     ):
         self.device = device
@@ -174,6 +204,7 @@ class DistillationTrainer:
         self.batch_size = batch_size
         self.grad_accum_steps = grad_accum_steps
         self.max_steps = max_steps
+        self.use_amp = use_amp and (self.device == "cuda")
         
         # 1. Load Student Config
         with open(config_path, "r", encoding="utf-8-sig") as f:
@@ -187,14 +218,18 @@ class DistillationTrainer:
         print(f"Hidden Dimension:    {self.config.get('d_model')}")
         print(f"Vocabulary Size:     {self.config.get('vocab_size')}")
         print(f"Teacher Model:       {teacher_model_name}")
-        print(f"Compute Device:      {self.device.upper()}")
+        print(f"Compute Device:      {self.device.upper()} (AMP FP16: {self.use_amp})")
         print(f"Distillation:        alpha={self.alpha}, tau={self.temperature}, lr={self.learning_rate}")
         print(f"Batching:            Batch={self.batch_size}, GradAccum={self.grad_accum_steps} (EffBatch={self.batch_size * self.grad_accum_steps})")
         print("=" * 80)
 
-        # 2. Instantiate Student Model
+        # 2. Instantiate Student Model with Gradient Checkpointing
         print("\n[Init] Instantiating THSA Student Model...")
         self.student = THSAHybridForCausalLM(self.config).to(self.device)
+        if self.device == "cuda":
+            self.student.gradient_checkpointing = True
+            print("[Init] Enabled Gradient Checkpointing for ultra-low VRAM memory footprint.")
+            
         total_params = sum(p.numel() for p in self.student.parameters())
         print(f"[Init] Student instantiated with {total_params:,} parameters ({total_params/1e6:.1f}M).")
 
@@ -202,7 +237,7 @@ class DistillationTrainer:
         print("\n[Init] Instantiating Teacher Ensemble...")
         self.teacher = QwenTeacherWrapper(teacher_model_name, device=self.device)
 
-        # 4. Setup Loss & Optimizer
+        # 4. Setup Loss, Optimizer & AMP Scaler
         self.loss_fn = DistillationLoss(alpha=self.alpha, temperature=self.temperature)
         self.optimizer = torch.optim.AdamW(
             self.student.parameters(), 
@@ -210,6 +245,7 @@ class DistillationTrainer:
             weight_decay=0.01,
             betas=(0.9, 0.95)
         )
+        self.scaler = torch.amp.GradScaler('cuda', enabled=self.use_amp)
 
         # 5. Tokenizer & Dataset Loader
         self.sp = None
@@ -262,34 +298,42 @@ class DistillationTrainer:
                 input_ids = torch.randint(0, vocab_size, (self.batch_size, seq_len), device=self.device)
             targets = input_ids.clone()
             
-            # Forward Passes
-            student_logits = self.student(input_ids)
-            teacher_logits = self.teacher(input_ids, student_vocab_size=vocab_size)
+            # Forward Passes under AMP Mixed Precision
+            with torch.amp.autocast('cuda', enabled=self.use_amp, dtype=torch.float16):
+                student_logits = self.student(input_ids)
+                teacher_logits = self.teacher(input_ids, student_vocab_size=vocab_size)
+                
+                # Distillation Loss: CE + Soft KL
+                loss = self.loss_fn(
+                    student_logits.view(-1, vocab_size),
+                    teacher_logits.view(-1, vocab_size),
+                    targets.view(-1)
+                )
+                loss_scaled = loss / self.grad_accum_steps
             
-            # Distillation Loss: CE + Soft KL
-            loss = self.loss_fn(
-                student_logits.view(-1, vocab_size),
-                teacher_logits.view(-1, vocab_size),
-                targets.view(-1)
-            )
-            
-            # Gradient Accumulation
-            loss_scaled = loss / self.grad_accum_steps
-            loss_scaled.backward()
+            # Scaled Backward Pass
+            self.scaler.scale(loss_scaled).backward()
             running_loss += loss.item()
             
+            # Optimizer Step with Gradient Accumulation
             if step % self.grad_accum_steps == 0:
+                self.scaler.unscale_(self.optimizer)
                 torch.nn.utils.clip_grad_norm_(self.student.parameters(), max_norm=1.0)
-                self.optimizer.step()
+                self.scaler.step(self.optimizer)
+                self.scaler.update()
                 self.optimizer.zero_grad()
                 
             if step % 10 == 0 or step == self.max_steps:
                 avg_loss = running_loss / 10 if step % 10 == 0 else running_loss / (step % 10 or 1)
                 elapsed = time.perf_counter() - t0
                 tok_per_sec = (10 * self.batch_size * seq_len) / (elapsed + 1e-5)
-                print(f"  Step {step:4d}/{self.max_steps} | Beta: {beta:5.1f} | Distill Loss: {loss.item():.4f} (Avg: {avg_loss:.4f}) | Speed: {tok_per_sec:.1f} tok/s")
+                vram_used = f" | VRAM: {torch.cuda.memory_allocated()/1024**2:.0f}MB" if self.device == "cuda" else ""
+                print(f"  Step {step:4d}/{self.max_steps} | Beta: {beta:5.1f} | Distill Loss: {loss.item():.4f} (Avg: {avg_loss:.4f}){vram_used} | Speed: {tok_per_sec:.1f} tok/s")
                 running_loss = 0.0
                 t0 = time.perf_counter()
+                
+            if self.device == "cuda" and step % 50 == 0:
+                torch.cuda.empty_cache()
 
         # 6. Save Distilled Checkpoint
         save_path = self.output_dir / "thsa_distilled_student.pt"
@@ -321,10 +365,12 @@ def main():
     parser.add_argument("--config", type=str, default=default_cfg, help="Path to student config JSON")
     parser.add_argument("--teacher", type=str, default="Qwen/Qwen2.5-0.5B-Instruct", help="Teacher model name/path")
     parser.add_argument("--corpus", type=str, default=default_corpus, help="Path to pre-training text corpus")
-    parser.add_argument("--steps", type=int, default=20, help="Number of distillation steps")
-    parser.add_argument("--batch_size", type=int, default=2, help="Batch size per step")
+    parser.add_argument("--steps", type=int, default=1000, help="Number of distillation steps")
+    parser.add_argument("--batch_size", type=int, default=2, help="Batch size per step (use 1 or 2 for 2B on Colab T4)")
+    parser.add_argument("--grad_accum", type=int, default=8, help="Gradient accumulation steps")
     parser.add_argument("--lr", type=float, default=3e-4, help="Learning rate")
     parser.add_argument("--output_dir", type=str, default=str(MODULE_ROOT / "training" / "checkpoints"), help="Save path")
+    parser.add_argument("--no_amp", action="store_true", help="Disable AMP mixed precision")
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu", help="cpu or cuda")
     
     args = parser.parse_args()
@@ -336,7 +382,9 @@ def main():
         output_dir=args.output_dir,
         learning_rate=args.lr,
         batch_size=args.batch_size,
+        grad_accum_steps=args.grad_accum,
         max_steps=args.steps,
+        use_amp=not args.no_amp,
         device=args.device
     )
     trainer.run()
