@@ -2,7 +2,7 @@
 ## Ternary Hybrid State-Attention 2B Engine for Android (Extensible Global Production Baseline)
 
 **Document Identifier:** `SPEC-NANO-ARCH-THSA2B-001`  
-**Revision:** `3.3.0` (Extensible Scale, Context & Multilingual Tokenizer Contracts)  
+**Revision:** `3.4.0` (Production-Hardened Telemetry, ZRAM Policy & Distillation Contracts)  
 **Status:** FINAL V1 ARCHITECTURE SPECIFICATION — PRODUCTION-READY TARGET  
 **Target Subsystem:** `ss_bangladesh_nano_android_module`  
 **Standard Compliance:** RFC 2119 (MUST, MUST NOT, SHOULD, SHOULD NOT, MAY)  
@@ -10,7 +10,7 @@
 ---
 
 > ### **CRITICAL SPECIFICATION NOTICE & PRODUCTION ENGINEERING MANDATE**
-> 1. **Production-Ready Target Status:** This document establishes `THSA-2B` Revision `3.2.0` as the final, complete architectural and implementation specification for the Nano-AI Android Module. All algorithmic dimensions, hardware constraints, lifecycle state machines, JNI interfaces, binary file formats, and defensive security boundaries are **fully codified as binding engineering contracts**.
+> 1. **Production-Ready Target Status:** This document establishes `THSA-2B` Revision `3.4.0` as the final, complete architectural and implementation specification for the Nano-AI Android Module. All algorithmic dimensions, hardware constraints, lifecycle state machines, JNI interfaces, binary file formats, and defensive security boundaries are **fully codified as binding engineering contracts**.
 > 2. **Physical Feasibility Mandate:** The project MUST NOT claim or imply that the ~2B parameter class, 10,000-token context length, or <= 250 MB working RAM target have already been achieved prior to complete physical-device benchmarking.
 > 3. **Research Discipline Principle:** *"External models provide evidence, not architecture."* Prior research systems (BitNet b1.58, Mamba-2/SSD, Liquid LFM2, Gemma 3n, KIVI, Gemini Nano MTP, StreamingLLM) are cited strictly as empirical precedent and design evidence. `THSA-2B` is an independent, clean-room systems architecture derived specifically from the Nano-AI device constraints.
 
@@ -421,6 +421,30 @@ To guarantee seamless multi-threaded integration with Android UI architectures (
    All negative status codes crossing the JNI boundary MUST automatically throw a corresponding typed Kotlin `NanoEngineException(errorCode, message)`.
 4. **JNI Local Reference Frame Bounding:** All streaming token callbacks invoked from native C++ into Kotlin MUST execute within a scoped `env->PushLocalFrame(16)` / `env->PopLocalFrame()` block to strictly prevent exceeding Android's 512 ART local reference table ceiling.
 
+### 9.7 Android ZRAM & Kernel Memory Hinting Policy (`madvise`)
+Android aggressively compresses inactive anonymous memory pages into ZRAM swap, consuming CPU cycles and thermal headroom. To ensure weight memory never touches ZRAM:
+1. **`MADV_DONTNEED` Hinting:** After a layer's weight chunk has been processed in the DMA execution ring, the runtime issues `madvise(chunk_addr, chunk_size, MADV_DONTNEED)` on non-pinned pages. This instructs the Linux kernel that clean file-backed pages can be dropped immediately without writing to ZRAM.
+2. **Zero ZRAM Footprint Invariant:** All weight memory is strictly `PROT_READ` file-backed mmap memory. The native engine MUST NOT allocate dirty anonymous pages for weight storage, guaranteeing zero page-out CPU tax during background operation.
+
+### 9.8 Native Runtime Telemetry & Observability API
+To provide real-time operational health, thermal stability, and memory monitoring to the host Android application without adding lock contention:
+1. **Telemetry Data Structure:**
+   ```c
+   struct NanoEngineTelemetry {
+       uint64_t resident_ram_bytes;      // Current physical RSS of process
+       uint32_t active_kv_tokens;        // Current active context slot count (0..10000)
+       float    instantaneous_tok_per_s; // Instantaneous decode rate (e.g. 11.2)
+       float    estimated_temp_c;        // Estimated chassis skin temperature
+       uint32_t degraded_flags;          // Bitmask: [0x1=KIVI_Engaged, 0x2=Thermal_Clamped]
+   };
+   ```
+2. **Non-Blocking Telemetry Getter:**
+   ```c
+   int nano_engine_get_telemetry(const NanoEngineContext* ctx, NanoEngineTelemetry* out_telemetry);
+   ```
+   * Execution budget: **$\le 0.1\text{ ms}$** non-blocking atomic read.
+   * JNI mapping: Exposed to Kotlin as `engine.getTelemetry(): NanoTelemetry`.
+
 ---
 
 ## 10. RAM Budget Allocation, Chunked Streaming & Cold-Start SLA
@@ -540,6 +564,12 @@ As a global core engine with native Bangladeshi deployment priority, the tokeniz
 3. **Complex Conjunct (যুক্তবর্ণ) Preservation:** High-frequency conjuncts (e.g., `ক্ষ`, `জ্ঞ`, `ঞ্চ`, `ম্ভ`, `স্ট`, `ন্ত্র`) are assigned dedicated single-token IDs, reducing Bangla token consumption from ~4 tokens/word to **~1.2 tokens/word** (on par with English).
 4. **Zero-Width Character Control:** Deterministic handling of Zero-Width Joiner (`ZWJ: U+200D`) for Hasanta conjuncts (যেমন: `র্` / `্য`) and Zero-Width Non-Joiner (`ZWNJ: U+200C`).
 5. **100% Byte-Level Fallback:** Tokens `0x00` through `0xFF` are reserved as base byte fallbacks, guaranteeing zero `<|unk|>` token emissions across any arbitrary UTF-8 text string.
+
+### 11.4 Subword Fertility SLA & Linguistic Density Metrics
+The $V = 65{,}536$ multilingual tokenizer MUST achieve high linguistic density across both primary languages to minimize sequence fragmentation:
+1. **Bengali Subword Fertility SLA:** The tokenizer MUST achieve a fertility rate of **$\le 1.8\text{ tokens / word}$** on standard Bengali prose (matching or exceeding Sarvam-1 benchmark levels of $1.4 - 2.1\text{ tok/word}$).
+2. **English Subword Fertility SLA:** The tokenizer MUST achieve a fertility rate of **$\le 1.2\text{ tokens / word}$** on standard English text.
+3. **Effective Context Expansion:** By maintaining $\le 1.8\text{ tok/word}$ for Bengali (compared to $4.5 - 7.0\text{ tok/word}$ in standard LLaMA-based tokenizers), the 10,000-token context window preserves the effective reading context of **$\sim 5{,}500 - 7{,}000\text{ Bengali words}$**, delivering a $3\times$ effective context gain with zero additional working RAM.
 
 ---
 
@@ -850,6 +880,16 @@ Prior to training the full 2B model, the project executes a **350M micro-THSA pr
 * **Token Budget:** Pre-training horizon of $\approx 2.0\text{ Trillion}$ high-quality multilingual and code tokens.
 * **Tokenizer Configuration:** Byte-Pair Encoding (BPE) or SentencePiece with vocabulary size $V \in [32{,}768, \, 65{,}536]$.
 * **Warm-Start QAT Annealing:** Pre-train in FP16 / INT8 for the first $80\%$ of tokens, then engage continuous QAT fine-tuning for the final $20\%$ ($20{,}000 - 50{,}000\text{ steps}$).
+
+### 23.3 Teacher-Student Knowledge Distillation Protocol (Phase 3 Training)
+To accelerate reasoning convergence, mathematical logic, and Bengali linguistic density in the ternary student weights during QAT:
+1. **Distillation Loss Formulation:**
+   $$\mathcal{L}_{\text{total}} = (1 - \alpha) \mathcal{L}_{\text{CE}}(y, \, \hat{y}) + \alpha \cdot \tau^2 \, \mathcal{D}_{\text{KL}}\left( \text{Softmax}\left(\frac{\mathbf{z}_{\text{student}}}{\tau}\right) \,||\, \text{Softmax}\left(\frac{\mathbf{z}_{\text{teacher}}}{\tau}\right) \right)$$
+   where distillation weight $\alpha = 0.65$ and temperature $\tau = 2.0$.
+2. **Teacher Ensemble Strategy:**
+   * **Indic/Bengali Linguistic Teacher:** `Sarvam-1 (2B)` / `Gemma-2-2B` for high-density Bengali syntax, conjunct semantics, and local cultural nuance.
+   * **Reasoning & Socratic Teacher:** `Qwen-2.5-7B-Instruct` / `Llama-3.1-8B-Instruct` for step-by-step mathematical reasoning, structured JSON extraction, and multi-turn dialogue logic.
+3. **Clean-Room License Compliance:** All teacher models are utilized strictly in an offline teacher-student distillation mode for soft-label loss computation and synthetic dialogue generation, ensuring the resulting `THSA-2B` binary runtime remains 100% independent and clean-room compliant.
 
 ---
 
