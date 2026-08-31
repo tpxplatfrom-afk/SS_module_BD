@@ -1,4 +1,4 @@
-﻿# Byte-compiled / optimized / DLL files
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
@@ -58,3 +58,12 @@ venv.bak/
 *.swo
 *~
 .DS_Store
+
+# Training Large Data & Checkpoints (Prevent GitHub 100MB rejection)
+**/data/raw/
+**/data/processed/
+*.bin
+*.tar.gz
+*.parquet
+checkpoints/
+*.pt
