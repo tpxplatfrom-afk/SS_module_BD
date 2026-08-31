@@ -63,6 +63,7 @@ venv.bak/
 **/data/raw/
 **/data/processed/
 *.bin
+*.nano
 *.tar.gz
 *.parquet
 checkpoints/

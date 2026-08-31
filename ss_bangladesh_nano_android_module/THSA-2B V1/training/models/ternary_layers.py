@@ -12,43 +12,30 @@ class WeightQuantizerSTE(torch.autograd.Function):
     """Straight-Through Estimator for 1.58-bit Ternary Weights {-1, 0, +1}."""
     @staticmethod
     def forward(ctx, weight, beta=100.0):
-        # 1. Calculate per-channel scale factor: gamma = mean(|W|)
         gamma = weight.abs().mean(dim=-1, keepdim=True).clamp(min=1e-5)
-        
-        # 2. Scaled weight
-        w_scaled = weight / gamma
-        
-        # 3. Soft relaxation using tanh(beta * W) during early annealing
         if beta < 50.0:
-            w_relaxed = torch.tanh(beta * w_scaled)
-            w_quant = torch.clamp(torch.round(w_relaxed), -1.0, 1.0)
+            w_quant = torch.clamp(torch.round(torch.tanh(beta * (weight / gamma))), -1.0, 1.0)
         else:
-            w_quant = torch.clamp(torch.round(w_scaled), -1.0, 1.0)
-            
-        ctx.save_for_backward(weight, gamma)
+            w_quant = torch.clamp(torch.round(weight / gamma), -1.0, 1.0)
+        ctx.save_for_backward(weight)
         return w_quant * gamma
 
     @staticmethod
     def backward(ctx, grad_output):
-        weight, gamma = ctx.saved_tensors
-        # STE: Pass gradient straight through within [-1, +1] clipping window
-        grad_input = grad_output.clone()
-        grad_input = grad_input * (weight.abs() <= 1.5).float()
-        return grad_input, None
+        weight, = ctx.saved_tensors
+        # STE: Pass gradient straight through within [-1.5, +1.5] clipping window
+        return grad_output * (weight.abs() <= 1.5), None
 
 class ActivationQuantizerSTE(torch.autograd.Function):
     """Dynamic INT8 Activation Quantizer with STE."""
     @staticmethod
     def forward(ctx, x):
-        # Dynamic symmetric range [-128, +127]
         scale = (x.abs().max(dim=-1, keepdim=True)[0] / 127.0).clamp(min=1e-5)
         x_quant = torch.clamp(torch.round(x / scale), -128.0, 127.0)
-        ctx.save_for_backward(scale)
         return x_quant * scale
 
     @staticmethod
     def backward(ctx, grad_output):
-        # STE gradient pass-through
         return grad_output
 
 class TernaryLinear(nn.Module):

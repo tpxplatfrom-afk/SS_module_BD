@@ -24,6 +24,8 @@ import argparse
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
@@ -225,10 +227,11 @@ class DistillationTrainer:
 
         # 2. Instantiate Student Model with Gradient Checkpointing
         print("\n[Init] Instantiating THSA Student Model...")
-        self.student = THSAHybridForCausalLM(self.config).to(self.device)
+        student_dtype = torch.float16 if self.use_amp else torch.float32
+        self.student = THSAHybridForCausalLM(self.config).to(device=self.device, dtype=student_dtype)
         if self.device == "cuda":
             self.student.gradient_checkpointing = True
-            print("[Init] Enabled Gradient Checkpointing for ultra-low VRAM memory footprint.")
+            print(f"[Init] Enabled Gradient Checkpointing & {student_dtype} for ultra-low VRAM memory footprint.")
             
         total_params = sum(p.numel() for p in self.student.parameters())
         print(f"[Init] Student instantiated with {total_params:,} parameters ({total_params/1e6:.1f}M).")
@@ -239,12 +242,25 @@ class DistillationTrainer:
 
         # 4. Setup Loss, Optimizer & AMP Scaler
         self.loss_fn = DistillationLoss(alpha=self.alpha, temperature=self.temperature)
-        self.optimizer = torch.optim.AdamW(
-            self.student.parameters(), 
-            lr=self.learning_rate, 
-            weight_decay=0.01,
-            betas=(0.9, 0.95)
-        )
+        
+        try:
+            import bitsandbytes as bnb
+            self.optimizer = bnb.optim.AdamW8bit(
+                self.student.parameters(), 
+                lr=self.learning_rate, 
+                weight_decay=0.01,
+                betas=(0.9, 0.95)
+            )
+            print("[Init] Successfully activated bitsandbytes 8-Bit AdamW (Saved ~12 GB VRAM).")
+        except Exception:
+            self.optimizer = torch.optim.AdamW(
+                self.student.parameters(), 
+                lr=self.learning_rate, 
+                weight_decay=0.01,
+                betas=(0.9, 0.95)
+            )
+            print("[Init] Loaded PyTorch standard AdamW optimizer.")
+            
         self.scaler = torch.amp.GradScaler('cuda', enabled=self.use_amp)
 
         # 5. Tokenizer & Dataset Loader
