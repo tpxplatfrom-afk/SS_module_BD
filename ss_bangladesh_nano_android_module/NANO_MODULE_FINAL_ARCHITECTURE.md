@@ -1,8 +1,8 @@
 # THSA-2B: Final V1 Architecture Specification
-## Ternary Hybrid State-Attention 2B Engine for Android (Production-Ready Baseline)
+## Ternary Hybrid State-Attention 2B Engine for Android (Extensible Global Production Baseline)
 
 **Document Identifier:** `SPEC-NANO-ARCH-THSA2B-001`  
-**Revision:** `3.2.0` (Complete Production-Ready Architecture & Implementation Contracts)  
+**Revision:** `3.3.0` (Extensible Scale, Context & Multilingual Tokenizer Contracts)  
 **Status:** FINAL V1 ARCHITECTURE SPECIFICATION — PRODUCTION-READY TARGET  
 **Target Subsystem:** `ss_bangladesh_nano_android_module`  
 **Standard Compliance:** RFC 2119 (MUST, MUST NOT, SHOULD, SHOULD NOT, MAY)  
@@ -111,6 +111,38 @@ The **Ternary Hybrid State-Attention 2B (THSA-2B)** architecture is a purpose-bu
 │ **Total Parameter Class Target**       │ **1.95B – 2.0B Parameters**   │
 └────────────────────────────────────────┴───────────────────────────────┘
 ```
+
+### 3.1 Model Scale Configuration Protocol (2B → 3B / 4B Upgrade Path)
+All architectural dimensions MUST be driven by a single versioned **`ModelConfig`** struct loaded at engine initialisation. This cleanly separates the runtime kernel implementation from the specific scale of any particular model release, enabling clean 2B → 3B → 4B upgrades via a config swap **with zero kernel code changes**.
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│               MODEL SCALE CONFIGURATION STRUCT (ModelConfig)           │
+├────────────────────────────────────────────────────────────────────────┤
+│                                                                        │
+│   struct ModelConfig {                                                  │
+│     uint16_t  format_version;      // File format version (0x0001)      │
+│     uint32_t  total_blocks;        // 24 (2B) / 28 (3B) / 32 (4B)      │
+│     uint32_t  state_blocks;        // 16 (2B) / 20 (3B) / 22 (4B)      │
+│     uint32_t  gqa_blocks;          // 8  (2B) / 8  (3B) / 10 (4B)      │
+│     uint32_t  d_model;             // 2560 (2B) / 2816 (3B) / 3072 (4B)│
+│     uint32_t  d_ffn;               // 6912 (2B) / 7680 (3B) / 8192 (4B)│
+│     uint32_t  n_query_heads;       // 20 (2B) / 22 (3B) / 24 (4B)      │
+│     uint32_t  n_kv_heads;          // 4  (all tiers)                    │
+│     uint32_t  d_head;              // 128 (all tiers)                   │
+│     uint32_t  vocab_size;          // 65536 (all tiers — fixed)         │
+│     uint32_t  max_context_tokens;  // Runtime-configurable (see §7.4)   │
+│     char      model_id[32];        // "THSA-2B-V1" / "THSA-3B-V1" etc  │
+│   };                                                                    │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+**Upgrade Invariants that MUST be preserved across all scale tiers:**
+1. **GQA KV Head Count Locked:** `n_kv_heads = 4` and `d_head = 128` are fixed across all scale tiers to maintain binary KV-cache compatibility.
+2. **Kernel ABI Stability:** All NEON compute kernels are parameterized by `d_model`, `d_ffn`, and block counts from `ModelConfig`. No kernel requires recompilation for a scale change.
+3. **RAM Budget Recalculation:** On init, the engine recomputes all memory arena sizes from `ModelConfig` fields. A 3B model is automatically allocated larger arenas without changing the allocator logic.
+4. **Binary Format Backward Compatibility:** The `.nano` file header MUST carry `format_version` so the engine can detect and reject mismatched model / runtime pairs with `NANO_ERR_CORRUPT_MODEL`.
 
 ---
 
@@ -236,6 +268,32 @@ In real-world mobile applications, multi-turn conversations frequently exceed 10
 2. **Circular FIFO Rolling Window:** When cumulative conversational tokens exceed $L_{\text{context}} = 10{,}000$, oldest user/assistant dialogue turns are overwritten in a circular buffer fashion.
 3. **State Recurrence Continuity:** Recurrent states in the 16 State blocks maintain their compressed continuous context representation across turns without resetting unless explicitly instructed by the user via a session clear command.
 4. **Long-Session Invariant:** Under continuous 1,000-turn operation, KV-cache memory remains **frozen at exactly $39.06\text{ MB}$**.
+
+### 7.4 Context Window Scalability Tiers & Dynamic KV Budget (10K → 20K Upgrade Path)
+The runtime engine decouples context allocation from fixed compile-time constants. The context horizon is a runtime-configurable parameter $L_{\text{context}} \in [2{,}048, \, 32{,}768]$ initialized via `ModelConfig.max_context_tokens`.
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│             CONTEXT WINDOW SCALABILITY & RAM BUDGET TIERS              │
+├───────────────┬────────────────┬───────────────────┬───────────────────┤
+│ Context Tier  │ INT4 KV-Cache  │ Peak Working RAM  │ Device Target     │
+│ ($L_{\text{context}}$)│ (8 GQA Blocks) │ (Standard Ring)   │ Profile           │
+├───────────────┼────────────────┼───────────────────┼───────────────────┤
+│ **4,096 (4K)**│ **15.63 MB**   │ **205.6 MB**      │ Ultra-Budget (<3G)│
+│ **8,192 (8K)**│ **31.25 MB**   │ **221.3 MB**      │ Low-End (3GB-4GB) │
+│ **10,000 (10K)**│ **39.06 MB**   │ **229.1 MB**      │ **V1 BASELINE**   │
+│ **16,384 (16K)**│ **64.00 MB**   │ **254.0 MB**      │ Mid-Tier (6GB RAM)│
+│ **20,480 (20K)**│ **80.00 MB**   │ **270.0 MB**      │ High-Tier (8GB+)  │
+│ **20K (Opt)** │ **50.00 MB**   │ **240.0 MB**      │ **250 MB ENVELOPE**│
+└───────────────┴────────────────┴───────────────────┴───────────────────┘
+```
+
+**Context Scaling Protocols:**
+1. **Dynamic Arena Sizing:** On engine initialization, the KV-cache arena is sized dynamically according to the requested $L_{\text{context}}$ using:
+   $$M_{\text{KV\_arena}} = 2 \times L_{\text{context}} \times 8 \times 4 \times 128 \times 0.5\text{ bytes}$$
+2. **RoPE Base Frequency Scaling:** To extend context beyond 10K (e.g. 10K $\rightarrow$ 20K) without retraining from scratch, the engine implements Rotary Position Embedding (RoPE) frequency scaling:
+   $$\theta_i' = \theta_i \cdot s^{-\frac{2(i-1)}{d_{\text{head}}}}, \quad \text{where } s = \frac{L_{\text{target}}}{L_{\text{base}}} = 2.0$$
+3. **20K RAM Compression Fallback:** For devices constrained to the $\le 250\text{ MB}$ ceiling running at 20K context, the engine activates **2.5-bit mixed KV quantization (KIVI)** or reduces the DMA prefetch ring to $8\text{ MB}$, keeping total working RAM at $\le 240.0\text{ MB}$.
 
 ---
 
@@ -456,6 +514,32 @@ The serialized model package MUST adhere to the following binary format:
 3. **Streaming UTF-8 Accumulation Ring Buffer:**
    * In non-Latin scripts (e.g., Bengali), single characters span 3 to 4 UTF-8 bytes. During streaming token emission, a token boundary may bisect a multi-byte sequence.
    * The native detokenizer maintains a **16-byte UTF-8 accumulation buffer**. It validates multi-byte sequence completeness before emitting characters to the Kotlin JNI callback, preventing character corruption (``) on client screens.
+
+### 11.3 Multilingual Tokenizer Architecture — English + Bangla Primary Support
+As a global core engine with native Bangladeshi deployment priority, the tokenizer architecture MUST natively optimize for **English and Bangla (Bengali)** with balanced token efficiency.
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│             MULTILINGUAL VOCABULARY ALLOCATION (V = 65,536)            │
+├────────────────────────────────┬───────────────────┬───────────────────┤
+│ Language / Script Segment      │ Token Budget      │ Target Allocation │
+├────────────────────────────────┼───────────────────┼───────────────────┤
+│ **English & Latin Script**     │ ~24,000 tokens    │ 36.6%             │
+│ **Bangla (বাংলা) & Conjuncts** │ ~20,000 tokens    │ 30.5%             │
+│ **Code & Technical Tokens**    │ ~12,000 tokens    │ 18.3%             │
+│ **Multilingual Shared Roots**  │ ~ 9,280 tokens    │ 14.2%             │
+│ **Special & Byte Fallback**    │    256 tokens     │  0.4%             │
+├────────────────────────────────┼───────────────────┼───────────────────┤
+│ **TOTAL VOCABULARY SIZE (V)**  │ **65,536 tokens** │ **100.0%**        │
+└────────────────────────────────┴───────────────────┴───────────────────┘
+```
+
+**Bangla Tokenization Invariants:**
+1. **Unicode NFC Normalization Mandate:** All input text MUST undergo deterministic **Unicode Normalization Form C (NFC)** preprocessing before token lookup. This unifies decomposed vowel signs (e.g. `ো` vs `ে` + `া`) and prevents token fragmentation.
+2. **Bengali Unicode Block Coverage:** Explicit subword representation covering the entire Bangla Unicode range (`U+0980`–`U+09FF`), including all dependent vowel signs (কার), consonant signs (ফলা), Khanda Ta (`ৎ: U+09CE`), Anusvara, Visarga, Chandrabindu, and Bengali numerals (`০-৯`).
+3. **Complex Conjunct (যুক্তবর্ণ) Preservation:** High-frequency conjuncts (e.g., `ক্ষ`, `জ্ঞ`, `ঞ্চ`, `ম্ভ`, `স্ট`, `ন্ত্র`) are assigned dedicated single-token IDs, reducing Bangla token consumption from ~4 tokens/word to **~1.2 tokens/word** (on par with English).
+4. **Zero-Width Character Control:** Deterministic handling of Zero-Width Joiner (`ZWJ: U+200D`) for Hasanta conjuncts (যেমন: `র্` / `্য`) and Zero-Width Non-Joiner (`ZWNJ: U+200C`).
+5. **100% Byte-Level Fallback:** Tokens `0x00` through `0xFF` are reserved as base byte fallbacks, guaranteeing zero `<|unk|>` token emissions across any arbitrary UTF-8 text string.
 
 ---
 
