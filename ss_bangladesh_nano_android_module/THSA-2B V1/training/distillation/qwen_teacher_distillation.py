@@ -261,7 +261,11 @@ class DistillationTrainer:
             )
             print("[Init] Loaded PyTorch standard AdamW optimizer.")
             
-        self.scaler = torch.amp.GradScaler('cuda', enabled=self.use_amp)
+        # GradScaler is only needed when student is float32 and using autocast
+        if self.use_amp and student_dtype == torch.float32:
+            self.scaler = torch.amp.GradScaler('cuda')
+        else:
+            self.scaler = None
 
         # 5. Tokenizer & Dataset Loader
         self.sp = None
@@ -327,16 +331,23 @@ class DistillationTrainer:
                 )
                 loss_scaled = loss / self.grad_accum_steps
             
-            # Scaled Backward Pass
-            self.scaler.scale(loss_scaled).backward()
+            # Backward Pass
+            if self.scaler is not None:
+                self.scaler.scale(loss_scaled).backward()
+            else:
+                loss_scaled.backward()
             running_loss += loss.item()
             
             # Optimizer Step with Gradient Accumulation
             if step % self.grad_accum_steps == 0:
-                self.scaler.unscale_(self.optimizer)
-                torch.nn.utils.clip_grad_norm_(self.student.parameters(), max_norm=1.0)
-                self.scaler.step(self.optimizer)
-                self.scaler.update()
+                if self.scaler is not None:
+                    self.scaler.unscale_(self.optimizer)
+                    torch.nn.utils.clip_grad_norm_(self.student.parameters(), max_norm=1.0)
+                    self.scaler.step(self.optimizer)
+                    self.scaler.update()
+                else:
+                    torch.nn.utils.clip_grad_norm_(self.student.parameters(), max_norm=1.0)
+                    self.optimizer.step()
                 self.optimizer.zero_grad()
                 
             if step % 10 == 0 or step == self.max_steps:
