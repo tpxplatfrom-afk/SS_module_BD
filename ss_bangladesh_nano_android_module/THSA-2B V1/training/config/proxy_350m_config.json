@@ -1,0 +1,34 @@
+﻿{
+  "model_id": "THSA-350M-PROXY-PILOT",
+  "format_version": 1,
+  "total_blocks": 14,
+  "state_blocks": 10,
+  "gqa_blocks": 4,
+  "d_model": 1024,
+  "d_ffn": 2764,
+  "n_query_heads": 8,
+  "n_kv_heads": 2,
+  "d_head": 128,
+  "vocab_size": 65536,
+  "max_context_tokens": 8192,
+  "chunk_size": 256,
+  "rms_norm_eps": 1e-5,
+  "quantization": {
+    "weights": "ternary_1.58bit",
+    "activations": "int8_dynamic",
+    "kv_cache": "int4_grouped",
+    "sensitive_shield": true
+  },
+  "training": {
+    "total_tokens": 50000000000,
+    "batch_size": 128,
+    "learning_rate": 3e-4,
+    "warmup_steps": 2000,
+    "qat_anneal_steps": 10000,
+    "distillation": {
+      "alpha": 0.65,
+      "temperature": 2.0,
+      "teachers": ["sarvamai/sarvam-1", "Qwen/Qwen2.5-7B-Instruct"]
+    }
+  }
+}
