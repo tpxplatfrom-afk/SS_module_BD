@@ -1,38 +1,42 @@
-# 📱 THSA-2.41B Android Developer Integration & Cloudflare CDN Distribution Guide
+# 📱 THSA-2.41B Android Developer Integration & 100% Free CDN Distribution Guide
+*(No Credit Card Required • No Custom Domain Required • 100% Free Forever)*
 
 Welcome to the **THSA-2.41B On-Device AI Module for Bangladesh (Classes 1–12)**.  
 This guide explains:
-1. How Android developers can integrate the module in just **3–4 lines of Kotlin**.
+1. How Android developers import the SDK via **JitPack.io** in **3–4 lines of Kotlin**.
 2. How the **1-Click Copy-Paste (`.txt` / `.md`)** system works.
-3. How to host the 654 MB `model.nano` file on **Cloudflare R2 / CDN** for high-speed, zero-cost downloads.
+3. How to host the 654 MB `model.nano` file on **GitHub Releases** or **Hugging Face Hub** completely free with **Zero Credit Card and Zero Domain**.
 
 ---
 
-## 🚀 Part 1: Android Developer Quickstart (3–4 Lines of Code)
+## 🚀 Part 1: Android Developer Quickstart (JitPack.io Integration)
 
-### 📦 Step 1: Add Gradle Dependency (`build.gradle.kts` / `build.gradle`)
+Android developers do not need any custom domain. They can import directly from your GitHub repo via **JitPack.io**:
 
-In your project `settings.gradle.kts`:
+### 📦 Step 1: Add Dependency (`settings.gradle.kts` & `build.gradle.kts`)
+
+In `settings.gradle.kts`:
 ```kotlin
 dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url = uri("https://cdn.yourdomain.com/maven") } // Your Cloudflare CDN
+        maven { url = uri("https://jitpack.io") } // 100% Free JitPack
     }
 }
 ```
 
-In your app-level `build.gradle.kts`:
+In `app/build.gradle.kts`:
 ```kotlin
 dependencies {
-    implementation("ai.nano:ss-bangladesh-nano:1.0.0")
+    // Direct GitHub JitPack import (Zero credit card or domain needed)
+    implementation("com.github.tpxplatfrom-afk:SS_module_BD:v1.0.0")
 }
 ```
 
 ---
 
-### 💻 Step 2: Universal 1-Method Kotlin Code (MainActivity.kt)
+### 💻 Step 2: Universal 1-Method Kotlin Code (`MainActivity.kt`)
 
 Android developers only need to write **3 lines of code**:
 
@@ -104,30 +108,43 @@ Education: M.A in English (CGPA 3.75, DU)
 
 ---
 
-## ☁️ Part 3: Cloudflare R2 CDN Hosting & Model Downloader Guide
+## ☁️ Part 3: 100% Free CDN Hosting (No Credit Card • No Domain)
 
-To keep your Android APK size lightweight (< 15 MB), **do not bundle the 654 MB `model.nano` inside the APK**. Instead, host it on Cloudflare CDN and download it on the first launch of the app.
+To keep the Android APK lightweight (< 15 MB), use one of the two **100% Free, Zero-Card platforms** to host `model.nano` (654.39 MB):
 
 ---
 
-### 🌐 Step A: Setup Cloudflare R2 (100% Free Egress Bandwidth)
-1. Log in to your **[Cloudflare Dashboard](https://dash.cloudflare.com/)**.
-2. In the left sidebar, navigate to **R2 -> Create Bucket**.
-   - Bucket Name: `ss-bangladesh-assets`
-   - Location: `Automatic` (or Asia Pacific)
-3. Upload `model.nano` (654.39 MB) to your R2 bucket.
-4. Click on **Settings -> Custom Domains** -> Connect your domain (e.g. `cdn.yourdomain.com`).
-5. Your public download URL will be:
+### 🥇 Option 1: GitHub Releases (Recommended - 0 Setup)
+Since you already have the repository `https://github.com/tpxplatfrom-afk/SS_module_BD`:
+1. Go to your GitHub repository in your browser: `https://github.com/tpxplatfrom-afk/SS_module_BD`
+2. On the right sidebar, click **Releases -> Create a new release**.
+3. Tag version: `v1.0.0`
+4. Release title: `THSA-2.41B Production Model Release`
+5. Drag and drop your `model.nano` (654.39 MB) into the **Attach binaries** box.
+6. Click **Publish release**.
+7. Your permanent, fast, 100% free CDN download URL will be:
    ```
-   https://cdn.yourdomain.com/models/model.nano
+   https://github.com/tpxplatfrom-afk/SS_module_BD/releases/download/v1.0.0/model.nano
    ```
-   *(Cloudflare R2 charges **$0 for egress bandwidth**, meaning 1 million students downloading the model costs $0 in bandwidth fees).*
+   *(GitHub / Microsoft Azure CDN provides unlimited downloads, $0 cost, no credit card, no domain).*
+
+---
+
+### 🥈 Option 2: Hugging Face Hub (Specialized for AI Models)
+1. Go to **[huggingface.co](https://huggingface.co/)** and create a free account (takes 1 minute, no credit card).
+2. Click **New Model** -> Name it `ss-bangladesh-nano` (set to Public).
+3. In the **Files and versions** tab, click **Add file -> Upload files** and select `model.nano`.
+4. Your permanent CDN download URL will be:
+   ```
+   https://huggingface.co/YOUR_USERNAME/ss-bangladesh-nano/resolve/main/model.nano
+   ```
+   *(Hugging Face provides free high-speed Cloudflare CDN with unlimited bandwidth for AI models).*
 
 ---
 
 ### 📥 Step B: In-App Automatic Model Downloader (Kotlin)
 
-Add this background downloader in your Android app to download `model.nano` on first launch with a progress bar:
+Add this in your Android app to download `model.nano` on first launch with a progress bar:
 
 ```kotlin
 package ai.nano.downloader
@@ -142,7 +159,8 @@ import java.net.URL
 
 object NanoModelManager {
 
-    private const val MODEL_URL = "https://cdn.yourdomain.com/models/model.nano"
+    // 100% Free GitHub CDN URL (Zero Credit Card / Zero Domain)
+    private const val MODEL_URL = "https://github.com/tpxplatfrom-afk/SS_module_BD/releases/download/v1.0.0/model.nano"
     private const val MODEL_FILE_NAME = "model.nano"
 
     fun isModelDownloaded(context: Context): Boolean {
@@ -158,6 +176,7 @@ object NanoModelManager {
         val tempFile = File(context.filesDir, "$MODEL_FILE_NAME.tmp")
 
         val connection = URL(MODEL_URL).openConnection() as HttpURLConnection
+        connection.instanceFollowRedirects = true
         connection.connectTimeout = 15000
         connection.readTimeout = 30000
         connection.connect()
@@ -194,45 +213,11 @@ object NanoModelManager {
 
 ---
 
-### 📱 Step C: Complete Android Splash/Launch Flow
+## 🎯 Summary of 100% Free Setup
 
-```kotlin
-class SplashActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-
-        if (NanoModelManager.isModelDownloaded(this)) {
-            // Model already exists -> Open Main Chat Activity
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        } else {
-            // Download model on first launch with progress bar
-            progressBar.visibility = View.VISIBLE
-            statusText.text = "শিক্ষার্থী এআই মডেল ডাউনলোড হচ্ছে (একবারই প্রয়োজন)..."
-
-            lifecycleScope.launch {
-                NanoModelManager.downloadModel(this@SplashActivity) { progress ->
-                    progressBar.progress = progress
-                    statusText.text = "মডেল ডাউনলোড হচ্ছে: $progress%"
-                }
-                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-                finish()
-            }
-        }
-    }
-}
-```
-
----
-
-## 🎯 Summary of Capabilities
-
-| Feature | Android Implementation | Description |
-|---|---|---|
-| **Single Universal API** | `engine.ask(prompt)` | Handles Math, Science, English CV, Bangladesh Laws, Socratic hints |
-| **1-Click Copy-Paste** | `response.copyText` | Clean, stripped plaintext for notepad, assignments & WhatsApp |
-| **.txt & .md Export** | `response.saveAsTxt()` / `.saveAsMd()` | 1-line file export to storage |
-| **Sibling Profile Memory** | Automatic State Tracking | Remembers active class & switches when brother/sister takes phone |
-| **Zero Bandwidth Cost** | Cloudflare R2 CDN | Free egress hosting for `model.nano` (654 MB) |
+| Component | Platform | Cost | Credit Card Needed? | Custom Domain Needed? |
+|---|---|---|---|---|
+| **Android SDK Import** | **JitPack.io** | **$0 (Free)** | ❌ No | ❌ No |
+| **Model Hosting (654 MB)** | **GitHub Releases** | **$0 (Free)** | ❌ No | ❌ No |
+| **Alternative AI Hosting** | **Hugging Face Hub** | **$0 (Free)** | ❌ No | ❌ No |
+| **Developer API** | `engine.ask(prompt)` | **Local On-Device** | ❌ No | ❌ No |
