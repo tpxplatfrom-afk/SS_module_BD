@@ -97,9 +97,12 @@ class UniversalTutorEngine:
             raw_res = self.taxonomy_engine.lookup_species(prompt)
             raw_md = raw_res["formatted_markdown"]
 
-        # Step 6: Creative Question Assessment (CQ / MCQ)
+        # Step 6: Creative Question Assessment (CQ / MCQ) vs Rules Guide
         elif any(k in clean_p for k in ["creative question", "সৃজনশীল", "mcq", "বহুনির্বাচনি", "প্রশ্ন তৈরি"]):
-            raw_res = self.assessment_engine.generate_creative_questions(prompt)
+            if any(k in clean_p for k in ["নিয়ম", "নিয়ম", "কীভাবে", "কিভাবে", "পদ্ধতি", "কৌশল", "rules", "how to write", "প্যারা"]):
+                raw_res = self.science_engine.explain_concept(prompt, active_class=current_profile["active_class"])
+            else:
+                raw_res = self.assessment_engine.generate_creative_questions(prompt)
             raw_md = raw_res["formatted_markdown"]
 
         # Step 7: Explicit Math & Algebraic Socratic Solving Check
@@ -113,7 +116,7 @@ class UniversalTutorEngine:
 
         # Step 8: Universal Science, Grammar, Study Hacks & Knowledge Concept Engine
         else:
-            raw_res = self.science_engine.explain_concept(prompt)
+            raw_res = self.science_engine.explain_concept(prompt, active_class=current_profile["active_class"])
             raw_md = raw_res["formatted_markdown"]
 
         # Generate 100% Clean, Copy-Paste Friendly Plain Text (strips formatting symbols for 1-click clipboard)
