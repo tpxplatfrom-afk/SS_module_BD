@@ -20,6 +20,66 @@ from src.engine.session_profile_tracker import SessionProfileTracker
 from src.engine.bangladesh_laws_engine import BangladeshLawsEngine
 from src.engine.universal_science_concept_engine import UniversalScienceConceptEngine
 
+def normalize_bengali_phonetic_and_typos(text: str) -> str:
+    """
+    Normalizes Bengali Unicode and fixes common student typing mistakes & colloquialisms.
+    """
+    if not text:
+        return text
+    text = normalize_bengali_unicode(text.lower().strip())
+    
+    typo_map = [
+        # সৃজনশীল typos
+        (r"সৃজনশিল[তা]?", "সৃজনশীল"),
+        (r"সিজনশীল", "সৃজনশীল"),
+        (r"সিজনশিল", "সৃজনশীল"),
+        (r"সৃজনশিলতা", "সৃজনশীলতা"),
+        # পরীক্ষা typos
+        (r"পরিক্ষা[য়য়েরর]?", "পরীক্ষা"),
+        (r"পেলিক্ষা[য়য়েরর]?", "পরীক্ষা"),
+        (r"পেলীক্ষা", "পরীক্ষা"),
+        # পাস / পাশ typos
+        (r"পাশ করব", "পাস করব"),
+        (r"পাশ করবার", "পাস করার"),
+        (r"পাস করবার", "পাস করার"),
+        (r"সহজে পাশ", "সহজে পাস"),
+        (r"সহজে পাস", "সহজে পাস"),
+        (r"\bপাশ\b", "পাস"),
+        # নীল typos
+        (r"আকাশ\s*নিল", "আকাশ নীল"),
+        (r"নিল\s*দেখায়", "নীল দেখায়"),
+        (r"নিল\s*দেখায়", "নীল দেখায়"),
+        # সালোকসংশ্লেষণ typos
+        (r"শালোকসংশ্লেষণ", "সালোকসংশ্লেষণ"),
+        (r"সালোক\s*সংস্লেশন", "সালোকসংশ্লেষণ"),
+        (r"শালক\s*সংশ্লেষণ", "সালোকসংশ্লেষণ"),
+        (r"শালক\s*সংস্লেশন", "সালোকসংশ্লেষণ"),
+        # কীভাবে / ক্যামনে typos
+        (r"\bক্যামনে\b", "কীভাবে"),
+        (r"\bকেমনে\b", "কীভাবে"),
+        (r"\bকেমতে\b", "কীভাবে"),
+        (r"\bকেমন\s*করে\b", "কীভাবে"),
+        (r"\bক্যামনে\s*করে\b", "কীভাবে"),
+        (r"\bকিভবে\b", "কীভাবে"),
+        (r"\bকিভাবে\b", "কীভাবে"),
+        # সূত্র typos
+        (r"\bশুত্র\b", "সূত্র"),
+        (r"\bশুএ\b", "সূত্র"),
+        (r"\bসূএ\b", "সূত্র"),
+        # অংক / গণিত typos
+        (r"\bঅঙ্ক\b", "অংক"),
+        (r"\bগনিত\b", "গণিত"),
+        # উড়োজাহাজ
+        (r"উড়ুজাহাজ", "উড়োজাহাজ"),
+        (r"উড়োজাহজ", "উড়োজাহাজ"),
+        # পড়ালেখা / পড়াশোনা
+        (r"পড়াশুনা", "পড়াশোনা"),
+        (r"পড়ালেখা", "পড়াশোনা")
+    ]
+    for pattern, replacement in typo_map:
+        text = re.sub(pattern, replacement, text)
+    return text
+
 class UniversalTutorEngine:
     """
     Universal Single-Entry Tutor Engine for THSA-2.41B.
@@ -40,7 +100,7 @@ class UniversalTutorEngine:
         """
         Universal 1-line query dispatcher for all subjects and tasks.
         """
-        clean_p = normalize_bengali_unicode(prompt.lower().strip())
+        clean_p = normalize_bengali_phonetic_and_typos(prompt)
         wants_copy_friendly = any(k in clean_p for k in [
             "copy", "কপি", "কপি পেস্ট", "copy paste", "plain text", "txt", ".txt", ".md", "markdown"
         ])
@@ -80,7 +140,11 @@ class UniversalTutorEngine:
             raw_res = self.laws_engine.explain_law(prompt)
             raw_md = raw_res["formatted_markdown"]
 
-        # Step 3: Mature Conversational & Empathetic Chat Handler (Greetings, motivation, study tips)
+        # Step 3: Emotional Frustration & Mental Support Intent Check
+        elif self._match_emotional_frustration(clean_p):
+            raw_md = self._get_frustration_reply(clean_p)
+
+        # Step 4: Mature Conversational & Empathetic Chat Handler (Greetings, motivation, study tips)
         elif self._match_conversational_chat(clean_p):
             raw_md = self._get_conversational_reply(clean_p, prompt)
 
@@ -145,6 +209,37 @@ class UniversalTutorEngine:
             "plain_text": clean_copy_text,
             "is_screen_safe": True
         }
+
+    def _match_emotional_frustration(self, clean_p: str) -> bool:
+        """
+        Detects student frustration, hopelessness, panic, or emotional distress.
+        """
+        frustration_triggers = [
+            "ধুর", "ভুয়া", "ভুয়া", "কিছুই পারি না", "কিছু পারি না", "পড়ব না", "পড়তে ইচ্ছা করে না",
+            "মাথা ধরে গেছে", "মাথা ব্যথা", "পড়া পারি না", "ফেল করব", "ফেল মারব", "জীবন বৃথা",
+            "পড়তে ভালো লাগছে না", "মন বসছে না", "বিরক্ত লাগছে", "অংক ভুয়া", "পড়া ভুয়া", "অংক পারি না"
+        ]
+        return any(trig in clean_p for trig in frustration_triggers)
+
+    def _get_frustration_reply(self, clean_p: str) -> str:
+        """
+        Generates empathetic, de-stressing, motivational support for frustrated students.
+        """
+        return normalize_bengali_unicode("""# 🌸 মন শান্ত করো, তুমি অবশ্যই পারবে! (Emotional Support & Motivation)
+
+আমি বুঝতে পারছি তুমি এখন হয়তো একটু ক্লান্ত, বিরক্ত বা পড়া নিয়ে হতাশ বোধ করছ।
+
+---
+
+### 💡 এই মুহূর্তে তোমার করণীয়:
+১. **একটু বিরতি নাও (১০ মিনিট):** পড়ার টেবিল থেকে ওঠো, চোখে-মুখে ঠান্ডা পানির ঝাপটা দাও এবং এক গ্লাস পানি পান করো।
+২. **মনে রেখো—কঠিন সময় সাময়িক:** পৃথিবীর সব সফল মানুষই এক সময় পড়া কঠিন মনে করতেন। কোনো বিষয় কঠিন লাগা মানেই তুমি নতুন ও বড় কিছু শিখতে চলেছ।
+৩. **একটু একটু করে শুরু করো:** পুরো বই বা অধ্যায় একসাথে পড়ার দরকার নেই। আজকে শুধু ১টি ছোট অংক বা ১টি সহজ নিয়ম আমরা একসাথে বুঝে ফেলব।
+
+---
+
+🌟 **আমি তোমার পাশে আছি:**
+মন যখন একটু ফ্রেশ হবে, আমাকে শুধু বলো কোন ছোট বিষয়টা বুঝতে তোমার সমস্যা হচ্ছে—আমি তোমাকে একদম পানির মতো সহজ ভাষায় বুঝিয়ে দেব! 😊💪""")
 
     def _match_conversational_chat(self, clean_p: str) -> bool:
         """
