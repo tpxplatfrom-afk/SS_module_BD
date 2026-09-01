@@ -450,9 +450,14 @@ def main():
     parser.add_argument("--lr", type=float, default=3e-4, help="Learning rate")
     parser.add_argument("--output_dir", type=str, default=str(MODULE_ROOT / "training" / "checkpoints"), help="Save path")
     parser.add_argument("--no_amp", action="store_true", help="Disable AMP mixed precision")
-    parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu", help="cpu or cuda")
+    parser.add_argument("--device", type=str, default="auto", help="auto | cpu | cuda  (auto detects at runtime)")
     
     args = parser.parse_args()
+    
+    # Resolve 'auto' to actual device at runtime (fixes AssertionError on CPU-only Colab sessions)
+    if args.device == "auto":
+        args.device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(f"[Device] Selected: {args.device.upper()} (CUDA available: {torch.cuda.is_available()})")
     
     trainer = DistillationTrainer(
         config_path=args.config,
