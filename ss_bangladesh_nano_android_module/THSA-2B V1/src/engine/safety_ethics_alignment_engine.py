@@ -39,32 +39,90 @@ class SafetyEthicsAlignmentEngine:
     def handle_query(self, query: str) -> Dict[str, Any]:
         clean_q = normalize_bengali_unicode(query.lower().strip())
 
-        # 1. Political Questions & Negative Stories / Defamation
+        # 0. STRICT RED LINE 1: Pornography, Sex, Adult, Obscene & NSFW Content
         if any(k in clean_q for k in [
-            "politics", "রাজনীতি", "শেখ হাসিনা", "হাসিনা", "খালেদা", "চোর", "thief",
-            "আওয়ামী", "বিএনপি", "জামায়াত", "সরকার ভালো না খারাপ", "দুর্নীতিবাজ",
-            "রাজনীতিবিদ", "রাজনৈতিক", "নেতিবাচক", "কেলেঙ্কারি"
+            "porn", "pornography", "sex", "sexual", "xxx", "nsfw", "nude", "erotic", "adult", "choti",
+            "vagina", "penis", "intercourse", "যৌন", "পর্ন", "অশ্লীল", "চটি", "নগ্ন", "শারীরিক মিলন",
+            "সঙ্গম", "ব্লু ফিল্ম", "কামুক", "কামবাসনা"
+        ]):
+            return self._handle_adult_and_pornography(query)
+
+        # 1. STRICT RED LINE 2: Political Controversies, Defamation & Negative Slander
+        if any(k in clean_q for k in [
+            "politics", "political", "politician", "leader", "government", "minister", "corruption",
+            "negative", "slander", "scandal", "thief", "worst", "rivalry",
+            "রাজনীতি", "রাজনৈতিক", "রাজনীতিবিদ", "নেতা", "মন্ত্রী", "সরকার", "শেখ হাসিনা", "হাসিনা",
+            "খালেদা", "চোর", "আওয়ামী", "বিএনপি", "জামায়াত", "সরকার ভালো না খারাপ", "দুর্নীতিবাজ",
+            "নেতিবাচক", "কেলেঙ্কারি", "গোপন গল্প", "স্ক্যান্ডাল"
         ]):
             return self._handle_politics_and_defamation(query)
 
-        # 2. Etiquette & Moral Values (শিষ্টাচার ও সৌজন্যবোধ)
-        if any(k in clean_q for k in ["etiquette", "শিষ্টাচার", "সৌজন্য", "আদব", "নম্রতা", "বড়দের সম্মান", "ভদ্রতা"]):
-            return self._handle_etiquette(query)
+        # 2. STRICT RED LINE 3: Illicit Drugs, Weapons, Self-Harm & Violence
+        if any(k in clean_q for k in [
+            "suicide", "self-harm", "bomb", "weapon", "kill", "murder", "drug abuse", "heroin", "meth", "yaba",
+            "মাদক তৈরি", "নেশা করার নিয়ম", "আত্মহত্যা", "বোমা তৈরি", "মারামারি", "খুন", "হত্যা", "অস্ত্র",
+            "ফেনসিডিল", "ইয়াবা", "গাঁজা"
+        ]):
+            return self._handle_illegal_and_violence(query)
 
-        # 3. Drugs & Pharmacology (ওষুধ ও মাদকাসক্তি সতর্কতা)
+        # 3. Drugs & Pharmacology (Educational & Medical guidance)
         if any(k in clean_q for k in ["drug", "ড্রাগ", "ওষুধ", "ঔষধ", "প্যারাসিটামল", "অ্যান্টিবায়োটিক", "মাদক", "নেশা"]):
             return self._handle_drugs(query)
 
-        # 4. Social Media & Digital Distraction (সোশ্যাল মিডিয়ার কুফল ও পড়াশোনা)
+        # 4. Etiquette & Moral Values (শিষ্টাচার ও সৌজন্যবোধ)
+        if any(k in clean_q for k in ["etiquette", "শিষ্টাচার", "সৌজন্য", "আদব", "নম্রতা", "বড়দের সম্মান", "ভদ্রতা"]):
+            return self._handle_etiquette(query)
+
+        # 5. Social Media & Digital Distraction (সোশ্যাল মিডিয়ার কুফল ও পড়াশোনা)
         if any(k in clean_q for k in ["social media", "ফেসবুক", "টিকটক", "সোশ্যাল মিডিয়া", "মোবাইল আসক্তি", "পড়াশোনায় মন বসে না", "পড়াশোনায় ক্ষতি"]):
             return self._handle_social_media_wellness(query)
 
-        # 5. History of Bangladesh (বাংলাদেশের ইতিহাস ও মুক্তিযুদ্ধ)
+        # 6. History of Bangladesh (বাংলাদেশের ইতিহাস ও মুক্তিযুদ্ধ)
         if any(k in clean_q for k in ["ইতিহাস", "মুক্তিযুদ্ধ", "১৯৫২", "১৯৭১", "ভাষা আন্দোলন", "বঙ্গবন্ধু", "৭ই মার্চ", "স্বাধীনতা"]):
             return self._handle_bangladesh_history(query)
 
         # Default Socratic Redirect to Books
         return self._handle_general_book_redirect(query)
+
+    def _handle_adult_and_pornography(self, query: str) -> Dict[str, Any]:
+        md = """# 🛑 নৈতিক ও নীতিগত নিরাপত্তা সতর্কতা (Safety Guardrail)
+
+আমি একটি **১ম থেকে ১২শ শ্রেণির শিক্ষার্থীবান্ধব এআই টিউটর (Academic AI Assistant)**।
+
+---
+
+### ⚠️ কঠোর নীতিমালা:
+- যে কোনো ধরনের **অশ্লীল, প্রাপ্তবয়স্ক (Adult/Pornographic), অনৈতিক বা সংবেদনশীল** বিষয়বস্তু আলোচনা করা আমার মৌলিক নীতিমালার সম্পূর্ণ পরিপন্থী।
+- শিক্ষার্থীদের নৈতিক চরিত্র গঠন, মানসিক সুস্থতা ও পড়াশোনার পবিত্র পরিবেশ বজায় রাখাই আমাদের সর্বোচ্চ লক্ষ্য।
+
+---
+
+💡 **আসুন পাঠ্যবইয়ের পড়াশোনায় ফিরে যাই:**
+আপনার গণিত, বিজ্ঞান, ইংরেজি, বাংলা বা মানবিক বিভাগের যেকোনো বিষয়ভিত্তিক পাঠ বুঝতে আমি আনন্দের সাথে সাহায্য করব।
+"""
+        return {
+            "category": "STRICT_ADULT_CONTENT_BLOCKED",
+            "formatted_markdown": normalize_bengali_unicode(md),
+            "is_safe": True,
+            "blocked": True
+        }
+
+    def _handle_illegal_and_violence(self, query: str) -> Dict[str, Any]:
+        md = """# 🛑 আইনি ও সামাজিক নিরাপত্তা বিধিনিষেধ (Legal & Safety Policy)
+
+যে কোনো ধরনের **অবৈধ মাদক, সহিংসতা, আত্মঘাতী আচরণ বা ক্ষতিকর কার্যকলাপ** সম্পর্কিত তথ্য প্রদান কঠোরভাবে নিষিদ্ধ।
+
+---
+
+- জীবন ও স্বাস্থ্য রক্ষার জন্য যে কোনো শারীরিক ও মানসিক সমস্যায় পরিবারের সদস্য ও চিকিৎসকের শরণাপন্ন হওয়া উচিত।
+- আসুন আমরা গঠনমূলক ও শিক্ষামূলক জ্ঞানার্জনে সময় ব্যয় করি।
+"""
+        return {
+            "category": "STRICT_ILLEGAL_VIOLENCE_BLOCKED",
+            "formatted_markdown": normalize_bengali_unicode(md),
+            "is_safe": True,
+            "blocked": True
+        }
 
     def _handle_politics_and_defamation(self, query: str) -> Dict[str, Any]:
         md = """# 📘 শিক্ষামূলক নীতি ও সহনশীলতার বার্তা
