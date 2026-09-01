@@ -1,0 +1,204 @@
+"""
+THSA-2B Safety, Ethics, Empathy & Historical Alignment Engine
+==============================================================
+Governs the 15% Reserved Neural Capacity Buffer:
+  1. Etiquette & Courtesy: Teaches respect, polite communication, and moral values.
+  2. Drugs & Pharmacology: Scientific description of medical drugs + warnings against drug abuse/addiction.
+  3. Digital Wellness & Social Media: Pedagogical advice on preventing social media distraction in studies.
+  4. Political Neutrality & Anti-Defamation: Deflects political controversies, avoids negative stories/slander,
+     maintains tolerance, and strictly redirects focus back to educational books.
+  5. Bangladesh History: Factual NCTB history (1952 Language Movement, 1966 Six Points, 1971 Liberation War).
+"""
+
+from typing import Dict, Any, Optional
+import unicodedata
+import re
+
+def normalize_bengali_unicode(text: str) -> str:
+    if not text:
+        return text
+    text = text.replace("\u09c7\u09be", "\u09cb")
+    text = text.replace("\u09c7\u09d7", "\u09cc")
+    text = unicodedata.normalize("NFC", text)
+    text = text.replace("\u09a1\u09bc", "\u09dc")
+    text = text.replace("\u09a2\u09bc", "\u09dd")
+    text = text.replace("\u09af\u09bc", "\u09df")
+    text = re.sub(r"বিস্\u09c3ত", "বিস্তৃত", text)
+    text = re.sub(r"বিস্\u09cd\u09c3ত", "বিস্তৃত", text)
+    text = re.sub(r"\u09cd+", "\u09cd", text)
+    return text
+
+class SafetyEthicsAlignmentEngine:
+    """
+    Enforces ethical safety, etiquette, anti-defamation, political neutrality, and historical grounding.
+    """
+
+    def __init__(self):
+        pass
+
+    def handle_query(self, query: str) -> Dict[str, Any]:
+        clean_q = normalize_bengali_unicode(query.lower().strip())
+
+        # 1. Political Questions & Negative Stories / Defamation
+        if any(k in clean_q for k in [
+            "politics", "রাজনীতি", "শেখ হাসিনা", "হাসিনা", "খালেদা", "চোর", "thief",
+            "আওয়ামী", "বিএনপি", "জামায়াত", "সরকার ভালো না খারাপ", "দুর্নীতিবাজ",
+            "রাজনীতিবিদ", "রাজনৈতিক", "নেতিবাচক", "কেলেঙ্কারি"
+        ]):
+            return self._handle_politics_and_defamation(query)
+
+        # 2. Etiquette & Moral Values (শিষ্টাচার ও সৌজন্যবোধ)
+        if any(k in clean_q for k in ["etiquette", "শিষ্টাচার", "সৌজন্য", "আদব", "নম্রতা", "বড়দের সম্মান", "ভদ্রতা"]):
+            return self._handle_etiquette(query)
+
+        # 3. Drugs & Pharmacology (ওষুধ ও মাদকাসক্তি সতর্কতা)
+        if any(k in clean_q for k in ["drug", "ড্রাগ", "ওষুধ", "ঔষধ", "প্যারাসিটামল", "অ্যান্টিবায়োটিক", "মাদক", "নেশা"]):
+            return self._handle_drugs(query)
+
+        # 4. Social Media & Digital Distraction (সোশ্যাল মিডিয়ার কুফল ও পড়াশোনা)
+        if any(k in clean_q for k in ["social media", "ফেসবুক", "টিকটক", "সোশ্যাল মিডিয়া", "মোবাইল আসক্তি", "পড়াশোনায় মন বসে না", "পড়াশোনায় ক্ষতি"]):
+            return self._handle_social_media_wellness(query)
+
+        # 5. History of Bangladesh (বাংলাদেশের ইতিহাস ও মুক্তিযুদ্ধ)
+        if any(k in clean_q for k in ["ইতিহাস", "মুক্তিযুদ্ধ", "১৯৫২", "১৯৭১", "ভাষা আন্দোলন", "বঙ্গবন্ধু", "৭ই মার্চ", "স্বাধীনতা"]):
+            return self._handle_bangladesh_history(query)
+
+        # Default Socratic Redirect to Books
+        return self._handle_general_book_redirect(query)
+
+    def _handle_politics_and_defamation(self, query: str) -> Dict[str, Any]:
+        md = """# 📘 শিক্ষামূলক নীতি ও সহনশীলতার বার্তা
+
+আমি একটি **শিক্ষার্থীবান্ধব এআই টিউটর (Educational AI Tutor)**। আমি কোনো রাজনীতি বুঝি না এবং রাজনৈতিক বিতর্ক বা মতাদর্শের সঙ্গে যুক্ত নই।
+
+---
+
+### 🕊️ সহনশীলতা ও শালীনতার দৃষ্টিভঙ্গি:
+১. **ব্যক্তিগত কুৎসা পরিহার:** কোনো ব্যক্তি—তিনি বিশিষ্ট ব্যক্তি হোন বা সাধারণ নাগরিক—কাউকে নিয়ে নেতিবাচক কুৎসা, গীবত বা অবমাননাকর মন্তব্য করা নৈতিকভাবে অনুচিত এবং শিষ্টাচারবিরোধী। প্রতিটি মানুষের কাজের মূল্যায়নের ভার ইতিহাসের।
+২. **আমাদের মূল মনোযোগ পাঠ্যবইয়ে:** একজন শিক্ষার্থী হিসেবে আমাদের মূল্যবান সময় ও চিন্তা বইয়ের জ্ঞান, বিজ্ঞান, গণিত ও সাহিত্যচর্চায় ব্যয় করা উচিত।
+
+---
+
+💡 **আসুন পাঠ্যবইয়ে ফিরে যাই:**
+আপনার কি পদার্থবিজ্ঞান, রসায়ন, উচ্চতর গণিত বা ইতিহাসের কোনো নির্দিষ্ট অধ্যায় বা প্রশ্ন বুঝতে সহায়তা প্রয়োজন? আমাকে নির্ভয়ে বলুন, আমি আনন্দ সহকারে বুঝিয়ে দেব!
+"""
+        return {
+            "category": "POLITICAL_NEUTRALITY_DEFLECTION",
+            "formatted_markdown": normalize_bengali_unicode(md),
+            "is_safe": True,
+            "redirect_to_books": True
+        }
+
+    def _handle_etiquette(self, query: str) -> Dict[str, Any]:
+        md = """# 🌟 শিষ্টাচার ও উত্তম নৈতিক চরিত্র (Etiquette & Good Manners)
+
+পাঠ্যবই ও ইসলাম/ধর্ম শিক্ষার অন্যতম প্রধান পাঠ হলো **শিষ্টাচার (Etiquette)**। একজন আদর্শ শিক্ষার্থীর চরিত্র সুন্দর হওয়া জ্ঞান অর্জনের মতোই গুরুত্বপূর্ণ।
+
+---
+
+### 💎 শিষ্টাচারের মূল স্তম্ভসমূহ:
+১. **গুরুজনদের প্রতি শ্রদ্ধা ও বিনম্র আচরণ:** পিতা-মাতা, শিক্ষক ও বয়োজ্যেষ্ঠদের সাথে কথা বলার সময় কণ্ঠস্বর নিচু ও মার্জিত রাখা।
+২. **ছোটদের প্রতি স্নেহ ও মমতা:** ছোটদের প্রতি সদয় হওয়া এবং তাদের সঠিক পথ দেখানো।
+৩. **শালীন ও ইতিবাচক ভাষা ব্যবহার:** পরনিন্দা, গীবত, গালিগালাজ বা কারও মনে আঘাত লাগে এমন কথা সম্পূর্ণরূপে বর্জন করা।
+৪. **ধন্যবাদ ও কৃতজ্ঞতা প্রকাশ:** কারো কাছ থেকে সামান্যতম উপকার পেলেও 'ধন্যবাদ' বা 'জাযাকাল্লাহু খাইরান' বলা।
+৫. **সহনশীলতা ও ক্ষমাশীলতা:** মতের অমিল হলেও ধৈর্য ধরে অন্যের কথা শোনা ও অন্যের দোষত্রুটি ক্ষমা করা।
+
+---
+
+💡 **এনসিটিবি পাঠ্যবইয়ের বার্তা:** সুন্দর ব্যবহার ও উত্তম চরিত্রই একজন মানুষকে সমাজে প্রকৃত সম্মানিত করে তোলে।
+"""
+        return {
+            "category": "ETIQUETTE_AND_MANNERS",
+            "formatted_markdown": normalize_bengali_unicode(md),
+            "is_safe": True
+        }
+
+    def _handle_drugs(self, query: str) -> Dict[str, Any]:
+        md = """# 💊 ফার্মাকোলজি ও ওষুধ বিজ্ঞান (Medical Drugs & Substance Safety)
+
+জীববিজ্ঞান ও রসায়ন পাঠ্যবইয়ের আলোকে **ওষুধ (Medicine/Drugs)** হলো এমন রাসায়নিক যৌগ যা রোগ নিরাময়, নিয়ন্ত্রণ বা প্রতিরোধে ব্যবহৃত হয়।
+
+---
+
+### 🔬 ১. ওষুধের সঠিক ও জীবনরক্ষাকারী ব্যবহার:
+- **অ্যান্টিবায়োটিক (Antibiotics):** ব্যাকটেরিয়া ঘটিত সংক্রামক রোগ নিরাময়ে কোর্স সম্পূর্ণ করে গ্রহণ করা হয়।
+- **ব্যথানাশক ও অ্যান্টাসিড (Analgesics & Antacids):** শারীরিক অস্বস্তি ও গ্যাস্ট্রিকের সমস্যা নিয়ন্ত্রণে নির্দিষ্ট মাত্রায় চিকিৎসকের পরামর্শে ব্যবহৃত হয়।
+
+---
+
+### ⚠️ ২. অপব্যবহার ও মাদকাসক্তির মারাত্মক ঝুঁকি (Strict Warning):
+- **মাদকাসক্তি (Drug Abuse):** চিকিৎসকের পরামর্শ ছাড়া অননুমোদিত ড্রাগ বা মাদক গ্রহণ করলে মস্তিষ্কের নিউরোট্রান্সমিটার ক্ষতিগ্রস্ত হয়, স্নায়ুতন্ত্র অকার্যকর হয়ে পড়ে এবং সামাজিক ও পারিবারিক জীবন ধ্বংস হয়ে যায়।
+- **অ্যান্টিবায়োটিক রেজিস্ট্যান্স:** নিয়ম ছাড়া ওষুধ খেলে জীবাণু প্রতিরোধী হয়ে ওঠে, যা ভবিষ্যতে মারাত্মক রূপ নেয়।
+
+---
+
+🛑 **সতর্কবার্তা:** যে কোনো ওষুধ গ্রহণের পূর্বে অবশ্যই নিবন্ধিত চিকিৎসকের (Registered Physician) পরামর্শ গ্রহণ করতে হবে।
+"""
+        return {
+            "category": "DRUG_PHARMACOLOGY_AND_SAFETY",
+            "formatted_markdown": normalize_bengali_unicode(md),
+            "is_safe": True
+        }
+
+    def _handle_social_media_wellness(self, query: str) -> Dict[str, Any]:
+        md = """# 📱 সোশ্যাল মিডিয়া ও পড়াশোনার ডিজিটাল ওয়েলনেস (Digital Wellness for Students)
+
+তথ্যপ্রযুক্তির যুগে সোশ্যাল মিডিয়া যোগাযোগের মাধ্যম হলেও **অতিরিক্ত ও নিয়ন্ত্রণহীন ব্যবহার শিক্ষার্থীদের পড়াশোনায় মারাত্মক ক্ষতি সাধন করে**।
+
+---
+
+### ⚠️ সোশ্যাল মিডিয়ার প্রধান নেতিবাচক প্রভাব:
+১. **মনোযোগের স্থায়িত্ব হ্রাস (Short Attention Span):** ক্রমাগত রিলস বা শর্টস ভিডিও দেখার ফলে মস্তিষ্কের গভীর মনোযোগ দেওয়ার ক্ষমতা কমে যায়, যার ফলে পড়ার টেবিলে বেশি সময় বসা কঠিন হয়ে পড়ে।
+২. **সময় অপচয় ও পড়ার ক্ষতি:** দিনের মূল্যবান পড়াশোনার সময় স্ক্রল করতে করতে হারিয়ে যায়, যার প্রভাব সরাসরি পরীক্ষার ফলাফলে পড়ে।
+৩. **ঘুমের ব্যাঘাত ও মস্তিষ্কের ক্লান্তি:** রাতের বেলা নীল আলো (Blue Light) মেলাটোনিন হরমোন নিঃসরণে বাধা দেয়, ফলে গভীর ঘুম হয় না এবং পরদিন স্মৃতিশক্তি দুর্বল থাকে।
+৪. **অযথা মানসিক চাপ ও তুলনা:** সোশ্যাল মিডিয়ার অবাস্তব জীবন দেখে শিক্ষার্থীদের মাঝে হতাশা ও আত্মবিশ্বাসের ঘাটতি তৈরি হতে পারে।
+
+---
+
+### 🎯 পড়াশোনায় সফল হওয়ার কৌশল:
+- পড়ার সময় ফোন সম্পূর্ণ সাইলেন্ট বা অন্য রুমে রাখুন।
+- পড়ার জন্য **পোমোডোরো টেকনিক (Pomodoro Technique)** ব্যবহার করুন: ২৫ মিনিট সম্পূর্ণ মনোযোগ দিয়ে পড়া, এরপর ৫ মিনিট বিশ্রাম।
+- প্রতিদিন নির্দিষ্ট সময়ের বেশি (যেমন: দিনে ৩০ মিনিটের বেশি নয়) সোশ্যাল মিডিয়া ব্যবহার করবেন না।
+"""
+        return {
+            "category": "SOCIAL_MEDIA_DIGITAL_WELLNESS",
+            "formatted_markdown": normalize_bengali_unicode(md),
+            "is_safe": True
+        }
+
+    def _handle_bangladesh_history(self, query: str) -> Dict[str, Any]:
+        md = """# 🇧🇩 বাংলাদেশের গৌরবময় ইতিহাস ও মুক্তিসংগ্রাম (History of Bangladesh)
+
+এনসিটিবি বাংলাদেশ ও বিশ্বপরিচয় এবং ইতিহাস পাঠ্যবইয়ের আলোকে বাংলাদেশের স্বাধীনতা সংগ্রামের মূল ঐতিহাসিক মাইলফলকসমূহ:
+
+---
+
+### 📜 ঐতিহাসিক ধারাবাহিকতা:
+১. **১৯৫২ সালের মহান ভাষা আন্দোলন:** মাতৃভাষা বাংলাকে রাষ্ট্রভাষার মর্যাদায় প্রতিষ্ঠার জন্য সালাম, বরকত, রফিক, জব্বার, শফিউরদের আত্মদান। যা পরবর্তীতে ২১শে ফেব্রুয়ারিকে 'আন্তর্জাতিক মাতৃভাষা দিবস' হিসেবে স্বীকৃতি এনে দেয়।
+২. **১৯৫৪ সালের যুক্তফ্রন্ট নির্বাচন:** ঐতিহাসিক ২১ দফার ভিত্তিতে পূর্ব বাংলার জনগণের নিরঙ্কুশ বিজয়।
+৩. **১৯৬৬ সালের ঐতিহাসিক ৬ দফা:** বঙ্গবন্ধু শেখ মুজিবুর রহমান কর্তৃক ঘোষিত বাঙালির মুক্তির সনদ বা 'ম্যাগনাকার্টা'।
+৪. **১৯৬৯ সালের গণঅভ্যুত্থান:** আগরতলা ষড়যন্ত্র মামলা প্রত্যাহার এবং সার্জেন্ট জহুরুল হক ও ড. শামসুজ্জোহাদের আত্মত্যাগ।
+৫. **১৯৭০ সালের সাধারণ নির্বাচন:** আওয়ামী লীগের জাতীয় পরিষদে নিরঙ্কুশ সংখ্যাগরিষ্ঠতা অর্জন।
+৬. **১৯৭১ সালের মহান মুক্তিযুদ্ধ:**
+   - **৭ই মার্চের ঐতিহাসিক ভাষণ:** "এবারের সংগ্রাম আমাদের মুক্তির সংগ্রাম, এবারের সংগ্রাম স্বাধীনতার সংগ্রাম।"
+   - **২৫শে মার্চের কালরাত:** পাকিস্তানি হানাদার বাহিনীর বর্বরোচিত 'অপারেশন সার্চলাইট' ও ২৬শে মার্চ স্বাধীনতার ঘোষণা।
+   - **১০ই এপ্রিল মুজিবনগর সরকার:** অস্থায়ী সরকার গঠন ও ১৭ই এপ্রিল মেহেরপুরের বৈদ্যনাথতলায় শপথ গ্রহণ।
+   - **১৬ই ডিসেম্বর চূড়ান্ত বিজয়:** দীর্ঘ ৯ মাস রক্তক্ষয়ী যুদ্ধ, ৩০ লক্ষ শহীদের রক্ত ও ২ লক্ষ মা-বোনের সম্ভ্রমের বিনিময়ে অর্জিত স্বাধীন সার্বভৌম বাংলাদেশ।
+৭. **১৯৭২ সালের সংবিধান:** ৪ঠা নভেম্বর গণপরিষদে গৃহীত এবং ১৬ই ডিসেম্বর কার্যকর হওয়া ৪টি মূলনীতির (জাতীয়তাবাদ, সমাজতন্ত্র, গণতন্ত্র ও ধর্মনিরপেক্ষতা) গণপ্রজাতন্ত্রী বাংলাদেশের সংবিধান।
+"""
+        return {
+            "category": "BANGLADESH_HISTORY_FACTUAL",
+            "formatted_markdown": normalize_bengali_unicode(md),
+            "is_safe": True
+        }
+
+    def _handle_general_book_redirect(self, query: str) -> Dict[str, Any]:
+        md = """# 📚 পাঠ্যবই ও শিক্ষার জগতে স্বাগতম
+
+আসুন আমরা পাঠ্যবইয়ের গণিত, বিজ্ঞান, সাহিত্য ও মানবিক বিষয়ের পড়াশোনায় মনোযোগ দিই। আপনার পাঠ্যবইয়ের কোন বিষয়টি আজ আলোচনা করতে চান?
+"""
+        return {
+            "category": "GENERAL_BOOK_REDIRECT",
+            "formatted_markdown": normalize_bengali_unicode(md),
+            "is_safe": True
+        }
