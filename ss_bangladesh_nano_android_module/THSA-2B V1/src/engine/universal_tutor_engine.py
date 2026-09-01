@@ -68,22 +68,17 @@ class UniversalTutorEngine:
                 "is_screen_safe": True
             }
 
-        # 1. Bangladesh Laws & Constitution Check
-        if any(k in clean_p for k in ["আইন", "সংবিধান", "মৌলিক অধিকার", "সাইবার নিরাপত্তা", "বাল্যবিয়ে", "যৌতুক", "ট্রাফিক আইন", "৯৯৯", "৩৩৩", "১০৯", "helpline"]):
+        # Step 1: Safety & Guardrail Check (Highest Priority)
+        safety_res = self.safety_engine.handle_query(prompt)
+        if safety_res["category"] != "GENERAL_BOOK_REDIRECT" and not any(k in clean_p for k in ["math", "গণিত", "3.1", "physics", "chemistry", "পদার্থ", "রসায়ন"]):
+            raw_md = safety_res["formatted_markdown"]
+
+        # Step 2: Bangladesh Laws & Constitution Check
+        elif any(k in clean_p for k in ["আইন", "সংবিধান", "মৌলিক অধিকার", "সাইবার নিরাপত্তা", "বাল্যবিয়ে", "যৌতুক", "ট্রাফিক আইন", "৯৯৯", "৩৩৩", "১০৯", "helpline"]):
             raw_res = self.laws_engine.explain_law(prompt)
             raw_md = raw_res["formatted_markdown"]
 
-        # 2. Safety & 3-Red-Lines Check (Adult, Politics, Illegal Violence)
-        elif any(k in clean_p for k in [
-            "porn", "sex", "xxx", "nsfw", "adult", "choti", "যৌন", "পর্ন", "অশ্লীল", "চটি",
-            "politics", "political", "রাজনীতি", "শেখ হাসিনা", "খালেদা", "চোর", "আওয়ামী", "বিএনপি", "দুর্নীতিবাজ",
-            "মাদক তৈরি", "নেশা", "আত্মহত্যা", "বোমা তৈরি", "খুন", "অস্ত্র", "etiquette", "শিষ্টাচার",
-            "social media", "ফেসবুক", "টিকটক", "ইতিহাস", "১৯৫২", "১৯৭১", "মুক্তিযুদ্ধ"
-        ]) and not any(k in clean_p for k in ["math", "গণিত", "3.1", "physics", "chemistry"]):
-            raw_res = self.safety_engine.handle_query(prompt)
-            raw_md = raw_res["formatted_markdown"]
-
-        # 3. English Curriculum & Composition Check
+        # Step 3: English Curriculum & Composition Check
         elif any(k in clean_p for k in ["cv", "resume", "cover letter", "paragraph", "letter", "application", "english 1st", "english 2nd", "seen passage", "unseen passage"]) or ("english" in clean_p and any(num in clean_p for num in ["1", "2", "3", "12"])):
             if any(k in clean_p for k in ["question", "number", "নং", "no", "will i answer"]):
                 raw_res = self.english_engine.explain_question_pattern(prompt)

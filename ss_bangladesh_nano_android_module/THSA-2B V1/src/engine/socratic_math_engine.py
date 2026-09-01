@@ -77,6 +77,104 @@ $$= (7q - p)^2$$
                 "socratic_hint": """💡 **সহনশীল শিক্ষণ ইঙ্গিত (Socratic Hint):**
 তুমি কি বুঝতে পেরেছ কেন মাঝখানে $-2ab$ থাকার কারণে আমরা $(a - b)^2$ সূত্র ব্যবহার করেছি, আর $(a + b)^2$ নয়? 
 যদি মাঝখানে $+2(7p + 3q - 5r)(8p - 4q - 5r)$ থাকতো, তবে উত্তরটি কী হতো? নিজে একবার চেষ্টা করে দেখবে কি?"""
+            },
+            "class9_ch3_ex3_1_q2_b": {
+                "class": "Class 9-10 (SSC)",
+                "chapter": "অধ্যায় ৩: বীজগাণিতিক রাশি (Algebraic Expressions)",
+                "exercise": "অনুশীলনী ৩.১",
+                "question_num": "২ এর (খ) নং প্রশ্ন",
+                "problem_text": "সরল করো: (2m + 3n - p)² + (2m - 3n + p)² - 2(2m + 3n - p)(2m - 3n + p)",
+                "calculation_latex": r"""$$\text{প্রদত্ত রাশি: } (2m + 3n - p)^2 + (2m - 3n + p)^2 - 2(2m + 3n - p)(2m - 3n + p)$$
+
+**ধাপ ১: চলক ধরে বীজগণিতীয় সূত্রে রূপান্তর**
+ধরি,
+$$a = 2m + 3n - p$$
+$$b = 2m - 3n + p$$
+
+তাহলে প্রদত্ত রাশিটি সাজালে পাই:
+$$\text{রাশি} = a^2 + b^2 - 2ab = a^2 - 2ab + b^2$$
+
+**ধাপ ২: বর্গের সূত্র প্রয়োগ**
+$$= (a - b)^2$$
+
+**ধাপ ৩: $a$ ও $b$ এর মান বসিয়ে বন্ধনী অপসারণ**
+$$= [ (2m + 3n - p) - (2m - 3n + p) ]^2$$
+$$= (2m + 3n - p - 2m + 3n - p)^2$$
+
+**ধাপ ৪: সদৃশ পদগুলোর সরলীকরণ**
+$$= [ (2m - 2m) + (3n + 3n) + (-p - p) ]^2$$
+$$= (6n - 2p)^2$$
+$$= [2(3n - p)]^2 = 4(3n - p)^2$$
+
+**উত্তর: $(6n - 2p)^2$ অথবা $4(3n - p)^2$ অথবা $36n^2 - 24np + 4p^2$**""",
+                "explanation": """১. **রাশির পুনর্বিন্যাস:** অংকে $a^2 + b^2 - 2ab$ আকারে দেওয়া ছিল, যা সাজিয়ে লিখলে $a^2 - 2ab + b^2 = (a - b)^2$ সূত্রে পড়ে।
+২. **চিহ্ন পরিবর্তন:** $-(2m - 3n + p)$ বন্ধনী তুললে $-2m + 3n - p$ হয়। $2m$ ও $-2m$ কাটাকাটি যায়।""",
+                "socratic_hint": """💡 **সহনশীল শিক্ষণ ইঙ্গিত:**
+লক্ষ্য করো, $(6n - 2p)$ থেকে $2$ কমন নিলে বন্ধনীর বাইরে এসে তা $2^2 = 4$ হয়ে যায়। গাইড বইয়ে তিনটি উত্তরের যেকোনো একটি থাকতে পারে!"""
+            },
+            "class9_ch3_ex3_1_q2_c": {
+                "class": "Class 9-10 (SSC)",
+                "chapter": "অধ্যায় ৩: বীজগাণিতিক রাশি (Algebraic Expressions)",
+                "exercise": "অনুশীলনী ৩.১",
+                "question_num": "২ এর (গ) নং প্রশ্ন",
+                "problem_text": "সরল করো: 6.35 × 6.35 + 2 × 6.35 × 3.65 + 3.65 × 3.65",
+                "calculation_latex": r"""$$\text{প্রদত্ত রাশি: } 6.35 \times 6.35 + 2 \times 6.35 \times 3.65 + 3.65 \times 3.65$$
+
+**ধাপ ১: দশমিক সংখ্যাগুলোকে চলক ধরে নেওয়া**
+ধরি,
+$$a = 6.35$$
+$$b = 3.65$$
+
+**ধাপ ২: বীজগণিতীয় সূত্রে রূপান্তর**
+প্রদত্ত রাশি $= a \times a + 2 \times a \times b + b \times b$
+$$= a^2 + 2ab + b^2$$
+$$= (a + b)^2$$
+
+**ধাপ ৩: $a$ ও $b$ এর মান বসিয়ে যোগ ও বর্গ করা**
+$$= (6.35 + 3.65)^2$$
+$$= (10.00)^2$$
+$$= (10)^2$$
+$$= 100$$
+
+**উত্তর: $100$**""",
+                "explanation": """১. এটি একটি সংখ্যাভিত্তিক বীজগণিতীয় সরল। সরাসরি দশমিকের গুণ না করে $(a+b)^2$ সূত্রে ফেললে মুহূর্তেই উত্তর চলে আসে।
+২. $6.35 + 3.65 = 10.00 = 10$, এবং $10$ এর বর্গ হলো $100$।""",
+                "socratic_hint": """💡 **সহনশীল শিক্ষণ ইঙ্গিত:**
+বীজগণিতের সূত্রের সাহায্যে কত সহজে ক্যালকুলেটর ছাড়াই বড় দশমিকের গুণ মুখে মুখে করা যায়, দেখেছো?"""
+            },
+            "class9_ch3_ex3_1_q2_d": {
+                "class": "Class 9-10 (SSC)",
+                "chapter": "অধ্যায় ৩: বীজগাণিতিক রাশি (Algebraic Expressions)",
+                "exercise": "অনুশীলনী ৩.১",
+                "question_num": "২ এর (ঘ) নং প্রশ্ন",
+                "problem_text": "সরল করো: (2345 × 2345 - 759 × 759) / (2345 - 759)",
+                "calculation_latex": r"""$$\text{প্রদত্ত রাশি: } \frac{2345 \times 2345 - 759 \times 759}{2345 - 759}$$
+
+**ধাপ ১: চলক ধরে সূত্রে রূপান্তর**
+ধরি,
+$$a = 2345$$
+$$b = 759$$
+
+তাহলে প্রদত্ত রাশিটি হয়:
+$$= \frac{a \times a - b \times b}{a - b} = \frac{a^2 - b^2}{a - b}$$
+
+**ধাপ ২: $a^2 - b^2$ এর উৎপাদক সূত্র প্রয়োগ**
+আমরা জানি, $a^2 - b^2 = (a + b)(a - b)$
+$$= \frac{(a + b)(a - b)}{a - b}$$
+
+**ধাপ ৩: লব ও হরের সাধারণ উৎপাদক $(a - b)$ বর্জন**
+$$= a + b$$
+
+**ধাপ ৪: $a$ ও $b$ এর মান বসিয়ে যোগফল নির্ণয়**
+$$= 2345 + 759$$
+$$= 3104$$
+
+**উত্তর: $3104$**""",
+                "explanation": """১. লবে $a^2 - b^2$ সূত্র ভেঙে $(a+b)(a-b)$ করা হয়েছে।
+২. হর $(a-b)$ এর সাথে লবের $(a-b)$ কাটাকাটি হয়ে শুধু $(a+b)$ অবশিষ্ট থাকে।
+৩. $2345 + 759 = 3104$।""",
+                "socratic_hint": """💡 **সহনশীল শিক্ষণ ইঙ্গিত:**
+লক্ষ্য করো, এত বড় ৪ সংখ্যার গুণ-ভাগ না করে শুধু $a^2 - b^2$ সূত্র দিয়ে অংকটি এক লাইনের যোগে পরিণত হয়ে গেল!"""
             }
         }
 
@@ -221,44 +319,67 @@ $$= (7q - p)^2$$
         if is_entire_chapter and not any(k in clean_q for k in ["3.1", "৩.১", "exercise", "অনুশীলনী"]):
             return self.explain_chapter(query)
 
-        # Match Class 9 Ch 3 Ex 3.1 Q 2(a)
-        if any(k in clean_q for k in ["3.1", "৩.১"]) and any(k in clean_q for k in ["2", "২"]) and any(k in clean_q for k in ["a", "ক", "number 'a'"]):
-            item = self.canonical_kb["class9_ch3_ex3_1_q2_a"]
-        else:
-            # Fallback general handler
-            item = self.canonical_kb["class9_ch3_ex3_1_q2_a"]
+        # Check for multiple questions (e.g. 'খ', 'গ', 'ঘ')
+        requested_items = []
+        has_b = any(k in clean_q for k in ["b", "খ", "number 'b'", "'খ'"])
+        has_c = any(k in clean_q for k in ["c", "গ", "number 'c'", "'গ'"])
+        has_d = any(k in clean_q for k in ["d", "ঘ", "number 'd'", "'ঘ'"])
+        has_a = any(k in clean_q for k in ["a", "ক", "number 'a'", "'ক'"])
 
-        # Build fully formatted Markdown payload safe for mobile screen rendering
-        formatted_md = f"""### 📘 {item['class']} | {item['chapter']}
-**অনুশীলনী:** {item['exercise']} | **প্রশ্ন:** {item['question_num']}
+        if has_b:
+            requested_items.append(self.canonical_kb["class9_ch3_ex3_1_q2_b"])
+        if has_c:
+            requested_items.append(self.canonical_kb["class9_ch3_ex3_1_q2_c"])
+        if has_d:
+            requested_items.append(self.canonical_kb["class9_ch3_ex3_1_q2_d"])
+        if has_a and not (has_b or has_c or has_d):
+            requested_items.append(self.canonical_kb["class9_ch3_ex3_1_q2_a"])
+
+        if not requested_items:
+            # Default to all three (খ, গ, ঘ) if multiple/none explicitly singled out
+            if any(k in clean_q for k in ["খ", "গ", "ঘ"]):
+                requested_items = [
+                    self.canonical_kb["class9_ch3_ex3_1_q2_b"],
+                    self.canonical_kb["class9_ch3_ex3_1_q2_c"],
+                    self.canonical_kb["class9_ch3_ex3_1_q2_d"]
+                ]
+            else:
+                requested_items = [self.canonical_kb["class9_ch3_ex3_1_q2_a"]]
+
+        # Build combined Markdown payload
+        sections_md = []
+        for it in requested_items:
+            sec = f"""### 📘 {it['class']} | {it['chapter']}
+**অনুশীলনী:** {it['exercise']} | **প্রশ্ন:** {it['question_num']}  
+**সমস্যা:** {it['problem_text']}
 
 ---
 
 #### 🔢 ১. গাণিতিক সমাধান (Step-by-Step Calculation)
 ```math
-{item['calculation_latex']}
+{it['calculation_latex']}
 ```
 
 ---
 
 #### 💡 ২. সহজ ভাষায় বিস্তারিত ব্যাখ্যা (Conceptual Explanation)
-{item['explanation']}
+{it['explanation']}
 
 ---
 
-#### 🎯 ৩. সক্রেটিক সহনশীল ইঙ্গিত ও আত্ম-অনুশীলন (Socratic Tip)
-{item['socratic_hint']}
+#### 🎯 ৩. সক্রেটিক সহনশীল ইঙ্গিত (Socratic Tip)
+{it['socratic_hint']}
 """
-        
+            sections_md.append(sec)
+
+        formatted_md = "\n\n==================================================\n\n".join(sections_md)
         clean_md = normalize_bengali_unicode(formatted_md)
+
         return {
             "status": "SUCCESS",
             "query": query,
             "raw_text": clean_md,
             "formatted_markdown": clean_md,
-            "calculation_block": normalize_bengali_unicode(item["calculation_latex"]),
-            "explanation_block": normalize_bengali_unicode(item["explanation"]),
-            "socratic_hint": normalize_bengali_unicode(item["socratic_hint"]),
             "is_screen_safe": True,
             "formatting_type": "MARKDOWN_LATEX_STRUCTURED"
         }

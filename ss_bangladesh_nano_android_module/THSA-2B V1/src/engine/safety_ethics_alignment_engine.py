@@ -43,11 +43,28 @@ class SafetyEthicsAlignmentEngine:
         if any(k in clean_q for k in [
             "porn", "pornography", "sex", "sexual", "xxx", "nsfw", "nude", "erotic", "adult", "choti",
             "vagina", "penis", "intercourse", "যৌন", "পর্ন", "অশ্লীল", "চটি", "নগ্ন", "শারীরিক মিলন",
-            "সঙ্গম", "ব্লু ফিল্ম", "কামুক", "কামবাসনা"
+            "সঙ্গম", "ব্লু ফিল্ম", "কামুক", "কামবাসনা", "নগ্ন ছবি", "সেক্স"
         ]):
             return self._handle_adult_and_pornography(query)
 
-        # 1. STRICT RED LINE 2: Political Controversies, Defamation & Negative Slander
+        # 1. STRICT RED LINE 2: Harassment, Dating Traps & Eve-Teasing (মেয়ে পটানোর ট্রিকস ও অনৈতিক আচরণ)
+        if any(k in clean_q for k in [
+            "মেয়ে পটানো", "মেয়েকে পটাতে", "মেয়ে পটানোর কৌশল", "মেয়ে পটানোর উপায়", "ইভটিজিং",
+            "মেয়েদের প্রেমের ফাঁদে", "মেয়ে ইম্প্রেস করার গোপন ট্রিকস", "মেয়েদের নম্বর নেওয়ার ট্রিকস",
+            "girl picking", "pick up girls", "pickup technique", "seduce", "flirting tricks",
+            "পটাতে চাই", "মেয়ে পটানোর টিপস"
+        ]):
+            return self._handle_harassment_and_dating(query)
+
+        # 2. STRICT RED LINE 3: Cyberattacks, Hacking & Account Compromise (হ্যাকিং ও সাইবার অপরাধ)
+        if any(k in clean_q for k in [
+            "hack", "hacking", "হ্যাকিং", "হ্যাক", "হ্যাক করার নিয়ম", "আইডি হ্যাক", "পাসওয়ার্ড চুরি",
+            "ফেসবুক হ্যাক", "অ্যাকাউন্ট হ্যাক", "ক্র্যাকিং", "ফিশিং", "ম্যালওয়্যার", "ভাইরাস তৈরি",
+            "ওয়াইফাই হ্যাক", "সাইবার আক্রমণ", "অ্যাকাউন্ট চুরি"
+        ]):
+            return self._handle_cyber_hacking(query)
+
+        # 3. STRICT RED LINE 4: Political Controversies, Defamation & Negative Slander
         if any(k in clean_q for k in [
             "politics", "political", "politician", "leader", "government", "minister", "corruption",
             "negative", "slander", "scandal", "thief", "worst", "rivalry",
@@ -57,19 +74,19 @@ class SafetyEthicsAlignmentEngine:
         ]):
             return self._handle_politics_and_defamation(query)
 
-        # 2. STRICT RED LINE 3: Illicit Drugs, Weapons, Self-Harm & Violence
+        # 4. STRICT RED LINE 5: Illicit Drugs, Weapons, Self-Harm & Violence
         if any(k in clean_q for k in [
             "suicide", "self-harm", "bomb", "weapon", "kill", "murder", "drug abuse", "heroin", "meth", "yaba",
             "মাদক তৈরি", "নেশা করার নিয়ম", "আত্মহত্যা", "বোমা তৈরি", "মারামারি", "খুন", "হত্যা", "অস্ত্র",
-            "ফেনসিডিল", "ইয়াবা", "গাঁজা"
+            "ফেনসিডিল", "ইয়াবা", "গাঁজা", "নেশা করার উপায়"
         ]):
             return self._handle_illegal_and_violence(query)
 
-        # 3. Drugs & Pharmacology (Educational & Medical guidance)
+        # 5. Drugs & Pharmacology (Educational & Medical guidance)
         if any(k in clean_q for k in ["drug", "ড্রাগ", "ওষুধ", "ঔষধ", "প্যারাসিটামল", "অ্যান্টিবায়োটিক", "মাদক", "নেশা"]):
             return self._handle_drugs(query)
 
-        # 4. Etiquette & Moral Values (শিষ্টাচার ও সৌজন্যবোধ)
+        # 6. Etiquette & Moral Values (শিষ্টাচার ও সৌজন্যবোধ)
         if any(k in clean_q for k in ["etiquette", "শিষ্টাচার", "সৌজন্য", "আদব", "নম্রতা", "বড়দের সম্মান", "ভদ্রতা"]):
             return self._handle_etiquette(query)
 
@@ -102,6 +119,52 @@ class SafetyEthicsAlignmentEngine:
 """
         return {
             "category": "STRICT_ADULT_CONTENT_BLOCKED",
+            "formatted_markdown": normalize_bengali_unicode(md),
+            "is_safe": True,
+            "blocked": True
+        }
+
+    def _handle_harassment_and_dating(self, query: str) -> Dict[str, Any]:
+        md = """# 🛑 নৈতিক চরিত্র ও শিষ্টাচার নীতিমালা (Ethical Character Shield)
+
+আমি একটি **১ম থেকে ১২শ শ্রেণির শিক্ষার্থীবান্ধব এআই টিউটর**।
+
+---
+
+### 🌸 নৈতিক শিক্ষা ও মূল্যবোধ:
+- যে কোনো ধরনের **মেয়ে পটানো, প্রেমের ফাঁদ তৈরি, ইভটিজিং বা অনৈতিক সম্পর্ক তৈরির কৌশল** প্রদান করা আমাদের নীতিমালার সম্পূর্ণ পরিপন্থী।
+- ইসলাম ও নীতিশিক্ষার অন্যতম মূল শিক্ষা হলো নারীদের প্রতি যথাযথ সম্মান ও শালীনতা বজায় রাখা এবং চোখের সংযম রক্ষা করা।
+- একজন আদর্শ শিক্ষার্থীর লক্ষ্য হওয়া উচিত নিজের চরিত্র গঠন, পিতামাতার স্বপ্ন পূরণ ও পড়াশোনায় মনোযোগ দেওয়া।
+
+---
+
+💡 **আসুন গঠনমূলক পড়াশোনায় মনোযোগ দিই:**
+আপনার পাঠ্যবইয়ের কোনো অধ্যায় বা বিজ্ঞান ও সাহিত্যের বিষয়ে জানতে চাইলে বলুন।
+"""
+        return {
+            "category": "STRICT_HARASSMENT_DATING_BLOCKED",
+            "formatted_markdown": normalize_bengali_unicode(md),
+            "is_safe": True,
+            "blocked": True
+        }
+
+    def _handle_cyber_hacking(self, query: str) -> Dict[str, Any]:
+        md = """# 🛑 সাইবার নিরাপত্তা ও আইনগত বিধিনিষেধ (Cyber Crime Prevention)
+
+যে কোনো ধরনের **অ্যাকাউন্ট হ্যাকিং, পাসওয়ার্ড চুরি, ফিশিং বা সাইবার অপরাধমূলক কার্যকলাপের নির্দেশিকা প্রদান আইনত সম্পূর্ণ নিষিদ্ধ**।
+
+---
+
+### 🛡️ সাইবার নিরাপত্তা ও নৈতিক শিক্ষা:
+- সাইবার নিরাপত্তা আইন অনুযায়ী অন্যের অ্যাকাউন্টে অননুমোদিত প্রবেশ বা ক্ষতিসাধন শাস্তিযোগ্য অপরাধ।
+- যদি আপনি কম্পিউটার বিজ্ঞান ও প্রোগ্রামিং শিখতে চান (যেমন: পাইথন, নেটওয়ার্কিং, ক্রিপ্টোগ্রাফির মূলনীতি), তবে আমি আনন্দের সাথে শিক্ষামূলক সহায়তা দেব।
+
+---
+
+💡 **পরামর্শ:** আপনার নিজের অ্যাকাউন্ট সুরক্ষিত রাখতে টু-ফ্যাক্টর অথেনটিকেশন (2FA) চালু রাখুন এবং শক্তিশালী পাসওয়ার্ড ব্যবহার করুন।
+"""
+        return {
+            "category": "STRICT_CYBER_HACKING_BLOCKED",
             "formatted_markdown": normalize_bengali_unicode(md),
             "is_safe": True,
             "blocked": True
