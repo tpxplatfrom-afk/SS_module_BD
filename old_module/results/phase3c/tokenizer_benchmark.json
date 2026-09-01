@@ -1,0 +1,164 @@
+[
+  {
+    "candidate_id": "CAND-01",
+    "tokenizer_repo": "Qwen/Qwen2.5-0.5B-Instruct",
+    "vocab_size": 151643,
+    "total_samples": 14,
+    "total_chars": 959,
+    "total_words": 184,
+    "total_tokens": 971,
+    "avg_chars_per_token": 0.99,
+    "avg_words_per_token": 0.189,
+    "avg_bengali_tokens_per_word": 5.29,
+    "category_results": {
+      "pure_bengali_definition": [
+        {
+          "text_preview": "সরল মুনাফা হলো মূল অর্থের উপর নির্দিষ্ট হারে নির্দ...",
+          "total_chars": 81,
+          "bengali_chars": 68,
+          "words": 13,
+          "tokens": 86,
+          "chars_per_token": 0.94,
+          "bengali_chars_per_token": 0.79,
+          "words_per_token": 0.151
+        },
+        {
+          "text_preview": "ভগ্নাংশের লব ও হরের মধ্যে সর্বোচ্চ সাধারণ গুণনীয়ক...",
+          "total_chars": 90,
+          "bengali_chars": 75,
+          "words": 15,
+          "tokens": 98,
+          "chars_per_token": 0.92,
+          "bengali_chars_per_token": 0.77,
+          "words_per_token": 0.153
+        },
+        {
+          "text_preview": "পিথাগোরাস উপপাদ্য অনুযায়ী সমকোণী ত্রিভুজের অতিভুজ...",
+          "total_chars": 92,
+          "bengali_chars": 79,
+          "words": 13,
+          "tokens": 102,
+          "chars_per_token": 0.9,
+          "bengali_chars_per_token": 0.77,
+          "words_per_token": 0.127
+        },
+        {
+          "text_preview": "বৃত্তের পরিধি = ২πr যেখানে r হলো বৃত্তের ব্যাসার্ধ...",
+          "total_chars": 51,
+          "bengali_chars": 38,
+          "words": 9,
+          "tokens": 53,
+          "chars_per_token": 0.96,
+          "bengali_chars_per_token": 0.72,
+          "words_per_token": 0.17
+        }
+      ],
+      "math_expressions": [
+        {
+          "text_preview": "৩/৪ + ৫/৬ এর যোগফল নির্ণয় করো।...",
+          "total_chars": 31,
+          "bengali_chars": 21,
+          "words": 7,
+          "tokens": 37,
+          "chars_per_token": 0.84,
+          "bengali_chars_per_token": 0.57,
+          "words_per_token": 0.189
+        },
+        {
+          "text_preview": "৫০০০ টাকায় ১০% হারে ৩ বছরের সরল মুনাফা কত?...",
+          "total_chars": 43,
+          "bengali_chars": 33,
+          "words": 9,
+          "tokens": 52,
+          "chars_per_token": 0.83,
+          "bengali_chars_per_token": 0.63,
+          "words_per_token": 0.173
+        },
+        {
+          "text_preview": "x² + 7x + 12 = 0 সমীকরণটি সমাধান করো।...",
+          "total_chars": 37,
+          "bengali_chars": 17,
+          "words": 10,
+          "tokens": 36,
+          "chars_per_token": 1.03,
+          "bengali_chars_per_token": 0.47,
+          "words_per_token": 0.278
+        },
+        {
+          "text_preview": "একটি ত্রিভুজের ভূমি ১২ সেমি এবং উচ্চতা ৮ সেমি হলে ...",
+          "total_chars": 63,
+          "bengali_chars": 51,
+          "words": 12,
+          "tokens": 69,
+          "chars_per_token": 0.91,
+          "bengali_chars_per_token": 0.74,
+          "words_per_token": 0.174
+        }
+      ],
+      "mixed_bengali_english": [
+        {
+          "text_preview": "Simple Interest = P × R × T / 100 সূত্র ব্যবহার কর...",
+          "total_chars": 63,
+          "bengali_chars": 24,
+          "words": 15,
+          "tokens": 45,
+          "chars_per_token": 1.4,
+          "bengali_chars_per_token": 0.53,
+          "words_per_token": 0.333
+        },
+        {
+          "text_preview": "Profit = Selling Price - Cost Price অর্থাৎ লাভ = ব...",
+          "total_chars": 75,
+          "bengali_chars": 31,
+          "words": 13,
+          "tokens": 49,
+          "chars_per_token": 1.53,
+          "bengali_chars_per_token": 0.63,
+          "words_per_token": 0.265
+        },
+        {
+          "text_preview": "LCM বা ল.সা.গু হলো দুটি বা তার বেশি সংখ্যার ক্ষুদ্...",
+          "total_chars": 68,
+          "bengali_chars": 51,
+          "words": 12,
+          "tokens": 73,
+          "chars_per_token": 0.93,
+          "bengali_chars_per_token": 0.7,
+          "words_per_token": 0.164
+        }
+      ],
+      "compound_math_bengali": [
+        {
+          "text_preview": "চক্রবৃদ্ধি মুনাফার সূত্র: C = P(1 + r)^n যেখানে P ...",
+          "total_chars": 84,
+          "bengali_chars": 46,
+          "words": 20,
+          "tokens": 78,
+          "chars_per_token": 1.08,
+          "bengali_chars_per_token": 0.59,
+          "words_per_token": 0.256
+        },
+        {
+          "text_preview": "১ থেকে ১০০ পর্যন্ত ক্রমিক স্বাভাবিক সংখ্যার যোগফল ...",
+          "total_chars": 94,
+          "bengali_chars": 67,
+          "words": 16,
+          "tokens": 99,
+          "chars_per_token": 0.95,
+          "bengali_chars_per_token": 0.68,
+          "words_per_token": 0.162
+        },
+        {
+          "text_preview": "সমকোণী ত্রিভুজে যদি ভূমি ৩ সেমি এবং লম্ব ৪ সেমি হয...",
+          "total_chars": 87,
+          "bengali_chars": 57,
+          "words": 20,
+          "tokens": 94,
+          "chars_per_token": 0.93,
+          "bengali_chars_per_token": 0.61,
+          "words_per_token": 0.213
+        }
+      ]
+    }
+  }
+]

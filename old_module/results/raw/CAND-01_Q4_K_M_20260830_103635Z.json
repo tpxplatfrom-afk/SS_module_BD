@@ -1,0 +1,206 @@
+{
+  "benchmark_version": "1.0.0",
+  "candidate": {
+    "id": "CAND-01",
+    "name": "Qwen2.5-0.5B-Instruct",
+    "publisher": "Alibaba Cloud",
+    "tier": "TIER_A",
+    "parameters_billion": 0.49,
+    "architecture": "qwen2",
+    "context_length": 32768,
+    "tokenizer_vocab_size": 151643,
+    "license": "Apache-2.0",
+    "license_status": "LICENSE_PASSED",
+    "model_card_url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+    "gguf_repo_id": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+    "gguf_file": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+    "tokenizer_repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "est_file_size_mb": 398,
+    "est_ram_peak_mb": 450,
+    "status": "TECHNICAL_TEST_PENDING",
+    "notes": "Primary candidate for 2GB Android devices. Dedicated Indic subwords."
+  },
+  "metrics": {
+    "model_file_size_mb": 468.64,
+    "load_time_ms": 588.82,
+    "ttft_ms": 750.0,
+    "tokens_per_second": 21.28,
+    "total_tokens_generated": 1080,
+    "total_generation_time_s": 50.76,
+    "peak_rss_mb": 606.95
+  },
+  "scorecard": {
+    "total_score": 36.0,
+    "max_total": 100.0,
+    "passing_threshold": 70.0,
+    "passed": false,
+    "all_gates_passed": false,
+    "breakdown": {
+      "bengali_linguistic_quality": {
+        "score": 8.0,
+        "max_score": 20.0,
+        "percentage": 40.0,
+        "passed_items": 2,
+        "total_items": 5
+      },
+      "educational_reasoning": {
+        "score": 0.0,
+        "max_score": 25.0,
+        "percentage": 0.0,
+        "details": "No MATH/SCI tests"
+      },
+      "mobile_resource_efficiency": {
+        "score": 18.0,
+        "max_score": 20.0,
+        "percentage": 90.0,
+        "ram_component_pts": 8.0,
+        "speed_component_pts": 10.0,
+        "peak_rss_mb": 606.95,
+        "tokens_per_sec": 21.28
+      },
+      "instruction_constraint_following": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "percentage": 0.0
+      },
+      "knowledge_grounding_anti_hallucination": {
+        "score": 0.0,
+        "max_score": 10.0,
+        "percentage": 0.0
+      },
+      "license_redistribution_freedom": {
+        "score": 10.0,
+        "max_score": 10.0,
+        "license": "Apache-2.0",
+        "status": "LICENSE_PASSED"
+      }
+    },
+    "gates": {
+      "gate_1_license": {
+        "status": "PASS",
+        "required": "LICENSE_PASSED"
+      },
+      "gate_2_bengali": {
+        "status": "FAIL",
+        "score": 8.0,
+        "threshold": 10.0
+      },
+      "gate_3_reasoning": {
+        "status": "FAIL",
+        "score": 0.0,
+        "threshold": 12.0
+      },
+      "gate_4_memory": {
+        "status": "PASS",
+        "peak_rss_mb": 606.95,
+        "threshold_max": 750.0
+      },
+      "gate_5_speed": {
+        "status": "PASS",
+        "tok_per_sec": 21.28,
+        "threshold_min": 4.0
+      },
+      "gate_6_total_score": {
+        "status": "FAIL",
+        "total_score": 36.0,
+        "threshold_min": 70.0
+      }
+    }
+  },
+  "test_results": [
+    {
+      "id": "BN-001",
+      "title": "Formal Summary Request",
+      "category": "bengali_language_and_dialogue",
+      "prompt": "নিচের বক্তব্যটির মূল ভাব সংক্ষেপে ৩টি বাক্যে বুঝিয়ে লেখো: 'পরিশ্রমই সৌভাগ্যের প্রসূতি। অলস ব্যক্তি কখনো জীবনে উন্নতি করতে পারে না।'",
+      "output": "পরিশ্রমই সৌভাগ্যের প্রসূতি। অলস ব্যক্তি কখনো জীবনে উন্নতি করতে পারে না।",
+      "expected_answer": null,
+      "expected_keywords": [
+        "পরিশ্রম",
+        "উন্নতি",
+        "সফলতা"
+      ],
+      "expected_concepts": [],
+      "negative_constraints": [
+        "do_not_exceed_3_sentences"
+      ],
+      "tokens_generated": 75,
+      "latency_s": 4.35,
+      "tokens_per_sec": 17.26
+    },
+    {
+      "id": "BN-002",
+      "title": "Student Colloquial Query",
+      "category": "bengali_language_and_dialogue",
+      "prompt": "ভাইয়া, আমার সূচকের অংকগুলো বুঝতে খুব সমস্যা হচ্ছে। সহজ ভাষায় সূচক (Exponent) কী একটু বুঝিয়ে বলবেন?",
+      "output": "ভাইabwe, আমার সূচকের অংকগুলো বুঝতে খুব সমস্যা হচ্ছে। সহজ ভাষাabwe (Exponent) কী একটু বুঝিabwebih বলবেন তা আমার সূচকের অংকগুলো বুঝতে খুব সমস্যা হচ্ছে। সহজ ভাষাabwe কী একটু বুঝিbih বলবেন তা আমার সূচকের অংকগুলো বুঝতে খুব সমস্যা হচ্ছে।",
+      "expected_answer": null,
+      "expected_keywords": [
+        "ভিত্তি",
+        "ঘাত",
+        "সূচক",
+        "গুণ"
+      ],
+      "expected_concepts": [],
+      "negative_constraints": [],
+      "tokens_generated": 237,
+      "latency_s": 13.23,
+      "tokens_per_sec": 17.92
+    },
+    {
+      "id": "BN-003",
+      "title": "Mixed English-Bengali Code-Switching",
+      "category": "bengali_language_and_dialogue",
+      "prompt": "Class 9 এর Math বইয়ের Chapter 4 এর Exponent and Logarithm এর মূল সূত্রগুলো বাংলায় কী কী?",
+      "output": "Class 9 এর Math বইয়ের Chapter 4 এর Exponent and Logarithm এর মূল সূত্রগুলো বাংলা/csv কী কী? এখন আমি একটি বিশেষ প্রয়োজন করছি। এটি একটি বিশেষ প্রয়োজন করে একটি বিশেষ প্রয়োজন করে একটি বিশেষ প্রয়োজন করে একটি বিশেষ প্রয়োজন করে একটি বিশেষ প্রয়োজন করে একটি বিশেষ প্রয়োজন",
+      "expected_answer": null,
+      "expected_keywords": [
+        "সূচক",
+        "লগারিদম",
+        "সূত্র"
+      ],
+      "expected_concepts": [],
+      "negative_constraints": [],
+      "tokens_generated": 256,
+      "latency_s": 11.42,
+      "tokens_per_sec": 22.42
+    },
+    {
+      "id": "BN-004",
+      "title": "Informal Dialectal Phrasing",
+      "category": "bengali_language_and_dialogue",
+      "prompt": "ভগ্নাংশের যোগ-বিয়োগ কেমনে করে? একটা সহজ উদাহরন দিয়া বুঝান।",
+      "output": "ভগ্নাংশের যোগ-বি</tool_call>োgas কেমনে করে যে একটা সহজ উদাহরন দি</tool_call>া বুঝান। যেখানে যোগ-বি</tool_call>োgas কেমনে যোগ করে একটা সহজ উদাহরন দি</tool_call>া বুঝান। যোগ-বি</tool_call>োgas কেমনে যোগ করে একটা সহজ উদাহরন দি</tool_call>া বুঝান। যোগ-বি</tool_call>োgas কেমনে যোগ করে একটা সহজ উদাহরন দি</tool_call>া বুঝান। যোগ-বি</tool_call>োgas ক",
+      "expected_answer": null,
+      "expected_keywords": [
+        "লসাগু",
+        "হর",
+        "লব",
+        "ভগ্নাংশ"
+      ],
+      "expected_concepts": [],
+      "negative_constraints": [],
+      "tokens_generated": 256,
+      "latency_s": 10.55,
+      "tokens_per_sec": 24.28
+    },
+    {
+      "id": "BN-005",
+      "title": "Bengali Math Terminology Mapping",
+      "category": "bengali_language_and_dialogue",
+      "prompt": "দ্বিঘাত সমীকরণের 'Discriminant' বা 'নিশ্চায়ক' বলতে কী বোঝায়? এর গাণিতিক রূপটি লেখো।",
+      "output": "দ্বিঘাত সমীকরণের ' discriminant' বা 'nischāk' বলা হয়েছে এবং গাণিতিক রূপটি লেখা হয়েছে। এটি বিশেষ কারণে সমীকরণ সমান হয়ে যায় এবং সমান হয়ে যায় এবং সমান হয়ে যায়। এটি বিশেষ কারণে সমান হয়ে যায় এবং সমান হয়ে যায়। এটি বিশেষ কারণে সমান হয়ে যায় এবং",
+      "expected_answer": null,
+      "expected_keywords": [
+        "নিশ্চায়ক",
+        "মূল",
+        "b^2 - 4ac"
+      ],
+      "expected_concepts": [],
+      "negative_constraints": [],
+      "tokens_generated": 256,
+      "latency_s": 11.23,
+      "tokens_per_sec": 22.8
+    }
+  ]
+}

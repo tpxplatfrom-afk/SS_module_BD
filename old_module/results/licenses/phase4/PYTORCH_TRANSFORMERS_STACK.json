@@ -1,0 +1,11 @@
+{
+  "component_id": "PYTORCH_TRANSFORMERS_STACK",
+  "name": "PyTorch + Hugging Face Transformers + Tokenizers",
+  "source": "Open Source FOSS ecosystem",
+  "license": "Apache-2.0 / BSD-3-Clause",
+  "commercial_use": true,
+  "redistribution": true,
+  "training_use_permitted": true,
+  "license_gate_status": "LICENSE_PASSED",
+  "decision": "APPROVED_FOR_PRODUCTION"
+}

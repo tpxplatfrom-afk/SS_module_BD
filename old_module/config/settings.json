@@ -1,0 +1,34 @@
+{
+  "project_name": "SS Tutor BD",
+  "version": "1.2.0",
+  "default_candidate": "CAND-01",
+  "min_disk_free_mb": 1500,
+  "max_model_size_mb": 1200,
+  "default_threads": 4,
+  "default_context_length": 1024,
+  "default_temperature": 0.1,
+  "directories": {
+    "active_model": "models/active",
+    "benchmarks": "benchmarks",
+    "results_raw": "results/raw",
+    "results_reports": "results/reports",
+    "results_failures": "results/failures",
+    "results_phase3b": "results/phase3b"
+  },
+  "production_memory_contract": {
+    "preferred_peak_rss_mb": 200.0,
+    "warning_peak_rss_mb": 250.0,
+    "hard_ceiling_peak_rss_mb": 250.0,
+    "max_production_model_size_mb": 150.0,
+    "target_rag_index_memory_mb": 15.0,
+    "default_production_context_length": 1024
+  },
+  "sequential_gates": {
+    "gate_1_license": "LICENSE_PASSED",
+    "gate_2_bengali_min_score": 14.0,
+    "gate_3_reasoning_min_score": 15.0,
+    "gate_4_max_peak_rss_mb": 250.0,
+    "gate_5_min_tokens_per_sec": 4.0,
+    "gate_6_min_total_score": 70.0
+  }
+}

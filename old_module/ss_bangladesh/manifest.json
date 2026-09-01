@@ -1,0 +1,49 @@
+{
+  "manifest_version": "1.0.0",
+  "model_id": "ss_bangladesh",
+  "canonical_name": "SS Bangladesh Core Model Master",
+  "model_family": "SS_Bangladesh",
+  "version": "0.8.2",
+  "model_type": "Causal Autoregressive Transformer",
+  "architecture": "LlamaForCausalLM (10L / 576H / 2304FFN / 8A / 256Ctx)",
+  "parameter_count": 71528256,
+  "parameter_count_str": "71.53M",
+  "tensor_count": 93,
+  "dtype": "float32",
+  "vocabulary_size": 16000,
+  "context_length": 256,
+  "tokenizer_id": "tokenizer_bengali_16k",
+  "tokenizer_version": "0.4.0",
+  "tokenizer_tokens_per_word": "3.65 - 3.86",
+  "base_checkpoint_type": "UNTRAINED_RECONSTRUCTABLE_BASELINE",
+  "training_status": "UNTRAINED_REUSABLE_BASE",
+  "domain_status": "DOMAIN_NEUTRAL (No Curriculum/Domain Bias)",
+  "creation_timestamp": "2026-08-30T23:30:00+06:00",
+  "initialization_seed": 42,
+  "initialization_method": "Truncated Normal Distribution (sigma=0.02)",
+  "license": "Apache-2.0",
+  "files_checksums_sha256": {
+    "config/architecture.json": "da751b609a49610721a11ea474894c234b4ab07849cba3b431c27ae83e88d2eb",
+    "model/config.json": "21cfc88d04f88eb8c87766b187dde6db798397331886da1fe7cf972b916e0364",
+    "model/generation_config.json": "fe20b9ee19352c9ed8e48e05166112cb50b419cfef5f0e31aabf48e99f822099",
+    "model/model.safetensors": "bb2f9e7cd79ef83546fd70ea97d8845cff17a7a8482580c3e63e36c4614119bb",
+    "tokenizer/tokenizer.json": "962a759ddaa4c0e177b9ad3b866a54e4c2f5d3e810261872ddb16288b84f6848",
+    "tokenizer/tokenizer_config.json": "bf0f80de3e181b74df7c6d2c3a27370da554dd005fc56b5ff479150e469c7d45"
+  },
+  "lineage": {
+    "parent": null,
+    "type": "ROOT_MASTER_CORE_AI",
+    "downstream_specializations": [
+      {
+        "specialization_id": "ss_tutor_bd",
+        "domain": "Bangladesh High School Education (NCTB Class 6-10)",
+        "active_checkpoint": "models/sstutor_bengali_70m_edu/model.safetensors"
+      },
+      {
+        "specialization_id": "mechanics_module",
+        "domain": "Applied Physics & Mechanics Education",
+        "active_checkpoint": "PLANNED_FUTURE_FORK"
+      }
+    ]
+  }
+}

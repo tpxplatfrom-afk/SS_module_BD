@@ -1,0 +1,128 @@
+{
+  "timestamp": "2026-08-30T23:10:00+06:00",
+  "total_curriculum_concepts_defined": 278,
+  "covered_concepts_count": 50,
+  "missing_concepts_count": 228,
+  "overall_curriculum_coverage_pct": 17.99,
+  "grade_breakdown": {
+    "grade_6": {
+      "total_concepts": 58,
+      "covered_concepts": 0,
+      "coverage_pct": 0.0,
+      "subjects": {
+        "mathematics": {
+          "total_concepts": 32,
+          "covered_concepts": 0,
+          "coverage_pct": 0.0,
+          "status": "MISSING_SOURCE"
+        },
+        "science": {
+          "total_concepts": 17,
+          "covered_concepts": 0,
+          "coverage_pct": 0.0,
+          "status": "MISSING_SOURCE"
+        },
+        "bengali": {
+          "total_concepts": 9,
+          "covered_concepts": 0,
+          "coverage_pct": 0.0,
+          "status": "MISSING_SOURCE"
+        }
+      }
+    },
+    "grade_7": {
+      "total_concepts": 39,
+      "covered_concepts": 0,
+      "coverage_pct": 0.0,
+      "subjects": {
+        "mathematics": {
+          "total_concepts": 29,
+          "covered_concepts": 0,
+          "coverage_pct": 0.0,
+          "status": "MISSING_SOURCE"
+        },
+        "science": {
+          "total_concepts": 10,
+          "covered_concepts": 0,
+          "coverage_pct": 0.0,
+          "status": "MISSING_SOURCE"
+        }
+      }
+    },
+    "grade_8": {
+      "total_concepts": 77,
+      "covered_concepts": 50,
+      "coverage_pct": 64.94,
+      "subjects": {
+        "mathematics": {
+          "total_concepts": 50,
+          "covered_concepts": 50,
+          "coverage_pct": 100.0,
+          "status": "COVERED"
+        },
+        "science": {
+          "total_concepts": 16,
+          "covered_concepts": 0,
+          "coverage_pct": 0.0,
+          "status": "MISSING_SOURCE"
+        },
+        "bengali": {
+          "total_concepts": 11,
+          "covered_concepts": 0,
+          "coverage_pct": 0.0,
+          "status": "MISSING_SOURCE"
+        }
+      }
+    },
+    "grade_9": {
+      "total_concepts": 62,
+      "covered_concepts": 0,
+      "coverage_pct": 0.0,
+      "subjects": {
+        "mathematics": {
+          "total_concepts": 49,
+          "covered_concepts": 0,
+          "coverage_pct": 0.0,
+          "status": "MISSING_SOURCE"
+        },
+        "science": {
+          "total_concepts": 13,
+          "covered_concepts": 0,
+          "coverage_pct": 0.0,
+          "status": "MISSING_SOURCE"
+        }
+      }
+    },
+    "grade_10": {
+      "total_concepts": 42,
+      "covered_concepts": 0,
+      "coverage_pct": 0.0,
+      "subjects": {
+        "mathematics": {
+          "total_concepts": 32,
+          "covered_concepts": 0,
+          "coverage_pct": 0.0,
+          "status": "MISSING_SOURCE"
+        },
+        "science": {
+          "total_concepts": 10,
+          "covered_concepts": 0,
+          "coverage_pct": 0.0,
+          "status": "MISSING_SOURCE"
+        }
+      }
+    }
+  },
+  "active_dataset_categories_detected": [
+    "factual_adherence",
+    "fraction_addition",
+    "simple_interest",
+    "compound_interest",
+    "anti_hallucination_refusal",
+    "series_sum",
+    "circle_area",
+    "quadratic_equation",
+    "pythagoras"
+  ],
+  "verdict": "PARTIAL_COVERAGE (Class 8 Math complete; Grades 6, 7, 9, 10 marked MISSING_SOURCE)"
+}

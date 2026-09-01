@@ -1,0 +1,240 @@
+{
+  "scaling_table": [
+    {
+      "words": 1,
+      "characters": 4,
+      "codepoints": 4,
+      "bytes": 12,
+      "tokens": 4,
+      "tokens_per_word": 4.0,
+      "bytes_per_token": 3.0,
+      "roundtrip_integrity": true
+    },
+    {
+      "words": 10,
+      "characters": 69,
+      "codepoints": 69,
+      "bytes": 189,
+      "tokens": 57,
+      "tokens_per_word": 5.7,
+      "bytes_per_token": 3.316,
+      "roundtrip_integrity": true
+    },
+    {
+      "words": 50,
+      "characters": 355,
+      "codepoints": 355,
+      "bytes": 967,
+      "tokens": 279,
+      "tokens_per_word": 5.58,
+      "bytes_per_token": 3.466,
+      "roundtrip_integrity": true
+    },
+    {
+      "words": 100,
+      "characters": 727,
+      "codepoints": 727,
+      "bytes": 1983,
+      "tokens": 574,
+      "tokens_per_word": 5.74,
+      "bytes_per_token": 3.455,
+      "roundtrip_integrity": true
+    },
+    {
+      "words": 250,
+      "characters": 1794,
+      "codepoints": 1794,
+      "bytes": 4884,
+      "tokens": 1408,
+      "tokens_per_word": 5.632,
+      "bytes_per_token": 3.469,
+      "roundtrip_integrity": true
+    },
+    {
+      "words": 500,
+      "characters": 3589,
+      "codepoints": 3589,
+      "bytes": 9769,
+      "tokens": 2814,
+      "tokens_per_word": 5.628,
+      "bytes_per_token": 3.472,
+      "roundtrip_integrity": true
+    },
+    {
+      "words": 1000,
+      "characters": 7177,
+      "codepoints": 7177,
+      "bytes": 19533,
+      "tokens": 5624,
+      "tokens_per_word": 5.624,
+      "bytes_per_token": 3.473,
+      "roundtrip_integrity": true
+    },
+    {
+      "words": 2000,
+      "characters": 14332,
+      "codepoints": 14332,
+      "bytes": 38998,
+      "tokens": 11224,
+      "tokens_per_word": 5.612,
+      "bytes_per_token": 3.475,
+      "roundtrip_integrity": true
+    },
+    {
+      "words": 5000,
+      "characters": 35839,
+      "codepoints": 35839,
+      "bytes": 97519,
+      "tokens": 28064,
+      "tokens_per_word": 5.613,
+      "bytes_per_token": 3.475,
+      "roundtrip_integrity": true
+    },
+    {
+      "words": 10000,
+      "characters": 71677,
+      "codepoints": 71677,
+      "bytes": 195033,
+      "tokens": 56124,
+      "tokens_per_word": 5.612,
+      "bytes_per_token": 3.475,
+      "roundtrip_integrity": true
+    }
+  ],
+  "unicode_robustness": {
+    "swaraborno": {
+      "sample": "\u0985 \u0986 \u0987 \u0988 \u0989 \u098a \u098b \u098f \u0990 \u0993 \u0994",
+      "chars": 21,
+      "bytes": 43,
+      "tokens": 17,
+      "decoded": "\u0985 \u0986 \u0987 \u0988 \u0989 \u098a \u098b \u098f \u0990 \u0993 \u0994",
+      "integrity": true
+    },
+    "byanjonborno": {
+      "sample": "\u0995 \u0996 \u0997 \u0998 \u0999 \u099a \u099b \u099c \u099d \u099e \u099f \u09a0 \u09a1 \u09a2 \u09a3 \u09a4 \u09a5 \u09a6 \u09a7 \u09a8 \u09aa \u09ab \u09ac \u09ad \u09ae \u09af \u09b0 \u09b2 \u09b6 \u09b7 \u09b8 \u09b9",
+      "chars": 63,
+      "bytes": 127,
+      "tokens": 42,
+      "decoded": "\u0995 \u0996 \u0997 \u0998 \u0999 \u099a \u099b \u099c \u099d \u099e \u099f \u09a0 \u09a1 \u09a2 \u09a3 \u09a4 \u09a5 \u09a6 \u09a7 \u09a8 \u09aa \u09ab \u09ac \u09ad \u09ae \u09af \u09b0 \u09b2 \u09b6 \u09b7 \u09b8 \u09b9",
+      "integrity": true
+    },
+    "kaar": {
+      "sample": "\u0995\u09be \u0995\u09bf \u0995\u09c0 \u0995\u09c1 \u0995\u09c2 \u0995\u09c3 \u0995\u09c7 \u0995\u09c8 \u0995\u09cb \u0995\u09cc",
+      "chars": 29,
+      "bytes": 69,
+      "tokens": 21,
+      "decoded": "\u0995\u09be \u0995\u09bf \u0995\u09c0 \u0995\u09c1 \u0995\u09c2 \u0995\u09c3 \u0995\u09c7 \u0995\u09c8 \u0995\u09cb \u0995\u09cc",
+      "integrity": true
+    },
+    "fola": {
+      "sample": "\u0995\u09cd\u09af \u0995\u09cd\u09b0 \u0995\u09cd\u09ac \u0995\u09cd\u09b2 \u0995\u09cd\u09a8 \u0995\u09cd\u09ae",
+      "chars": 23,
+      "bytes": 59,
+      "tokens": 18,
+      "decoded": "\u0995\u09cd\u09af \u0995\u09cd\u09b0 \u0995\u09cd\u09ac \u0995\u09cd\u09b2 \u0995\u09cd\u09a8 \u0995\u09cd\u09ae",
+      "integrity": true
+    },
+    "juktakkhor": {
+      "sample": "\u0995\u09cd\u09b7 \u099c\u09cd\u099e \u09b7\u09cd\u09a3 \u0999\u09cd\u0995 \u0999\u09cd\u0997 \u099e\u09cd\u099a \u099e\u09cd\u099b \u099e\u09cd\u099c \u099e\u09cd\u099d \u09a3\u09cd\u099f \u09a3\u09cd\u09a0 \u09a3\u09cd\u09a1 \u09a3\u09cd\u09a3 \u09a4\u09cd\u09a4 \u09a5\u09cd\u09ac \u09a6\u09cd\u09a6 \u09a6\u09cd\u09ac \u09a7\u09cd\u09ac \u09a8\u09cd\u09a4 \u09a8\u09cd\u09a5 \u09a8\u09cd\u09a6 \u09a8\u09cd\u09a7 \u09a8\u09cd\u09a8 \u09aa\u09cd\u09a4 \u09aa\u09cd\u09b8 \u09ac\u09cd\u09a6 \u09ac\u09cd\u09a7 \u09ae\u09cd\u09aa \u09ae\u09cd\u09ab \u09ae\u09cd\u09ac \u09ae\u09cd\u09ad \u09ae\u09cd\u09ae \u09b2\u09cd\u0995 \u09b2\u09cd\u0997 \u09b2\u09cd\u09aa \u09b2\u09cd\u099f \u09b2\u09cd\u09a1 \u09b2\u09cd\u09aa \u09b2\u09cd\u09ac \u09b2\u09cd\u09ae \u09b7\u09cd\u0995 \u09b7\u09cd\u099f \u09b7\u09cd\u09a0 \u09b7\u09cd\u09a3 \u09b7\u09cd\u09aa \u09b7\u09cd\u09ab \u09b8\u09cd\u0995 \u09b8\u09cd\u0996 \u09b8\u09cd\u09a4 \u09b8\u09cd\u09a5 \u09b8\u09cd\u09a8 \u09b8\u09cd\u09aa \u09b8\u09cd\u09ab \u09b8\u09cd\u09ae \u09b8\u09cd\u09af \u09b8\u09cd\u09b0 \u09b6\u09cd\u099a \u09b6\u09cd\u09a8 \u09b6\u09cd\u09b2 \u09b6\u09cd\u09ac",
+      "chars": 239,
+      "bytes": 599,
+      "tokens": 198,
+      "decoded": "\u0995\u09cd\u09b7 \u099c\u09cd\u099e \u09b7\u09cd\u09a3 \u0999\u09cd\u0995 \u0999\u09cd\u0997 \u099e\u09cd\u099a \u099e\u09cd\u099b \u099e\u09cd\u099c \u099e\u09cd\u099d \u09a3\u09cd\u099f \u09a3\u09cd\u09a0 \u09a3\u09cd\u09a1 \u09a3\u09cd\u09a3 \u09a4\u09cd\u09a4 \u09a5\u09cd\u09ac \u09a6\u09cd\u09a6 \u09a6\u09cd\u09ac \u09a7\u09cd\u09ac \u09a8\u09cd\u09a4 \u09a8\u09cd\u09a5 \u09a8\u09cd\u09a6 \u09a8\u09cd\u09a7 \u09a8\u09cd\u09a8 \u09aa\u09cd\u09a4 \u09aa\u09cd\u09b8 \u09ac\u09cd\u09a6 \u09ac\u09cd\u09a7 \u09ae\u09cd\u09aa \u09ae\u09cd\u09ab \u09ae\u09cd\u09ac \u09ae\u09cd\u09ad \u09ae\u09cd\u09ae \u09b2\u09cd\u0995 \u09b2\u09cd\u0997 \u09b2\u09cd\u09aa \u09b2\u09cd\u099f \u09b2\u09cd\u09a1 \u09b2\u09cd\u09aa \u09b2\u09cd\u09ac \u09b2\u09cd\u09ae \u09b7\u09cd\u0995 \u09b7\u09cd\u099f \u09b7\u09cd\u09a0 \u09b7\u09cd\u09a3 \u09b7\u09cd\u09aa \u09b7\u09cd\u09ab \u09b8\u09cd\u0995 \u09b8\u09cd\u0996 \u09b8\u09cd\u09a4 \u09b8\u09cd\u09a5 \u09b8\u09cd\u09a8 \u09b8\u09cd\u09aa \u09b8\u09cd\u09ab \u09b8\u09cd\u09ae \u09b8\u09cd\u09af \u09b8\u09cd\u09b0 \u09b6\u09cd\u099a \u09b6\u09cd\u09a8 \u09b6\u09cd\u09b2 \u09b6\u09cd\u09ac",
+      "integrity": true
+    },
+    "nukta_specials": {
+      "sample": "\u09dc \u09dd \u09df \u09ce \u0982 \u0983 \u0981",
+      "chars": 13,
+      "bytes": 27,
+      "tokens": 14,
+      "decoded": "\u09dc \u09dd \u09df \u09ce \u0982 \u0983 \u0981",
+      "integrity": true
+    },
+    "bengali_numerals": {
+      "sample": "\u09e6 \u09e7 \u09e8 \u09e9 \u09ea \u09eb \u09ec \u09ed \u09ee \u09ef",
+      "chars": 19,
+      "bytes": 39,
+      "tokens": 10,
+      "decoded": "\u09e6 \u09e7 \u09e8 \u09e9 \u09ea \u09eb \u09ec \u09ed \u09ee \u09ef",
+      "integrity": true
+    },
+    "arabic_numerals": {
+      "sample": "0 1 2 3 4 5 6 7 8 9",
+      "chars": 19,
+      "bytes": 19,
+      "tokens": 10,
+      "decoded": "0 1 2 3 4 5 6 7 8 9",
+      "integrity": true
+    },
+    "math_notation": {
+      "sample": "x^2 + 2xy + y^2 = (x+y)^2, \u221a16 = 4, a/b * c/d = ac/bd, \u03c0 \u2248 3.14159, \u03b8 = 45\u00b0",
+      "chars": 75,
+      "bytes": 82,
+      "tokens": 54,
+      "decoded": "x^2 + 2xy + y^2 = (x+y)^2, \u221a16 = 4, a/b * c/d = ac/bd, \u03c0 \u2248 3.14159, \u03b8 = 45\u00b0",
+      "integrity": true
+    },
+    "mixed_bangla_english": {
+      "sample": "Class 8 \u098f\u09b0 Math \u09ac\u0987\u09df\u09c7\u09b0 Chapter 2 \u098f\u09b0 Profit-Loss \u0985\u0982\u0995 \u09b8\u09ae\u09be\u09a7\u09be\u09a8 \u0995\u09b0\u09cb\u0964 Formula: I = Pnr",
+      "chars": 79,
+      "bytes": 123,
+      "tokens": 55,
+      "decoded": "Class 8 \u098f\u09b0 Math \u09ac\u0987\u09df\u09c7\u09b0 Chapter 2 \u098f\u09b0 Profit-Loss \u0985\u0982\u0995 \u09b8\u09ae\u09be\u09a7\u09be\u09a8 \u0995\u09b0\u09cb\u0964 Formula: I = Pnr",
+      "integrity": true
+    },
+    "punctuation_symbols": {
+      "sample": "\u0964 , ; : ? ! - ( ) [ ] { } ' \" @ # $ % & *",
+      "chars": 41,
+      "bytes": 43,
+      "tokens": 38,
+      "decoded": "\u0964 , ; : ? ! - ( ) [ ] { } ' \" @ # $ % & *",
+      "integrity": true
+    },
+    "emojis": {
+      "sample": "\ud83d\udcd8 \ud83d\udcd0 \u270f\ufe0f \ud83c\udde7\ud83c\udde9 \ud83d\udca1 \u2728",
+      "chars": 13,
+      "bytes": 34,
+      "tokens": 32,
+      "decoded": "\ud83d\udcd8 \ud83d\udcd0 \u270f\ufe0f \ud83c\udde7\ud83c\udde9 \ud83d\udca1 \u2728",
+      "integrity": true
+    }
+  },
+  "worst_case_analysis": {
+    "dense_diacritics": {
+      "chars": 120,
+      "bytes": 360,
+      "tokens": 120,
+      "ratio_tok_per_char": 1.0
+    },
+    "repeating_zwj_zwnj": {
+      "chars": 80,
+      "bytes": 240,
+      "tokens": 160,
+      "ratio_tok_per_char": 2.0
+    },
+    "alternating_scripts": {
+      "chars": 100,
+      "bytes": 200,
+      "tokens": 105,
+      "ratio_tok_per_char": 1.05
+    },
+    "dense_numerals": {
+      "chars": 200,
+      "bytes": 400,
+      "tokens": 140,
+      "ratio_tok_per_char": 0.7
+    },
+    "single_huge_word": {
+      "chars": 280,
+      "bytes": 840,
+      "tokens": 252,
+      "ratio_tok_per_char": 0.9
+    },
+    "excessive_whitespace": {
+      "chars": 100,
+      "bytes": 200,
+      "tokens": 51,
+      "ratio_tok_per_char": 0.51
+    }
+  }
+}

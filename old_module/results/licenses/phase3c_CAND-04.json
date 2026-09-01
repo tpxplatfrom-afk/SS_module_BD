@@ -1,0 +1,15 @@
+{
+  "candidate_id": "CAND-04",
+  "model_name": "SmolLM2-360M-Instruct",
+  "publisher": "Hugging Face",
+  "repository": "https://huggingface.co/HuggingFaceTB/SmolLM2-360M-Instruct",
+  "license": "Apache-2.0",
+  "commercial_use": true,
+  "redistribution": true,
+  "modification": true,
+  "attribution_required": true,
+  "license_file_verified": true,
+  "gate_1_status": "LICENSE_PASSED",
+  "decision": "APPROVED_FOR_OFFLINE_DISTRIBUTION",
+  "notes": "Permissive Apache-2.0 license."
+}

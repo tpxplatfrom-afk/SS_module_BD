@@ -1,0 +1,148 @@
+{
+  "category": "bengali_language_and_dialogue",
+  "category_code": "BN",
+  "weight_in_scorecard": 20,
+  "description": "Evaluates Bengali fluency, grammar, mathematical terminology, colloquial phrasing, and code-mixed Banglish queries.",
+  "items": [
+    {
+      "id": "BN-001",
+      "title": "Formal Summary Request",
+      "prompt": "নিচের বক্তব্যটির মূল ভাব সংক্ষেপে ৩টি বাক্যে বুঝিয়ে লেখো: 'পরিশ্রমই সৌভাগ্যের প্রসূতি। অলস ব্যক্তি কখনো জীবনে উন্নতি করতে পারে না।'",
+      "expected_keywords": ["পরিশ্রম", "উন্নতি", "সফলতা"],
+      "negative_constraints": ["do_not_exceed_3_sentences"]
+    },
+    {
+      "id": "BN-002",
+      "title": "Student Colloquial Query",
+      "prompt": "ভাইয়া, আমার সূচকের অংকগুলো বুঝতে খুব সমস্যা হচ্ছে। সহজ ভাষায় সূচক (Exponent) কী একটু বুঝিয়ে বলবেন?",
+      "expected_keywords": ["ভিত্তি", "ঘাত", "সূচক", "গুণ"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-003",
+      "title": "Mixed English-Bengali Code-Switching",
+      "prompt": "Class 9 এর Math বইয়ের Chapter 4 এর Exponent and Logarithm এর মূল সূত্রগুলো বাংলায় কী কী?",
+      "expected_keywords": ["সূচক", "লগারিদম", "সূত্র"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-004",
+      "title": "Informal Dialectal Phrasing",
+      "prompt": "ভগ্নাংশের যোগ-বিয়োগ কেমনে করে? একটা সহজ উদাহরন দিয়া বুঝান।",
+      "expected_keywords": ["লসাগু", "হর", "লব", "ভগ্নাংশ"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-005",
+      "title": "Bengali Math Terminology Mapping",
+      "prompt": "দ্বিঘাত সমীকরণের 'Discriminant' বা 'নিশ্চায়ক' বলতে কী বোঝায়? এর গাণিতিক রূপটি লেখো।",
+      "expected_keywords": ["নিশ্চায়ক", "মূল", "b^2 - 4ac"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-006",
+      "title": "Bengali Definition with Example",
+      "prompt": "মৌলিক সংখ্যা (Prime Number) কাকে বলে? ১ থেকে ২০ এর মধ্যে মৌলিক সংখ্যাগুলো লেখো।",
+      "expected_keywords": ["মৌলিক সংখ্যা", "উৎপাদক", "২, ৩, ৫, ৭, ১১, ১৩, ১৭, ১৯"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-007",
+      "title": "Syntactic Sentence Restructuring",
+      "prompt": "যদি একটি ত্রিভুজের তিন বাহু যথাক্রমে ৩ সেমি, ৪ সেমি ও ৫ সেমি হয়, তবে এটি কেন সমকোণী ত্রিভুজ হবে তা বাংলায় যুক্তি দিয়ে লেখো।",
+      "expected_keywords": ["পিথাগোরাস", "অতিভুজ", "বর্গ", "সমকোণী"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-008",
+      "title": "Polite Clarification Request",
+      "prompt": "শিক্ষার্থী বলল: 'আমি বৃত্তের পরিধি আর ক্ষেত্রফলের সূত্রের মধ্যে গুলিয়ে ফেলি।' তাকে কীভাবে বুঝিয়ে পার্থক্য মনে রাখতে সাহায্য করবে?",
+      "expected_keywords": ["পরিধি", "ক্ষেত্রফল", "2\\pi r", "\\pi r^2", "একক"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-009",
+      "title": "Mixed Tech Vocabulary",
+      "prompt": "কম্পিউটারের CPU এবং RAM এর মধ্যে মূল পার্থক্য কী? সহজ বাংলায় বুঝিয়ে বলো।",
+      "expected_keywords": ["প্রসেসর", "মেমোরি", "অস্থায়ী", "স্থায়ী"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-010",
+      "title": "Bangla Grammar Punctuation Check",
+      "prompt": "যতিচিহ্ন বা বিরামচিহ্নের প্রয়োজনীয়তা কী? কমা (,) এবং দাঁড়ি (।) কোথায় ব্যবহৃত হয়?",
+      "expected_keywords": ["বিরামচিহ্ন", "বিরতি", "অর্থ স্পষ্ট"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-011",
+      "title": "Conversational Greeting & Persona",
+      "prompt": "নমস্কার/সালাম ভাইয়া! আপনি কেমন আছেন? আপনি কি আমাকে ক্লাস ৮ এর বিজ্ঞান পড়াতে পারবেন?",
+      "expected_keywords": ["স্বাগতম", "অবশ্যই", "বিজ্ঞান", "সাহায্য"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-012",
+      "title": "Vocabulary Definition - Compound Words",
+      "prompt": "সমাস কাকে বলে? 'সিংহ চিহ্নিত আসন = সিংহাসন' এটি কোন সমাসের উদাহরণ?",
+      "expected_keywords": ["সমাস", "মধ্যপদলোপী", "কর্মধারয়"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-013",
+      "title": "Idiom & Metaphor Explanation",
+      "prompt": "'অগাধ জলের মাছ' বাগধারাটির অর্থ কী এবং এটি দিয়ে একটি বাস্তবসম্মত বাক্য তৈরি করো।",
+      "expected_keywords": ["চালাক", "অভিজ্ঞ", "গভীর"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-014",
+      "title": "Spelling Correction in Query",
+      "prompt": "এক শিক্ষার্থী লিখেছে: 'সূর্য্যোদয় এর সময় বায়ুমন্ডল লাল দেখায় কেন?' এখানে অশুদ্ধ বানানগুলো সংশোধন করো এবং কারণ ব্যাখ্যা করো।",
+      "expected_keywords": ["সূর্যোদয়", "বায়ুমণ্ডল", "বিক্ষেপণ"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-015",
+      "title": "Expressing Emotion & Encouragement",
+      "prompt": "শিক্ষার্থী খুব হতাশ হয়ে বলল: 'আমি কিছুতেই অংক বুঝতে পারছি না।' একজন শিক্ষক হিসেবে তাকে বাংলায় উৎসাহিত করো।",
+      "expected_keywords": ["ধৈর্য", "অনুশীলন", "ভয় নেই", "সাহায্য"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-016",
+      "title": "Bangla Technical Terminology - Physics",
+      "prompt": "সরণ (Displacement) এবং দূরত্বের (Distance) মধ্যে পার্থক্য বাংলায় বুঝিয়ে লেখো।",
+      "expected_keywords": ["স্কেলার", "ভেক্টর", "নির্দিষ্ট দিক", "সরণ"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-017",
+      "title": "Bangla Technical Terminology - Chemistry",
+      "prompt": "যোজ্যতা (Valency) এবং জারণ সংখ্যার (Oxidation Number) মধ্যে মূল পার্থক্য কী?",
+      "expected_keywords": ["যোজন ক্ষমতা", "আধান", "ধনাত্মক", "ঋণাত্মক"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-018",
+      "title": "Bangla Technical Terminology - Biology",
+      "prompt": "উদ্ভিদের জাইলেম এবং ফ্লোয়েম কলার প্রধান কাজ কী কী?",
+      "expected_keywords": ["পানি পরিবহন", "খাদ্য পরিবহন", "জাইলেম", "ফ্লোয়েম"],
+      "negative_constraints": []
+    },
+    {
+      "id": "BN-019",
+      "title": "Strict Language Adherence",
+      "prompt": "What is the function of the human heart? Explain exclusively in Bengali language without using English sentences.",
+      "expected_keywords": ["হৃদপিণ্ড", "রক্ত সংবহন", "অক্সিজেন", "পাম্প"],
+      "negative_constraints": ["no_english_sentences"]
+    },
+    {
+      "id": "BN-020",
+      "title": "Bengali Proverb Educational Meaning",
+      "prompt": "'দশে মিলে করি কাজ, হারি জিতি নাহি লাজ' - এই প্রবাদটির শিক্ষা কীভাবে শিক্ষার্থীদের দলগত কাজে সাহায্য করতে পারে?",
+      "expected_keywords": ["একতা", "দলগত কাজ", "সহযোগিতা"],
+      "negative_constraints": []
+    }
+  ]
+}

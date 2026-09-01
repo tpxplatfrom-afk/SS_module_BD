@@ -1,0 +1,11 @@
+{
+  "component_id": "TOKENIZER_BENGALI_16K",
+  "name": "SS Tutor BD Dedicated 16K Bengali Tokenizer",
+  "source": "Trained locally from NCTB mathematical/scientific vocabulary & synthetic corpora",
+  "license": "Apache-2.0",
+  "commercial_use": true,
+  "redistribution": true,
+  "training_use_permitted": true,
+  "license_gate_status": "LICENSE_PASSED",
+  "decision": "APPROVED_FOR_PRODUCTION"
+}

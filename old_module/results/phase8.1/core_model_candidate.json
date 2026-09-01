@@ -1,0 +1,26 @@
+{
+  "core_model_master_definition": {
+    "status": "IDENTIFIED",
+    "base_model_status": "BASE_MODEL_RECONSTRUCTABLE",
+    "architecture_class": "LlamaForCausalLM",
+    "config": {
+      "vocab_size": 16000,
+      "hidden_size": 576,
+      "intermediate_size": 2304,
+      "num_hidden_layers": 10,
+      "num_attention_heads": 8,
+      "num_key_value_heads": 8,
+      "hidden_act": "silu",
+      "max_position_embeddings": 256,
+      "initializer_range": 0.02
+    },
+    "reusable_tokenizer_path": "models/tokenizer_bengali_16k/",
+    "reusable_runtime_path": "core/runtime/micro_runtime.py",
+    "specialization_boundary": {
+      "is_current_safetensors_generic_base": false,
+      "current_safetensors_identity": "SS_TUTOR_BD_CLASS8_MATH_SPECIALIZATION",
+      "future_forking_supported": true,
+      "forking_mechanics_ready": true
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "phase": "4",
+  "project": "SS Tutor BD",
+  "model_name": "sstutor-bengali-70m-edu",
+  "seed": 42,
+  "tokenizer": {
+    "path": "models/tokenizer_bengali_16k",
+    "vocab_size": 16000,
+    "special_tokens_count": 18
+  },
+  "architecture": {
+    "candidate_id": "Candidate_B_70M",
+    "hidden_size": 576,
+    "num_hidden_layers": 10,
+    "num_attention_heads": 8,
+    "intermediate_size": 2304,
+    "hidden_act": "silu",
+    "max_position_embeddings": 256,
+    "tie_word_embeddings": false,
+    "total_parameters": 68244480
+  },
+  "training": {
+    "dataset_paths": [
+      "data/phase4/math/math_verbalization.jsonl",
+      "data/phase4/socratic/socratic_hints.jsonl",
+      "data/phase4/grounding/grounding_dataset.jsonl",
+      "data/phase4/bengali/bengali_variants.jsonl"
+    ],
+    "total_training_examples": 13000,
+    "max_sequence_length": 256,
+    "batch_size": 8,
+    "learning_rate": 0.0003,
+    "lr_scheduler": "cosine",
+    "warmup_steps": 100,
+    "weight_decay": 0.01,
+    "optimizer": "AdamW",
+    "device": "cpu",
+    "quantization_target": "INT4",
+    "target_binary_size_mb": 34.1,
+    "target_peak_rss_mb": 110.0
+  }
+}

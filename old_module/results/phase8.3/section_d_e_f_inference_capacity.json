@@ -1,0 +1,183 @@
+{
+  "loading_metrics": {
+    "tokenizer_load_time_ms": 10.6,
+    "model_load_time_ms": 157.0,
+    "first_inference_latency_ms": 541.97,
+    "model_ram_footprint_mb": 3.61
+  },
+  "context_capacity": [
+    {
+      "context_length": 64,
+      "status": "PASS",
+      "classification": "SAFE",
+      "latency_ms": 266.85,
+      "memory_delta_mb": 247.23,
+      "logits_shape": [
+        1,
+        64,
+        16000
+      ],
+      "error": null
+    },
+    {
+      "context_length": 128,
+      "status": "PASS",
+      "classification": "SAFE",
+      "latency_ms": 120.3,
+      "memory_delta_mb": 16.6,
+      "logits_shape": [
+        1,
+        128,
+        16000
+      ],
+      "error": null
+    },
+    {
+      "context_length": 192,
+      "status": "PASS",
+      "classification": "SAFE",
+      "latency_ms": 174.04,
+      "memory_delta_mb": 14.95,
+      "logits_shape": [
+        1,
+        192,
+        16000
+      ],
+      "error": null
+    },
+    {
+      "context_length": 256,
+      "status": "PASS",
+      "classification": "SAFE",
+      "latency_ms": 216.16,
+      "memory_delta_mb": 21.23,
+      "logits_shape": [
+        1,
+        256,
+        16000
+      ],
+      "error": null
+    },
+    {
+      "context_length": 320,
+      "status": "PASS",
+      "classification": "UNSUPPORTED_EXTRAPOLATION",
+      "latency_ms": 261.88,
+      "memory_delta_mb": 3.38,
+      "logits_shape": [
+        1,
+        320,
+        16000
+      ],
+      "error": null
+    },
+    {
+      "context_length": 384,
+      "status": "PASS",
+      "classification": "UNSUPPORTED_EXTRAPOLATION",
+      "latency_ms": 322.13,
+      "memory_delta_mb": 25.67,
+      "logits_shape": [
+        1,
+        384,
+        16000
+      ],
+      "error": null
+    },
+    {
+      "context_length": 512,
+      "status": "PASS",
+      "classification": "UNSUPPORTED_EXTRAPOLATION",
+      "latency_ms": 468.01,
+      "memory_delta_mb": 18.92,
+      "logits_shape": [
+        1,
+        512,
+        16000
+      ],
+      "error": null
+    },
+    {
+      "context_length": 768,
+      "status": "PASS",
+      "classification": "UNSUPPORTED_EXTRAPOLATION",
+      "latency_ms": 731.61,
+      "memory_delta_mb": 38.46,
+      "logits_shape": [
+        1,
+        768,
+        16000
+      ],
+      "error": null
+    },
+    {
+      "context_length": 1024,
+      "status": "PASS",
+      "classification": "UNSUPPORTED_EXTRAPOLATION",
+      "latency_ms": 986.98,
+      "memory_delta_mb": 67.25,
+      "logits_shape": [
+        1,
+        1024,
+        16000
+      ],
+      "error": null
+    }
+  ],
+  "generation_capacity": [
+    {
+      "requested_new_tokens": 16,
+      "actual_generated_tokens": 16,
+      "total_time_s": 0.542,
+      "tokens_per_second": 29.52,
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "requested_new_tokens": 32,
+      "actual_generated_tokens": 32,
+      "total_time_s": 1.1154,
+      "tokens_per_second": 28.69,
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "requested_new_tokens": 64,
+      "actual_generated_tokens": 64,
+      "total_time_s": 2.0731,
+      "tokens_per_second": 30.87,
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "requested_new_tokens": 128,
+      "actual_generated_tokens": 128,
+      "total_time_s": 4.2802,
+      "tokens_per_second": 29.91,
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "requested_new_tokens": 192,
+      "actual_generated_tokens": 192,
+      "total_time_s": 7.0136,
+      "tokens_per_second": 27.38,
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "requested_new_tokens": 256,
+      "actual_generated_tokens": 233,
+      "total_time_s": 8.4392,
+      "tokens_per_second": 27.61,
+      "status": "PASS",
+      "error": null
+    }
+  ],
+  "oversized_input_behavior": {
+    "raw_tokens": 2001,
+    "configured_max_context": 256,
+    "runtime_truncation_applied": true,
+    "truncated_tokens": 256
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-30T21:50:28.864111",
+  "environment": "python_emulated",
+  "total_questions": 75,
+  "passed": 75,
+  "score": 100.0,
+  "by_type": {
+    "math": {
+      "pass": 30,
+      "total": 30
+    },
+    "hint": {
+      "pass": 5,
+      "total": 5
+    },
+    "concept": {
+      "pass": 20,
+      "total": 20
+    },
+    "grounding": {
+      "pass": 20,
+      "total": 20
+    }
+  },
+  "gates": {
+    "overall_score": {
+      "req": 90.0,
+      "val": 100.0,
+      "pass": true
+    },
+    "math_accuracy": {
+      "req": 98.0,
+      "val": 100.0,
+      "pass": true
+    },
+    "grounding": {
+      "req": 95.0,
+      "val": 100.0,
+      "pass": true
+    },
+    "hint_compliance": {
+      "req": 95.0,
+      "val": 100.0,
+      "pass": true
+    }
+  },
+  "avg_latency_ms": 0.01,
+  "note": "EMULATED - NOT PRODUCTION PROOF. Real neural model quality requires Android APK testing."
+}

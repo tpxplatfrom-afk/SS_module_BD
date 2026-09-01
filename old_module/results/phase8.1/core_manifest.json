@@ -1,0 +1,56 @@
+{
+  "manifest_version": "1.0.0",
+  "purpose": "Proposed Core Model Master Manifest without physically moving files",
+  "classifications": {
+    "CORE_REQUIRED": [
+      "training/train_micro_model.py (Architecture Builder)",
+      "models/tokenizer_bengali_16k/ (16K BPE Tokenizer)",
+      "configs/phase8_training.json (Core Architecture Config)",
+      "core/runtime/micro_runtime.py (Bounded Inference Engine)",
+      "core/runtime/memory_budget.py (Memory Contract Enforcement)",
+      "core/runtime/session_manager.py (O(1) Bounded Session Engine)",
+      "core/curriculum/schema.py (Ontology & Deterministic IDs)",
+      "core/curriculum/boundaries.py (CurriculumScope Abstractions)",
+      "core/tutor_module.py (Developer Integration API Contract)"
+    ],
+    "CORE_OPTIONAL": [
+      "models/manager.py",
+      "models/registry.json",
+      "core/sanitization/cleaner.py"
+    ],
+    "SS_TUTOR_SPECIFIC": [
+      "models/sstutor_bengali_70m_edu/model.safetensors (Trained Class 8 Weights)",
+      "models/export_int4/ (Quantized 34MB Class 8 Model)",
+      "packs/class8_math/ (Class 8 NCTB Math Knowledge Pack)",
+      "data/phase4/ (13,000 Class 8 Math Training Pairs)",
+      "core/math/ (Exact NCTB Mathematics Solvers)",
+      "core/validation/ (Pedagogical & Math Validators)"
+    ],
+    "RUNTIME_ONLY": [
+      "runtimes/base.py",
+      "runtimes/llama_cpp_runtime.py",
+      "runtimes/mock_runtime.py"
+    ],
+    "ANDROID_ONLY": [
+      "android/app/",
+      "benchmarks/android/real_device/"
+    ],
+    "TRAINING_ONLY": [
+      "scripts/train_micro_model.py",
+      "scripts/generate_phase7_queries.py",
+      "scripts/purge_training_artifacts.py"
+    ],
+    "TEST_ONLY": [
+      "tests/",
+      "benchmarks/"
+    ],
+    "BUILD_ONLY": [
+      "scripts/build_android_assets.py",
+      "scripts/audit_release.py"
+    ],
+    "TEMPORARY": [
+      "scratch/",
+      "__pycache__/"
+    ]
+  }
+}

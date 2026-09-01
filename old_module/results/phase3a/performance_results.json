@@ -1,0 +1,29 @@
+{
+  "candidate_id": "CAND-01",
+  "model_name": "Qwen2.5-0.5B-Instruct",
+  "quantization": "Q4_K_M",
+  "model_file_size_mb": 468.64,
+  "peak_rss_mb": 738.07,
+  "target_rss_mb": 750.0,
+  "rss_passed": true,
+  "retrieval": {
+    "recall_at_1_pct": 86.67,
+    "recall_at_3_pct": 91.67,
+    "recall_at_5_pct": 91.67,
+    "avg_retrieval_latency_ms": 1.39
+  },
+  "inference": {
+    "tokens_per_second": 9.94,
+    "total_tokens": 12670,
+    "total_inference_time_s": 1274.28,
+    "avg_time_per_question_s": 25.49
+  },
+  "scorecard": {
+    "grounded_tutor_score_pct": 68.0,
+    "math_correctness_pct": 58.0,
+    "bengali_quality_pct": 10.0,
+    "grounding_adherence_pct": 100.0,
+    "pedagogy_pct": 72.0,
+    "hint_compliance_rate_pct": 100.0
+  }
+}

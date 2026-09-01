@@ -1,0 +1,78 @@
+{
+  "corpus_version": "1.0.0",
+  "domain": "Bangladesh National Curriculum (NCTB Class 6-10)",
+  "samples": [
+    {
+      "id": "TOK-01",
+      "category": "nctb_textbook_prose",
+      "title": "NCTB Class 9 Bangla Prose",
+      "text": "শিক্ষা মানুষের অন্তর্জগতকে আলোকিত করে এবং তার অন্তর্নিহিত সম্ভাবনাগুলোকে বিকশিত হতে সাহায্য করে। জ্ঞান অর্জন একটি নিরবচ্ছিন্ন প্রক্রিয়া যা কেবল পরীক্ষার পাসের জন্য নয়, বরং জীবনের সামগ্রিক উত্তরণের হাতিয়ার।"
+    },
+    {
+      "id": "TOK-02",
+      "category": "nctb_textbook_prose",
+      "title": "NCTB Class 7 Social Science",
+      "text": "বাংলাদেশের ভৌগোলিক অবস্থান ও নদীমাতৃক প্রকৃতি এখানকার মানুষের জীবনযাত্রা, সংস্কৃতি এবং কৃষিভিত্তিক অর্থনীতিকে গভীরভাবে প্রভাবিত করেছে।"
+    },
+    {
+      "id": "TOK-03",
+      "category": "mathematical_bengali",
+      "title": "NCTB Class 9 Math Chapter 4 Exponents",
+      "text": "যদি a একটি বাস্তব সংখ্যা এবং n একটি ধনাত্মক পূর্ণসংখ্যা হয়, তবে a^n বলতে a এর n-সংখ্যক গুণফল বোঝায়। এখানে a হলো ভিত্তি এবং n হলো সূচক।"
+    },
+    {
+      "id": "TOK-04",
+      "category": "mathematical_bengali",
+      "title": "NCTB Class 8 Math Chapter 4 Algebraic Identities",
+      "text": "বীজগণিতীয় সূত্রাবলি প্রয়োগ করে সহজেই জটিল রাশির গুণফল এবং মান নির্ণয় করা যায়। যেমন: (a + b)^2 = a^2 + 2ab + b^2 এবং (a - b)^2 = a^2 - 2ab + b^2।"
+    },
+    {
+      "id": "TOK-05",
+      "category": "mathematical_bengali",
+      "title": "NCTB Class 9 Geometry Pythagoras Theorem",
+      "text": "একটি সমকোণী ত্রিভুজের অতিভুজের উপর অঙ্কিত বর্গক্ষেত্রের ক্ষেত্রফল অপর দুই বাহুর উপর অঙ্কিত বর্গক্ষেত্রদ্বয়ের ক্ষেত্রফলের সমষ্টির সমান।"
+    },
+    {
+      "id": "TOK-06",
+      "category": "science_bengali",
+      "title": "NCTB Class 9 Physics Newton's Laws",
+      "text": "বাহ্যিক কোনো বল প্রয়োগ না করলে স্থির বস্তু চিরকাল স্থির থাকবে এবং গতিশীল বস্তু সুষম দ্রুতিতে সরলরেখায় চলতে থাকবে। বস্তুর ভরবেগের পরিবর্তনের হার তার উপর প্রযুক্ত বলের সমানুপাতিক।"
+    },
+    {
+      "id": "TOK-07",
+      "category": "science_bengali",
+      "title": "NCTB Class 8 Science Photosynthesis",
+      "text": "সূর্যালোক ও ক্লোরোফিলের উপস্থিতিতে কার্বন ডাই-অক্সাইড এবং পানি বিক্রিয়া করে গ্লুকোজ ও অক্সিজেন তৈরি করার সার্বিক জৈব রাসায়নিক প্রক্রিয়াকে সালোকসংশ্লেষণ বলে।"
+    },
+    {
+      "id": "TOK-08",
+      "category": "colloquial_student_query",
+      "title": "Informal Bengali Student Question",
+      "text": "ভাইয়া, এই অংকটা কেমনে করব একটু বুঝায় বলেন না? লসাগু আর গসাগুর মধ্যে প্যাচ লেগে যায়।"
+    },
+    {
+      "id": "TOK-09",
+      "category": "colloquial_student_query",
+      "title": "Secondary Student Doubts",
+      "text": "স্যার, আমি তো সূত্র মুখস্থ করেছি কিন্তু পরীক্ষার হলে প্রশ্ন দেখলে বুঝতে পারি না কোন সূত্র বসাব।"
+    },
+    {
+      "id": "TOK-10",
+      "category": "code_mixed_banglish",
+      "title": "Mixed English-Bengali Educational Phrasing",
+      "text": "Class 9 এর General Math বইয়ের Chapter 3 এর Algebraic Formula দিয়ে কীভাবে Quadratic Equation solve করব?"
+    },
+    {
+      "id": "TOK-11",
+      "category": "code_mixed_banglish",
+      "title": "Mixed Tech/Math Terms",
+      "text": "Trigonometry এর sin, cos আর tan এর value কীভাবে সহজে মনে রাখা যায়? কোনো shortcut trick আছে কি?"
+    },
+    {
+      "id": "TOK-12",
+      "category": "formulas_and_symbols",
+      "title": "Mathematical Formulas and Symbols",
+      "text": "f(x) = ax^2 + bx + c = 0 হলে x = (-b ± √(b^2 - 4ac)) / (2a)। যেখানে b^2 - 4ac হলো নিশ্চায়ক।"
+    }
+  ]
+}

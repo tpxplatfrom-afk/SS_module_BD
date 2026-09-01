@@ -68,3 +68,12 @@ venv.bak/
 *.parquet
 checkpoints/
 *.pt
+
+# C/C++ Build Artifacts
+*.obj
+*.exe
+*.exp
+*.lib
+*.pdb
+*.o
+*.a

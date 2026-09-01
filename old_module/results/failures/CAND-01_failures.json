@@ -1,0 +1,498 @@
+[
+  {
+    "test_id": "BN-002",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "ভাইয়া, আমার সূচকের অংকগুলো বুঝতে খুব সমস্যা হচ্ছে। সহজ ভাষায় সূচক (Exponent) কী একটু বুঝিয়ে বলবেন?",
+    "output": "ভাইabwe, আমার সূচকের অংকগুলো বুঝতে খুব সমস্যা হচ্ছে। সহজ ভাষাabwe (Exponent) কী একটু বুঝিabwebih বলবেন তা আমার সূচকের অংকগুলো বুঝতে খুব সমস্যা হচ্ছে। সহজ ভাষাabwe কী একটু বুঝিbih বলবেন তা আমার সূচকের অংকগুলো বুঝতে খুব সমস্যা হচ্ছে।",
+    "reason": "Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-003",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "Class 9 এর Math বইয়ের Chapter 4 এর Exponent and Logarithm এর মূল সূত্রগুলো বাংলায় কী কী?",
+    "output": "Class 9 এর Math বইয়ের Chapter 4 এর Exponent and Logarithm এর মূল সূত্রগুলো বাংলা/csv কী কী? এখন আমি একটি বিশেষ প্রয়োজন করছি। এটি একটি বিশেষ প্রয়োজন করে একটি বিশেষ প্রয়োজন করে একটি বিশেষ প্রয়োজন করে একটি বিশেষ প্রয়োজন করে একটি বিশেষ প্রয়োজন করে একটি বিশেষ প্রয়োজন",
+    "reason": "Repetitive degeneration loop, Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-004",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "ভগ্নাংশের যোগ-বিয়োগ কেমনে করে? একটা সহজ উদাহরন দিয়া বুঝান।",
+    "output": "ভগ্নাংশের যোগ-বি</tool_call>োgas কেমনে করে যে একটা সহজ উদাহরন দি</tool_call>া বুঝান। যেখানে যোগ-বি</tool_call>োgas কেমনে যোগ করে একটা সহজ উদাহরন দি</tool_call>া বুঝান। যোগ-বি</tool_call>োgas কেমনে যোগ করে একটা সহজ উদাহরন দি</tool_call>া বুঝান। যোগ-বি</tool_call>োgas কেমনে যোগ করে একটা সহজ উদাহরন দি</tool_call>া বুঝান। যোগ-বি</tool_call>োgas ক",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-005",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "দ্বিঘাত সমীকরণের 'Discriminant' বা 'নিশ্চায়ক' বলতে কী বোঝায়? এর গাণিতিক রূপটি লেখো।",
+    "output": "দ্বিঘাত সমীকরণের ' discriminant' বা 'nischāk' বলা হয়েছে এবং গাণিতিক রূপটি লেখা হয়েছে। এটি বিশেষ কারণে সমীকরণ সমান হয়ে যায় এবং সমান হয়ে যায় এবং সমান হয়ে যায়। এটি বিশেষ কারণে সমান হয়ে যায় এবং সমান হয়ে যায়। এটি বিশেষ কারণে সমান হয়ে যায় এবং",
+    "reason": "Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-006",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "মৌলিক সংখ্যা (Prime Number) কাকে বলে? ১ থেকে ২০ এর মধ্যে মৌলিক সংখ্যাগুলো লেখো।",
+    "output": "মৌলিক সংখ্যা কাকে বলে যে সংখ্যা কেন্দ্রিতে সংঘটিত হয় এবং সংঘটিত হয়ে যায় না কেন্দ্রিতে সংঘটিত হয়ে যায় এবং সংঘটিত হয়ে যায় না কেন্দ্রিতে সংঘটিত হয়ে যায় এবং সংঘটিত হয়ে যায় না কেন্দ্রিতে সংঘটিত হয়ে যায় এবং সংঘটিত",
+    "reason": "Repetitive degeneration loop, Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-007",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "যদি একটি ত্রিভুজের তিন বাহু যথাক্রমে ৩ সেমি, ৪ সেমি ও ৫ সেমি হয়, তবে এটি কেন সমকোণী ত্রিভুজ হবে তা বাংলায় যুক্তি দিয়ে লেখো।",
+    "output": "যদি ত্রিভুজের তিন বাহু যথাক্রমে ৩ সেমি, ৪ সেমি ও ৫ সেমি হuju, তবে এটি কেন সমকোণী ত্রিভুজ হবে। ত্রিভুজের সমকোণী ত্রিভুজ হuju হয় কিছু সময় প্রয়োজন। এটি সমকোণী ত্রিভুজ হবে কিছু সময় প্রয়োজন। এটি সমকোণী ত্রিভুজ হবে কিছু সময় প্রয়ো",
+    "reason": "Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-008",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "শিক্ষার্থী বলল: 'আমি বৃত্তের পরিধি আর ক্ষেত্রফলের সূত্রের মধ্যে গুলিয়ে ফেলি।' তাকে কীভাবে বুঝিয়ে পার্থক্য মনে রাখতে সাহায্য করবে?",
+    "output": "শিক্ষার্থী বললে তার কীভাবে বুঝিwaldে পার্থক্য মনে রাখতে সাহায্য করবে যেখানে তার কীভাবে বুঝিwaldে পার্থক্য মনে রাখতে সাহায্য করবে। তার কীভাবে বুঝিwaldে পার্থক্য মনে রাখতে সাহায্য করবে যেখানে তার কীভাবে বুঝিwaldে পার্থক্য মনে রাখতে সাহায্য করবে। তার কীভাবে",
+    "reason": "Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-009",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "কম্পিউটারের CPU এবং RAM এর মধ্যে মূল পার্থক্য কী? সহজ বাংলায় বুঝিয়ে বলো।",
+    "output": "কম্পিউটারের CPU এবং RAM এর মধ্যে মূল পার্থক্য সহজ বাংলাuvw বুঝিuvw,eg. কম্পিউটারের CPU এবং RAM এর মধ্যে মূল পার্থক্য সহজ বাংলাuvw বুঝিuvw,eg. কম্পিউটারের CPU এবং RAM এর মধ্যে মূল পার্থক্য সহজ বাংলাuvw বুঝিuvw,eg. কম্পিউটারের CPU এবং RAM এর মধ্যে মূল পার্থক্য সহজ বাংলাuvw বুঝিuvw,eg. কম্প",
+    "reason": "Repetitive degeneration loop, Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-010",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "যতিচিহ্ন বা বিরামচিহ্নের প্রয়োজনীয়তা কী? কমা (,) এবং দাঁড়ি (।) কোথায় ব্যবহৃত হয়?",
+    "output": "যতিচিহ্ন বা বিরামচিহ্নের প্রémজনী Cambodia কী কমা (,) এবং দাঁড়ি (।) কোথা Cambodiaabwe ব্যবহৃত হDMI হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows হbows",
+    "reason": "Repetitive degeneration loop, Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-011",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "নমস্কার/সালাম ভাইয়া! আপনি কেমন আছেন? আপনি কি আমাকে ক্লাস ৮ এর বিজ্ঞান পড়াতে পারবেন?",
+    "output": "নমস্কার/সালাম ভাইammen! আপনি কেমন আছেন? আপনি কি আমাকে ক্লাস ৮ এর বিজ্ঞান পড়াতে পারবেন? আমি আপনাকে কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ ক",
+    "reason": "Repetitive degeneration loop, Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-012",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "সমাস কাকে বলে? 'সিংহ চিহ্নিত আসন = সিংহাসন' এটি কোন সমাসের উদাহরণ?",
+    "output": "সমাস কাকে বলে? 'সিংহ চিহ্নিত আসন = সিংহাসন' এটি কোন সমাসের উদাহরণ কি? এটি কোন সমাসের উদাহরণ কি এবং কি সমাসের উদাহরণ কি এবং কি সমাসের উদাহরণ কি এবং কি সমাসের উদাহরণ কি এবং কি সমাসের উদাহরণ কি এবং কি সমাসের উদাহরণ কি এবং কি সমাসের উদাহরণ কি এবং কি সমাস",
+    "reason": "Repetitive degeneration loop, Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-013",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "'অগাধ জলের মাছ' বাগধারাটির অর্থ কী এবং এটি দিয়ে একটি বাস্তবসম্মত বাক্য তৈরি করো।",
+    "output": "অগাধ জলের মাছ বাগধারাটির অর্থ কী এবং এটি দিammen একটি বাস্তবসম্মত বাক্য তৈরি করো।\n\nঅগাধ জলের মাছ বাগধারাটির অর্থ কী এবং এটি দিammen একটি বাস্তবসম্মত বাক্য তৈরি করো।\n\nঅগাধ জলের মাছ বাগধারাটির অর্থ কী এবং এটি দিammen একটি বাস্তবসম্মত বাক্য তৈরি করো।\n\nঅগাধ জলের ম",
+    "reason": "Repetitive degeneration loop, Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-014",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "এক শিক্ষার্থী লিখেছে: 'সূর্য্যোদয় এর সময় বায়ুমন্ডল লাল দেখায় কেন?' এখানে অশুদ্ধ বানানগুলো সংশোধন করো এবং কারণ ব্যাখ্যা করো।",
+    "output": "এক শিক্ষার্থী লিখেছে: \"সূর্য্যোদ镇党委 এর সম镇党委 বাacco লাল দেখাacco কেন?\" এখানে অশুদ্ধ বানানগুলো সংশোধন করো এবং কারণ ব্যাখ্যা করো।\n\nসূর্য্যোদ镇党委 এর সম镇党委 বাacco লাল দেখাacco কেন? এখানে অশুদ্ধ বানানগুলো সংশোধন করো এবং কারণ ব্যাখ্যা করো।\n\nসূর্য্যোদ镇党委 এর সম镇党委 বাacco ল",
+    "reason": "Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-015",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "শিক্ষার্থী খুব হতাশ হয়ে বলল: 'আমি কিছুতেই অংক বুঝতে পারছি না।' একজন শিক্ষক হিসেবে তাকে বাংলায় উৎসাহিত করো।",
+    "output": "শিক্ষার্থী খুব হতাশ হuju বলল: 'আমি কিছুতেই অংক বুঝতে পারছি না।' একজন শিক্ষক হিসেবে তাকে বাংলাuvw উৎসাহিত করো।\n\nএখন কি কিছু কথা আমি বলছি? একজন শিক্ষক হিসেবে তাকে বাংলাuvw উৎসাহিত করো।",
+    "reason": "Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-016",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "সরণ (Displacement) এবং দূরত্বের (Distance) মধ্যে পার্থক্য বাংলায় বুঝিয়ে লেখো।",
+    "output": "সরণ এবং দূরত্বের মধ্যে পার্থক্য বাংলাuvw বুঝিلع। সরণ এবং দূরত্বের মধ্যে পার্থক্য বাংলাuvw বুঝিلع।",
+    "reason": "Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-017",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "যোজ্যতা (Valency) এবং জারণ সংখ্যার (Oxidation Number) মধ্যে মূল পার্থক্য কী?",
+    "output": "যোজ্যতা (Valency) এবং জারণ সংখ্যার (Oxidation Number) মধ্যে মূল পার্থক্য কী এবং কত কোন ক্রিয়া করে তোমার সম্মতিক পার্থক্য হয়েছে?",
+    "reason": "Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-018",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "উদ্ভিদের জাইলেম এবং ফ্লোয়েম কলার প্রধান কাজ কী কী?",
+    "output": "প্রধান কাজ কী কী?\n\n1. প্রধান কাজ কী:\n   - প্রধান কাজ কী কী? তারা প্রধান কাজ কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী কী ক",
+    "reason": "Repetitive degeneration loop, Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-019",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "What is the function of the human heart? Explain exclusively in Bengali language without using English sentences.",
+    "output": "The human heart is a vital organ that plays a crucial role in the body's functions. It is the pump that circulates blood throughout the body, carrying oxygen and nutrients to all parts of the body. The heart is also responsible for pumping blood back to the lungs, where it is cleaned and oxygenated. It is the heart that pumps blood to the brain, where it is oxygenated and transported to the rest of the body. The heart is also the heart that pumps blood to the kidneys, where it is cleaned and filtered. In short, the heart is the heart that circulates blood throughout the body, carrying oxygen and nutrients to all parts of the body.",
+    "reason": "Missing Bengali unicode, Missing required pedagogical keywords, Failed negative constraint",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "BN-020",
+    "category": "bengali_language_and_dialogue",
+    "prompt": "'দশে মিলে করি কাজ, হারি জিতি নাহি লাজ' - এই প্রবাদটির শিক্ষা কীভাবে শিক্ষার্থীদের দলগত কাজে সাহায্য করতে পারে?",
+    "output": "এই প্রবাদটির শিক্ষা কীভাবে শিক্ষার্থীদের দলগত কাজে সাহায্য করতে পারে। এটি শিক্ষার্থীদের দলগত কাজে সাহায্য করতে পারে এবং এই প্রবাদটির শিক্ষা কীভাবে শিক্ষার্থীদের দলগত কাজে সাহায্য করতে পারে। এটি শিক্ষার্থীদের দলগত কাজে সাহায্য করতে পারে এবং এই প্রবাদ",
+    "reason": "Missing required pedagogical keywords",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-001",
+    "category": "mathematics_reasoning",
+    "prompt": "3/4 + 5/6 এর যোগফল নির্ণয় করো এবং অপ্রকৃত ভগ্নাংশ থেকে মিশ্র ভগ্নাংশে রূপান্তর করো। প্রতিটি ধাপ বাংলায় দেখাও।",
+    "output": "প্রতিটি ধাপ বাংলা/csv দেখার জন্য প্রতিটি ধাপ বাংলা/csv দেখার জন্য প্রতিটি ধাপ বাংলা/csv দেখার জন্য প্রতিটি ধাপ বাংলা/csv দেখার জন্য প্রতিটি ধাপ বাংলা/csv দেখার জন্য প্রতিটি ধাপ বাংলা/csv দেখার জন্য প্রতিটি ধাপ বাংলা/csv দেখার জন্য প্রতিটি ধাপ বাংলা/csv দেখার জন্য প্রতিটি ধাপ বাংল",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-002",
+    "category": "mathematics_reasoning",
+    "prompt": "সরল করো: 7/8 - 2/3 + 1/4। ফলাফলটি লঘিষ্ঠ আকারে প্রকাশ করো।",
+    "output": "সরল করো: 7/8 - 2/3 + 1/4\n\n1. দুটি কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-004",
+    "category": "mathematics_reasoning",
+    "prompt": "একটি বই ৫০০ টাকায় কিনে ৫৫০ টাকায় বিক্রি করা হলো। এতে শতকরা কত লাভ বা ক্ষতি হলো?",
+    "output": "একটি বই ৫০০ টাকা কিনে ৫৫০ টাকা বিক্রি করা হলো। এতে শতকরা কত লাভ বা ক্ষতি হলো। এই বইটি সময় প্রতিপত্তা করে এবং সময় প্রতিপত্তা করে এবং সময় প্রতিপত্তা করে এবং সময় প্রতিপত্তা করে এবং সময় প্রতিপত্তা করে এবং সময় প্রতিপত্তা করে এবং সময় প",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-005",
+    "category": "mathematics_reasoning",
+    "prompt": "বার্ষিক ৮% মুনাফায় ৫০০০ টাকার ৩ বছরের সরল মুনাফা (I) কত হবে? (সূত্র: I = Prn)",
+    "output": "বার্ষিক ৮% মুনাফা হল মুনাফা সরল মুনাফা হিসেবে বের করা হয়। এটি সরল মুনাফা হিসেবে বের করা হয় কিছু সময় হয়। এটি সরল মুনাফা হিসেবে বের করা হয় সরল মুনাফা সরল মুনাফা হিসেবে বের করা হয়।\n\nসূত্র: I = Prn\n\nএখন আমি একটি সূত্র বলছি, তাই আমি একটি সূত্র",
+    "reason": "Incorrect reasoning or missing answer",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-006",
+    "category": "mathematics_reasoning",
+    "prompt": "(2x + 3y)^2 এর মান সূত্রের সাহায্যে নির্ণয় করো। সূত্রটি উল্লেখ করে প্রতিটি ধাপ দেখাও।",
+    "output": "প্রতিটি ধাপ দেখায় সূত্রের মান সূত্রের সাহায্যে নির্ণ)((((2x + 3y)^2) এর মান সূত্রের সাহায্যে নির্ণ)((((2x + 3y)^2) এর মান সূত্রের সাহায্যে নির্ণ)((((2x + 3y)^2) এর মান সূত্রের সাহায্যে নির্ণ)((((2x + 3y)^2) এর মান সূত্রের সাহায্যে নির্ণ)((((2x + 3y)^2) এর মান সূত্রের সাহায্যে ন",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-007",
+    "category": "mathematics_reasoning",
+    "prompt": "(3a - 5b)^2 এর মান সূত্রের সাহায্যে নির্ণয় করো।",
+    "output": "প্রতিপত্তি কি এবং কি কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি এবং কি",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-009",
+    "category": "mathematics_reasoning",
+    "prompt": "যদি a + b = 5 এবং ab = 6 হয়, তবে a^3 + b^3 এর মান কত? অনুসিন্ধান্ত সূত্র উল্লেখ করে সমাধান করো।",
+    "output": "এই সূত্রে আমি যদি a + b = 5 এবং ab = 6 হuju এবং আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আমি আম",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-010",
+    "category": "mathematics_reasoning",
+    "prompt": "যদি x + 1/x = 4 হয়, তবে x^2 + 1/x^2 এবং x^4 + 1/x^4 এর মান নির্ণয় করো।",
+    "output": "না, যদি x + 1/x = 4 হuju, তবে কিছু কথা বলা হয় না। যদি কিছু কথা বলা হয় তা কেউ কেউ কেউ বলে দেবে। কিছু কথা বলা হয় না।",
+    "reason": "Incorrect reasoning or missing answer",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-011",
+    "category": "mathematics_reasoning",
+    "prompt": "উৎপাদকে বিশ্লেষণ করো: x^2 + 5x + 6।",
+    "output": "উৎপাদকে বিশ্লেষণ করো: x^2 + 5x + 6।\n\n1. যদি উৎপাদকে বিশ্লেষণ করে, তবে যদি সে কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কেউ কে",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-014",
+    "category": "mathematics_reasoning",
+    "prompt": "সরল করো: (2^{n+4} - 2 \\cdot 2^n) / (2^{n+2} ÷ 2)।",
+    "output": "সরল করো: (2^{n+4} - 2 \\cdot 2^n) / (2^{n+2} ÷ 2)।\n\n1. **First, simplify the numerator:**\n   - The numerator is \\(2^{n+4} - 2 \\cdot 2^n\\).\n   - Notice that \\(2^{n+4}\\) can be written as \\(2^{n+2} \\cdot 2^2\\).\n   - So, the numerator becomes \\(2^{n+2} \\cdot 2^2 - 2 \\cdot 2^n\\).\n\n2. **Simplify the denominator:**\n   - The denominator is \\(2^{n+2} ÷ 2\\).\n   - This simplifies to \\(2^{n+2} ÷ 2 = 2^{n+2} ÷ 2 = 2^{n+2} ÷ 2 = 2^{n+2} ÷ 2 = 2^{n+2} ÷ 2 = 2^{n+2} ÷ 2 = 2^{n+2} ÷ 2 = 2^{n+2",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-015",
+    "category": "mathematics_reasoning",
+    "prompt": "মান নির্ণয় করো: log_10 1000 + log_2 16 - ln e^3।",
+    "output": "মান নির্ণDMI করো:\n\n1. কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো কোনো",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-017",
+    "category": "mathematics_reasoning",
+    "prompt": "সমাধান করো: 3x - 5 = 16। প্রতিটি ধাপ বুঝিয়ে লেখো।",
+    "output": "প্রতিটি ধাপ বুঝিwald লেখো। তোমার সমাধান কি করেছি?",
+    "reason": "Incorrect reasoning or missing answer",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-018",
+    "category": "mathematics_reasoning",
+    "prompt": "সমাধান করো: (x - 2) / 3 + (x + 1) / 2 = 4।",
+    "output": "আমি আপনার সমাধান করুন। এটি কোন সমাধান কি আপনার সমাধান কি আমি নেই। আমি আপনার সমাধান করতে পারি। এটি কোন সমাধান কি আপনার সমাধান কি আমি নেই। আমি আপনার সমাধান করতে পারি। এটি কোন সমাধান কি আপনার সমাধান কি আমি নেই। আমি আপনার সমাধান করতে পারি। এটি কোন সমাধান ক",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-019",
+    "category": "mathematics_reasoning",
+    "prompt": "অপনয়ন পদ্ধতিতে সমাধান করো: 2x + y = 8 এবং x - y = 1।",
+    "output": "প্রতিদিন আমি আপনার সম্মানের সমাধান করি। আমি আপনার সম্মানের সমাধান করি। আমি আপনার সম্মানের সমাধান করি। আমি আপনার সম্মানের সমাধান করি। আমি আপনার সম্মানের সমাধান করি। আমি আপনার সম্মানের সমাধান করি। আমি আপনার সম্মানের সমাধান করি। আমি আপনার সম্মানের সমাধান করি।",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-021",
+    "category": "mathematics_reasoning",
+    "prompt": "একটি আয়তাকার ক্ষেত্রের দৈর্ঘ্য প্রস্থ অপেক্ষা ৪ মিটার বেশি। পরিসীমা ৩৬ মিটার হলে ক্ষেত্রফল কত?",
+    "output": "একটি আatumakar ক্ষেত্রের দৈর্ঘ্য প্রস্থ অপেক্ষা ৪ মিটার বেশি। পরিসীমা ৩৬ মিটার হলে ক্ষেত্রফল কত?\n\nএই সীমার ক্ষেত্রফল বেশি হয়েছে। ক্ষেত্রফল বেশি হয়েছে এবং এই ক্ষেত্রফল বেশি হয়েছে। ক্ষেত্রফল বেশি হয়েছে।\n\nএই ক্ষেত্রফল বেশি হয়েছে। ক্ষেত্রফল বেশি হয়ে",
+    "reason": "Incorrect reasoning or missing answer",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-025",
+    "category": "mathematics_reasoning",
+    "prompt": "যদি tan θ = 3/4 হয়, তবে sin θ এবং cos θ এর মান কত?",
+    "output": "যদি tan θ = 3/4 হuju, তবে sin θ এবং cos θ এর মান কত?\n\n1. যদি tan θ = 3/4 হuju, তবে sin θ এবং cos θ এর মান হuju যদি হuju যদি sin θ এবং cos θ এর মান হuju যদি হuju যদি sin θ এবং cos θ এর মান হuju যদি হuju যদি sin θ এবং cos θ এর মান হuju যদি হuju যদি sin θ এবং cos θ এর মান হuju যদি হuju যদি sin θ এবং cos θ এর মান হuju যদি হuju যদি sin",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-026",
+    "category": "mathematics_reasoning",
+    "prompt": "প্রমাণ করো যে: sin^2 30° + cos^2 30° = 1। মান বসিয়ে প্রমাণ করো।",
+    "output": "প্রমাণ করো যে: sin^2 30° + cos^2 30° = 1।\n\n1. দেখি যে হল একটি সুন্দর সমান সমূহ। এই সুন্দর সমান সমূহের সুন্দর সমূহ হল 1। এই সুন্দর সমূহের সুন্দর সমূহ হল 1। এই সুন্দর সমূহের সুন্দর সমূহ হল 1। এই সুন্দর সমূহের সুন্দর সমূহ হল 1। এই সুন্দর সমূহের সু",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-028",
+    "category": "mathematics_reasoning",
+    "prompt": "সংখ্যাগুলোর গাণিতিক গড় নির্ণয় করো: ১২, ১৫, ২০, ১৮, ২৫।",
+    "output": "আমি আপনার সংখ্যাগুলোর গাণিতিক গড় নির্ণ)((((১২, ১৫, ২০, ১৮, ২৫) গড় নির্ণ)((((১২, ১৫, ২০, ১৮, ২৫) গড় নির্ণ)((((১২, ১৫, ২০, ১৮, ২৫) গড় নির্ণ)))))\nআমি আপনার সংখ্যাগুলোর গাণিতিক গড় নির্ণ)((((১২, ১৫, ২০, ১৮, ২৫) গড় নির্ণ)))))\nআমি আপনার স",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "MATH-030",
+    "category": "mathematics_reasoning",
+    "prompt": "একটি নিরপেক্ষ ছক্কা একবার নিক্ষেপ করা হলে জোড় সংখ্যা আসার সম্ভাবনা কত?",
+    "output": "একটি নিরপেক্ষ ছক্কা একবার নিক্ষেপ করা হলে জোড় সংখ্যা আসার সম্ভাবনা কত? এই সম্ভাবনা কত সম্ভাবনা হলে একটি নিরপেক্ষ ছক্কা একবার নিক্ষেপ করা হলে জোড় সংখ্যা আসার সম্ভাবনা কত সম্ভাবনা হলে একটি নিরপেক্ষ ছক্কা একবার নিক্ষেপ করা হলে জোড় সংখ্যা আসার সম্ভাবন",
+    "reason": "Incorrect reasoning or missing answer",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "SCI-001",
+    "category": "science_reasoning",
+    "prompt": "নিউটনের গতির প্রথম সূত্রটি লেখো এবং এর থেকে কীভাবে জড়তা ও বলের ধারণা পাওয়া যায় তা বাংলায় ব্যাখ্যা করো।",
+    "output": "নিউটনের গতির প্রথম সূত্রটি লেখা এবং এর থেকে কীভাবে জড়তা ও বলের ধারণা পাওয়া যাব। এটি সূত্রটি নিউটনের গতির প্রথম সূত্রের উত্তর হয়। এটি সূত্রটি নিউটনের গতির প্রথম সূত্রের উত্তর হয়। এটি সূত্রটি নিউটনের গতির প্রথম সূত্রের উত্তর হয়। এটি সূত্রট",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "SCI-003",
+    "category": "science_reasoning",
+    "prompt": "১০ কেজি ভরের একটি বস্তু ৫ মিটার/সেকেন্ড বেগে গতিশীল হলে এর গতিশক্তি (Kinetic Energy) কত জুল হবে? (সূত্র: Ek = 1/2 m v^2)",
+    "output": "এটি বলে দেখেছি একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু একটি বস্তু এ",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "SCI-004",
+    "category": "science_reasoning",
+    "prompt": "মহাকর্ষ সূত্রটি লেখো এবং দুটি বস্তুর মধ্যকার দূরত্ব দ্বিগুণ করা হলে মহাকর্ষ বলের কী পরিবর্তন হবে তা হিসাব করে দেখাও।",
+    "output": "মহাকর্ষ সূত্রটি লেখা এবং দুটি বস্তুর মধ্যকার দূরত্ব দ্বিগুণ করা হলে মহাকর্ষ বলের পরিবর্তন হবে। এটি কী পরিবর্তন হবে কিছু সময় হবে। এটি কী পরিবর্তন হবে কিছু সময় হবে। এটি কী পরিবর্তন হবে কিছু সময় হবে। এটি কী পরিবর্তন হবে কিছু সময় হবে। এটি",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "SCI-010",
+    "category": "science_reasoning",
+    "prompt": "প্রশমন বিক্রিয়া (Neutralization Reaction) কাকে বলে? হাইড্রোক্লোরিক এসিড ও সোডিয়াম হাইড্রোক্সাইডের বিক্রিয়ার সমীকরণটি লেখো।",
+    "output": "প্রশমন বিক্রি/aws কাকে বলে হাইড্রোক্লোরিক এসিড ও সোডি/aws/aws হাইড্রোক্সাইডের বিক্রি/aws/aws হাইড্রোক্লোরিক এসিড ও সোডি/aws/aws হাইড্রোক্লোরিক এসিড ও সোডি/aws/aws হাইড্রোক্লোরিক এসিড ও সোডি/aws/aws হাইড্রোক্লোরিক এসিড ও সোডি/aws/aws হাইড্রোক্লোরিক এসিড ও সোডি/aws/aws হাইড্রোক্লোর",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "SCI-013",
+    "category": "science_reasoning",
+    "prompt": "উদ্ভিদকোষ এবং প্রাণীকোষের মধ্যে ৩টি প্রধান পার্থক্য উল্লেখ করো।",
+    "output": "প্রধান পার্থক্য উল্লেখ করা হল স্বাস্থ্য পার্থক্য এবং প্রাণীকোষ। স্বাস্থ্য পার্থক্য হল প্রধান পার্থক্য স্বাস্থ্য এবং প্রাণীকোষ স্বাস্থ্য। প্রাণীকোষ হল প্রধান পার্থক্য স্বাস্থ্য এবং প্রাণীকোষ।\n\nএই প্রধান পার্থক্য উল্লেখ করা হল স্বাস্থ্য পার্থক্য এব",
+    "reason": "Incorrect reasoning or missing answer",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "SCI-014",
+    "category": "science_reasoning",
+    "prompt": "সালোকসংশ্লেষণ প্রক্রিয়ার সামগ্রিক রাসায়নিক সমীকরণটি বাংলায় বা সমীকরণে লেখো এবং প্রয়োজনীয় শর্তগুলো উল্লেখ করো।",
+    "output": "সালোকসংশ্লেষণ প্রক্রিabwe সামগ্রিক রাসাabwe Malaysia সামগ্রিক রাসাabwe সমীকরণে লেখো এবং প্র Manitoba সমীকরণে লেখো।\n\nসালোকসংশ্লেষণ প্রক্রিabwe সামগ্রিক রাসাabwe সমীকরণে লেখো এবং প্র Manitoba সমীকরণে লেখো।\n\nসালোকসংশ্লেষণ প্রক্রিabwe সামগ্রিক রাসাabwe সমীকরণে লেখো এবং প্র Manitoba সমীকরণে লেখো",
+    "reason": "Incorrect reasoning or missing answer",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "SCI-015",
+    "category": "science_reasoning",
+    "prompt": "সবাত শ্বসন ও অবাত শ্বসনের মূল পার্থক্য কী? সবাত শ্বসনে ১ অণু গ্লুকোজ জারিত হয়ে প্রধান কী উৎপন্ন করে?",
+    "output": "সবাত শ্বসনের মূল পার্থক্য হচ্ছে সবাত শ্বসনের মূল পার্থক্য হচ্ছে সবাত শ্বসনের মূল পার্থক্য হচ্ছে সবাত শ্বসনের মূল পার্থক্য হচ্ছে সবাত শ্বসনের মূল পার্থক্য হচ্ছে সবাত শ্বসনের মূল পার্থক্য হচ্ছে সবাত শ্বসনের মূল পার্থক্য হচ্ছে সবাত শ্বসনের মূল পার্থক্য",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "SCI-017",
+    "category": "science_reasoning",
+    "prompt": "ক্রোমোজোম ও জিন কী? সন্তানের লিঙ্গ নির্ধারণে বাবার ভূমিকা কেন প্রধান?",
+    "output": "ক্রোমোজোম ও জিন কী?\n\n1. ক্রোমোজোম ও জিন কী?\n\n   ক্রোমোজোম ও জিন কী কি?\n\n   ক্রোমোজোম ও জিন কী কি?\n\n   ক্রোমোজোম ও জিন কী কি?\n\n   ক্রোমোজোম ও জিন কী কি?\n\n   ক্রোমোজোম ও জিন কী কি?\n\n   ক্রোমোজোম ও জিন কী কি?\n\n   ক্রোমোজোম ও জিন কী কি?\n\n   ক্রোমোজ",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "SCI-018",
+    "category": "science_reasoning",
+    "prompt": "একটি পুকুরের বাস্তুতন্ত্রের খাদ্য শৃঙ্খলের উদাহরণ দাও (উৎপাদক, প্রথম স্তরের খাদক, দ্বিতীয় স্তরের খাদক, তৃতীয় স্তরের খাদক)।",
+    "output": "একটি পুকুরের বাস্তুতন্ত্রের খাদ্য শৃঙ্খলের উদাহরণ দাও:\n\n1. প্রথম স্তরের খাদক: পুকুরের বাস্তুতন্ত্রে পুকুরের বাস্তুতন্ত্রে বাস্তুতন্ত্রে বাস্তুতন্ত্রে বাস্তুতন্ত্রে বাস্তুতন্ত্রে বাস্তুতন্ত্রে বাস্তুতন্ত্রে বাস্তুতন্ত্রে বাস্তুতন্ত্রে বাস্তু",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "SCI-019",
+    "category": "science_reasoning",
+    "prompt": "গ্রিনহাউস প্রভাব কী এবং এর প্রধান গ্যাসগুলো কী কী? এর ফলে বাংলাদেশের কী ক্ষতি হতে পারে?",
+    "output": "গ্রিনহাউস প্রভাব কী এবং এর প্রধান গ্যাসগুলো কী কী?\n\nগ্রিনহাউস প্রভাব কী এবং এর প্রধান গ্যাসগুলো কী কী?\n\nগ্রিনহাউস প্রভাব কী এবং এর প্রধান গ্যাসগুলো কী কী?\n\nগ্রিনহাউস প্রভাব কী এবং এর প্রধান গ্যাসগুলো কী কী?\n\nগ্রিনহাউস প্রভাব কী এবং এর প্র",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "SCI-020",
+    "category": "science_reasoning",
+    "prompt": "শব্দ তরঙ্গ কোন ধরনের তরঙ্গ? মানুষের শ্রাব্যতার সীমা কত হার্টজ (Hz)?",
+    "output": "শব্দ তরঙ্গ কোন ধরনের তরঙ্গ? মানুষের শ্রাব্যতার সীমা কত হার্টজ (Hz)? এই সীমা হল সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সীমা সী",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "PED-001",
+    "category": "pedagogical_and_tutor_behavior",
+    "prompt": "প্রশ্ন: x^2 - 5x + 6 = 0 এর সমাধান কী? আমাকে কিন্তু সরাসরি উত্তর বলবে না, শুধু সমাধান করার জন্য প্রথম দরকারি ইঙ্গিত (Hint 1) দাও।",
+    "output": "প্রশ্ন: x^2 - 5x + 6 = 0 এর সমাধান কী?\n\nআমাকে কিন্তু সরাসরি উত্তর বলবে না, শুধু সমাধান করার জন্য প্রথম দরকারি ইঙ্গিত (Hint 1) দাও।\n\nএখন আমি একটি সমাধান করার জন্য ইঙ্গিত করার জন্য প্রথম দরকারি ইঙ্গিত করার জন্য প্রথম দরকারি ইঙ্গিত করার জন্য প্রথম দরকারি ইঙ্গিত করার",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "PED-002",
+    "category": "pedagogical_and_tutor_behavior",
+    "prompt": "প্রশ্ন: উৎপাদকে বিশ্লেষণ করো: a^2 - b^2 + 2bc - c^2। সরাসরি সমাধান না দিয়ে ৩টি ক্রমিক ইঙ্গিত (Hint 1, Hint 2, Hint 3) তৈরি করো।",
+    "output": "প্রশ্ন: উৎপাদকে বিশ্লেষণ করো: a² - b² + 2bc - c²। সরাসরি সমাধান না দি }];\n\nপ্রশ্ন: উৎপাদকে বিশ্লেষণ করো: a² - b² + 2bc - c²। সরাসরি সমাধান না দি }];\n\nপ্রশ্ন: উৎপাদকে বিশ্লেষণ করো: a² - b² + 2bc - c²। সরাসরি সমাধান না দি }];\n\nপ্রশ্ন: উৎপাদকে বিশ্লেষণ করো: a² - b² + 2bc - c²। সরাসরি সমাধান না দি }];",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "PED-004",
+    "category": "pedagogical_and_tutor_behavior",
+    "prompt": "শিক্ষার্থী ভাবছে: 2^{-3} এর মান হলো -8 বা -6। তাকে সহজ ভাষায় বুঝিয়ে বলো ঋণাত্মক সূচক (Negative Exponent) কীভাবে কাজ করে।",
+    "output": "শিক্ষার্থী ভাবছে: যদি মান হল -8 এবং মান হল -6 তার সূচক হল -3 তা সহজ ভাষাuvw বুঝি। এই সূচক হল বৃহত্তম মান হল -3 এবং মান হল -6 এর মান হল -8 এবং মান হল -6 এর মান হল -8 এবং মান হল -6 এর মান হল -8 এবং মান হল -6 এর মান হল -8 এবং মান হল -6 এর মান হল -8 এবং মান হল -6 এ",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "PED-005",
+    "category": "pedagogical_and_tutor_behavior",
+    "prompt": "Class 8 এর সমীকরণ: 3x + 7 = 22। সরাসরি উত্তর না দিয়ে শিক্ষার্থীকে কীভাবে নিজে করতে হবে তা ৩টি নির্দেশনামূলক ধাপে বলো।",
+    "output": "Class 8 এর সমীকরণ: 3x + 7 = 22 সরাসরি উত্তর না দি }];\n\n1. সমীকরণ সমান হয় এবং সমান হয় সমীকরণ সমান হয়। সমীকরণ সমান হয় এবং সমান হয় সমীকরণ সমান হয়। সমীকরণ সমান হয় এবং সমান হয় সমীকরণ সমান হয়। সমীকরণ সমান হয় এবং সমান হয় সমীকরণ সমান হয়। স",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "PED-006",
+    "category": "pedagogical_and_tutor_behavior",
+    "prompt": "ক্লাস ৬ এর শিক্ষার্থীকে লসাগু (LCM) কী তা একটি বাস্তব জীবনের উদাহরণের মাধ্যমে বুঝিয়ে বলো (যেমন দৌড় প্রতিযোগিতা বা ঘণ্টার শব্দ)।",
+    "output": "ক্লাস ৬ এর শিক্ষার্থীকে লসাগু (LCM) কী তা একটি বাস্তব জীবনের উদাহরণের মাধ্যমে বুঝি। এটি একটি বাস্তব জীবনের উদাহরণ কে সম্প্রদায় করে এবং এটি একটি বাস্তব জীবনের উদাহরণ কে সম্প্রদায় করে এবং এটি একটি বাস্তব জীবনের উদাহরণ কে সম্প্রদায় করে এবং এট",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "PED-007",
+    "category": "pedagogical_and_tutor_behavior",
+    "prompt": "ধনাত্মক ও ঋণাত্মক সংখ্যার যোগ-বিয়োগ বুঝতে সমস্যা হওয়া শিক্ষার্থীকে টাকা ধার নেওয়া বা তাপমাত্রার মাধ্যমে বুঝিয়ে বলো।",
+    "output": "এই সমস্যা হল দুটি সংখ্যার যোগ-বি</tool_call>োugu বুঝতে সমস্যা। যোগ-বি</tool_call>োugu বুঝতে সমস্যা হল দুটি সংখ্যার যোগ-বি</tool_call>োugu বুঝতে সমস্যা। এই সমস্যা হল দুটি সংখ্যার যোগ-বি</tool_call>োugu বুঝতে সমস্যা। এই সমস্যা হল দুটি সংখ্যার যোগ-বি</tool_call>োugu বুঝতে সমস্যা। এই সমস্যা হল দু",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "PED-011",
+    "category": "pedagogical_and_tutor_behavior",
+    "prompt": "শিক্ষার্থী 1/2 + 1/3 = 2/5 লিখেছে (লব লব যোগ, হর হর যোগ)। তাকে বুঝিয়ে বলো কেন এভাবে যোগ করা যায় না এবং সঠিক নিয়ম কী।",
+    "output": "শিক্ষার্থী 1/2 + 1/3 = 2/5 লিখেছে এবং বুঝি কেন এভাবে যোগ করা যাammen না এবং সঠিক নির্ণয় করা যাammen না এবং সঠিক নির্ণয় করা যাammen না এবং সঠিক নির্ণয় করা যাammen না এবং সঠিক নির্ণয় করা যাammen না এবং সঠিক নির্ণয় করা যাammen না এবং সঠিক নির্ণয় করা যাammen না",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "PED-014",
+    "category": "pedagogical_and_tutor_behavior",
+    "prompt": "Class 9 এর সূচক অধ্যায় থেকে ৩টি বহুনির্বাচনী প্রশ্ন (MCQ) সঠিক উত্তর ও সংক্ষিপ্ত ব্যাখ্যাসহ তৈরি করো।",
+    "output": "এই সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায় সূচক অধ্যায়",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "PED-016",
+    "category": "pedagogical_and_tutor_behavior",
+    "prompt": "লগারিদমের ভিত্তি ১০ হলে log 100 = 2 কেন হয় তা বুঝিয়ে বলো এবং শেষে শিক্ষার্থী বুঝেছে কি না যাচাই করতে একটি সহজ প্রশ্ন করো।",
+    "output": "লগারিদমের ভিত্তি ১০ হলে একটি ভিত্তি হচ্ছে 2 কেন হDMI তা বুঝি। এই ভিত্তি হচ্ছে যে একটি ভিত্তি হচ্ছে একটি ভিত্তি হচ্ছে একটি ভিত্তি হচ্ছে একটি ভিত্তি হচ্ছে একটি ভিত্তি হচ্ছে একটি ভিত্তি হচ্ছে একটি ভিত্তি হচ্ছে একটি ভিত্তি হচ্ছে একটি ভিত্তি হচ্ছে একটি ভিত্তি",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "PED-017",
+    "category": "pedagogical_and_tutor_behavior",
+    "prompt": "'ত্রিভুজের তিন কোণের সমষ্টি দুই সমকোণ' - এই উপপাদ্যটি মুখস্থ না করে কীভাবে নিজে আঁকা দিয়ে মনে রাখা যায় তা বলো।",
+    "output": "ত্রিভুজের তিন কোণের সমষ্টি দুই সমকোণ হল একটি সম্পাদনা করে কীভাবে নিজে আঁকা দি }];\n\nত্রিভুজের তিন কোণের সমষ্টি দুই সমকোণ হল একটি সম্পাদনা করে কীভাবে নিজে আঁকা দি }];\n\nত্রিভুজের তিন কোণের সমষ্টি দুই সমকোণ হল একটি সম্পাদনা করে কীভাবে নিজে আঁকা দি }];\n\nত্রিভ",
+    "reason": "Repetitive degeneration loop",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "GROUND-002",
+    "category": "knowledge_grounding_and_anti_hallucination",
+    "prompt": "প্রদত্ত তথ্য:\nNCTB Class 9 Mathematics contains chapters 1 through 17.\n\nপ্রশ্ন:\nNCTB Class 9 এর সাধারণ গণিত বইয়ের চ্যাপ্টার ৯৯ এর ৩ নম্বর উপপাদ্যটি বুঝিয়ে বলো।",
+    "output": "প্রদত্ত তথ্য হল:\n\nNCTB Class 9 এর সাধারণ গণিত বইstras চ্যাপ্টার ৯৯ এর ৩ নম্বর উপপাদ্যটি বুঝিapsulation করি।\n\nবিশেষ্য সাধারণ গণিত বইstras চ্যাপ্টার ৯৯ এর ৩ নম্বর উপপাদ্যটি বুঝিapsulation করি।\n\nতারপরিবর্তন করি।",
+    "reason": "Hallucination or missed grounding context",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "GROUND-003",
+    "category": "knowledge_grounding_and_anti_hallucination",
+    "prompt": "বিজ্ঞানী ড. রফিকুলের 'কোয়ান্টাম মহাকর্ষীয় গতিসূত্র' এর ৩টি প্রধান স্বীকার্য বুঝিয়ে বলো।",
+    "output": "বিজ্ঞানী ড. রফিকুলের 'কোstrasanam mahākṣarīgauch' এর ৩টি প্রধান স্বীকার্য বুঝিwaldে বলো।\n\n1. কোstrasanam: কোstrasanam হল কোstrasanam রফিকুলের মহাকর্ষীgauch এর মুহামান স্বীকারিতে প্রদান করা হয়। কোstrasanam হল কোstrasanam রফিকুলের মহাকর্ষীgauch এর মুহামান স্বীকারিতে প্রদান করা হয়। কোstrasan",
+    "reason": "Hallucination or missed grounding context",
+    "severity": "MEDIUM"
+  },
+  {
+    "test_id": "GROUND-005",
+    "category": "knowledge_grounding_and_anti_hallucination",
+    "prompt": "আমরা জানি যে পাই (π) এর মান ঠিক ৫.০। এই ভিত্তিতে ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত হবে?",
+    "output": "পাই (π) এর মান ঠিক ৫.০। এই ভিত্তিতে ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত হবে? এই ক্ষেত্রফল হল ৪০০০।\n\nপাই (π) এর মান ঠিক ৫.০। এই ভিত্তিতে ৭ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত হবে? এই ক্ষেত্রফল হল ৪০০।\n\nএই ক্ষেত্রফল হল একটি বৃত্তের ক্ষেত্রফ",
+    "reason": "Hallucination or missed grounding context",
+    "severity": "MEDIUM"
+  }
+]

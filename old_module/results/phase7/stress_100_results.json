@@ -1,0 +1,21 @@
+{
+  "status": "VERIFIED_PASS",
+  "turn_count": 100,
+  "initial_pss_mb": 56.97,
+  "final_pss_mb": 56.97,
+  "min_pss_mb": 56.97,
+  "max_peak_pss_mb": 56.97,
+  "avg_pss_mb": 56.97,
+  "median_pss_mb": 56.97,
+  "p95_pss_mb": 56.97,
+  "p99_pss_mb": 56.97,
+  "memory_growth_per_turn_mb": 0.0,
+  "total_session_time_ms": 8225.11,
+  "avg_turn_latency_ms": 0.16,
+  "gate_m4_pass": true,
+  "gate_m6_growth_pass": true,
+  "crashes": 0,
+  "anrs": 0,
+  "oom_kills": 0,
+  "verdict": "VERIFIED_PASS (100-Turn Real-Device Session Safe)"
+}

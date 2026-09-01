@@ -1,0 +1,33 @@
+{
+  "phase": "8.2",
+  "title": "Core Model Master Assembly & Baseline Creation",
+  "timestamp": "2026-08-30T23:27:26Z",
+  "final_verdict": "PHASE 8.2: SS BANGLADESH CORE MODEL MASTER ASSEMBLED & VALIDATED",
+  "total_steps": 6,
+  "passed_steps": 6,
+  "failed_steps": 0,
+  "total_execution_time_s": 39.15,
+  "steps": [
+    {"label": "Phases 1-4 Complete Regression Suite (17 tests)", "passed": true, "elapsed_s": 16.84, "tests": 17},
+    {"label": "Phase 8 Curriculum & Module Suite (6 tests)", "passed": true, "elapsed_s": 0.78, "tests": 6},
+    {"label": "Phase 8.2 Core Model Master Suite (12 tests)", "passed": true, "elapsed_s": 18.23, "tests": 12},
+    {"label": "Core Master SHA-256 Immutability Check", "passed": true, "elapsed_s": 0.01, "checksum": "bb2f9e7cd79ef83546fd70ea97d8845cff17a7a8482580c3e63e36c4614119bb"},
+    {"label": "Specialization Isolation (Core != SS Tutor BD)", "passed": true, "elapsed_s": 0.5, "core_hash": "bb2f9e7cd79ef83546fd70ea97d8845cff17a7a8482580c3e63e36c4614119bb", "spec_hash": "a44215f9bc3ebb0ca22e0021974a6fd556b0c8b88135211c59553190f6865c2c"},
+    {"label": "Release Artifact & Security Audit", "passed": true, "elapsed_s": 0.44, "files_scanned": 367, "issues": 0, "warnings": 2}
+  ],
+  "core_model_master": {
+    "model_id": "ss_bangladesh",
+    "version": "0.8.2",
+    "architecture": "LlamaForCausalLM",
+    "layers": 10,
+    "hidden_size": 576,
+    "parameters": 71528256,
+    "tensors": 93,
+    "tokenizer_vocab": 16000,
+    "training_status": "UNTRAINED_REUSABLE_BASE",
+    "seed": 42,
+    "safetensors_sha256": "bb2f9e7cd79ef83546fd70ea97d8845cff17a7a8482580c3e63e36c4614119bb",
+    "primary_path": "models/core/ss_bangladesh/",
+    "root_bundle_path": "ss_bangladesh/"
+  }
+}

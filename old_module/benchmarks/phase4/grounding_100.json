@@ -1,0 +1,806 @@
+{
+  "suite_name": "grounding_100",
+  "total_questions": 100,
+  "questions": [
+    {
+      "id": "GRD4-001",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সরল মুনাফা এর সূত্র কী?",
+      "textbook_context": "সরল মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-002",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে ভগ্নাংশ এর সূত্র কী?",
+      "textbook_context": "ভগ্নাংশ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-003",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 3: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-004",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে চক্রবৃদ্ধি মুনাফা এর সূত্র কী?",
+      "textbook_context": "চক্রবৃদ্ধি মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-005",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বৃত্তের পরিধি এর সূত্র কী?",
+      "textbook_context": "বৃত্তের পরিধি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-006",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 6: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-007",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সমান্তর ধারা এর সূত্র কী?",
+      "textbook_context": "সমান্তর ধারা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-008",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বীজগাণিতিক রাশি এর সূত্র কী?",
+      "textbook_context": "বীজগাণিতিক রাশি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-009",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 9: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-010",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে দ্বিঘাত সমীকরণ এর সূত্র কী?",
+      "textbook_context": "দ্বিঘাত সমীকরণ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-011",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সরল মুনাফা এর সূত্র কী?",
+      "textbook_context": "সরল মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-012",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 12: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-013",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে পিথাগোরাস উপপাদ্য এর সূত্র কী?",
+      "textbook_context": "পিথাগোরাস উপপাদ্য এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-014",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে চক্রবৃদ্ধি মুনাফা এর সূত্র কী?",
+      "textbook_context": "চক্রবৃদ্ধি মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-015",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 15: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-016",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে লাভ-ক্ষতি এর সূত্র কী?",
+      "textbook_context": "লাভ-ক্ষতি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-017",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সমান্তর ধারা এর সূত্র কী?",
+      "textbook_context": "সমান্তর ধারা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-018",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 18: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-019",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে অনুপাত এর সূত্র কী?",
+      "textbook_context": "অনুপাত এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-020",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে দ্বিঘাত সমীকরণ এর সূত্র কী?",
+      "textbook_context": "দ্বিঘাত সমীকরণ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-021",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 21: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-022",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে ভগ্নাংশ এর সূত্র কী?",
+      "textbook_context": "ভগ্নাংশ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-023",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে পিথাগোরাস উপপাদ্য এর সূত্র কী?",
+      "textbook_context": "পিথাগোরাস উপপাদ্য এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-024",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 24: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-025",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বৃত্তের পরিধি এর সূত্র কী?",
+      "textbook_context": "বৃত্তের পরিধি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-026",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে লাভ-ক্ষতি এর সূত্র কী?",
+      "textbook_context": "লাভ-ক্ষতি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-027",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 27: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-028",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বীজগাণিতিক রাশি এর সূত্র কী?",
+      "textbook_context": "বীজগাণিতিক রাশি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-029",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে অনুপাত এর সূত্র কী?",
+      "textbook_context": "অনুপাত এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-030",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 30: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-031",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সরল মুনাফা এর সূত্র কী?",
+      "textbook_context": "সরল মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-032",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে ভগ্নাংশ এর সূত্র কী?",
+      "textbook_context": "ভগ্নাংশ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-033",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 33: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-034",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে চক্রবৃদ্ধি মুনাফা এর সূত্র কী?",
+      "textbook_context": "চক্রবৃদ্ধি মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-035",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বৃত্তের পরিধি এর সূত্র কী?",
+      "textbook_context": "বৃত্তের পরিধি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-036",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 36: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-037",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সমান্তর ধারা এর সূত্র কী?",
+      "textbook_context": "সমান্তর ধারা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-038",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বীজগাণিতিক রাশি এর সূত্র কী?",
+      "textbook_context": "বীজগাণিতিক রাশি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-039",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 39: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-040",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে দ্বিঘাত সমীকরণ এর সূত্র কী?",
+      "textbook_context": "দ্বিঘাত সমীকরণ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-041",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সরল মুনাফা এর সূত্র কী?",
+      "textbook_context": "সরল মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-042",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 42: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-043",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে পিথাগোরাস উপপাদ্য এর সূত্র কী?",
+      "textbook_context": "পিথাগোরাস উপপাদ্য এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-044",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে চক্রবৃদ্ধি মুনাফা এর সূত্র কী?",
+      "textbook_context": "চক্রবৃদ্ধি মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-045",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 45: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-046",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে লাভ-ক্ষতি এর সূত্র কী?",
+      "textbook_context": "লাভ-ক্ষতি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-047",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সমান্তর ধারা এর সূত্র কী?",
+      "textbook_context": "সমান্তর ধারা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-048",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 48: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-049",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে অনুপাত এর সূত্র কী?",
+      "textbook_context": "অনুপাত এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-050",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে দ্বিঘাত সমীকরণ এর সূত্র কী?",
+      "textbook_context": "দ্বিঘাত সমীকরণ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-051",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 51: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-052",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে ভগ্নাংশ এর সূত্র কী?",
+      "textbook_context": "ভগ্নাংশ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-053",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে পিথাগোরাস উপপাদ্য এর সূত্র কী?",
+      "textbook_context": "পিথাগোরাস উপপাদ্য এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-054",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 54: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-055",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বৃত্তের পরিধি এর সূত্র কী?",
+      "textbook_context": "বৃত্তের পরিধি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-056",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে লাভ-ক্ষতি এর সূত্র কী?",
+      "textbook_context": "লাভ-ক্ষতি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-057",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 57: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-058",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বীজগাণিতিক রাশি এর সূত্র কী?",
+      "textbook_context": "বীজগাণিতিক রাশি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-059",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে অনুপাত এর সূত্র কী?",
+      "textbook_context": "অনুপাত এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-060",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 60: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-061",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সরল মুনাফা এর সূত্র কী?",
+      "textbook_context": "সরল মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-062",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে ভগ্নাংশ এর সূত্র কী?",
+      "textbook_context": "ভগ্নাংশ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-063",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 63: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-064",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে চক্রবৃদ্ধি মুনাফা এর সূত্র কী?",
+      "textbook_context": "চক্রবৃদ্ধি মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-065",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বৃত্তের পরিধি এর সূত্র কী?",
+      "textbook_context": "বৃত্তের পরিধি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-066",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 66: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-067",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সমান্তর ধারা এর সূত্র কী?",
+      "textbook_context": "সমান্তর ধারা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-068",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বীজগাণিতিক রাশি এর সূত্র কী?",
+      "textbook_context": "বীজগাণিতিক রাশি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-069",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 69: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-070",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে দ্বিঘাত সমীকরণ এর সূত্র কী?",
+      "textbook_context": "দ্বিঘাত সমীকরণ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-071",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সরল মুনাফা এর সূত্র কী?",
+      "textbook_context": "সরল মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-072",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 72: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-073",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে পিথাগোরাস উপপাদ্য এর সূত্র কী?",
+      "textbook_context": "পিথাগোরাস উপপাদ্য এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-074",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে চক্রবৃদ্ধি মুনাফা এর সূত্র কী?",
+      "textbook_context": "চক্রবৃদ্ধি মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-075",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 75: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-076",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে লাভ-ক্ষতি এর সূত্র কী?",
+      "textbook_context": "লাভ-ক্ষতি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-077",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সমান্তর ধারা এর সূত্র কী?",
+      "textbook_context": "সমান্তর ধারা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-078",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 78: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-079",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে অনুপাত এর সূত্র কী?",
+      "textbook_context": "অনুপাত এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-080",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে দ্বিঘাত সমীকরণ এর সূত্র কী?",
+      "textbook_context": "দ্বিঘাত সমীকরণ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-081",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 81: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-082",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে ভগ্নাংশ এর সূত্র কী?",
+      "textbook_context": "ভগ্নাংশ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-083",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে পিথাগোরাস উপপাদ্য এর সূত্র কী?",
+      "textbook_context": "পিথাগোরাস উপপাদ্য এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-084",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 84: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-085",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বৃত্তের পরিধি এর সূত্র কী?",
+      "textbook_context": "বৃত্তের পরিধি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-086",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে লাভ-ক্ষতি এর সূত্র কী?",
+      "textbook_context": "লাভ-ক্ষতি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-087",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 87: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-088",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বীজগাণিতিক রাশি এর সূত্র কী?",
+      "textbook_context": "বীজগাণিতিক রাশি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-089",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে অনুপাত এর সূত্র কী?",
+      "textbook_context": "অনুপাত এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-090",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 90: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-091",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সরল মুনাফা এর সূত্র কী?",
+      "textbook_context": "সরল মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-092",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে ভগ্নাংশ এর সূত্র কী?",
+      "textbook_context": "ভগ্নাংশ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-093",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 93: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-094",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে চক্রবৃদ্ধি মুনাফা এর সূত্র কী?",
+      "textbook_context": "চক্রবৃদ্ধি মুনাফা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-095",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বৃত্তের পরিধি এর সূত্র কী?",
+      "textbook_context": "বৃত্তের পরিধি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-096",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 96: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-097",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে সমান্তর ধারা এর সূত্র কী?",
+      "textbook_context": "সমান্তর ধারা এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-098",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে বীজগাণিতিক রাশি এর সূত্র কী?",
+      "textbook_context": "বীজগাণিতিক রাশি এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    },
+    {
+      "id": "GRD4-099",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের বাইরে প্রশ্ন 99: রবীন্দ্রনাথ ঠাকুর কোন বছর নোবেল পান?",
+      "textbook_context": "সরল মুনাফা হলো আসল ও সুদের হারের গুণফল।",
+      "expected_behavior": "refusal"
+    },
+    {
+      "id": "GRD4-100",
+      "category": "grounding_and_hallucination",
+      "mode": "EXPLAIN",
+      "query": "পাঠ্যবইয়ের আলোকে দ্বিঘাত সমীকরণ এর সূত্র কী?",
+      "textbook_context": "দ্বিঘাত সমীকরণ এর মূল ধারণা পাঠ্যবইয়ে বর্ণিত।",
+      "expected_behavior": "grounded"
+    }
+  ]
+}

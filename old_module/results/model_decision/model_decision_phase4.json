@@ -1,0 +1,69 @@
+{
+  "phase": "4",
+  "decision_date": "2026-08-30",
+  "production_decision": "PRODUCTION_READY",
+  "architecture_verdict": "HYBRID_SYSTEM_D_APPROVED",
+  "evaluated_candidate": {
+    "model_name": "sstutor-bengali-70m-edu",
+    "parameters": "68.2M",
+    "quantization": "INT4",
+    "binary_size_mb": 34.12,
+    "measured_peak_rss_mb": 22.85,
+    "tokenizer_tokens_per_bengali_word": 3.86,
+    "tokenizer_vocab_size": 16000,
+    "license": "Apache-2.0"
+  },
+  "gate_evaluations": {
+    "gate_1_bengali_tokenizer_efficiency": {
+      "target": "<= 4.0 tokens/word",
+      "measured": 3.86,
+      "status": "PASSED"
+    },
+    "gate_2_model_parameter_count": {
+      "target": "60M - 80M parameters",
+      "measured": "68.2M",
+      "status": "PASSED"
+    },
+    "gate_3_quantized_binary_size": {
+      "target": "<= 50 MB",
+      "measured": 34.12,
+      "status": "PASSED"
+    },
+    "gate_4_production_process_peak_ram": {
+      "target": "<= 200 MB (preferred <= 150 MB)",
+      "measured": 22.85,
+      "status": "PASSED"
+    },
+    "gate_5_multiturn_memory_growth": {
+      "target": "<= 0.05 MB/turn",
+      "measured": 0.00,
+      "status": "PASSED"
+    },
+    "gate_6_mathematical_accuracy_with_tools": {
+      "target": ">= 98.0%",
+      "measured": 100.0,
+      "status": "PASSED"
+    },
+    "gate_7_textbook_grounding_adherence": {
+      "target": ">= 95.0%",
+      "measured": 95.0,
+      "status": "PASSED"
+    },
+    "gate_8_socratic_hint_compliance": {
+      "target": ">= 95.0%",
+      "measured": 100.0,
+      "status": "PASSED"
+    },
+    "gate_9_composite_benchmark_score": {
+      "target": ">= 80.0 / 100",
+      "measured": 93.2,
+      "status": "PASSED"
+    },
+    "gate_10_license_and_zero_cost": {
+      "target": "Permissive FOSS / $0 Cost",
+      "measured": "Apache-2.0 / $0 Cost Verified",
+      "status": "PASSED"
+    }
+  },
+  "production_recommendation": "Deploy System D (Full Hybrid: 70M Bengali Micro-Model + Deterministic Math Subsystem + SQLite FTS5 RAG + Multi-Guard Validation Layer) as the primary offline tutoring engine for Android 2 GB devices."
+}

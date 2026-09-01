@@ -1,0 +1,92 @@
+{
+  "candidate_id": "CAND-03",
+  "runtime_type": "llama_cpp",
+  "initial_rss_mb": 159.89,
+  "sessions": [
+    {
+      "session_length_queries": 10,
+      "duration_s": 76.72,
+      "session_start_rss_mb": 159.89,
+      "session_end_rss_mb": 314.7,
+      "peak_rss_mb": 314.7,
+      "total_growth_mb": 154.81,
+      "growth_per_query_mb": 15.481,
+      "is_stable_plateau": false,
+      "rss_trace": [
+        {
+          "query_num": 5,
+          "rss_mb": 311.52
+        },
+        {
+          "query_num": 10,
+          "rss_mb": 314.7
+        }
+      ]
+    },
+    {
+      "session_length_queries": 20,
+      "duration_s": 149.83,
+      "session_start_rss_mb": 314.7,
+      "session_end_rss_mb": 326.37,
+      "peak_rss_mb": 326.37,
+      "total_growth_mb": 11.67,
+      "growth_per_query_mb": 0.5835,
+      "is_stable_plateau": false,
+      "rss_trace": [
+        {
+          "query_num": 5,
+          "rss_mb": 317.68
+        },
+        {
+          "query_num": 10,
+          "rss_mb": 320.63
+        },
+        {
+          "query_num": 15,
+          "rss_mb": 323.53
+        },
+        {
+          "query_num": 20,
+          "rss_mb": 326.37
+        }
+      ]
+    },
+    {
+      "session_length_queries": 30,
+      "duration_s": 233.86,
+      "session_start_rss_mb": 326.37,
+      "session_end_rss_mb": 326.07,
+      "peak_rss_mb": 327.5,
+      "total_growth_mb": -0.3,
+      "growth_per_query_mb": -0.01,
+      "is_stable_plateau": true,
+      "rss_trace": [
+        {
+          "query_num": 5,
+          "rss_mb": 311.39
+        },
+        {
+          "query_num": 10,
+          "rss_mb": 314.56
+        },
+        {
+          "query_num": 15,
+          "rss_mb": 317.6
+        },
+        {
+          "query_num": 20,
+          "rss_mb": 320.44
+        },
+        {
+          "query_num": 25,
+          "rss_mb": 323.24
+        },
+        {
+          "query_num": 30,
+          "rss_mb": 326.07
+        }
+      ]
+    }
+  ],
+  "overall_stability": false
+}

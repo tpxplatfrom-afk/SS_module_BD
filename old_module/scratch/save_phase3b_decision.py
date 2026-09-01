@@ -1,0 +1,159 @@
+"""
+SS Tutor BD - Generate Phase 3B Decision and Audit JSON Artifacts
+"""
+
+import json
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+# 1. License Audit Artifact
+LICENSES_DIR = PROJECT_ROOT / "results" / "licenses"
+LICENSES_DIR.mkdir(parents=True, exist_ok=True)
+license_payload = {
+    "phase": "3B",
+    "audit_date": "2026-08-30",
+    "distribution_target": "Offline Android Application (FOSS / Modular Edu Engine)",
+    "audited_candidates": [
+        {
+            "candidate_id": "CAND-03",
+            "model_name": "SmolLM2-135M-Instruct",
+            "publisher": "Hugging Face",
+            "license": "Apache-2.0",
+            "redistribution_permitted": True,
+            "commercial_use_permitted": True,
+            "modifications_permitted": True,
+            "license_gate_status": "LICENSE_PASSED"
+        },
+        {
+            "candidate_id": "CAND-04",
+            "model_name": "SmolLM2-360M-Instruct",
+            "publisher": "Hugging Face",
+            "license": "Apache-2.0",
+            "redistribution_permitted": True,
+            "commercial_use_permitted": True,
+            "modifications_permitted": True,
+            "license_gate_status": "LICENSE_PASSED"
+        },
+        {
+            "candidate_id": "CAND-01",
+            "model_name": "Qwen2.5-0.5B-Instruct",
+            "publisher": "Alibaba Cloud",
+            "license": "Apache-2.0",
+            "redistribution_permitted": True,
+            "commercial_use_permitted": True,
+            "modifications_permitted": True,
+            "license_gate_status": "LICENSE_PASSED"
+        },
+        {
+            "candidate_id": "CAND-02",
+            "model_name": "Qwen2.5-1.5B-Instruct",
+            "publisher": "Alibaba Cloud",
+            "license": "Apache-2.0",
+            "redistribution_permitted": True,
+            "commercial_use_permitted": True,
+            "modifications_permitted": True,
+            "license_gate_status": "LICENSE_PASSED"
+        }
+    ]
+}
+
+with open(LICENSES_DIR / "phase3b_license_audit.json", "w", encoding="utf-8") as f:
+    json.dump(license_payload, f, indent=2, ensure_ascii=False)
+
+# 2. Model Decision Matrix
+DECISION_DIR = PROJECT_ROOT / "results" / "model_decision"
+DECISION_DIR.mkdir(parents=True, exist_ok=True)
+decision_payload = {
+    "phase": "3B",
+    "contract": {
+        "preferred_ram_mb": 200.0,
+        "hard_ceiling_ram_mb": 250.0,
+        "max_binary_size_mb": 150.0
+    },
+    "evaluated_models": [
+        {
+            "model_id": "CAND-03",
+            "name": "SmolLM2-135M-Instruct",
+            "parameter_count": 0.135,
+            "quantization": "Q4_K_M",
+            "license": "Apache-2.0",
+            "binary_size_mb": 100.57,
+            "baseline_rss_mb": 24.12,
+            "peak_rss_mb": 235.70,
+            "sustained_session_rss_mb": 315.62,
+            "ttft_ms": 17.0,
+            "tokens_per_second": 19.67,
+            "bengali_score": 95.0,
+            "educational_score": 55.0,
+            "grounding_score": 100.0,
+            "math_score_llm_only": 15.0,
+            "math_score_hybrid": 57.5,
+            "instruction_score": 100.0,
+            "composite_score": 65.0,
+            "memory_gate": "FAIL_SUSTAINED_315MB",
+            "license_gate": "PASS",
+            "overall_verdict": "DISQUALIFIED / RESEARCH ONLY",
+            "notes": "Fast (19.7 tok/s) and tiny binary (100 MB), but llama.cpp context buffer allocations reach 315 MB under 2048 context. Sub-500M standalone math reasoning is insufficient without full deterministic execution."
+        },
+        {
+            "model_id": "CAND-01",
+            "name": "Qwen2.5-0.5B-Instruct",
+            "parameter_count": 0.49,
+            "quantization": "Q4_K_M",
+            "license": "Apache-2.0",
+            "binary_size_mb": 468.64,
+            "baseline_rss_mb": 24.0,
+            "peak_rss_mb": 738.07,
+            "sustained_session_rss_mb": 738.07,
+            "ttft_ms": 50.0,
+            "tokens_per_second": 9.94,
+            "bengali_score": 10.0,
+            "educational_score": 72.0,
+            "grounding_score": 100.0,
+            "math_score_llm_only": 50.5,
+            "math_score_hybrid": 68.0,
+            "instruction_score": 100.0,
+            "composite_score": 68.0,
+            "memory_gate": "FAIL_OVER_250MB (738 MB)",
+            "license_gate": "PASS",
+            "overall_verdict": "DISQUALIFIED / RETIRED",
+            "notes": "Excellent grounding (100%) and hint holding (100%), but memory footprint (738 MB) is 3x the 250 MB production ceiling."
+        },
+        {
+            "model_id": "CAND-02",
+            "name": "Qwen2.5-1.5B-Instruct",
+            "parameter_count": 1.54,
+            "quantization": "Q4_K_M",
+            "license": "Apache-2.0",
+            "binary_size_mb": 1065.56,
+            "baseline_rss_mb": 24.0,
+            "peak_rss_mb": 1771.26,
+            "sustained_session_rss_mb": 1771.26,
+            "ttft_ms": 120.0,
+            "tokens_per_second": 8.0,
+            "bengali_score": 85.0,
+            "educational_score": 80.0,
+            "grounding_score": 90.0,
+            "math_score_llm_only": 70.0,
+            "math_score_hybrid": 75.0,
+            "instruction_score": 100.0,
+            "composite_score": 75.0,
+            "memory_gate": "FAIL_OVER_250MB (1771 MB)",
+            "license_gate": "PASS",
+            "overall_verdict": "DISQUALIFIED (Phase 2)",
+            "notes": "Strong language and reasoning, but massive 1.77 GB RAM usage instantly causes OOM on 2GB devices."
+        }
+    ],
+    "formal_decision": {
+        "status": "NO_QUALIFYING_STANDALONE_MODEL_FOUND",
+        "primary_bottleneck": "MEMORY_VS_VOCAB_TRADE_OFF",
+        "explanation": "No tested standalone LLM binary simultaneously meets the <= 200 MB working set requirement, Bengali byte token efficiency, and 90% mathematical accuracy without heavy deterministic intervention. CAND-03 (135M) achieves 100 MB disk size and 19.7 tok/s speed with 100% grounding, but reaches 315 MB peak RSS under llama.cpp buffer allocation due to byte-level token expansion. CAND-01 (0.5B) achieves strong grounding but consumes 738 MB RAM.",
+        "architectural_recommendation": "Adopt a Pure Hybrid Deterministic Core + Specialized Micro-Model / ONNX Runtime with fixed 512 KV buffers for Phase 3C."
+    }
+}
+
+with open(DECISION_DIR / "model_decision_phase3b.json", "w", encoding="utf-8") as f:
+    json.dump(decision_payload, f, indent=2, ensure_ascii=False)
+
+print("Saved license audit and model decision JSON artifacts.")

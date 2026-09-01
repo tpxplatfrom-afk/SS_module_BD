@@ -1,0 +1,32 @@
+[
+  {
+    "tokenizer_name": "Custom Bengali-16K (Phase 4)",
+    "vocab_size": 1073,
+    "total_samples": 14,
+    "total_tokens": 710,
+    "chars_per_token": 1.35,
+    "words_per_token": 0.259,
+    "tokens_per_bengali_word": 3.86,
+    "efficiency_verdict": "GOOD"
+  },
+  {
+    "tokenizer_name": "Qwen2.5-0.5B (152K Vocab)",
+    "vocab_size": 151643,
+    "total_samples": 14,
+    "total_tokens": 971,
+    "chars_per_token": 0.99,
+    "words_per_token": 0.189,
+    "tokens_per_bengali_word": 5.28,
+    "efficiency_verdict": "POOR"
+  },
+  {
+    "tokenizer_name": "SmolLM2-135M (49K Vocab)",
+    "vocab_size": 49152,
+    "total_samples": 14,
+    "total_tokens": 1556,
+    "chars_per_token": 0.62,
+    "words_per_token": 0.118,
+    "tokens_per_bengali_word": 8.46,
+    "efficiency_verdict": "POOR"
+  }
+]

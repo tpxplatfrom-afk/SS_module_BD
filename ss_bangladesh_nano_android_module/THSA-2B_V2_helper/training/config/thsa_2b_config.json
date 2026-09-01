@@ -1,0 +1,53 @@
+﻿{
+  "model_id": "THSA-2B-V1-PRODUCTION",
+  "format_version": 1,
+  "total_blocks": 24,
+  "state_blocks": 16,
+  "gqa_blocks": 8,
+  "d_model": 2560,
+  "d_ffn": 6912,
+  "n_query_heads": 20,
+  "n_kv_heads": 4,
+  "d_head": 128,
+  "vocab_size": 65536,
+  "max_context_tokens": 10000,
+  "chunk_size": 256,
+  "rms_norm_eps": 1e-5,
+  "quantization": {
+    "weights": "ternary_1.58bit",
+    "activations": "int8_dynamic",
+    "kv_cache": "int4_grouped",
+    "sensitive_shield": true,
+    "embeddings_precision": "int8",
+    "lm_head_precision": "int8",
+    "layer_norm_precision": "fp32"
+  },
+  "training": {
+    "total_tokens": 2000000000000,
+    "batch_size": 256,
+    "learning_rate": 2.5e-4,
+    "min_learning_rate": 2.5e-5,
+    "warmup_tokens": 10000000000,
+    "weight_decay": 0.1,
+    "adam_beta1": 0.9,
+    "adam_beta2": 0.95,
+    "qat_anneal_schedule": {
+      "start_ratio": 0.80,
+      "end_ratio": 1.00,
+      "beta_min": 1.0,
+      "beta_max": 100.0
+    },
+    "distillation": {
+      "alpha": 0.65,
+      "temperature": 2.0,
+      "teachers": ["sarvamai/sarvam-1", "Qwen/Qwen2.5-7B-Instruct"]
+    }
+  },
+  "deployment_envelope": {
+    "max_ram_mb": 250.0,
+    "preferred_ram_mb": 200.0,
+    "target_rom_mb": 500.0,
+    "target_joules_per_token": 0.0035,
+    "max_chassis_temp_c": 45.0
+  }
+}

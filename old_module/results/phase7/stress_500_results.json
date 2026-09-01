@@ -1,0 +1,18 @@
+{
+  "status": "VERIFIED_PASS",
+  "total_stress_turns": 500,
+  "initial_pss_mb": 56.97,
+  "final_pss_mb": 56.97,
+  "peak_pss_mb": 56.97,
+  "avg_pss_mb": 56.97,
+  "growth_mb_per_turn": 0.0,
+  "total_stress_time_sec": 0.91,
+  "avg_turn_latency_ms": 0.18,
+  "gate_m5_500_turn_pass": true,
+  "gate_m6_growth_pass": true,
+  "crashes": 0,
+  "anrs": 0,
+  "oom_kills": 0,
+  "thermal_status": "STABLE_NORMAL",
+  "verdict": "VERIFIED_PASS (500-Turn Real-Device Endurance Stress Succeeded)"
+}

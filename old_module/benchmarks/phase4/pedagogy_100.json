@@ -1,0 +1,706 @@
+{
+  "suite_name": "pedagogy_100",
+  "total_questions": 100,
+  "questions": [
+    {
+      "id": "PED4-001",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সরল মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-002",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে ভগ্নাংশ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-003",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে পিথাগোরাস উপপাদ্য একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-004",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে চক্রবৃদ্ধি মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-005",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বৃত্তের পরিধি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-006",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে লাভ-ক্ষতি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-007",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সমান্তর ধারা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-008",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বীজগাণিতিক রাশি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-009",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে অনুপাত একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-010",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে দ্বিঘাত সমীকরণ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-011",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সরল মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-012",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে ভগ্নাংশ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-013",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে পিথাগোরাস উপপাদ্য একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-014",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে চক্রবৃদ্ধি মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-015",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বৃত্তের পরিধি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-016",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে লাভ-ক্ষতি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-017",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সমান্তর ধারা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-018",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বীজগাণিতিক রাশি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-019",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে অনুপাত একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-020",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে দ্বিঘাত সমীকরণ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-021",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সরল মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-022",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে ভগ্নাংশ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-023",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে পিথাগোরাস উপপাদ্য একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-024",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে চক্রবৃদ্ধি মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-025",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বৃত্তের পরিধি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-026",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে লাভ-ক্ষতি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-027",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সমান্তর ধারা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-028",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বীজগাণিতিক রাশি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-029",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে অনুপাত একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-030",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে দ্বিঘাত সমীকরণ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-031",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সরল মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-032",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে ভগ্নাংশ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-033",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে পিথাগোরাস উপপাদ্য একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-034",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে চক্রবৃদ্ধি মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-035",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বৃত্তের পরিধি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-036",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে লাভ-ক্ষতি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-037",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সমান্তর ধারা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-038",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বীজগাণিতিক রাশি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-039",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে অনুপাত একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-040",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে দ্বিঘাত সমীকরণ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-041",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সরল মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-042",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে ভগ্নাংশ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-043",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে পিথাগোরাস উপপাদ্য একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-044",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে চক্রবৃদ্ধি মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-045",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বৃত্তের পরিধি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-046",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে লাভ-ক্ষতি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-047",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সমান্তর ধারা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-048",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বীজগাণিতিক রাশি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-049",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে অনুপাত একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-050",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে দ্বিঘাত সমীকরণ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-051",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সরল মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-052",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে ভগ্নাংশ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-053",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে পিথাগোরাস উপপাদ্য একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-054",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে চক্রবৃদ্ধি মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-055",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বৃত্তের পরিধি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-056",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে লাভ-ক্ষতি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-057",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সমান্তর ধারা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-058",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বীজগাণিতিক রাশি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-059",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে অনুপাত একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-060",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে দ্বিঘাত সমীকরণ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-061",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সরল মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-062",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে ভগ্নাংশ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-063",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে পিথাগোরাস উপপাদ্য একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-064",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে চক্রবৃদ্ধি মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-065",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বৃত্তের পরিধি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-066",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে লাভ-ক্ষতি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-067",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সমান্তর ধারা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-068",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বীজগাণিতিক রাশি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-069",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে অনুপাত একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-070",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে দ্বিঘাত সমীকরণ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-071",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সরল মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-072",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে ভগ্নাংশ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-073",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে পিথাগোরাস উপপাদ্য একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-074",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে চক্রবৃদ্ধি মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-075",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বৃত্তের পরিধি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-076",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে লাভ-ক্ষতি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-077",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সমান্তর ধারা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-078",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বীজগাণিতিক রাশি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-079",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে অনুপাত একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-080",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে দ্বিঘাত সমীকরণ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-081",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সরল মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-082",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে ভগ্নাংশ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-083",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে পিথাগোরাস উপপাদ্য একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-084",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে চক্রবৃদ্ধি মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-085",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বৃত্তের পরিধি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-086",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে লাভ-ক্ষতি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-087",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সমান্তর ধারা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-088",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বীজগাণিতিক রাশি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-089",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে অনুপাত একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-090",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে দ্বিঘাত সমীকরণ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-091",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সরল মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-092",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে ভগ্নাংশ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-093",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে পিথাগোরাস উপপাদ্য একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-094",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে চক্রবৃদ্ধি মুনাফা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-095",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বৃত্তের পরিধি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-096",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে লাভ-ক্ষতি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-097",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে সমান্তর ধারা একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-098",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে বীজগাণিতিক রাশি একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-099",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে অনুপাত একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    },
+    {
+      "id": "PED4-100",
+      "category": "pedagogical_explanation",
+      "mode": "EXPLAIN",
+      "query": "একজন ৮ম শ্রেণির শিক্ষার্থীকে দ্বিঘাত সমীকরণ একটি বাস্তব উদাহরণ দিয়ে বুঝাও।",
+      "pedagogical_goal": "step_by_step_and_analogy"
+    }
+  ]
+}

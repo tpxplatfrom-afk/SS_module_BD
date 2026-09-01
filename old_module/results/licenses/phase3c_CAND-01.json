@@ -1,0 +1,15 @@
+{
+  "candidate_id": "CAND-01",
+  "model_name": "Qwen2.5-0.5B-Instruct",
+  "publisher": "Alibaba Cloud",
+  "repository": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+  "license": "Apache-2.0",
+  "commercial_use": true,
+  "redistribution": true,
+  "modification": true,
+  "attribution_required": true,
+  "license_file_verified": true,
+  "gate_1_status": "LICENSE_PASSED",
+  "decision": "APPROVED_FOR_OFFLINE_DISTRIBUTION",
+  "notes": "Permissive Apache-2.0 license verified."
+}

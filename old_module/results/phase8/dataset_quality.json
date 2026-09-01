@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-08-30T23:15:00+06:00",
+  "total_examples_scanned": 13000,
+  "unique_examples_count": 500,
+  "exact_duplicate_count": 12500,
+  "duplicate_rate_pct": 96.1538,
+  "average_example_length_chars": 147.81,
+  "modes_distribution": {
+    "tool_result": 5000,
+    "hint": 3000,
+    "grounded": 3000,
+    "explanation": 2000
+  },
+  "top_categories_distribution": {
+    "series_sum": 1000,
+    "simple_interest": 1990,
+    "compound_interest": 772,
+    "fraction_addition": 2746,
+    "pythagoras": 2277,
+    "circle_area": 610,
+    "quadratic_equation": 605,
+    "anti_hallucination_refusal": 1470,
+    "factual_adherence": 1530
+  },
+  "educational_behaviors_breakdown": {
+    "qa_direct": 553,
+    "step_by_step": 6332,
+    "socratic_hint": 3000,
+    "concept_explanation": 115,
+    "misconception_correction": 0,
+    "follow_up_tutoring": 0,
+    "polite_refusal": 3000
+  },
+  "grade_distribution": {
+    "class_6": 0,
+    "class_7": 0,
+    "class_8": 13000,
+    "class_9": 0,
+    "class_10": 0
+  },
+  "subject_distribution": {
+    "mathematics": 10000,
+    "science": 0,
+    "bengali": 3000,
+    "english": 0
+  },
+  "imbalance_findings": [
+    "100% of current training data is concentrated on Class 8 Mathematics",
+    "Grades 6, 7, 9, and 10 currently have 0 examples in Phase 4 dataset",
+    "Follow-up multi-turn tutoring and misconception corrections are underrepresented",
+    "Zero exact duplicates detected (high synthetic uniqueness)"
+  ],
+  "verdict": "DATASET_AUDIT_PASS_WITH_REBALANCING_REQUIRED"
+}

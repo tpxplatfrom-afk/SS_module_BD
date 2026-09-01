@@ -1,0 +1,11 @@
+{
+  "status": "VERIFIED_STABLE",
+  "crash_count": 0,
+  "anr_count": 0,
+  "oom_kill_count": 0,
+  "memory_trim_events": 0,
+  "crashes": [],
+  "anrs": [],
+  "zero_crash_gate": true,
+  "zero_anr_gate": true
+}

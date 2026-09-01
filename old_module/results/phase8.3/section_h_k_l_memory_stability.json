@@ -1,0 +1,143 @@
+{
+  "lifecycle_states": {
+    "State_A_unloaded_mb": 501.46,
+    "State_B_loaded_idle_mb": 501.79,
+    "State_C_short_inference_mb": 726.26,
+    "State_D_max_input_256_mb": 759.21,
+    "State_E_generation_32_mb": 678.41,
+    "State_F_after_500_turns_mb": 648.33,
+    "State_G_after_unload_mb": 409.25,
+    "recovered_memory_mb": 239.07,
+    "leakage_delta_mb": -92.2
+  },
+  "drift_over_turns": [
+    {
+      "turn": 10,
+      "process_rss_mb": 652.69,
+      "growth_from_idle_mb": 150.9
+    },
+    {
+      "turn": 50,
+      "process_rss_mb": 656.79,
+      "growth_from_idle_mb": 154.99
+    },
+    {
+      "turn": 100,
+      "process_rss_mb": 657.15,
+      "growth_from_idle_mb": 155.36
+    },
+    {
+      "turn": 250,
+      "process_rss_mb": 649.52,
+      "growth_from_idle_mb": 147.73
+    },
+    {
+      "turn": 500,
+      "process_rss_mb": 648.33,
+      "growth_from_idle_mb": 146.54
+    }
+  ],
+  "repeated_load_unload_cycles": [
+    {
+      "cycle": 1,
+      "rss_mb": 406.75,
+      "delta_from_base_mb": -2.51
+    },
+    {
+      "cycle": 2,
+      "rss_mb": 402.23,
+      "delta_from_base_mb": -7.02
+    },
+    {
+      "cycle": 3,
+      "rss_mb": 402.58,
+      "delta_from_base_mb": -6.67
+    },
+    {
+      "cycle": 4,
+      "rss_mb": 403.59,
+      "delta_from_base_mb": -5.66
+    },
+    {
+      "cycle": 5,
+      "rss_mb": 403.49,
+      "delta_from_base_mb": -5.76
+    },
+    {
+      "cycle": 6,
+      "rss_mb": 402.92,
+      "delta_from_base_mb": -6.33
+    },
+    {
+      "cycle": 7,
+      "rss_mb": 404.9,
+      "delta_from_base_mb": -4.36
+    },
+    {
+      "cycle": 8,
+      "rss_mb": 402.66,
+      "delta_from_base_mb": -6.6
+    },
+    {
+      "cycle": 9,
+      "rss_mb": 402.38,
+      "delta_from_base_mb": -6.88
+    },
+    {
+      "cycle": 10,
+      "rss_mb": 402.35,
+      "delta_from_base_mb": -6.91
+    },
+    {
+      "cycle": 11,
+      "rss_mb": 403.37,
+      "delta_from_base_mb": -5.88
+    },
+    {
+      "cycle": 12,
+      "rss_mb": 402.51,
+      "delta_from_base_mb": -6.74
+    },
+    {
+      "cycle": 13,
+      "rss_mb": 402.48,
+      "delta_from_base_mb": -6.77
+    },
+    {
+      "cycle": 14,
+      "rss_mb": 402.46,
+      "delta_from_base_mb": -6.8
+    },
+    {
+      "cycle": 15,
+      "rss_mb": 403.18,
+      "delta_from_base_mb": -6.08
+    },
+    {
+      "cycle": 16,
+      "rss_mb": 403.03,
+      "delta_from_base_mb": -6.23
+    },
+    {
+      "cycle": 17,
+      "rss_mb": 402.62,
+      "delta_from_base_mb": -6.63
+    },
+    {
+      "cycle": 18,
+      "rss_mb": 403.39,
+      "delta_from_base_mb": -5.86
+    },
+    {
+      "cycle": 19,
+      "rss_mb": 402.79,
+      "delta_from_base_mb": -6.47
+    },
+    {
+      "cycle": 20,
+      "rss_mb": 402.79,
+      "delta_from_base_mb": -6.47
+    }
+  ],
+  "is_memory_bounded": true
+}

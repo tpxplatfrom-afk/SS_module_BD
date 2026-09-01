@@ -1,0 +1,35 @@
+{
+  "registry_version": "1.0.0",
+  "phase": 8,
+  "experiments": [
+    {
+      "experiment_id": "EXP-04-BASELINE-70M",
+      "phase": 4,
+      "date": "2026-08-30",
+      "model_name": "sstutor_bengali_70m_edu",
+      "parameters": "68.2M",
+      "quantized_size_mb": 34.12,
+      "dataset_examples": 13000,
+      "dataset_scope": "Class 8 Mathematics Only",
+      "train_loss": 0.42,
+      "math_accuracy_pct": 100.0,
+      "grounding_adherence_pct": 100.0,
+      "hint_compliance_pct": 100.0,
+      "overall_13d_eval_score": 92.31,
+      "status": "ACTIVE_PRODUCTION_BASELINE"
+    },
+    {
+      "experiment_id": "EXP-08-CURRICULUM-FRAMEWORK",
+      "phase": 8,
+      "date": "2026-08-30",
+      "model_name": "sstutor_bengali_core_v08",
+      "parameters": "68.2M",
+      "quantized_size_mb": 34.12,
+      "curriculum_scope": "Class 6-10 Ontological Hierarchy",
+      "dataset_audited": true,
+      "coverage_engine_integrated": true,
+      "developer_module_ready": true,
+      "status": "COMPLETED_FRAMEWORK_FOUNDATION"
+    }
+  ]
+}

@@ -1,0 +1,435 @@
+{
+  "AUDIT_RUN_ID": "RUN-NEURAL-AUDIT-A3709C893145",
+  "UTC_TIMESTAMP": "2026-09-01T15:10:29.051041+00:00",
+  "LOCAL_TIMESTAMP": "2026-09-01T21:10:29.051057",
+  "HOST_ENVIRONMENT": {
+    "os": "Windows-10-10.0.19045-SP0",
+    "arch": "AMD64",
+    "python": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]",
+    "pid": 7480
+  },
+  "MODEL_FILE_EVIDENCE": {
+    "path": "c:\\Users\\User\\Desktop\\SS_module_BD\\ss_bangladesh_nano_android_module\\THSA-2B V1\\models\\model.nano",
+    "size_bytes": 686176192,
+    "sha256": "638d51bd6813893145a2c64a46e33581c78b2a8134df0b580f4de1645e164791",
+    "mtime": "2026-09-01T04:15:25.433541",
+    "header_inspection": {
+      "magic_hex": "4e414e4f0100180010000800000a0000",
+      "magic_ascii": "NANO............",
+      "format": "NANO_BINARY_V1",
+      "topology": "24 Blocks (16 State / 8 GQA)",
+      "d_model": 2560,
+      "d_ffn": 6912,
+      "d_head": 128,
+      "n_query_heads": 20,
+      "n_kv_heads": 4,
+      "vocab_size": 65536,
+      "context_horizon": 10000,
+      "tensor_count": 123,
+      "crc32_checksum": "0xE3744527 (MATCH)",
+      "quantization": "INT4",
+      "parameter_count": "UNOBSERVABLE (Header stores hyperparams but not pre-computed total param count field)"
+    }
+  },
+  "NATIVE_INVENTORY": [
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\jni\\nano_engine_jni.cpp",
+      "size_bytes": 6099,
+      "sha256": "e5c0a89ca191811ea0dc0f23da764c43d9f95b6a97329dc61bb6e75f02ae703c",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\tests\\benchmarks\\benchmark_gemv_neon.cpp",
+      "size_bytes": 2362,
+      "sha256": "335152fe32264f9bec19984ee4b776d5dfe3aaeacfa915cdb497eb5a7d900a04",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\tests\\integration\\test_async_cancellation.cpp",
+      "size_bytes": 3018,
+      "sha256": "6c6a7137567b1207cc3d10342f843414202a3c01e61e0a5a70c1f93924d96a60",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\tests\\integration\\test_load_unload_leak.cpp",
+      "size_bytes": 1430,
+      "sha256": "4beacb1567759080924bcd29093a13fe990a70bf019135fef0546bc82d2ff439",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\tests\\integration\\test_multi_turn_dialogue.cpp",
+      "size_bytes": 2908,
+      "sha256": "b6dfa68fc6c3c3dc04508fcd965c0fc2fa1d33ceeea24e87284e0cb326844312",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\tests\\unit\\test_neon_kernels.cpp",
+      "size_bytes": 8999,
+      "sha256": "5eef0692d12da1f681c243570f03adfef27d3fb26bc60a2bca2075b74b453bd6",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\src\\engine\\memory_arena.cpp",
+      "size_bytes": 3452,
+      "sha256": "4d3a516340276f811e16fdaa28695211181a5abe67e0a19c9197af898022c65f",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\src\\engine\\nano_engine.cpp",
+      "size_bytes": 5601,
+      "sha256": "94e2c0441af870406dfa37733dbd8b609d72919bea0ab3dcac751a13921ff4de",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "STUB_IMPLEMENTATION ((void)model_path; dummy token loop)"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\src\\kernels\\neon_gemv_ternary.cpp",
+      "size_bytes": 5691,
+      "sha256": "5d2cb0bfb873dafcdf35108f88964d1eeb06d9c348feb420368d0fe6bd652b33",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\src\\kernels\\neon_kv_cache.cpp",
+      "size_bytes": 4144,
+      "sha256": "f684b87a20415f47e853f450a8752754045a31e488bd69c907d411ff2c3c8732",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\src\\kernels\\neon_norm_act.cpp",
+      "size_bytes": 2468,
+      "sha256": "6f6c6c4a69df8f8eb7257a841aa92380a6bb6696c649db76c860cfc9e8f658be",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\src\\kernels\\neon_state_update.cpp",
+      "size_bytes": 2744,
+      "sha256": "41b96d9aca2128f3100c143dafe248b7a4c5dfb9370b005504dfdab90c62a979",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\src\\tokenizer\\bpe_trie_runtime.cpp",
+      "size_bytes": 5747,
+      "sha256": "36de4bda5d6d3a35b08975060534b0aaf1d5b67cdd40ad563522339823151561",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\src\\tokenizer\\unicode_nfc.cpp",
+      "size_bytes": 2604,
+      "sha256": "7b3ad47126edbd401eeb6a33660c161f967541dac4d46aa7ed310d66c5eaa19f",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\src\\tokenizer\\utf8_ring_buffer.cpp",
+      "size_bytes": 3487,
+      "sha256": "aea1c1b2ce14528336a8b6a564392859d07f0468ff13ca7a9a6e38bf3aaada98",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\include\\nano_config.h",
+      "size_bytes": 3153,
+      "sha256": "5c82e6a61c1bcfbf75d7b86ff51515ad292ec3445bc6b22229b341e31f9bccf3",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\include\\nano_engine.h",
+      "size_bytes": 3626,
+      "sha256": "37c488ae6911550a39d988a02e11620b89e7e837115c5a8a49b831a26f216190",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\include\\nano_telemetry.h",
+      "size_bytes": 1463,
+      "sha256": "42e0c68d02eebc59c2629be1d15495686441546cee41d826dba210633a4d3101",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\include\\nano_tokenizer.h",
+      "size_bytes": 3855,
+      "sha256": "d815bed5eed01df99fdd4b562d44f13acfb5d18e592d3c84b4cccc6e0f686b88",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\include\\nano_types.h",
+      "size_bytes": 3283,
+      "sha256": "01a67b598906e08f8d157286401b0edbe15650a27586c5cd88c1f50f796e6427",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\include\\kernels\\neon_gemv_ternary.h",
+      "size_bytes": 1800,
+      "sha256": "ef2dd631a3dd4c642ec0803a9602f1f1207385fedfeaee81c41e55f2e6e0f922",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\include\\kernels\\neon_kv_cache.h",
+      "size_bytes": 2075,
+      "sha256": "99284447290d7b1fc5c2060e44b7cb4f7193a57d423f84cc2be3225f7af02e00",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\include\\kernels\\neon_norm_act.h",
+      "size_bytes": 1688,
+      "sha256": "ef0b7356fdba4141fbfacf59cc264699e4f5bca85601350a9bf88c03f02012f8",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\include\\kernels\\neon_state_update.h",
+      "size_bytes": 1516,
+      "sha256": "9394ec4ef3a9bcd0fd48b92ef583fdef1dc4ff634cd9907c6b38a1a11aa0d590",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\CMakeLists.txt",
+      "size_bytes": 1157,
+      "sha256": "af732269bd96669623fd41c98422bc89a53b5cda407350e4f786f2ba2b9e9313",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\android\\build.gradle.kts",
+      "size_bytes": 1112,
+      "sha256": "5f4ec14f0e226de02bbd71fa4102fe134f70ed32260b39f29ffea3d8cf460cb7",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\android\\src\\main\\java\\ai\\nano\\downloader\\NanoModelManager.kt",
+      "size_bytes": 2688,
+      "sha256": "f2eb6363c6b4f7de96325bc7eb9ed91907516bb4b0d26c0cc7d6f954e3adf34a",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "ANDROID_KOTLIN_WRAPPER"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\android\\src\\main\\java\\ai\\nano\\engine\\NanoConfig.kt",
+      "size_bytes": 558,
+      "sha256": "5b1d9e3b1388502c243af8ff4d4fb9a9ad5ef9837a205cf27cd1b2fff9bd01e3",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\android\\src\\main\\java\\ai\\nano\\engine\\NanoEngine.kt",
+      "size_bytes": 4207,
+      "sha256": "fdb2e77ebd0e4c1ae4bb2cc95aa586f18d4265cd0bbef398517371b0e117b78d",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "ANDROID_KOTLIN_WRAPPER"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\android\\src\\main\\java\\ai\\nano\\engine\\NanoEngineException.kt",
+      "size_bytes": 659,
+      "sha256": "84020c86e5d5bd623e8356618bf37bf785ceafedd9ffe01d2d97b1323bdf209b",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\android\\src\\main\\java\\ai\\nano\\engine\\NanoMathResponse.kt",
+      "size_bytes": 1718,
+      "sha256": "85db001901f8f0351d5c2e71bc721b19f29d9b2732f4845cecacd3d3f9f587a8",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\android\\src\\main\\java\\ai\\nano\\engine\\NanoNative.kt",
+      "size_bytes": 871,
+      "sha256": "40d33bf8779ec258e54cfa6f834b75e4552f6ea17ef54822f35707df01bf7532",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\android\\src\\main\\java\\ai\\nano\\engine\\NanoResponse.kt",
+      "size_bytes": 1005,
+      "sha256": "810b9b9ec83e13d41d1fde54fd4238058bc160c37c71d453ed76c3340464ca6b",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    },
+    {
+      "path": "ss_bangladesh_nano_android_module\\THSA-2B V1\\android\\src\\main\\java\\ai\\nano\\engine\\NanoTelemetry.kt",
+      "size_bytes": 630,
+      "sha256": "e892745ebc7b7a5b2fe965ef8e2e61a915fc195a2485cd612c76a2575cbc9150",
+      "build_status": "SOURCE_PRESENT",
+      "runtime_status": "UNLINKED_IN_HOST_PYTHON"
+    }
+  ],
+  "TENSOR_LOADING_TRACE": {
+    "file_opened_in_host_python": "NO",
+    "mmap_executed_in_nano_engine_cpp": "NO (Code contains '(void)model_path;' stub)",
+    "loaded_tensors_in_active_graph": 0,
+    "first_tensor_name": "UNOBSERVABLE (No runtime tensor mapping executed)",
+    "model_memory_allocation_bytes": 0
+  },
+  "TOKENIZER_TRACE": {
+    "raw_input": "17 × 23",
+    "native_bpe_trie_invoked": "NO",
+    "token_ids_generated": "TOKENIZER NOT WIRED TO NEURAL GRAPH IN HOST RUNTIME",
+    "special_tokens_injected": "NONE",
+    "model_input_tensor_shape": "UNOBSERVABLE"
+  },
+  "FORWARD_PASS_TRACE": {
+    "forward_pass_count": 0,
+    "native_forward_pass_executed": "NO",
+    "logits_produced": "NO",
+    "logits_shape": "UNOBSERVABLE",
+    "token_selection_executed": "NO",
+    "generated_tokens": "NONE",
+    "actual_model_inference": "NO"
+  },
+  "ROUTING_ANALYSIS": {
+    "universal_tutor_engine_architecture": "Symbolic Regex & Static Keyword Matcher -> Markdown Knowledge Base Templates",
+    "neural_backend_wiring": "DISCONNECTED (No C++ engine integration or PyTorch/ONNX inference call in universal_tutor_engine.py)",
+    "primary_response_origin": "RULE / TEMPLATE / STATIC KB",
+    "safety_layer_architecture": "Deterministic regex keyword blocks in SafetyEthicsAlignmentEngine"
+  },
+  "BUILD_AND_TOOLCHAIN_STATUS": {
+    "cmake": "NOT FOUND IN PATH",
+    "gcc": "NOT FOUND IN PATH",
+    "clang": "NOT FOUND IN PATH",
+    "cl": "NOT FOUND IN PATH",
+    "ndk_build": "NOT FOUND IN PATH",
+    "adb": "NOT FOUND IN PATH",
+    "host_platform": "Windows-10-10.0.19045-SP0",
+    "cpu_arch": "AMD64",
+    "python_version": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]"
+  },
+  "DEVICE_SMOKE_TEST_STATUS": {
+    "device_connected": "NO (No ADB daemon or physical Android device attached)",
+    "arm64_execution_possible_on_host": "NO (Host is x86_64 Windows)",
+    "forward_pass_count": 0
+  },
+  "UNSEEN_PROMPTS_TEST_RESULTS": [
+    {
+      "id": "UNSEEN_1_ARITHMETIC",
+      "prompt": "487 × 36 কত? দুইটি ভিন্ন পদ্ধতিতে হিসাব করো।",
+      "output_snippet": "### 💡 ধারণা ও পাঠ্যবই ভিত্তিক বিশ্লেষণ (Academic Concept Explanation) **বিষয়:** 487 × 36 কত? দুইটি ভিন্ন পদ্ধতিতে হিসাব করো।   📖 **পাঠ্যবই রেফারেন্স:** এনসিটিবি (NCTB) জাতীয় শিক্ষা",
+      "latency_ms": 3.33,
+      "source_attribution": "TEMPLATE (Generic Academic Fallback)",
+      "neural_inference_executed": "NO",
+      "fallback_detected": "YES"
+    },
+    {
+      "id": "UNSEEN_2_BANGLA",
+      "prompt": "আজকে ছুটির দিনে কী করা যায়? সুন্দর একটি প্ল্যান দাও।",
+      "output_snippet": "### 💡 ধারণা ও পাঠ্যবই ভিত্তিক বিশ্লেষণ (Academic Concept Explanation) **বিষয়:** আজকে ছুটির দিনে কী করা যায়? সুন্দর একটি প্ল্যান দাও।   📖 **পাঠ্যবই রেফারেন্স:** এনসিটিবি (NCTB) জাতী",
+      "latency_ms": 0.93,
+      "source_attribution": "TEMPLATE (Generic Academic Fallback)",
+      "neural_inference_executed": "NO",
+      "fallback_detected": "YES"
+    },
+    {
+      "id": "UNSEEN_3_BANGLISH",
+      "prompt": "amar exam er preparation valo na, ki korle vlo result kora jabe?",
+      "output_snippet": "### 💡 ধারণা ও পাঠ্যবই ভিত্তিক বিশ্লেষণ (Academic Concept Explanation) **বিষয়:** amar exam er preparation valo na, ki korle vlo result kora jabe?   📖 **পাঠ্যবই রেফারেন্স:** এনসিটিবি",
+      "latency_ms": 0.59,
+      "source_attribution": "TEMPLATE (Generic Academic Fallback)",
+      "neural_inference_executed": "NO",
+      "fallback_detected": "YES"
+    },
+    {
+      "id": "UNSEEN_4_SCIENCE",
+      "prompt": "পানির অণুতে হাইড্রোজেন ও অক্সিজেনের বন্ধন কোণ কত এবং কেন?",
+      "output_snippet": "### 💡 ধারণা ও পাঠ্যবই ভিত্তিক বিশ্লেষণ (Academic Concept Explanation) **বিষয়:** পানির অণুতে হাইড্রোজেন ও অক্সিজেনের বন্ধন কোণ কত এবং কেন?   📖 **পাঠ্যবই রেফারেন্স:** এনসিটিবি (NCTB)",
+      "latency_ms": 0.89,
+      "source_attribution": "TEMPLATE (Generic Academic Fallback)",
+      "neural_inference_executed": "NO",
+      "fallback_detected": "YES"
+    },
+    {
+      "id": "UNSEEN_5_EXPLANATION",
+      "prompt": "শব্দ কীভাবে এক স্থান থেকে অন্য স্থানে সঞ্চালিত হয়?",
+      "output_snippet": "### 💡 ধারণা ও পাঠ্যবই ভিত্তিক বিশ্লেষণ (Academic Concept Explanation) **বিষয়:** শব্দ কীভাবে এক স্থান থেকে অন্য স্থানে সঞ্চালিত হয়?   📖 **পাঠ্যবই রেফারেন্স:** এনসিটিবি (NCTB) জাতীয় ",
+      "latency_ms": 0.86,
+      "source_attribution": "TEMPLATE (Generic Academic Fallback)",
+      "neural_inference_executed": "NO",
+      "fallback_detected": "YES"
+    },
+    {
+      "id": "UNSEEN_6_SHORT",
+      "prompt": "বল কাকে বলে",
+      "output_snippet": "### 💡 ধারণা ও পাঠ্যবই ভিত্তিক বিশ্লেষণ (Academic Concept Explanation) **বিষয়:** বল কাকে বলে   📖 **পাঠ্যবই রেফারেন্স:** এনসিটিবি (NCTB) জাতীয় শিক্ষাক্রম পাঠ্যপুস্তক  ---  #### 🌟 সহজ",
+      "latency_ms": 0.88,
+      "source_attribution": "TEMPLATE (Generic Academic Fallback)",
+      "neural_inference_executed": "NO",
+      "fallback_detected": "YES"
+    },
+    {
+      "id": "UNSEEN_7_REASONING",
+      "prompt": "যদি a + b = 7 এবং ab = 12 হয়, তবে a² + b² এর মান কত?",
+      "output_snippet": "### 💡 ধারণা ও পাঠ্যবই ভিত্তিক বিশ্লেষণ (Academic Concept Explanation) **বিষয়:** যদি a + b = 7 এবং ab = 12 হয়, তবে a² + b² এর মান কত?   📖 **পাঠ্যবই রেফারেন্স:** এনসিটিবি (NCTB) জাতী",
+      "latency_ms": 0.84,
+      "source_attribution": "TEMPLATE (Generic Academic Fallback)",
+      "neural_inference_executed": "NO",
+      "fallback_detected": "YES"
+    },
+    {
+      "id": "UNSEEN_8_CONVERSATION",
+      "prompt": "তোমার প্রিয় কোনো বাংলাদেশি লেখকের নাম বলো।",
+      "output_snippet": "### 💡 ধারণা ও পাঠ্যবই ভিত্তিক বিশ্লেষণ (Academic Concept Explanation) **বিষয়:** তোমার প্রিয় কোনো বাংলাদেশি লেখকের নাম বলো।   📖 **পাঠ্যবই রেফারেন্স:** এনসিটিবি (NCTB) জাতীয় শিক্ষাক্",
+      "latency_ms": 0.94,
+      "source_attribution": "TEMPLATE (Generic Academic Fallback)",
+      "neural_inference_executed": "NO",
+      "fallback_detected": "YES"
+    },
+    {
+      "id": "UNSEEN_9_CODE_SWITCHING",
+      "prompt": "Respiration প্রক্রিয়াটি বাংলাতে explain করো with chemical equation.",
+      "output_snippet": "### 💡 ধারণা ও পাঠ্যবই ভিত্তিক বিশ্লেষণ (Academic Concept Explanation) **বিষয়:** Respiration প্রক্রিয়াটি বাংলাতে explain করো with chemical equation.   📖 **পাঠ্যবই রেফারেন্স:** এনসিট",
+      "latency_ms": 1.04,
+      "source_attribution": "TEMPLATE (Generic Academic Fallback)",
+      "neural_inference_executed": "NO",
+      "fallback_detected": "YES"
+    },
+    {
+      "id": "UNSEEN_10_UNKNOWN",
+      "prompt": "২০৩১ সালের জাতীয় শিক্ষাক্রমের পরিবর্তনগুলো কী কী?",
+      "output_snippet": "### 💡 ধারণা ও পাঠ্যবই ভিত্তিক বিশ্লেষণ (Academic Concept Explanation) **বিষয়:** ২০৩১ সালের জাতীয় শিক্ষাক্রমের পরিবর্তনগুলো কী কী?   📖 **পাঠ্যবই রেফারেন্স:** এনসিটিবি (NCTB) জাতীয় শ",
+      "latency_ms": 0.92,
+      "source_attribution": "TEMPLATE (Generic Academic Fallback)",
+      "neural_inference_executed": "NO",
+      "fallback_detected": "YES"
+    }
+  ],
+  "FINAL_ACCEPTANCE_CHECKLIST": {
+    "1_model_nano_opened_by_loader": false,
+    "2_metadata_successfully_parsed": true,
+    "3_tensors_loaded_into_graph": false,
+    "4_tokenizer_produces_real_ids": false,
+    "5_native_forward_pass_executed": false,
+    "6_real_logits_produced": false,
+    "7_real_token_selection_executed": false,
+    "8_generated_tokens_decoded": false,
+    "9_android_native_runtime_executes_path": false,
+    "10_output_came_from_neural_backend": false,
+    "11_symbolic_template_did_not_replace_neural": false,
+    "12_unseen_prompt_passed_neural_pipeline": false
+  },
+  "FINAL_VERDICT_SUMMARY": {
+    "ACTUAL_NEURAL_INFERENCE_CONFIRMED": "NO",
+    "ANDROID_NEURAL_INFERENCE_CONFIRMED": "NO",
+    "SYMBOLIC_FALLBACK_PRIMARY": "YES",
+    "MODEL_WEIGHTS_LOADED": "NO (model.nano stored on disk; not mapped into RAM graph)",
+    "FORWARD_PASS_EXECUTED": "NO (FORWARD_PASS_COUNT: 0)",
+    "LOGITS_GENERATED": "NO",
+    "TOKENS_GENERATED": "NO (Generated via string templates)",
+    "FINAL_STATUS": "NOT VALIDATED"
+  }
+}
