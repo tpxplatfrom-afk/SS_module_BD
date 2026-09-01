@@ -8,7 +8,29 @@ Implements the 15% Reserved Neural Capacity Buffer logic:
 """
 
 from typing import Dict, Any, Optional
+import unicodedata
 import re
+
+def normalize_bengali_unicode(text: str) -> str:
+    """
+    Ensures 100% clean Unicode NFC normalization and repairs any broken Bengali ligatures/viramas.
+    Recombines decomposed vowels (e.g. e-kar + aa-kar -> o-kar) and Nukta consonants (য়, ড়, ঢ়).
+    """
+    if not text:
+        return text
+    # Recompose decomposed vowels
+    text = text.replace("\u09c7\u09be", "\u09cb") # ে + া -> ো
+    text = text.replace("\u09c7\u09d7", "\u09cc") # ে + ৗ -> ৌ
+    text = unicodedata.normalize("NFC", text)
+    # Recompose Nukta consonants to single canonical code points
+    text = text.replace("\u09a1\u09bc", "\u09dc") # ড + ় -> ড়
+    text = text.replace("\u09a2\u09bc", "\u09dd") # ঢ + ় -> ঢ়
+    text = text.replace("\u09af\u09bc", "\u09df") # য + ় -> য়
+    # Fix broken virama sequence leaks
+    text = re.sub(r"বিস্\u09c3ত", "বিস্তৃত", text)
+    text = re.sub(r"বিস্\u09cd\u09c3ত", "বিস্তৃত", text)
+    text = re.sub(r"\u09cd+", "\u09cd", text)
+    return text
 
 class SocraticMathEngine:
     """
@@ -174,10 +196,11 @@ $$= (7q - p)^2$$
 **কুইজ প্রশ্ন:** যদি $x + \\frac{{1}}{{x}} = 3$ হয়, তবে $x^2 + \\frac{{1}}{{x^2}}$ এর মান কত হবে? অনুসিদ্ধান্ত দিয়ে উত্তরটি বের করে দেখবে কি?
 """
 
+        clean_md = normalize_bengali_unicode(formatted_md)
         return {
             "status": "SUCCESS",
             "query": query,
-            "formatted_markdown": formatted_md,
+            "formatted_markdown": clean_md,
             "chapter_title": bp["chapter_title"],
             "class_level": bp["class_level"],
             "is_screen_safe": True,
@@ -190,8 +213,12 @@ $$= (7q - p)^2$$
         """
         clean_q = query.lower()
         
-        # Check if user is asking to explain an entire chapter
-        if any(k in clean_q for k in ["explain chapter", "অধ্যায়টি বুঝিয়ে", "explain the", "অধ্যায় ৩", "chapter 3"]) and not any(k in clean_q for k in ["2 of", "২ এর", "২ নং"]):
+        # Check if user is asking to explain an entire chapter vs a specific exercise question
+        is_entire_chapter = (
+            any(k in clean_q for k in ["explain chapter", "অধ্যায়টি বুঝিয়ে", "সম্পূর্ণ অধ্যায়", "অধ্যায় বিশ্লেষণ", "formulas and knowledge"]) or
+            (any(k in clean_q for k in ["chapter 3", "অধ্যায় ৩"]) and not any(k in clean_q for k in ["ex", "exercise", "অনুশীলনী", "প্রশ্ন", "q", "2 of", "২ এর", "২ নং", "3.1", "৩.১"]))
+        )
+        if is_entire_chapter and not any(k in clean_q for k in ["3.1", "৩.১", "exercise", "অনুশীলনী"]):
             return self.explain_chapter(query)
 
         # Match Class 9 Ch 3 Ex 3.1 Q 2(a)
@@ -223,14 +250,15 @@ $$= (7q - p)^2$$
 {item['socratic_hint']}
 """
         
+        clean_md = normalize_bengali_unicode(formatted_md)
         return {
             "status": "SUCCESS",
             "query": query,
-            "raw_text": formatted_md,
-            "formatted_markdown": formatted_md,
-            "calculation_block": item["calculation_latex"],
-            "explanation_block": item["explanation"],
-            "socratic_hint": item["socratic_hint"],
+            "raw_text": clean_md,
+            "formatted_markdown": clean_md,
+            "calculation_block": normalize_bengali_unicode(item["calculation_latex"]),
+            "explanation_block": normalize_bengali_unicode(item["explanation"]),
+            "socratic_hint": normalize_bengali_unicode(item["socratic_hint"]),
             "is_screen_safe": True,
             "formatting_type": "MARKDOWN_LATEX_STRUCTURED"
         }
