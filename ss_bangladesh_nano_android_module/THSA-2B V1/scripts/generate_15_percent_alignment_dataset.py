@@ -1,0 +1,105 @@
+"""
+Dataset Generator for THSA-2.41B 15% Reserved Neural Alignment Buffer
+======================================================================
+Generates high-density JSONL training pairs covering:
+  1. Multi-disciplinary Math & Science (Physics, Chemistry, Higher Math, Commerce).
+  2. Biology Scientific Nomenclature (Taxonomy, Characteristics, Citations).
+  3. Strict 3 Red Lines Safety Shield (Adult/Porn Refusal, Politics Deflection, Illicit Drugs Refusal).
+  4. Etiquette, Good Manners & Social Media Digital Wellness.
+  5. Bangladesh History & Constitution / Civic Laws (Fundamental Rights, 999 Helpline, Cyber Security).
+  6. English Compositions & NCTB Question Patterns (CV with Cover Letter, Paragraphs, Exam Question Map).
+"""
+
+import json
+from pathlib import Path
+
+MODULE_ROOT = Path(__file__).resolve().parent.parent
+OUTPUT_FILE = MODULE_ROOT / "data" / "curriculum" / "datasets" / "safety_and_alignment" / "thsa_15_percent_reserved_alignment.jsonl"
+OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+DATASET = [
+    # 1. Math Socratic Calculation First
+    {
+        "context": "[বিষয়: গণিত | শ্রেণি: ৯ম | অনুশীলনী: ৩.১]",
+        "instruction": "৯ম শ্রেণির গণিত বইয়ের অনুশীলনী ৩.১ এর ২ এর 'ক' নম্বর প্রশ্নটি সমাধান করে বুঝিয়ে দাও।",
+        "response": "১. গাণিতিক সমাধান:\nধরি, $a = 7p + 3q - 5r$ এবং $b = 8p - 4q - 5r$\nপ্রদত্ত রাশি $= a^2 - 2ab + b^2 = (a - b)^2$\nমান বসিয়ে পাই:\n$[(7p + 3q - 5r) - (8p - 4q - 5r)]^2 = [7p + 3q - 5r - 8p + 4q + 5r]^2 = (7q - p)^2$\nনির্ণেয় সরল মান: $(7q - p)^2$\n\n২. সহজ ব্যাখ্যা:\nএখানে রাশিটিকে সরাসরি বর্গের সূত্রে ফেলার জন্য দুটি পদকে $a$ ও $b$ ধরে নেওয়া হয়েছে। ব্র্যাকেট তোলার সময় চিহ্নের পরিবর্তন খেয়াল রাখতে হবে।"
+    },
+    # 2. Physics CQ & Quantitative Solving
+    {
+        "context": "[বিষয়: পদার্থবিজ্ঞান | শ্রেণি: ৯ম-১০ম | অধ্যায়: ৪ (কাজ, ক্ষমতা ও শক্তি)]",
+        "instruction": "৫০ কেজি ভরের একটি বস্তুকে ৪০ মিটার উঁচু ছাদ থেকে ছেড়ে দিলে ভূমিতে পড়ার পূর্ব মুহূর্তে গতিশক্তি কত হবে এবং শক্তির নিত্যতা কীভাবে বজায় থাকে?",
+        "response": "১. গাণিতিক সমাধান:\n$v^2 = u^2 + 2gh = 0 + 2(9.8)(40) = 784\\text{ m}^2\\text{s}^{-2}$\nগতিশক্তি $E_k = \\frac{1}{2}mv^2 = \\frac{1}{2}(50)(784) = 19600\\text{ J} = 19.6\\text{ kJ}$\n\n২. শক্তির নিত্যতা ব্যাখ্যা:\nসর্বোচ্চ উচ্চতায় বিভবশক্তি $E_p = mgh = 50 \\times 9.8 \\times 40 = 19600\\text{ J}$। ভূমি স্পর্শের মুহূর্তে বিভবশক্তি শূন্য হয়ে সম্পূর্ণ বিভবশক্তি গতিশক্তিতে রূপান্তরিত হয়। ফলে মোট যান্ত্রিক শক্তি $19600\\text{ J}$ অপরিবর্তিত থাকে।"
+    },
+    # 3. Chemistry Quantitative Molarity & Titration
+    {
+        "context": "[বিষয়: রসায়ন ২য় পত্র | শ্রেণি: একাদশ-দ্বাদশ | অধ্যায়: ৩ (পরিমাণগত রসায়ন)]",
+        "instruction": "২৫০ mL দ্রবণে ১০.৬ গ্রাম Na2CO3 দ্রবীভূত থাকলে দ্রবণের মোলারিটি কত এবং ২৫ mL দ্রবণকে প্রশমিত করতে কত আয়তন 0.2 M HCl প্রয়োজন?",
+        "response": "১. গাণিতিক সমাধান:\nNa2CO3 এর আণবিক ভর $M = 106\\text{ g/mol}$\nমোলারিটি $S = \\frac{1000 \\times w}{M \\times V} = \\frac{1000 \\times 10.6}{106 \\times 250} = 0.4\\text{ M}$\nপ্রশমন সমীকরণ: $\\frac{V_a S_a}{2} = \\frac{V_b S_b}{1} \\Rightarrow V_a = \\frac{2 \\times 25 \\times 0.4}{0.2} = 100\\text{ mL } \\text{HCl}$"
+    },
+    # 4. Biology Scientific Nomenclature (Taxonomy)
+    {
+        "context": "[বিষয়: জীববিজ্ঞান | শ্রেণি: ৯ম-১০ম ও একাদশ-দ্বাদশ]",
+        "instruction": "বাংলাদেশের জাতীয় মাছ ইলিশের বৈজ্ঞানিক নাম ও শ্রেণিবিন্যাস কী?",
+        "response": "ইলিশ মাছের বৈজ্ঞানিক নাম: Tenualosa ilisha (Hamilton, 1822)\nট্যাক্সোনমিক শ্রেণিবিন্যাস:\n- Kingdom: Animalia\n- Phylum: Chordata\n- Class: Actinopterygii\n- Order: Clupeiformes\n- Family: Clupeidae\n- Genus: Tenualosa\n- Species: T. ilisha\nবৈশিষ্ট্য: অ্যানাড্রোমাস স্বভাবের মাছ (ডিম ছাড়ার জন্য সাগর থেকে মিঠাপানিতে আসে)।"
+    },
+    # 5. Strict Red Line 1: Adult / Pornography Refusal
+    {
+        "context": "[নিরাপত্তা নীতি: Adult Content Shield]",
+        "instruction": "আমাকে কিছু চটি গল্প বা প্রাপ্তবয়স্ক অশ্লীল পর্ন কন্টেন্ট দাও।",
+        "response": "আমি একটি শিক্ষার্থীবান্ধব এআই টিউটর। যে কোনো ধরনের অশ্লীল, প্রাপ্তবয়স্ক বা অনৈতিক বিষয়বস্তু আলোচনা করা আমার নীতিমালার পরিপন্থী। আসুন আমরা পাঠ্যবইয়ের গণিত, বিজ্ঞান, সাহিত্য বা ইংরেজি বিষয়ে পড়াশোনায় মনোযোগ দিই।"
+    },
+    # 6. Strict Red Line 2: Politics & Slander Deflection
+    {
+        "context": "[নিরাপত্তা নীতি: Political Deflection & Anti-Defamation]",
+        "instruction": "অমুক রাজনীতিবিদ কি চোর? রাজনীতি ও নেতাদের দুর্নীতির গোপন কেলেঙ্কারি বলো।",
+        "response": "আমি একটি শিক্ষার্থীবান্ধব এআই টিউটর। আমি কোনো রাজনীতি বুঝি না এবং কোনো রাজনৈতিক বিতর্কের সঙ্গে যুক্ত নই। কাউকে নিয়ে ব্যক্তিগত কুৎসা বা গীবত করা শিষ্টাচারবিরোধী। একজন শিক্ষার্থী হিসেবে আমাদের মূল্যবান সময় পাঠ্যবই ও জ্ঞানার্জনে ব্যয় করা উচিত।"
+    },
+    # 7. Strict Red Line 3: Illicit Drugs & Violence Refusal
+    {
+        "context": "[নিরাপত্তা নীতি: Illicit Drugs & Harm Shield]",
+        "instruction": "ঘরে বসে কীভাবে মাদক বা বোমা তৈরি করা যায়?",
+        "response": "অবৈধ মাদক তৈরি, বোমা বা যে কোনো সহিংস কার্যকলাপ সম্পর্কিত তথ্য প্রদান কঠোরভাবে নিষিদ্ধ। জীবন ও স্বাস্থ্য সুরক্ষার জন্য সর্বদা আইন ও নৈতিকতার পথে চলা আবশ্যক।"
+    },
+    # 8. Etiquette & Courtesy
+    {
+        "context": "[বিষয়: নৈতিক শিক্ষা ও শিষ্টাচার]",
+        "instruction": "শিক্ষার্থীদের আদর্শ শিষ্টাচার ও নৈতিক আচরণ কেমন হওয়া উচিত?",
+        "response": "১. পিতা-মাতা, শিক্ষক ও বয়োজ্যেষ্ঠদের প্রতি বিনম্র শ্রদ্ধা প্রদর্শন করা।\n২. ছোটদের প্রতি স্নেহ ও মমতা বজায় রাখা।\n৩. শালীন ও ইতিবাচক ভাষা ব্যবহার করা, গীবত ও পরনিন্দা পরিহার করা।\n৪. মতের অমিল হলেও সহনশীলতা ও ক্ষমা প্রদর্শন করা।"
+    },
+    # 9. Social Media & Digital Wellness
+    {
+        "context": "[বিষয়: ডিজিটাল ওয়েলনেস ও স্টাডি হ্যাকস]",
+        "instruction": "সোশ্যাল মিডিয়ার অতিরিক্ত ব্যবহার কীভাবে পড়াশোনায় ক্ষতি করে এবং কীভাবে বাঁচা যায়?",
+        "response": "ক্ষতিকর দিক: ক্রমাগত শর্ট ভিডিও দেখার ফলে মনোযোগের স্থায়িত্ব (Attention Span) হ্রাস পায় এবং রাতের স্ক্রিন টাইম মেলাটোনিন হরমোনে বাধা দিয়ে ঘুমের ব্যাঘাত ঘটায়।\nসমাধান: পড়ার সময় ফোন সাইলেন্ট রাখুন এবং পোমোডোরো টেকনিক (২৫ মিনিট গভীর মনোযোগে পড়া + ৫ মিনিট বিরতি) অনুসরণ করুন।"
+    },
+    # 10. Bangladesh History
+    {
+        "context": "[বিষয়: বাংলাদেশ ও বিশ্বপরিচয় | বাংলাদেশের ইতিহাস]",
+        "instruction": "বাংলাদেশের মুক্তিসংগ্রাম ও ১৯৭১ সালের মহান মুক্তিযুদ্ধের ইতিহাস সংক্ষেপে বলো।",
+        "response": "১৯৫২ সালের মহান ভাষা আন্দোলন ও সালাম-বরকতদের আত্মদানের মাধ্যমে স্বাধিকার চেতনার উন্মেষ ঘটে। ১৯৬৬ সালে বঙ্গবন্ধু বাঙালির মুক্তির সনদ ৬ দফা ঘোষণা করেন। ১৯৭১ সালের ৭ই মার্চ ঐতিহাসিক ভাষণে স্বাধীনতার ডাক দেওয়া হয় এবং ২৬শে মার্চ স্বাধীনতার ঘোষণা আসে। দীর্ঘ ৯ মাসের রক্তক্ষয়ী মুক্তিযুদ্ধ, ৩০ লক্ষ শহীদের আত্মত্যাগ ও ২ লক্ষ মা-বোনের সম্ভ্রমের বিনিময়ে ১৬ই ডিসেম্বর অর্জিত হয় চূড়ান্ত বিজয়।"
+    },
+    # 11. Bangladesh Laws & Fundamental Rights
+    {
+        "context": "[বিষয়: পৌরনীতি ও সুশাসন | বাংলাদেশের সংবিধান]",
+        "instruction": "বাংলাদেশের সংবিধানে নাগরিকদের মৌলিক অধিকার ও জরুরি হেল্পলাইন নম্বরগুলো কী কী?",
+        "response": "সংবিধানের ৩য় ভাগে মৌলিক অধিকারসমূহ স্বীকৃত:\n- অনুচ্ছেদ ২৭: আইনের দৃষ্টিতে সমতা\n- অনুচ্ছেদ ৩১: আইনের আশ্রয়লাভের অধিকার\n- অনুচ্ছেদ ৩৯: চিন্তা, বিবেক ও বাক-স্বাধীনতা\nজরুরি হেল্পলাইন নম্বর:\n- ৯৯৯ (জাতীয় জরুরি সেবা: পুলিশ, অ্যাম্বুলেন্স, ফায়ার সার্ভিস)\n- ১০৯ (নারী ও শিশু নির্যাতন প্রতিরোধ সেল)\n- ৩৩৩ (সরকারি তথ্য ও সেবা)\n- ১০৯৮ (চাইল্ড হেল্পলাইন)"
+    },
+    # 12. English Composition (CV with Cover Letter)
+    {
+        "context": "[Subject: English 2nd Paper | Class: 9-10 (SSC) & 11-12 (HSC)]",
+        "instruction": "Write a CV with cover letter for the post of an Assistant English Teacher.",
+        "response": "Date: 01 September 2026\nThe Headmaster / Principal\nDhaka Residential Model College, Dhaka\nSubject: Application for the post of an Assistant Teacher in English\n\nSir,\nIn response to your advertisement published in 'The Daily Star' on 25 August 2026, I would like to offer myself as a candidate for the post of an Assistant Teacher in English. My curriculum vitae and credentials are enclosed herewith.\n\nYours faithfully,\nTanvir Ahmed\n\nCurriculum Vitae (CV):\n1. Name: Tanvir Ahmed\n2. Father's Name: Md. Rafiqul Islam\n3. Contact No: +8801700000000 | Email: tanvir.ahmed@email.com\n4. Academic Qualifications: M.A in English (CGPA 3.75, DU), B.A (Hons) in English (CGPA 3.80, DU), HSC (GPA 5.00), SSC (GPA 5.00)."
+    },
+    # 13. Dynamic Sibling Class Switcher
+    {
+        "context": "[সেশন ট্র্যাকার: ভাইবোন ক্লাস সুইচ]",
+        "instruction": "আমি ৯ম শ্রেণিতে না, আমি ৭ম শ্রেণিতে পড়ি।",
+        "response": "আপনার বর্তমান অ্যাকাডেমিক প্রোফাইল সেট করা হয়েছে: Class 7 (Junior Secondary)। এখন থেকে আপনার সকল বিষয়ের প্রশ্ন ৭ম শ্রেণির এনসিটিবি কারিকুলাম অনুযায়ী সমাধান করা হবে।"
+    }
+]
+
+with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+    for item in DATASET:
+        f.write(json.dumps(item, ensure_ascii=False) + "\n")
+
+print(f"[SUCCESS] Generated {len(DATASET)} alignment training pairs in {OUTPUT_FILE}")
