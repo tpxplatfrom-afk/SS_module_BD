@@ -47,6 +47,37 @@ class UniversalTutorEngine:
         class_switched = self.session_tracker.update_profile_from_prompt(prompt)
         current_profile = self.session_tracker.get_profile_summary()
 
+        # Step -1: Greeting & General Conversation Handler (MUST be first)
+        greetings = {
+            "hi": "হ্যালো! 👋 আমি তোমার পাশে আছি। তুমি কি পড়াশোনায় কোনো সাহায্য চাও? গণিত, বিজ্ঞান, ইংরেজি — যেকোনো বিষয়ে প্রশ্ন করো!",
+            "hello": "হ্যালো! 😊 আমি বাংলাদেশের শিক্ষার্থীদের জন্য তৈরি তোমার অফলাইন এআই শিক্ষক। কী নিয়ে কথা বলতে চাও?",
+            "হ্যালো": "হ্যালো! 👋 কেমন আছ? পড়াশোনায় কোনো প্রশ্ন থাকলে বলো, আমি সাহায্য করতে সদা প্রস্তুত!",
+            "হাই": "হাই! 😊 তোমার জন্য এখানে আছি। গণিত, বিজ্ঞান, ইংরেজি রচনা, প্যারাগ্রাফ — যা দরকার বলো!",
+            "কেমন আছ": "আমি ভালো আছি, ধন্যবাদ! 😊 তুমি কেমন আছ? পড়াশোনায় কোনো সাহায্য লাগলে জানাও!",
+            "কেমন আছো": "আমি চমৎকার আছি! 🌟 তুমি কীভাবে আছ? কোনো বিষয়ে পড়তে সমস্যা হচ্ছে? একসাথে সমাধান করি!",
+            "ধন্যবাদ": "তোমাকেও ধন্যবাদ! 🙏 আরো কোনো প্রশ্ন থাকলে যেকোনো সময় জিজ্ঞেস করো।",
+            "thanks": "You're welcome! 😊 আর কোনো বিষয়ে সাহায্য দরকার হলে বলো!",
+            "thank you": "You're welcome! 🌟 Feel free to ask anything — Math, Science, English Grammar or Paragraph!",
+            "ok": "ঠিক আছে! 😊 আরো কিছু জানার থাকলে জিজ্ঞেস করো।",
+            "okay": "Great! 👍 যখনই পড়াশোনায় কোনো প্রশ্ন আসবে, আমাকে জানিও।",
+            "ঠিক আছে": "ঠিক আছে! 😊 যখনই দরকার, আমি এখানেই আছি।",
+            "আচ্ছা": "আচ্ছা! 👍 পড়াশোনায় কোনো প্রশ্ন এলে বলো।",
+            "bye": "আবার দেখা হবে! 👋 পড়াশোনায় শুভকামনা! 📚",
+            "goodbye": "Goodbye! 👋 পড়াশোনায় মনোযোগ দিও, শুভকামনা! 🌟",
+            "বিদায়": "বিদায়! 👋 পরে আবার কথা হবে। শুভকামনা! 📚",
+        }
+        for key, reply in greetings.items():
+            if clean_p.strip() == key or clean_p.strip().rstrip("!?।.") == key:
+                return {
+                    "status": "SUCCESS",
+                    "prompt": prompt,
+                    "text": reply,
+                    "markdown": reply,
+                    "copy_text": reply,
+                    "plain_text": reply,
+                    "is_screen_safe": True
+                }
+
         # If user is only declaring/switching class (e.g. "আমি ৭ম শ্রেণিতে পড়ি")
         if class_switched and len(clean_p.split()) <= 6 and not any(k in clean_p for k in ["math", "অংক", "question", "অধ্যায়"]):
             msg = f"""# 🎒 শিক্ষার্থী প্রোফাইল আপডেট সম্পন্ন
