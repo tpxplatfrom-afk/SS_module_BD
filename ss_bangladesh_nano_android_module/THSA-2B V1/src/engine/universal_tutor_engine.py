@@ -16,6 +16,7 @@ from src.engine.creative_assessment_engine import CreativeAssessmentEngine
 from src.engine.scientific_nomenclature_engine import ScientificNomenclatureEngine
 from src.engine.safety_ethics_alignment_engine import SafetyEthicsAlignmentEngine, normalize_bengali_unicode
 from src.engine.english_curriculum_engine import EnglishCurriculumEngine
+from src.engine.english_learning_engine import EnglishLearningEngine
 from src.engine.session_profile_tracker import SessionProfileTracker
 from src.engine.bangladesh_laws_engine import BangladeshLawsEngine
 from src.engine.universal_science_concept_engine import UniversalScienceConceptEngine
@@ -92,6 +93,7 @@ class UniversalTutorEngine:
         self.taxonomy_engine = ScientificNomenclatureEngine()
         self.safety_engine = SafetyEthicsAlignmentEngine()
         self.english_engine = EnglishCurriculumEngine()
+        self.english_learning_engine = EnglishLearningEngine()
         self.session_tracker = SessionProfileTracker()
         self.laws_engine = BangladeshLawsEngine()
         self.science_engine = UniversalScienceConceptEngine()
@@ -148,12 +150,17 @@ class UniversalTutorEngine:
         elif self._match_conversational_chat(clean_p):
             raw_md = self._get_conversational_reply(clean_p, prompt)
 
-        # Step 4: English Curriculum & Composition Check
-        elif any(k in clean_p for k in ["cv", "resume", "cover letter", "paragraph", "letter", "application", "english 1st", "english 2nd", "seen passage", "unseen passage"]) or ("english" in clean_p and any(num in clean_p for num in ["1", "2", "3", "12"])):
+        # Step 5: English Curriculum & Composition Check (CV, Letters, Paragraphs, Board Patterns)
+        elif any(k in clean_p for k in ["cv", "resume", "cover letter", "paragraph", "letter", "application", "seen passage", "unseen passage", "dialogue", "story"]) or ("english" in clean_p and any(num in clean_p for num in ["1st", "2nd", "paper 1", "paper 2", "107", "108"])):
             if any(k in clean_p for k in ["question", "number", "নং", "no", "will i answer"]):
                 raw_res = self.english_engine.explain_question_pattern(prompt)
             else:
                 raw_res = self.english_engine.generate_composition(prompt)
+            raw_md = raw_res["formatted_markdown"]
+
+        # Step 6: English Language Learning & Conversational Coach (Vocab, Grammar, Tense, Spoken, Proficiency)
+        elif self.english_learning_engine.handle_english_query(prompt) is not None:
+            raw_res = self.english_learning_engine.handle_english_query(prompt)
             raw_md = raw_res["formatted_markdown"]
 
         # Step 5: Biology Scientific Names Check
