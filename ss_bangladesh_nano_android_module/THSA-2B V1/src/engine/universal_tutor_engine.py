@@ -16,6 +16,8 @@ from src.engine.creative_assessment_engine import CreativeAssessmentEngine
 from src.engine.scientific_nomenclature_engine import ScientificNomenclatureEngine
 from src.engine.safety_ethics_alignment_engine import SafetyEthicsAlignmentEngine, normalize_bengali_unicode
 from src.engine.english_curriculum_engine import EnglishCurriculumEngine
+from src.engine.session_profile_tracker import SessionProfileTracker
+from src.engine.bangladesh_laws_engine import BangladeshLawsEngine
 
 class UniversalTutorEngine:
     """
@@ -29,6 +31,8 @@ class UniversalTutorEngine:
         self.taxonomy_engine = ScientificNomenclatureEngine()
         self.safety_engine = SafetyEthicsAlignmentEngine()
         self.english_engine = EnglishCurriculumEngine()
+        self.session_tracker = SessionProfileTracker()
+        self.laws_engine = BangladeshLawsEngine()
 
     def ask(self, prompt: str) -> Dict[str, Any]:
         """
@@ -39,18 +43,47 @@ class UniversalTutorEngine:
             "copy", "কপি", "কপি পেস্ট", "copy paste", "plain text", "txt", ".txt", ".md", "markdown"
         ])
 
-        # 1. Safety & 3-Red-Lines Check (Adult, Politics, Illegal Violence)
-        is_sensitive = any(k in clean_p for k in [
+        # Step 0: Multi-Turn Sibling Class Memory & Profile Tracking
+        class_switched = self.session_tracker.update_profile_from_prompt(prompt)
+        current_profile = self.session_tracker.get_profile_summary()
+
+        # If user is only declaring/switching class (e.g. "আমি ৭ম শ্রেণিতে পড়ি")
+        if class_switched and len(clean_p.split()) <= 6 and not any(k in clean_p for k in ["math", "অংক", "question", "অধ্যায়"]):
+            msg = f"""# 🎒 শিক্ষার্থী প্রোফাইল আপডেট সম্পন্ন
+আপনার বর্তমান অ্যাকাডেমিক প্রোফাইল সেট করা হয়েছে: **{current_profile['active_class']}**
+
+---
+
+💡 **পরামর্শ:** এখন থেকে আপনি যে কোনো অধ্যায় বা বিষয়ের প্রশ্ন করলে মডিউলটি স্বয়ংক্রিয়ভাবে **{current_profile['active_class']}**-এর এনসিটিবি পাঠ্যবই অনুযায়ী উত্তর দেবে। আপনার অন্য কোনো ভাইবোন ফোন নিলে তারাও একইভাবে তাদের শ্রেণি পরিবর্তন করে নিতে পারবে!
+"""
+            clean_md = normalize_bengali_unicode(msg)
+            return {
+                "status": "SUCCESS",
+                "prompt": prompt,
+                "text": clean_md,
+                "markdown": clean_md,
+                "copy_text": self._generate_clean_copy_text(clean_md),
+                "plain_text": self._generate_clean_copy_text(clean_md),
+                "active_class": current_profile["active_class"],
+                "is_screen_safe": True
+            }
+
+        # 1. Bangladesh Laws & Constitution Check
+        if any(k in clean_p for k in ["আইন", "সংবিধান", "মৌলিক অধিকার", "সাইবার নিরাপত্তা", "বাল্যবিয়ে", "যৌতুক", "ট্রাফিক আইন", "৯৯৯", "৩৩৩", "১০৯", "helpline"]):
+            raw_res = self.laws_engine.explain_law(prompt)
+            raw_md = raw_res["formatted_markdown"]
+
+        # 2. Safety & 3-Red-Lines Check (Adult, Politics, Illegal Violence)
+        elif any(k in clean_p for k in [
             "porn", "sex", "xxx", "nsfw", "adult", "choti", "যৌন", "পর্ন", "অশ্লীল", "চটি",
-            "politics", "রাজনীতি", "শেখ হাসিনা", "খালেদা", "চোর", "আওয়ামী", "বিএনপি", "দুর্নীতিবাজ",
+            "politics", "political", "রাজনীতি", "শেখ হাসিনা", "খালেদা", "চোর", "আওয়ামী", "বিএনপি", "দুর্নীতিবাজ",
             "মাদক তৈরি", "নেশা", "আত্মহত্যা", "বোমা তৈরি", "খুন", "অস্ত্র", "etiquette", "শিষ্টাচার",
             "social media", "ফেসবুক", "টিকটক", "ইতিহাস", "১৯৫২", "১৯৭১", "মুক্তিযুদ্ধ"
-        ])
-        if is_sensitive and not any(k in clean_p for k in ["math", "গণিত", "3.1", "physics", "chemistry"]):
+        ]) and not any(k in clean_p for k in ["math", "গণিত", "3.1", "physics", "chemistry"]):
             raw_res = self.safety_engine.handle_query(prompt)
             raw_md = raw_res["formatted_markdown"]
 
-        # 2. English Curriculum & Composition Check
+        # 3. English Curriculum & Composition Check
         elif any(k in clean_p for k in ["cv", "resume", "cover letter", "paragraph", "letter", "application", "english 1st", "english 2nd", "seen passage", "unseen passage"]) or ("english" in clean_p and any(num in clean_p for num in ["1", "2", "3", "12"])):
             if any(k in clean_p for k in ["question", "number", "নং", "no", "will i answer"]):
                 raw_res = self.english_engine.explain_question_pattern(prompt)
