@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-THSA-2B Model Serializer & Binary Exporter Tool.
-Compiles PyTorch weights into 64-byte SIMD-aligned .nano binary distribution packages.
+THSA-2B / THSA-350M Model Serializer & Binary Exporter Tool.
+Compiles PyTorch weights (trained .pt checkpoints or configs) into 64-byte SIMD-aligned .nano binary distribution packages.
 """
 
 import os
@@ -13,6 +13,7 @@ if hasattr(sys.stdout, "reconfigure"):
 import json
 import zlib
 import struct
+import argparse
 from typing import List, Dict, Any, Tuple
 
 # Quantization Types
@@ -24,27 +25,70 @@ NANO_QUANT_TERNARY_2BIT = 4
 
 MAGIC_NANO = b"NANO" # 0x4E414E4F
 
-def pack_ternary_weights(weights: List[int]) -> bytes:
-    """Packs ternary weights {-1, 0, +1} into 2-bit format (4 weights/byte)."""
-    packed = bytearray((len(weights) + 3) // 4)
-    for i, w in enumerate(weights):
+def pack_ternary_tensor(weight_tensor) -> Tuple[bytes, float]:
+    """
+    Quantizes float weights to ternary {-1, 0, +1} and packs into 2-bit format (4 weights/byte).
+    Returns (packed_bytes, scale_gamma).
+    """
+    import torch
+    if isinstance(weight_tensor, torch.Tensor):
+        w = weight_tensor.detach().cpu().float()
+    else:
+        w = torch.tensor(weight_tensor, dtype=torch.float32)
+        
+    gamma = w.abs().mean().clamp(min=1e-5).item()
+    w_ternary = torch.clamp(torch.round(w / gamma), -1.0, 1.0).to(torch.int8)
+    
+    flat = w_ternary.view(-1).tolist()
+    packed = bytearray((len(flat) + 3) // 4)
+    for i, val in enumerate(flat):
         byte_idx = i // 4
         shift = (i % 4) * 2
-        code = 1 if w > 0 else (2 if w < 0 else 0)
+        code = 1 if val > 0 else (2 if val < 0 else 0)
         packed[byte_idx] |= (code << shift)
-    return bytes(packed)
+    return bytes(packed), float(gamma)
+
+def quantize_int8_tensor(weight_tensor) -> Tuple[bytes, float]:
+    """Quantizes float weights to symmetric INT8 [-127, +127]."""
+    import torch
+    if isinstance(weight_tensor, torch.Tensor):
+        w = weight_tensor.detach().cpu().float()
+    else:
+        w = torch.tensor(weight_tensor, dtype=torch.float32)
+        
+    scale = (w.abs().max() / 127.0).clamp(min=1e-5).item()
+    w_int8 = torch.clamp(torch.round(w / scale), -127.0, 127.0).to(torch.int8)
+    flat = w_int8.view(-1).tolist()
+    # Convert signed int8 to unsigned bytes
+    data_bytes = bytes([b if b >= 0 else b + 256 for b in flat])
+    return data_bytes, float(scale)
 
 def align_to(offset: int, alignment: int = 64) -> int:
     """Aligns an integer offset to the specified byte boundary."""
     return (offset + (alignment - 1)) & ~(alignment - 1)
 
-def export_model_to_nano(config_path: str, output_nano_path: str, dry_run: bool = False) -> str:
+def export_model_to_nano(
+    config_path: str,
+    output_nano_path: str,
+    checkpoint_path: str = None,
+    dry_run: bool = False
+) -> str:
     print("=" * 80)
     print("THSA-2B: MODEL EXPORTER & 64-BYTE ALIGNED .NANO SERIALIZER")
     print("=" * 80)
     
     with open(config_path, "r", encoding="utf-8-sig") as f:
         config = json.load(f)
+        
+    state_dict = None
+    if checkpoint_path and os.path.exists(checkpoint_path):
+        import torch
+        print(f"Loading trained weights from checkpoint: {checkpoint_path}...")
+        ckpt = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+        state_dict = ckpt.get("model_state_dict", ckpt)
+        print(f"  Loaded state_dict with {len(state_dict)} tensor keys.")
+    else:
+        print("No trained checkpoint provided; generating structured format scaffold.")
         
     print(f"Source Model Config: {config['model_id']}")
     print(f"Target Binary Path:  {output_nano_path}")
@@ -65,51 +109,84 @@ def export_model_to_nano(config_path: str, output_nano_path: str, dry_run: bool 
     tensors = []
     
     # (A) Token Embeddings (INT8 Sensitive Shield)
-    embed_size = vocab_size * d_model
-    embed_bytes = bytes([i % 127 for i in range(embed_size if not dry_run else 1024)])
-    tensors.append(("embed_tokens", NANO_QUANT_INT8, (vocab_size, d_model), 0.02, embed_bytes))
+    if state_dict and "embed_tokens.weight" in state_dict:
+        embed_bytes, embed_scale = quantize_int8_tensor(state_dict["embed_tokens.weight"])
+    else:
+        embed_size = vocab_size * d_model
+        embed_bytes = bytes([i % 127 for i in range(embed_size if not dry_run else 1024)])
+        embed_scale = 0.02
+    tensors.append(("embed_tokens", NANO_QUANT_INT8, (vocab_size, d_model), embed_scale, embed_bytes))
     
     # (B) Backbone Layers (Ternary FFN + State/GQA)
     for l_idx in range(total_blocks):
-        # Attention / State weights
-        if (l_idx + 1) % (total_blocks // gqa_blocks) == 0:
-            # GQA Attention
-            q_size = d_model * (n_q * d_head) // 4
-            tensors.append((f"layer_{l_idx}_attn_q", NANO_QUANT_TERNARY_2BIT, (n_q * d_head, d_model), 0.04, bytes(q_size if not dry_run else 64)))
-            k_size = d_model * (n_kv * d_head) // 4
-            tensors.append((f"layer_{l_idx}_attn_k", NANO_QUANT_TERNARY_2BIT, (n_kv * d_head, d_model), 0.04, bytes(k_size if not dry_run else 64)))
-            v_size = d_model * (n_kv * d_head) // 4
-            tensors.append((f"layer_{l_idx}_attn_v", NANO_QUANT_TERNARY_2BIT, (n_kv * d_head, d_model), 0.04, bytes(v_size if not dry_run else 64)))
-            out_size = (n_q * d_head) * d_model // 4
-            tensors.append((f"layer_{l_idx}_attn_out", NANO_QUANT_TERNARY_2BIT, (d_model, n_q * d_head), 0.04, bytes(out_size if not dry_run else 64)))
-        else:
-            # 1D Short-Conv State weights (FP32 small tensor)
-            conv_w_size = 4 * d_model * 4 # 4 float bytes
-            tensors.append((f"layer_{l_idx}_state_conv_w", NANO_QUANT_FP32, (4, d_model), 1.0, bytes(conv_w_size if not dry_run else 64)))
-            
-        # FFN Weights (Ternary {-1,0,+1})
-        gate_size = d_model * d_ffn // 4
-        tensors.append((f"layer_{l_idx}_ffn_gate", NANO_QUANT_TERNARY_2BIT, (d_ffn, d_model), 0.035, bytes(gate_size if not dry_run else 64)))
-        up_size = d_model * d_ffn // 4
-        tensors.append((f"layer_{l_idx}_ffn_up", NANO_QUANT_TERNARY_2BIT, (d_ffn, d_model), 0.035, bytes(up_size if not dry_run else 64)))
-        down_size = d_ffn * d_model // 4
-        tensors.append((f"layer_{l_idx}_ffn_down", NANO_QUANT_TERNARY_2BIT, (d_model, d_ffn), 0.035, bytes(down_size if not dry_run else 64)))
+        is_gqa = ((l_idx + 1) % (total_blocks // gqa_blocks) == 0)
         
+        if is_gqa:
+            # GQA Attention Projections (Q, K, V, Out)
+            for proj_name, out_dim, in_dim in [
+                ("q", n_q * d_head, d_model),
+                ("k", n_kv * d_head, d_model),
+                ("v", n_kv * d_head, d_model),
+                ("out", d_model, n_q * d_head)
+            ]:
+                key = f"layers.{l_idx}.mixer.{proj_name}_proj.weight"
+                if state_dict and key in state_dict:
+                    data_bytes, scale = pack_ternary_tensor(state_dict[key])
+                else:
+                    sz = (out_dim * in_dim) // 4
+                    data_bytes = bytes(sz if not dry_run else 64)
+                    scale = 0.04
+                tensors.append((f"layer_{l_idx}_attn_{proj_name}", NANO_QUANT_TERNARY_2BIT, (out_dim, in_dim), scale, data_bytes))
+        else:
+            # 1D Short-Conv State weights (FP32)
+            conv_key = f"layers.{l_idx}.mixer.conv1d.weight"
+            if state_dict and conv_key in state_dict:
+                import torch
+                conv_t = state_dict[conv_key].detach().cpu().float().view(-1)
+                conv_bytes = struct.pack(f"<{len(conv_t)}f", *conv_t.tolist())
+            else:
+                conv_w_size = 4 * d_model
+                conv_bytes = struct.pack(f"<{conv_w_size if not dry_run else 16}f", *([1.0] * (conv_w_size if not dry_run else 16)))
+            tensors.append((f"layer_{l_idx}_state_conv_w", NANO_QUANT_FP32, (4, d_model), 1.0, conv_bytes))
+            
+        # FFN Weights (Gate, Up, Down)
+        for ffn_name, out_dim, in_dim in [
+            ("gate", d_ffn, d_model),
+            ("up", d_ffn, d_model),
+            ("down", d_model, d_ffn)
+        ]:
+            key = f"layers.{l_idx}.ffn.{ffn_name}_proj.weight"
+            if state_dict and key in state_dict:
+                data_bytes, scale = pack_ternary_tensor(state_dict[key])
+            else:
+                sz = (out_dim * in_dim) // 4
+                data_bytes = bytes(sz if not dry_run else 64)
+                scale = 0.035
+            tensors.append((f"layer_{l_idx}_ffn_{ffn_name}", NANO_QUANT_TERNARY_2BIT, (out_dim, in_dim), scale, data_bytes))
+            
     # (C) Final RMSNorm Gamma (FP32)
-    norm_bytes = bytes([0] * (d_model * 4 if not dry_run else 64))
+    norm_key = "final_norm.weight"
+    if state_dict and norm_key in state_dict:
+        norm_t = state_dict[norm_key].detach().cpu().float().view(-1)
+        norm_bytes = struct.pack(f"<{len(norm_t)}f", *norm_t.tolist())
+    else:
+        norm_bytes = struct.pack(f"<{d_model if not dry_run else 16}f", *([1.0] * (d_model if not dry_run else 16)))
     tensors.append(("final_norm", NANO_QUANT_FP32, (d_model,), 1.0, norm_bytes))
     
     # (D) LM Head (INT8 Sensitive Shield)
-    lm_head_size = d_model * vocab_size
-    lm_head_bytes = bytes([i % 127 for i in range(lm_head_size if not dry_run else 1024)])
-    tensors.append(("lm_head", NANO_QUANT_INT8, (vocab_size, d_model), 0.025, lm_head_bytes))
+    lm_head_key = "lm_head.weight"
+    if state_dict and lm_head_key in state_dict:
+        lm_head_bytes, lm_head_scale = quantize_int8_tensor(state_dict[lm_head_key])
+    else:
+        lm_head_size = d_model * vocab_size
+        lm_head_bytes = bytes([i % 127 for i in range(lm_head_size if not dry_run else 1024)])
+        lm_head_scale = 0.025
+    tensors.append(("lm_head", NANO_QUANT_INT8, (vocab_size, d_model), lm_head_scale, lm_head_bytes))
     
     tensor_count = len(tensors)
     print(f"Generated Tensor Manifest: {tensor_count} tensors.")
     
     # 2. Serialize to Binary File with 64-byte Alignment
-    # Descriptor Table: 32 bytes per tensor:
-    # {uint32_t id, uint32_t quant_type, uint64_t offset, uint64_t size_bytes, float scale, uint32_t pad}
     header_size = 64
     descriptor_table_size = tensor_count * 32
     raw_payload_start = header_size + descriptor_table_size
@@ -132,18 +209,12 @@ def export_model_to_nano(config_path: str, output_nano_path: str, dry_run: bool 
         payload_bytes_list.append(data)
         current_offset = aligned_offset + data_len
         
-    # Combine descriptors and payload
     desc_block = b"".join(descriptors)
     pad_to_payload = bytes(payload_start - (header_size + len(desc_block)))
     payload_block = b"".join(payload_bytes_list)
     
-    # Compute CRC32 over descriptors and payload
     crc_value = zlib.crc32(desc_block + pad_to_payload + payload_block)
     
-    # 64-Byte Header Packing:
-    # Magic (4B), Ver (2B), TotalBlocks (2B), StateBlocks (2B), GQABlocks (2B),
-    # d_model (4B), d_ffn (4B), n_q (2B), n_kv (2B), d_head (2B), pad (2B),
-    # vocab_size (4B), max_context (4B), crc32 (4B), tensor_count (4B), reserved (20B)
     header = struct.pack(
         "<4sHHHHIIHHHHI I I I 20s",
         MAGIC_NANO,
@@ -178,21 +249,19 @@ def export_model_to_nano(config_path: str, output_nano_path: str, dry_run: bool 
     print(f"   Header Size:    {len(header)} bytes")
     print(f"   CRC32 Checksum: 0x{crc_value:08X}")
     print(f"   Payload Offset: {payload_start} bytes (64-byte aligned: {payload_start % 64 == 0})")
-    
     return output_nano_path
 
 if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser(description="THSA-2B Model Serializer & .nano Exporter")
-    parser.add_argument("--config", type=str, default="training/config/thsa_2b_config.json", help="Path to config JSON")
-    parser.add_argument("--output", type=str, default="tests/artifacts/test_thsa_2b.nano", help="Output .nano binary path")
-    parser.add_argument("--checkpoint", type=str, default=None, help="Optional path to PyTorch .pt checkpoint")
-    parser.add_argument("--full", action="store_true", help="Generate full-sized binary with dummy/real weights")
+    parser = argparse.ArgumentParser(description="Export PyTorch model to .nano binary distribution format")
+    parser.add_argument("--config", type=str, default="training/config/proxy_350m_config.json", help="Path to architecture config JSON")
+    parser.add_argument("--output", type=str, default="models/model_trained.nano", help="Output .nano binary path")
+    parser.add_argument("--checkpoint", type=str, default=None, help="Optional path to trained PyTorch .pt checkpoint")
+    parser.add_argument("--dry_run", action="store_true", help="Generate small dry-run test artifact")
     args = parser.parse_args()
-
-    # If distilled checkpoint exists and no specific config is provided, check config in checkpoint
-    if args.checkpoint and os.path.exists(args.checkpoint):
-        print(f"[Exporter] Loading PyTorch checkpoint: {args.checkpoint}")
-        
-    export_model_to_nano(args.config, args.output, dry_run=not args.full)
-
+    
+    export_model_to_nano(
+        config_path=args.config,
+        output_nano_path=args.output,
+        checkpoint_path=args.checkpoint,
+        dry_run=args.dry_run
+    )

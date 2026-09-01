@@ -1,6 +1,6 @@
 """
-BitNet-Style Ternary Linear Layer with Straight-Through Estimator (STE)
-and Temperature-Annealed Quantization-Aware Training (QAT).
+BitNet-Style Ternary Linear Layer with Straight-Through Estimator (STE),
+Temperature-Annealed Quantization-Aware Training (QAT), and native LoRA.
 """
 
 import math
@@ -70,3 +70,45 @@ class TernaryLinear(nn.Module):
         w_q = WeightQuantizerSTE.apply(self.weight, self.beta)
         
         return F.linear(x_q, w_q, self.bias)
+
+class TernaryLoRALinear(TernaryLinear):
+    """
+    Ternary Linear Projection Layer with integrated Low-Rank Adaptation (LoRA).
+    Enables ultra-fast, memory-efficient QAT fine-tuning on Google Colab GPUs (T4/V100/A100).
+    """
+    def __init__(self, in_features, out_features, bias=False, is_sensitive=False,
+                 lora_r=16, lora_alpha=32.0, lora_dropout=0.05):
+        super().__init__(in_features, out_features, bias=bias, is_sensitive=is_sensitive)
+        self.lora_r = lora_r
+        self.lora_alpha = lora_alpha
+        self.lora_dropout = nn.Dropout(p=lora_dropout) if lora_dropout > 0.0 else nn.Identity()
+        self.scaling = lora_alpha / lora_r if lora_r > 0 else 1.0
+        self.merged = False
+        
+        if lora_r > 0:
+            self.lora_A = nn.Parameter(torch.empty(lora_r, in_features))
+            self.lora_B = nn.Parameter(torch.zeros(out_features, lora_r))
+            nn.init.kaiming_uniform_(self.lora_A, a=math.sqrt(5))
+            nn.init.zeros_(self.lora_B)
+            # Freeze base weights when LoRA is active for fast training
+            self.weight.requires_grad = False
+        else:
+            self.register_parameter('lora_A', None)
+            self.register_parameter('lora_B', None)
+
+    def merge_lora_weights(self):
+        """Merges LoRA adapter weights into base weights for zero-overhead .nano export."""
+        if self.lora_r > 0 and not self.merged:
+            with torch.no_grad():
+                delta_w = (self.lora_B @ self.lora_A) * self.scaling
+                self.weight.data += delta_w
+                self.merged = True
+
+    def forward(self, x):
+        if self.merged or self.lora_r == 0:
+            return super().forward(x)
+            
+        base_out = super().forward(x)
+        # LoRA bypass branch: (x @ A^T) @ B^T * scaling
+        lora_out = (self.lora_dropout(x) @ self.lora_A.t()) @ self.lora_B.t() * self.scaling
+        return base_out + lora_out
