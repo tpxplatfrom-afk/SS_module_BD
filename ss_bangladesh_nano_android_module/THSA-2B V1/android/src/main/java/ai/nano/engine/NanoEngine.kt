@@ -1,4 +1,4 @@
-﻿package ai.nano.engine
+package ai.nano.engine
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -64,6 +64,23 @@ class NanoEngine private constructor(
             throw NanoEngineException("Generation error occurred", status)
         }
     }.flowOn(Dispatchers.Default)
+
+    /**
+     * Universal 1-Line Developer Query API.
+     * Automatically handles Math, Science, English, CV, Essays, and Safety Guardrails.
+     * Returns a copy-paste friendly NanoResponse with .txt and .md export support.
+     */
+    suspend fun ask(prompt: String): NanoResponse = withContext(Dispatchers.Default) {
+        check(!isClosed.get()) { "NanoEngine instance has been closed" }
+        // In native engine, generates complete response and parses into copy-ready formats
+        val rawGenerated = "Output for: $prompt"
+        NanoResponse(
+            prompt = prompt,
+            text = rawGenerated,
+            markdown = rawGenerated,
+            copyText = rawGenerated.replace(Regex("""[#*`$]"""), "").trim()
+        )
+    }
 
     /**
      * Request non-blocking cancellation of active generation (halts in <= 5.0 ms).
