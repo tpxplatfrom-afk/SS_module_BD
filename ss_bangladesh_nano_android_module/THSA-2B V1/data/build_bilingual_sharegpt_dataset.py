@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """
-Bilingual ShareGPT Conversational Dataset Generator for THSA-2B On-Device AI Model.
-Generates comprehensive, multi-turn, long-form conversational datasets (2,000-4,000 tokens per thread)
-systematically structured in pedagogical order:
+THSA-2B: Comprehensive Bilingual (Bangla & English) Conversational Dataset Generator.
+Structured from Micro-Interactions (Very Small) to Multi-Turn Deep Philosophical & Historical Discussions.
 
-  STAGE 1: General Everyday Foundations & Small Talk (Greetings, Introductions, Identity, Empathy, Productivity)
-  STAGE 2: Bangladesh Heritage, History & Ecology (Liberation War, Language Movement, Ancient Bengal, River Delta)
-  STAGE 3: World Civilizations & Modern History (Japan, UK, USA, Germany, Egypt, China, France, India)
-  STAGE 4: NCTB Curriculum STEM & Practical Problem Solving (Physics, Mechanics, Calculus, Thermodynamics)
+CURRICULUM HIERARCHY (From Small to Deep):
+  LEVEL 1: Micro-Greetings, Small Talk & AI Identity (Hi, Hello, কেমন আছেন, কী অবস্থা, Who are you)
+  LEVEL 2: Everyday Casual Assistance & Wellness (Day-to-day chat, stress relief, daily routines)
+  LEVEL 3: Moderate Discussions, Opinions & Creative Problem Solving (Tech habits, language learning, art)
+  LEVEL 4: Deep Historical, Cultural & Geopolitical Analyses (1971 Liberation War, 1952 Language Movement, World Civilizations)
+  LEVEL 5: Deep Academic STEM & Scientific Deductions (Physics mechanics, calculus, thermodynamics, AI philosophy)
 
-Includes deterministic 90% Train / 10% Test stratified split, token length audit, and syntax validation.
+Outputs:
+  - data/train_sharegpt.jsonl (90% Train Split)
+  - data/test_sharegpt.jsonl (10% Test Evaluation Split)
 """
 
 import os
@@ -22,161 +25,253 @@ from typing import List, Dict, Any, Tuple
 random.seed(42)
 
 def generate_all_conversations() -> List[Dict[str, Any]]:
-    """Builds the comprehensive conversational dataset in pedagogical priority order."""
+    """Builds the comprehensive conversational dataset in strictly ordered pedagogical progression."""
     conversations = []
 
     # =========================================================================
-    # STAGE 1: GENERAL EVERYDAY FOUNDATIONS & SMALL TALK
+    # LEVEL 1: MICRO-GREETINGS, CASUAL SMALL TALK & AI IDENTITY (VERY SMALL)
     # =========================================================================
 
-    # 1.1 Greetings, Introductions, Identity & Capabilities
+    # 1.1 Micro Greetings & Fast Replies (বাংলা)
     conversations.append({
-        "id": "gen_conv_001_greetings_introductions_capabilities",
-        "topic": "General Conversation: Greetings, Introduction & AI Identity (পরিচিতি ও দৈনন্দিন কুশল বিনিময়)",
+        "id": "lvl1_001_micro_greetings_bangla",
+        "topic": "Level 1: Micro Greetings & Polite Casual Exchanges (বাংলা সংক্ষিপ্ত কুশল বিনিময়)",
         "conversations": [
             {
                 "from": "human",
-                "value": "হ্যালো! কেমন আছেন? আপনি কে এবং আমাকে কীভাবে সাহায্য করতে পারেন?"
+                "value": "হাই!"
             },
             {
                 "from": "gpt",
-                "value": "হ্যালো! আমি ভালো আছি, ধন্যবাদ। আশা করি আপনিও সুস্থ ও ভালো আছেন!\n\nআমি **শান্ত অন-ডিভাইস এআই (Shanto On-Device AI)**—একটি সম্পূর্ণ অফলাইন, প্রাইভেট ও দ্রুতগতির কৃত্রিম বুদ্ধিমত্তা সহকারী। আমি সরাসরি আপনার ডিভাইসের প্রসেসরে কাজ করি, তাই আমার সাথে কথা বলতে বা কাজ করতে কোনো ইন্টারনেটের প্রয়োজন হয় না এবং আপনার কোনো তথ্য ক্লাউডে যায় না।\n\n### আমি আপনাকে যেসব বিষয়ে সহায়তা করতে পারি:\n1. **দৈনন্দিন কুশল বিনিময় ও আড্ডা:** যেকোনো চিন্তা, অভিজ্ঞতা বা ভালো-লাগা নিয়ে খোলামেলা আলোচনা।\n2. **পড়াশোনা ও জ্ঞানার্জন:** ইতিহাস, বিজ্ঞান, গণিত, সাহিত্য, ভূগোল এবং সাধারণ জ্ঞান সহজ ভাষায় ব্যাখ্যা করা।\n3. **লেখালেখি ও ক্রিয়েটিভিটি:** চিঠি, আবেদনপত্র, ব্লগ, প্রবন্ধ, ইমেইল ও যেকোনো ধরণের ক্রিয়েটিভ ড্রাফটিং।\n4. **দৈনন্দিন কাজের পরিকল্পনা:** সময় ব্যবস্থাপনা, পড়াশোনার রুটিন তৈরি এবং যেকোনো সমস্যার ধাপে ধাপে সমাধান।\n\nআজকের দিনটি আপনার কেমন কাটছে? কোনো নির্দিষ্ট বিষয়ে আলোচনা করতে চান?"
+                "value": "হ্যালো! কেমন আছেন? আজকে আপনাকে কীভাবে সাহায্য করতে পারি?"
             },
             {
                 "from": "human",
-                "value": "Hi there! It's great to meet you. Sometimes I just want to chat casually after a long day at work. How do you usually keep conversations engaging and helpful?"
+                "value": "কেমন আছো?"
             },
             {
                 "from": "gpt",
-                "value": "It is wonderful to meet you too! I completely understand—after a demanding day of work or study, having a relaxing, thoughtful conversation is one of the best ways to unwind.\n\n### How I Keep Conversations Engaging & Supportive:\n- **Active Attentiveness:** I pay close attention to your mood, goals, and nuances so our chat feels natural and human rather than robotic.\n- **Adaptive Depth:** Whether you want lighthearted small talk about movies and coffee, or a deep dive into philosophy, science, or life decisions, I adapt smoothly to your rhythm.\n- **Constructive & Empathetic Thinking:** I love exploring multiple perspectives, brainstorming creative solutions, or simply offering a calm sounding board whenever you need to think out loud.\n\nHow did your day go today? Did anything interesting or unexpected happen?"
+                "value": "আমি খুব ভালো আছি, ধন্যবাদ! আপনি কেমন আছেন? আশা করি আপনার দিনটি দারুণ কাটছে।"
             },
             {
                 "from": "human",
-                "value": "আজকের দিনটা বেশ ব্যস্ত গেল। অনেকগুলো কাজ একসাথে চলে আসায় কিছুটা মানসিক চাপ অনুভব করছি। একটু রিল্যাক্স হতে এবং মন ভালো করতে কী করা যায়?"
+                "value": "তুমি কে?"
             },
             {
                 "from": "gpt",
-                "value": "অনেকগুলো কাজ একসাথে এলে মানসিক ক্লান্তি লাগাটা খুবই স্বাভাবিক। নিজেকে একটু সময় দেওয়া এবং মস্তিষ্ককে বিশ্রাম দেওয়া এখনই সবচেয়ে জরুরি।\n\n### মন শান্ত ও ফ্রেশ করার জন্য কয়েকটি সহজ পদক্ষেপ:\n1. **ডিপ ব্রিদিং (৪-৭-৮ টেকনিক):** আরামদায়কভাবে বসুন। ৪ সেকেন্ড ধরে নাক দিয়ে গভীর শ্বাস নিন, ৭ সেকেন্ড ধরে রাখুন, এবং ৮ সেকেন্ড ধরে মুখ দিয়ে ধীরে ধীরে ছাড়ুন। ৩-৪ বার করলেই হৃদস্পন্দন শান্ত হয়ে আসবে।\n2. **এক গ্লাস হালকা গরম পানি বা চা:** এক কাপ উষ্ণ পুদিনা পাতা, আদা বা গ্রিন টি নিয়ে ৫ মিনিটের জন্য ফোন ও স্ক্রিন থেকে দূরে থাকুন।\n3. **৫-মিনিটের মৃদু হাঁটা:** ঘরের ভেতরে বা বারান্দায় একটু খোলা বাতাসে পায়চারি করুন। রক্ত সঞ্চালন বাড়লে ক্লান্তি দূর হয়।\n4. **আজকের কাজকে 'পজ' দিন:** নিজেকে বলুন—*\"আজ আমি যা পেরেছি তা যথেষ্ট, বাকি কাজ কাল নতুন উদ্যমে করব।\"*\n5. **হালকা ইন্সট্রুমেন্টাল মিউজিক বা বই পড়া:** আপনার প্রিয় কোনো গান শুনুন অথবা পছন্দের কোনো বইয়ের ১-২ পাতা পড়ুন।\n\nআপনি চাইলে আমাকে যেকোনো মজার বিষয় বলতে পারেন, অথবা আমরা সুন্দর কোনো গল্প বা মজার কোনো টপিক নিয়ে কথা বলতে পারি!"
+                "value": "আমি **শান্ত (Shanto)**—একটি দ্রুতগতির, সম্পূর্ণ অফলাইন অন-ডিভাইস এআই সহকারী। আপনার যেকোনো প্রশ্ন, পড়াশোনা বা লেখালেখির কাজে সাহায্য করাই আমার কাজ।"
+            },
+            {
+                "from": "human",
+                "value": "ধন্যবাদ তোমাকে!"
+            },
+            {
+                "from": "gpt",
+                "value": "আপনাকে অনেক ধন্যবাদ! যেকোনো সময় যেকোনো প্রশ্ন থাকলে নিঃসঙ্কোচে জিজ্ঞেস করতে পারেন।"
             }
         ]
     })
 
-    # 1.2 Daily Life Advice, Productivity & Mindset
+    # 1.2 Micro Greetings & Introductions (English)
     conversations.append({
-        "id": "gen_conv_002_daily_productivity_wellness_advice",
-        "topic": "General Conversation: Productivity, Time Management & Healthy Habits (সময় ব্যবস্থাপনা ও সুঅভ্যাস)",
+        "id": "lvl1_002_micro_greetings_english",
+        "topic": "Level 1: Micro Greetings & Introductions (English Casual & Polite)",
         "conversations": [
             {
                 "from": "human",
-                "value": "I often struggle with procrastination when I have large projects to complete. What is a realistic psychological framework to overcome this without burning out?"
+                "value": "Hi!"
             },
             {
                 "from": "gpt",
-                "value": "Procrastination is rarely a flaw of laziness; neurologically, it is almost always an **emotional regulation challenge** triggered by task overwhelm, ambiguity, or perfectionism.\n\n### 1. The Psychology of Task Avoidance\nWhen a project appears massive, the brain's amygdala perceives it as a threat or cognitive burden, prompting avoidance toward quick dopamine hits (scrolling, snacking). To solve this, we must reduce the friction of *initiating* action.\n\n### 2. A 4-Step Practical Framework\n1. **The 2-Minute Micro-Start (Activation Energy):**\n   - Do not commit to finishing the whole project.\n   - Tell yourself: *\"I will only open the document and write for 2 minutes.\"* Once the friction of starting is broken, momentum takes over.\n2. **Chunking via the 'Swiss Cheese' Method:**\n   - Poke small holes in the project. Break a 20-page report into: *Outline (15 mins) $\\to$ Header drafting (10 mins) $\\to$ Section 1 draft (25 mins)*.\n3. **Pomodoro with Strict Rest Boundaries:**\n   - 25 minutes of deep focus (zero notifications) followed by 5 minutes of physical movement.\n   - After 4 cycles, take a real 20-minute cognitive break.\n4. **Lower the Bar on First Drafts ('Shitty First Drafts'):**\n   - Perfectionism paralyzes execution. Allow yourself to create an imperfect first draft. Editing an existing draft is 10x easier than staring at a blank screen."
+                "value": "Hello there! How are you doing today? How can I assist you?"
             },
             {
                 "from": "human",
-                "value": "পড়াশোনা বা কাজের পাশাপাশি মানসিক স্বাস্থ্য ও ঘুমের শৃঙ্খলা ঠিক রাখার সেরা উপায় কী?"
+                "value": "Who are you?"
             },
             {
                 "from": "gpt",
-                "value": "মানসিক স্বাস্থ্য ও শারীরিক কর্মক্ষমতার সবচেয়ে বড় ভিত্তি হলো **পর্যাপ্ত ও গুণগত ঘুম (Quality Sleep)** এবং সচেতন জীবনযাপন।\n\n### ঘুমের শৃঙ্খলা ও মানসিক প্রশান্তির ৫টি বিজ্ঞানসম্মত নিয়ম:\n1. **সার্কাডিয়ান রিদম ঠিক রাখা:** প্রতিদিন একই সময়ে ঘুমাতে যাওয়া এবং একই সময়ে ঘুম থেকে ওঠার অভ্যাস গড়ে তুলুন (ছুটির দিনেও এর বড় পরিবর্তন করবেন না)।\n2. **সকালের সূর্যালোক (Morning Sunlight):** ঘুম থেকে ওঠার ৩০ মিনিটের মধ্যে ১০-১৫ মিনিট ভোরের প্রাকৃতিক আলোতে থাকুন। এটি মস্তিষ্কে মেলাটোনিন হরমোনের টাইমিং রিসেট করে।\n3. **ডিজিটাল কার্ফিউ (স্ক্রিন টাইম বর্জন):** ঘুমানোর অন্তত ৪৫ মিনিট আগে মোবাইল, ল্যাপটপ বা টিভির নীল আলো বন্ধ করুন। নীল আলো মেলাটোনিন নিঃসরণ বাধাগ্রস্ত করে।\n4. **ক্যাফেইন নিয়ন্ত্রণ:** দুপুর ২টার পর চা বা কফি খাওয়া সীমিত রাখুন, কারণ ক্যাফেইনের প্রভাব শরীরে ৬ থেকে ৮ ঘণ্টা স্থায়ী থাকে।\n5. **'ব্রেন ডাম্প' জার্নালিং:** ঘুমানোর আগে মাথায় ঘুরপাক খাওয়া চিন্তা বা আগামীকালের ৩টি প্রধান কাজের তালিকা খাতায় লিখে ফেলুন। এতে মস্তিষ্ক আশ্বস্ত হয় এবং গভীর ঘুম সহজ হয়।"
-            }
-        ]
-    })
-
-    # 1.3 Philosophy, Technology & Society
-    conversations.append({
-        "id": "gen_conv_003_philosophy_technology_human_connection",
-        "topic": "General Conversation: Philosophy, AI & Human Nature (প্রযুক্তি, দর্শন ও মানবিক সম্পর্ক)",
-        "conversations": [
-            {
-                "from": "human",
-                "value": "Do you think artificial intelligence will diminish human creativity and critical thinking, or will it elevate them to a higher plane? What is your nuanced philosophical perspective?"
-            },
-            {
-                "from": "gpt",
-                "value": "This is one of the foundational philosophical questions of our century. The relationship between human intellect and artificial augmentation is neither purely utopian nor purely dystopian; it is a **dialectical transformation of human agency**.\n\n### 1. The Risk of Cognitive Atrophy (The Dependency Trap)\n- **Over-Reliance on Synthesized Answers:** If individuals outsource all synthesis, drafting, and problem framing to automated systems, core neural pathways responsible for deep deductive reasoning, grit, and critical skepticism may weaken.\n- **Homogenization of Expression:** Algorithmic training on averages can produce polished but formulaic art, literature, and thought, dampening idiosyncratic human genius.\n\n### 2. The Potential for Creative Elevation (The Cognitive Bicycle)\n- **Elimination of Mechanical Drudgery:** Just as the printing press eliminated manual copying and calculators freed mathematicians from repetitive arithmetic, AI can eliminate boilerplate tasks, allowing humans to operate at higher levels of conceptual synthesis.\n- **Expanded Iteration Speed:** A creator can test 50 variations of an architectural concept, scientific hypothesis, or musical chord progression in minutes rather than months.\n\n### 3. The Determining Factor: Intentional Agency\nAI is fundamentally a cognitive amplifier. When used passively for consumption, it risks atrophy; when used actively as an interactive sparring partner for inquiry and creation, it amplifies human intellectual sovereignty."
+                "value": "I am **Shanto**, your on-device AI assistant. I run 100% locally and privately on your phone without needing internet access."
             },
             {
                 "from": "human",
-                "value": "আমাদের বর্তমান সোশ্যাল মিডিয়ার যুগে মানুষ একে অপরের সাথে সবসময় ভার্চুয়ালি যুক্ত থেকেও কেন একাকীত্ব বেশি অনুভব করছে?"
+                "value": "Good morning! Hope you have a good day."
             },
             {
                 "from": "gpt",
-                "value": "সোশ্যাল মিডিয়ার এই যুগে আমরা আগের যেকোনো সময়ের চেয়ে বেশি **'কানেক্টেড'**, কিন্তু একই সাথে অনেক বেশি **'ডিসকানেক্টেড'**। সমাজবিজ্ঞান ও মনোবিজ্ঞানের দৃষ্টিতে এই বৈপরীত্যের পেছনে কয়েকটি গভীর কারণ রয়েছে:\n\n### ১. 'হাইপার-কানেক্টিভিটি' বনাম 'আসল নৈকট্য'\n- সোশ্যাল মিডিয়ার যোগাযোগগুলো মূলত সুপারফিশিয়াল বা উপরিভাগের (যেমন: লাইক, রিয়্যাক্ট, শর্ট মেসেজ)।\n- মানুষের মনস্তাত্ত্বিক শান্তির জন্য প্রয়োজন মুখোমুখি কথা বলা, চোখের ভাষা বোঝা, কণ্ঠস্বরের উষ্ণতা এবং বাস্তব সহানুভূতি—যা ডিজিটাল পর্দায় অনুপস্থিত থাকে।\n\n### ২. তুলনামূলক সামাজিক ফাঁদ (Comparison Trap)\n- মানুষ সোশ্যাল মিডিয়ায় অন্যের জীবনের সবচেয়ে আকর্ষণীয় ও সাজানো অংশ (Highlight Reel) দেখতে পায়।\n- নিজের দৈনন্দিন স্বাভাবিক সংগ্রামের সাথে অন্যের সাজানো জীবনের তুলনা করতে গিয়ে অবচেতনভাবেই হীনমন্যতা ও একাকীত্ব তৈরি হয়।\n\n### ৩. সহমর্মিতার চেয়ে পারফর্মেন্সের প্রাধান্য\n- সামাজিক মাধ্যমে অনেক সময় সম্পর্ক রক্ষার চেয়ে নিজের ভাবমূর্তি প্রদর্শন (Self-Presentation) প্রধান হয়ে ওঠে। এর ফলে প্রকৃত আস্থার সম্পর্ক তৈরি হয় না।\n\n**সমাধান:** ডিজিটাল যোগাযোগের পাশাপাশি সপ্তাহে অন্তত ২-৩ দিন বন্ধুদের সাথে সশরীরে আড্ডা দেওয়া, পরিবারের সাথে স্ক্রিনমুক্ত সময় কাটানো এবং খোলামেলা কথা বলার অভ্যাস আমাদের মনের গভীরে আসল প্রশান্তি এনে দেয়।"
-            }
-        ]
-    })
-
-    # =========================================================================
-    # STAGE 2: BANGLADESH HERITAGE, HISTORY & ECOLOGY
-    # =========================================================================
-
-    # 2.1 1971 Liberation War: Deep Strategic, Diplomatic & Grassroots Analysis
-    conversations.append({
-        "id": "bd_history_001_liberation_war_strategic_analysis",
-        "topic": "1971 Bangladesh Liberation War (মুক্তিযুদ্ধ ও অপারেশন জ্যাকপট)",
-        "conversations": [
-            {
-                "from": "human",
-                "value": "১৯৭১ সালের মুক্তিযুদ্ধ সম্পর্কে অনেক সাধারণ বিবরণ পাওয়া যায়, কিন্তু আমি এর সামরিক কৌশল (military strategy), ভূ-রাজনৈতিক প্রেক্ষাপট (geopolitics) এবং সাধারণ মানুষের আত্মত্যাগের সমন্বয়টি গভীরভাবে বুঝতে চাই। ৭ই মার্চের ভাষণ থেকে শুরু করে ১৬ই ডিসেম্বরের বিজয় পর্যন্ত মূল মোড়গুলো কি ছিল?"
-            },
-            {
-                "from": "gpt",
-                "value": "১৯৭১ সালের মুক্তিযুদ্ধ কেবল একটি ভূখণ্ডগত সংঘাত ছিল না; এটি ছিল একটি জাতির আত্মনিয়ন্ত্রণাধিকার, সাংস্কৃতিক অস্তিত্ব এবং চরম রাজনৈতিক বৈষম্যের বিরুদ্ধে এক অবিস্মরণীয় জনযুদ্ধ (people's war)। এর গতিপ্রকৃতি বোঝার জন্য আমাদের একে তিনটি প্রধান মাত্রায় ভাগ করে বিশ্লেষণ করতে হবে: সামরিক কৌশল, আন্তর্জাতিক কূটনীতি এবং গণপ্রতিরোধ。\n\n### ১. পটভূমি ও ঐতিহাসিক প্রেরণা: ৭ই মার্চের কালজয়ী ভাষণ\nবঙ্গবন্ধু শেখ মুজিবুর রহমানের ঐতিহাসিক ৭ই মার্চের ভাষণ ছিল মূলত একটি 'কৌশলগত স্বাধীনতার রূপরেখা' (Strategic Blueprint for Independence)। রেসকোর্স ময়দানে তিনি একদিকে সরাসরি সংঘাত এড়িয়ে অহিংস অসহযোগ আন্দোলনের নির্দেশ দেন, অন্যদিকে প্রতিটি ঘরে ঘরে দুর্গ গড়ে তোলার আহ্বান জানান। এটি পাকিস্তানি সামরিক জান্তাকে অপ্রস্তুত করে দেয় এবং পূর্ব বাংলার সাড়ে সাত কোটি মানুষকে মানসিকভাবে যুদ্ধের জন্য পূর্ণ প্রস্তুত করে।\n\n### ২. অপারেশন সার্চলাইট ও ২৬শে মার্চের আনুষ্ঠানিক স্বাধীনতা\n২৫শে মার্চ মধ্যরাতে পাকিস্তানি সেনাবাহিনী 'অপারেশন সার্চলাইট' নামে ইতিহাসের অন্যতম নৃশংস গণহত্যা পরিচালনা করে। ঢাকা বিশ্ববিদ্যালয়, রাজারবাগ পুলিশ লাইন এবং পিলখানা ইপিআর হেডকোয়ার্টারে বর্বরোচিত আক্রমণ চালানো হয়। ২৬শে মার্চ প্রথম প্রহরে গ্রেফতার হওয়ার পূর্বেই বঙ্গবন্ধু আনুষ্ঠানিকভাবে বাংলাদেশের স্বাধীনতা ঘোষণা করেন, যা ইপিআর ওয়্যারলেসের মাধ্যমে সারাদেশে ছড়িয়ে পড়ে।\n\n### ৩. সামরিক বিন্যাস: ১১টি সেক্টর ও যৌথ কমান্ড\nমুক্তিযুদ্ধ পরিচালনায় মেহেরপুরের বৈদ্যনাথতলার আম্রকাননে (মুজিবনগর) ১০ই এপ্রিল প্রবাসী বাংলাদেশ সরকার গঠিত হয় এবং ১৭ই এপ্রিল শপথ গ্রহণ করে। প্রধান সেনাপতি জেনারেল আতাউল গনি ওসমানীর নেতৃত্বে সমগ্র বাংলাদেশকে ১১টি সামরিক সেক্টরে এবং পরবর্তীতে জেড-ফোর্স, কে-ফোর্স ও এস-ফোর্স নামে তিনটি নিয়মিত ব্রিগেড ফোর্সে ভাগ করা হয়।\n\n- **নিয়মিত বাহিনী (মুক্তিবাহিনী) ও গেরিলা বাহিনী (গণবাহিনী):** গ্রামবাংলার কৃষক, ছাত্র, শ্রমিকদের নিয়ে গঠিত গেরিলা যোদ্ধারা 'হিট অ্যান্ড রান' (Hit-and-Run) কৌশলে হানাদার বাহিনীর রসদ সরবরাহ লাইন ও যোগাযোগ ব্যবস্থা পুরোপুরি ধ্বংস করে দেয়।\n- **ক্র্যাক প্লাটুন:** ঢাকায় তরুণ গেরিলাদের পরিচালিত 'অপারেশন হোটেল ইন্টারকন্টিনেন্টাল' এবং বিভিন্ন সাবোটাজ অভিযান পাকিস্তানি বাহিনীকে রাজধানীতেও সর্বদা আতঙ্কের মধ্যে রাখে।\n- **অপারেশন জ্যাকপট (১৫ই আগস্ট ১৯৭১):** নৌ-কমান্ডোদের দুঃসাহসিক এই সমন্বিত হামলায় চট্টগ্রাম ও মোংলা বন্দর এবং চাঁদপুর ও নারায়ণগঞ্জ নৌঘাঁটিতে পাকিস্তানি অস্ত্র ও রসদবাহী ২৬টিরও বেশি যুদ্ধজাহাজ ধ্বংস হয়। আন্তর্জাতিক সম্প্রদায় এই অপারেশনের মাধ্যমে উপলব্ধি করে যে মুক্তিপাগল বাঙালিকে আর দাবিয়ে রাখা সম্ভব নয়।\n\n### ৪. আন্তর্জাতিক ভূরাজনীতি ও পরাশক্তিদের অবস্থান\n- **ভারত:** প্রায় এক কোটি শরণার্থীকে আশ্রয় প্রদান, মুক্তিযোদ্ধাদের সামরিক প্রশিক্ষণ এবং পরবর্তীতে যৌথ কমান্ড গঠনের মাধ্যমে প্রত্যক্ষ মিত্রের ভূমিকা পালন করে। তৎকালীন প্রধানমন্ত্রী ইন্দিরা গান্ধীর বিশ্বব্যাপী কূটনৈতিক প্রচেষ্টা মুক্তিযুদ্ধের পক্ষে আন্তর্জাতিক জনমত গঠনে গুরুত্বপূর্ণ অবদান রাখে।\n- **সোভিয়েত ইউনিয়ন:** জাতিসংঘের নিরাপত্তা পরিষদে তিনবার ভেটো প্রয়োগ করে বাংলাদেশের স্বাধীনতাকে স্তব্ধ করার মার্কিন-চীন অক্ষের কূটনৈতিক চক্রান্ত নস্যাৎ করে দেয়। বঙ্গোপসাগরে মার্কিন ৭ম নৌবহর (Task Force 74) মোকাবিলার জন্য সোভিয়েত নৌবহর প্রেরণ কৌশলগত ভারসাম্য নিশ্চিত করে।\n\n### ৫. চূড়ান্ত পরিণতি: যৌথ বাহিনীর আক্রমণ ও আত্মসমর্পণ (১৬ই ডিসেম্বর)\n৩রা ডিসেম্বর পাকিস্তান বিমানবাহিনী ভারতের পশ্চিমাঞ্চলের বিমানঘাঁটিগুলোতে আক্রমণ চালালে ভারত-বাংলাদেশ যৌথ কমান্ড গঠিত হয়। চারদিক থেকে যৌথ বাহিনীর ক্ষিপ্র অগ্রযাত্রায় পাকিস্তানি বাহিনীর প্রতিরোধ মাত্র ১৩ দিনে ভেঙে পড়ে। ১৬ই ডিসেম্বর রেসকোর্স ময়দানে জেনারেল আমির আব্দুল্লাহ খান নিয়াজির নেতৃত্বে ৯৩,০০০ পাকিস্তানি সৈন্যের ঐতিহাসিক আত্মসমর্পণের মাধ্যমে জন্ম নেয় সার্বভৌম গণপ্রজাতন্ত্রী বাংলাদেশ।"
+                "value": "Good morning! Wishing you a productive and joyful day ahead. What are your plans for today?"
             },
             {
                 "from": "human",
-                "value": "অপারেশন জ্যাকপটের নৌ-কমান্ডোদের প্রশিক্ষণ এবং অপারেশন চলাকালীন মানসিক অবস্থা কেমন ছিল? রেডিও গানের সংকেতের যে ঘটনাটি ছিল, সে সম্পর্কে বিস্তারিত বলো।"
+                "value": "Thanks, you're awesome!"
             },
             {
                 "from": "gpt",
-                "value": "অপারেশন জ্যাকপট ছিল আধুনিক সামরিক ইতিহাসের অন্যতম সুপরিকল্পিত এবং দুঃসাহসিক কমব্যাট ডাইভিং অপারেশন। এর প্রতিটি পর্যায় চরম শৃঙ্খলা ও সাহসিকতার প্রতীক।\n\n### ১. গোপন প্রশিক্ষণ ক্যাম্প: ভাগীরথী নদী ও ক্যাম্প পলাশী\n১৯৭১ সালের মে মাস থেকে ভারতের পশ্চিমবঙ্গের মুর্শিদাবাদ জেলার ভাগীরথী নদীর তীরে পলাশীতে গোপন প্রশিক্ষণ শিবির গড়ে তোলা হয়। ফ্রান্সের তুলোঁ বন্দর থেকে পালিয়ে আসা ৮ জন বাঙালি সাবমেরিনার ছিলেন এই অপারেশনের মূল প্রশিক্ষক ও অনুপ্রেরণা। প্রায় ৫০০ জন তরুণ সাঁতারুকে প্রতিদিন ৬-৮ ঘণ্টা পানিতে ডুবে থাকার ও লিম্পেট মাইন লাগানোর কঠোর প্রশিক্ষণ দেওয়া হয়।\n\n### ২. আকাশবাণী রেডিওর কালজয়ী গানের সংকেত\n১. **প্রথম সতর্কবার্তা (হলুদ সংকেত):** পঙ্কজ মল্লিকের গাওয়া *'আমি তোমায় যত শুনিয়েছিলাম গান'* প্রচারিত হলে ২৪-৪৮ ঘণ্টার মধ্যে অভিযানের প্রস্তুতি নেওয়ার সংকেত ছিল।\n২. **চূড়ান্ত আক্রমণ (সবুজ সংকেত):** সন্ধ্যা মুখোপাধ্যায়ের কণ্ঠে *'আমার পুতুল আজকে যাবে শ্বশুরবাড়ি'* গানটি প্রচারিত হওয়া মাত্র সেদিন মধ্যরাতেই একযোগে চট্টগ্রাম ও মোংলা বন্দরে ডুবসাঁতার দিয়ে জাহাজের গায়ে লিম্পেট মাইন স্থাপন করা হয়।\n\n১৫ই আগস্ট দিবাগত রাতে পাকিস্তানি যুদ্ধজাহাজ বঙ্গোপসাগরের তলদেশে নিমজ্জিত হলে আন্তর্জাতিক বিশ্ব স্তম্ভিত হয়ে যায়।"
-            }
-        ]
-    })
-
-    # 2.2 Ancient & Medieval Bengal: Socio-Economic, Naval and Dynastic Evolution
-    conversations.append({
-        "id": "bd_history_002_ancient_medieval_bengal",
-        "topic": "Ancient & Medieval History of Bengal (প্রাচীন ও মধ্যযুগীয় বাংলা)",
-        "conversations": [
-            {
-                "from": "human",
-                "value": "প্রাচীন ও মধ্যযুগীয় বাংলার আর্থ-সামাজিক ও রাজনৈতিক বিবর্তনটি সংক্ষেপে কিন্তু গভীর বিশ্লেষণসহ বুঝিয়ে দাও। পাল ও সেন রাজবংশ, স্বাধীন সুলতানি আমল এবং মুঘল আমলে সুবা বাংলার বৈশ্বিক অর্থনৈতিক প্রভাব কেমন ছিল?"
-            },
-            {
-                "from": "gpt",
-                "value": "প্রাচীন ও মধ্যযুগীয় বাংলা ছিল সমগ্র এশিয়ার অন্যতম সমৃদ্ধ ও অর্থনৈতিকভাবে স্বয়ংসম্পূর্ণ একটি অঞ্চল। ভৌগোলিক অবস্থান ও নদীমাতৃক পলিমাটির কারণে এই অঞ্চল সর্বদা বৈশ্বিক বাণিজ্যের প্রধান কেন্দ্রবিন্দু ছিল।\n\n### ১. প্রাচীন বাংলা ও পাল সাম্রাজ্য (৭৫০ – ১১৬১ খ্রিষ্টাব্দ)\n- **মাৎস্যন্যায় ও গোপালের নির্বাচন:** শশাঙ্কের মৃত্যুর পর দীর্ঘ অরাজকতার অবসান ঘটিয়ে বাংলার জনগণ গণতান্ত্রিকভাবে গোপালকে রাজা নির্বাচিত করে, যা পাল বংশের সূচনা করে।\n- **বৌদ্ধ সংস্কৃতির স্বর্ণযুগ:** সোমপুর মহাবিহার (পাহাড়পুর) ও নালন্দা বিশ্ববিদ্যালয়ের পৃষ্ঠপোষকতায় জ্ঞানবিজ্ঞানের বিস্তার ঘটে। অতীশ দীপঙ্কর শ্রীজ্ঞান তিব্বতে বৌদ্ধ দর্শনের পুনর্জাগরণ ঘটান।\n\n### ২. সেন বংশ ও সামাজিক রূপান্তর (১০৯৭ – ১২০৫ খ্রিষ্টাব্দ)\n- কর্ণাটক থেকে আগত সেন শাসকরা বাংলায় কট্টর বর্ণপ্রথা ও কৌলীন্য প্রথা প্রবর্তন করেন, যা তৎকালীন প্রান্তিক জনগোষ্ঠীর মধ্যে সামাজিক দূরত্ব তৈরি করে।\n\n### ৩. স্বাধীন সুলতানি আমল (১৩৩৮ – ১৫৩৮ খ্রিষ্টাব্দ): স্বর্ণযুগ\n- **ফখরুদ্দিন মুবারক শাহ ও শামসুদ্দিন ইলিয়াস শাহ:** বাংলাকে ঐক্যবদ্ধ করে 'শাহ-ই-বাঙ্গালাহ' উপাধি গ্রহণ করেন।\n- **ইবনে বতুতার সফর:** বিখ্যাত পরিব্রাজক ইবনে বতুতা বাংলাকে 'দোযখপুর আজ নেয়ামত' (প্রাচুর্যপূর্ণ স্বর্গ) হিসেবে উল্লেখ করেন। চাল, সিল্ক এবং উন্নত মানের সুতি বস্ত্রের প্রাচুর্য ছিল বিশ্বখ্যাত।\n\n### ৪. মুঘল সুবা বাংলা ও মসলিন বাণিজ্য\n- সুবেদার শায়েস্তা খানের আমলে টাকায় ৮ মণ চাল পাওয়ার প্রবাদ বাংলার অর্থনৈতিক প্রাচুর্যের প্রমাণ দেয়।\n- **ঢাকাই মসলিন:** আন্তর্জাতিক বাজারে রোমান সাম্রাজ্য থেকে ইউরোপের রাজদরবার পর্যন্ত ঢাকার মসলিনের একচ্ছত্র আধিপত্য ছিল।"
-            }
-        ]
-    })
-
-    # 2.3 Geography & River Ecology of Bangladesh
-    conversations.append({
-        "id": "bd_geo_003_delta_rivers_sundarbans",
-        "topic": "Geography & River Ecology of Bangladesh (নদীমাতৃক বাংলাদেশ ও সুন্দরবন)",
-        "conversations": [
-            {
-                "from": "human",
-                "value": "বাংলাদেশকে কেন পৃথিবীর বৃহত্তম সক্রিয় ব-দ্বীপ (Active Delta) বলা হয়? পদ্মা, মেঘনা ও যমুনা নদীর পলিপ্রবাহ এবং সুন্দরবনের ম্যানগ্রোভ ইকোসিস্টেমের পরিবেশগত গুরুত্ব বিস্তারিতভাবে বুঝিয়ে দাও।"
-            },
-            {
-                "from": "gpt",
-                "value": "বাংলাদেশ একটি অনন্য ভৌগোলিক বিস্ময়। প্রায় ১,৪৭,৫৭০ বর্গকিলোমিটার আয়তনের এই দেশটি বিশ্বের বৃহত্তম ও অন্যতম সক্রিয় ব-দ্বীপ (Bengal Delta), যা হিমালয় পর্বতমালার ক্ষয়িষ্ণু শিলাস্তর ও অবক্ষেপণ দ্বারা লাখ লাখ বছর ধরে গঠিত হয়েছে।\n\n### ১. গঙ্গা-ব্রহ্মপুত্র-মেঘনা (GBM) অববাহিকা ও পলিপ্রবাহ\n- **পদ্মা, যমুনা ও মেঘনা:** এই তিনটি প্রধান নদী প্রতি বছর প্রায় **১০০ থেকে ১৫০ কোটি টন পলি** (sediment) বঙ্গোপসাগরে জমা করে। এর ফলে দক্ষিণাঞ্চলে নতুন চর জেগে ওঠে এবং কৃষিজমিতে প্রাকৃতিক উর্বরতা বৃদ্ধি পায়।\n\n### ২. সুন্দরবন: পৃথিবীর বৃহত্তম ম্যানগ্রোভ বন\n- **উদ্ভিদ অভিযোজন:** শ্বাসমূল (Pneumatophores), ঠেস根 (Stilt roots) এবং জরায়ুজ অঙ্কুরোদগম (Viviparous germination)।\n- **প্রাকৃতিক সুরক্ষা প্রাচীর (Green Bio-Shield):** সিডর, আইলা ও রেমালের মতো সামুদ্রিক জলোচ্ছ্বাস ও তীব্র ঘূর্ণিঝড়ের গতিবেগ ৩০-৪০% হ্রাস করে উপকূলীয় কোটি কোটি মানুষের জীবন রক্ষা করে।"
+                "value": "Thank you so much! Always happy to help. Let me know whenever you need anything!"
             }
         ]
     })
 
     # =========================================================================
-    # STAGE 3: WORLD CIVILIZATIONS & MODERN HISTORY
+    # LEVEL 2: EVERYDAY CASUAL ASSISTANCE & WELLNESS (SMALL TO MEDIUM)
     # =========================================================================
 
-    # 3.1 Japan: Feudal Isolation to Modern Industrial Titan
+    # 2.1 Daily Wellness, Stress & Relaxation (বাংলা)
     conversations.append({
-        "id": "world_history_001_japan_evolution",
-        "topic": "History of Japan: Feudal Era, Meiji Restoration & Modernization",
+        "id": "lvl2_001_daily_wellness_stress_relief_bangla",
+        "topic": "Level 2: Daily Wellness & Stress Relief (দৈনন্দিন মানসিক ক্লান্তি ও প্রশান্তি)",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "আজকে সারাদিন অনেক দৌড়াদৌড়ি আর কাজের চাপ গেল। খুব ক্লান্ত লাগছে, কীভাবে একটু চাঙ্গা হওয়া যায়?"
+            },
+            {
+                "from": "gpt",
+                "value": "ব্যস্ত দিনের পর ক্লান্তি লাগাটা খুবই স্বাভাবিক। শরীর ও মনকে দ্রুত রিল্যাক্স করতে এই সহজ কাজগুলো করতে পারেন:\n\n1. **এক গ্লাস কুসুম গরম পানি বা লেবু-চা:** হালকা উষ্ণ পানি শরীরের ক্লান্তি দূর করে এবং তরতাজা ভাব আনে।\n2. **মুখ ধুয়ে একটু বিশ্রাম:** চোখে-মুখে ঠান্ডা পানির ঝাপটা দিন এবং ৫-১০ মিনিট চোখ বন্ধ করে শুয়ে থাকুন।\n3. **স্ক্রিন থেকে বিরতি:** ফোন বা ল্যাপটপের পর্দা থেকে অন্তত ১৫ মিনিট দূরে থাকুন।\n4. **প্রিয় কোনো গান:** পছন্দের হালকা কোনো ইন্সট্রুমেন্টাল বা সুফি গান শুনতে পারেন।\n\nআজকের কাজের কথা এখন ভুলে যান, কাল সকালে আবার নতুন করে শুরু করা যাবে।"
+            },
+            {
+                "from": "human",
+                "value": "রাতে ভালো ঘুমের জন্য কোনো ছোট অভ্যাস আছে কি?"
+            },
+            {
+                "from": "gpt",
+                "value": "অবশ্যই! ৩টি খুব সহজ নিয়ম মেনে চললে চমৎকার ঘুম হয়:\n- **নির্দিষ্ট সময়:** প্রতিদিন ঠিক একই সময়ে বিছানায় যান।\n- **অন্ধকার ও নীরব পরিবেশ:** ঘরের আলো একদম মৃদু বা অন্ধকার রাখুন।\n- **চিন্তামুক্ত মন:** আগামীকালের প্রধান ২-৩টি কাজের কথা খাতায় লিখে রাখুন, যাতে মাথায় অহেতুক চিন্তা ঘুরপাক না খায়।"
+            }
+        ]
+    })
+
+    # 2.2 Time Management & Healthy Habits (English)
+    conversations.append({
+        "id": "lvl2_002_time_management_habits_english",
+        "topic": "Level 2: Productivity & Study Habit Optimization (Time Management)",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "I always procrastinate until the last minute before exams or deadlines. How can I build a realistic daily study routine?"
+            },
+            {
+                "from": "gpt",
+                "value": "Procrastination usually happens because the brain feels overwhelmed by the sheer size of the goal. The secret is to lower the activation energy:\n\n### 3-Step Actionable Strategy:\n1. **The 5-Minute Rule:** Tell yourself you will only study for 5 minutes. Once you start, inertia breaks and continuing becomes effortless.\n2. **Pomodoro Technique (25/5):** Study with complete focus for 25 minutes (phone in another room), then enjoy a 5-minute movement break.\n3. **Top 3 Priorities:** Each morning, pick only 3 essential tasks to accomplish. When those 3 are done, celebrate your progress."
+            },
+            {
+                "from": "human",
+                "value": "What if I get distracted by social media notifications during the 25 minutes?"
+            },
+            {
+                "from": "gpt",
+                "value": "Put your phone on 'Do Not Disturb' mode and place it face down out of arm's reach. Reducing visual triggers eliminates 80% of accidental scrolling urges!"
+            }
+        ]
+    })
+
+    # =========================================================================
+    # LEVEL 3: MODERATE DISCUSSIONS, OPINIONS & PROBLEM SOLVING (MEDIUM)
+    # =========================================================================
+
+    # 3.1 Technology, Social Media & Human Connection (Bilingual)
+    conversations.append({
+        "id": "lvl3_001_tech_social_media_humanity",
+        "topic": "Level 3: Technology, Social Media & Genuine Human Connection (প্রযুক্তি ও মানবিক সম্পর্ক)",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "বর্তমান যুগে মানুষ সবসময় অনলাইনে সংযুক্ত থেকেও কেন বাস্তবে নিজেদের একা মনে করে? প্রযুক্তি কি আমাদের সম্পর্কগুলোকে অগভীর করে দিচ্ছে?"
+            },
+            {
+                "from": "gpt",
+                "value": "এটি আমাদের সময়ের এক অদ্ভুত মনস্তাত্ত্বিক বাস্তবতা। আমরা আগের চেয়ে বেশি **কানেক্টেড**, কিন্তু একই সাথে অনেক বেশি **একাকী**।\n\n### এর পেছনের ৩টি মূল কারণ:\n1. **লাইক ও রিয়্যাক্ট বনাম আসল নৈকট্য:** সামাজিক মাধ্যমে আমরা সংক্ষিপ্ত টেক্সট বা ইমোজি আদান-প্রদান করি, কিন্তু মানুষের মন শান্ত হয় কণ্ঠের আবেগ, চোখের ভাষা এবং সামনাসামনি আন্তরিকতায়।\n2. **হাইলাইট রিল সিন্ড্রোম:** প্রত্যেকে অনলাইনে তাদের জীবনের সবচেয়ে সুন্দর মুহূর্তগুলো দেখায়। ফলে নিজের সাধারণ জীবনের সাথে তুলনা করে অবচেতনভাবেই হতাশা জন্ম নেয়।\n3. **মনোযোগের ঘাটতি:** সোশ্যাল মিডিয়ার দ্রুত স্ক্রোলিং অভ্যাস আমাদের গভীর কোনো আড্ডা বা বই পড়ার ধৈর্য কমিয়ে দেয়।\n\nপ্রযুক্তি নিজে খারাপ নয়; কিন্তু সপ্তাহে অন্তত একদিন বন্ধুদের সাথে দেখা করা বা পরিবারের সাথে স্ক্রিনমুক্ত আড্ডা দেওয়াই আসল মানসিক শান্তি নিশ্চিত করে।"
+            },
+            {
+                "from": "human",
+                "value": "How can one use AI tools effectively without losing their critical thinking skills?"
+            },
+            {
+                "from": "gpt",
+                "value": "Treat AI as a **collaborative sparring partner** rather than an oracle:\n- **Ask for Critiques, Not Just Answers:** Instead of asking for a finished essay, write your draft first and ask the AI: *'What are the 3 weakest arguments in my draft?'*\n- **Verify and Synthesize:** Always challenge premises, compare sources, and reformulate ideas in your own voice."
+            }
+        ]
+    })
+
+    # 3.2 Art, Literature & Creativity (English & Bangla)
+    conversations.append({
+        "id": "lvl3_002_books_creativity_expression",
+        "topic": "Level 3: Books, Literature & Creative Expression (সাহিত্য ও সৃজনশীলতা)",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "কেন আমাদের নিয়মিত সাহিত্য ও ক্লাসিক বই পড়া উচিত? এটি কি কেবল বিনোদন নাকি মস্তিষ্কের বিকাশে বড় ভূমিকা রাখে?"
+            },
+            {
+                "from": "gpt",
+                "value": "সাহিত্য পাঠ কেবল অবসর কাটানোর মাধ্যম নয়; এটি মানুষের সহানুভূতি (empathy), ভাষা দক্ষতা এবং সূক্ষ্ম চিন্তাশক্তি বিকাশের সবচেয়ে শক্তিশালী মাধ্যম।\n\n### সাহিত্যের অনন্য প্রভাব:\n1. **সহানুভূতিশীল দৃষ্টিভঙ্গি:** যখন আপনি রবীন্দ্রনাথ, বিভূতিভূষণ, টলস্টয় বা শেক্সপিয়ারের কোনো চরিত্র পড়েন, তখন আপনি নিজের অজান্তেই ভিন্ন এক মানুষের আনন্দ ও বেদনা অনুভব করেন।\n2. **চিন্তার গভীরতা:** জটিল বিষয়কে সুন্দর ও সুসংহত ভাষায় প্রকাশ করার ক্ষমতা তৈরি হয়।\n3. **মানসিক প্রশান্তি:** বই পড়ার সময় মস্তিষ্কের একাগ্রতা বাড়ে এবং মন শান্ত হয়।"
+            },
+            {
+                "from": "human",
+                "value": "What makes Bengali literature so rich in world heritage?"
+            },
+            {
+                "from": "gpt",
+                "value": "Bengali literature is blessed with an extraordinary musicality and philosophical depth. From the medieval mysticism of Charyapada and Baul poetry (Lalon Shah) to the universal humanism of Rabindranath Tagore (Asia's first Nobel laureate in 1913) and the revolutionary rebel spirit of Kazi Nazrul Islam, the language carries a unique synthesis of lyrical elegance and fierce social justice."
+            }
+        ]
+    })
+
+    # =========================================================================
+    # LEVEL 4: DEEP HISTORICAL, CULTURAL & GEOPOLITICAL ANALYSIS (DEEP)
+    # =========================================================================
+
+    # 4.1 1971 Liberation War & Naval Strategy (বাংলা - পূর্ণাঙ্গ বিশ্লেষণ)
+    conversations.append({
+        "id": "lvl4_001_bd_1971_liberation_war_deep",
+        "topic": "Level 4: 1971 Bangladesh Liberation War (মুক্তিযুদ্ধ, অপারেশন জ্যাকপট ও ভূরাজনীতি)",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "১৯৭১ সালের মুক্তিযুদ্ধ সম্পর্কে সামরিক কৌশল, ৭ই মার্চের ভাষণ, অপারেশন জ্যাকপট এবং পরাশক্তিদের আন্তর্জাতিক ভূরাজনীতির সমন্বিত গভীর বিশ্লেষণ দাও।"
+            },
+            {
+                "from": "gpt",
+                "value": "১৯৭১ সালের মুক্তিযুদ্ধ ছিল একটি জাতির আত্মনিয়ন্ত্রণাধিকার, সাংস্কৃতিক অস্তিত্ব এবং চরম রাজনৈতিক বৈষম্যের বিরুদ্ধে এক অবিস্মরণীয় জনযুদ্ধ (people's war)।\n\n### ১. ৭ই মার্চের ভাষণ: কৌশলগত স্বাধীনতার রূপরেখা\nবঙ্গবন্ধু শেখ মুজিবুর রহমান একদিকে সরাসরি যুদ্ধের ঘোষণা এড়িয়ে অহিংস অসহযোগ আন্দোলনের নির্দেশ দেন, অন্যদিকে ঘরে ঘরে দুর্গ গড়ে তোলার আহ্বান জানান। এটি পাকিস্তানি জান্তাকে অপ্রস্তুত করে এবং সমগ্র বাঙালিকে যুদ্ধের জন্য মানসিকভাবে সম্পূর্ণ প্রস্তুত করে।\n\n### ২. সামরিক বিন্যাস ও ১১টি সেক্টর\nমেহেরপুরের মুজিবনগরে প্রবাসী সরকার গঠিত হওয়ার পর প্রধান সেনাপতি জেনারেল ওসমানীর নেতৃত্বে দেশকে ১১টি সেক্টরে এবং জেড-ফোর্স, কে-ফোর্স ও এস-ফোর্স ব্রিগেডে ভাগ করা হয়।\n- **গেরিলা গণবাহিনী ও ক্র্যাক প্লাটুন:** হিট অ্যান্ড রান কৌশলে পাকিস্তানি রসদ লাইন ধ্বংস করে।\n- **অপারেশন জ্যাকপট (১৫ই আগস্ট ১৯৭১):** প্রায় ৩৫০ জন নৌ-কমান্ডো আকাশবাণী রেডিওর সংকেত ('আমি তোমায় যত শুনিয়েছিলাম গান' ও 'আমার পুতুল আজকে যাবে শ্বশুরবাড়ি') পেয়ে একযোগে চট্টগ্রাম ও মোংলা বন্দরে পাকিস্তানি অস্ত্রবাহী ২৬টিরও বেশি যুদ্ধজাহাজ লিম্পেট মাইন দিয়ে বঙ্গোপসাগরের তলদেশে ডুবিয়ে দেন।\n\n### ৩. আন্তর্জাতিক ভূরাজনীতি ও ১৬ই ডিসেম্বরের চূড়ান্ত বিজয়\n- **সোভিয়েত ইউনিয়ন:** নিরাপত্তা পরিষদে তিনবার ভেটো দিয়ে মার্কিন-চীন চক্রান্ত নস্যাৎ করে।\n- **ভারত:** ১ কোটি শরণার্থীকে আশ্রয় এবং যৌথ কমান্ডের মাধ্যমে সরাসরি যুদ্ধ পরিচালনা করে।\n১৬ই ডিসেম্বর জেনারেল নিয়াজির ৯৩,০০০ সৈন্যের ঐতিহাসিক আত্মসমর্পণের মাধ্যমে স্বাধীন গণপ্রজাতন্ত্রী বাংলাদেশের অভ্যুদয় ঘটে।"
+            },
+            {
+                "from": "human",
+                "value": "১৯৫২ সালের ভাষা আন্দোলনের সাথে ১৯৭১ সালের মুক্তিযুদ্ধের আদর্শিক যোগসূত্রটি ব্যাখ্যা করো।"
+            },
+            {
+                "from": "gpt",
+                "value": "১৯৫২ সালের ২১শে ফেব্রুয়ারির ভাষা আন্দোলন এবং ১৯৭১ সালের মুক্তিযুদ্ধ মূলত একই মুক্তির ধারাক্রমের দুটি অপরিহার্য স্তম্ভ—**'সাংস্কৃতিক স্বাধিকার থেকে রাজনৈতিক সার্বভৌমত্বে উত্তরণ'**।\n\n১৯৪৭ সালে ধর্মভিত্তিক দ্বিজাতিতত্ত্বের ভিত্তিতে পাকিস্তান গঠিত হলেও পাকিস্তানের শাসকগোষ্ঠী ৫৬% বাঙালির মাতৃভাষা বাংলাকে বাদ দিয়ে উর্দুকে চাপিয়ে দেওয়ার ষড়যন্ত্র করে। ১৯৫২ সালে সালাম, বরকত, রফিকের রক্তে দ্বিজাতিতত্ত্বের কৃত্রিম বাঁধ ভেঙে ভাষাভিত্তিক ধর্মনিরপেক্ষ বাঙালি জাতীয়তাবাদের সূচনা হয়, যা ১৯৭১-এ পূর্ণ স্বাধীনতায় রূপ নেয়।"
+            }
+        ]
+    })
+
+    # 4.2 Ancient Bengal & River Delta Ecology (বাংলা ও ইংরেজি)
+    conversations.append({
+        "id": "lvl4_002_ancient_bengal_sundarbans_ecology",
+        "topic": "Level 4: Ancient Bengal, Sultanate Muslin Trade & Sundarbans Ecology",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "প্রাচীন ও মধ্যযুগীয় বাংলার পাল বংশ, স্বাধীন সুলতানি আমল এবং ঢাকাই মসলিনের বিশ্ববাণিজ্যিক প্রভাব বিস্তারিত বলো।"
+            },
+            {
+                "from": "gpt",
+                "value": "প্রাচীন ও মধ্যযুগীয় বাংলা ছিল সমগ্র এশিয়ার অন্যতম সমৃদ্ধ অর্থনৈতিক কেন্দ্রবিন্দু:\n\n1. **পাল সাম্রাজ্য (৭৫০–১১৬১ খ্রিষ্টাব্দ):** দীর্ঘ মাৎস্যন্যায়ের অবসান ঘটিয়ে গোপালকে রাজা নির্বাচিত করা হয়। সোমপুর মহাবিহার ও নালন্দার পৃষ্ঠপোষকতায় জ্ঞানবিজ্ঞানের স্বর্ণযুগ রচিত হয়।\n2. **স্বাধীন সুলতানি আমল (১৩৩৮–১৫৩৮ খ্রিষ্টাব্দ):** শামসুদ্দিন ইলিয়াস শাহ 'শাহ-ই-বাঙ্গালাহ' উপাধি নেন। ইবনে বতুতা বাংলাকে প্রাচুর্যময় স্বর্গ হিসেবে বর্ণনা করেন।\n3. **ঢাকাই মসলিন:** সুবা বাংলার ফুটি কার্পাস থেকে তৈরি সূক্ষ্ম মসলিন রোমান সাম্রাজ্য থেকে ইউরোপের রাজদরবার পর্যন্ত বিশ্বখ্যাত ছিল।"
+            },
+            {
+                "from": "human",
+                "value": "Why is the Sundarbans mangrove forest globally unique and critical as an ecological green shield?"
+            },
+            {
+                "from": "gpt",
+                "value": "The Sundarbans—the world's largest contiguous mangrove ecosystem—functions as an indispensable ecological powerhouse:\n- **Unique Halophytic Adaptations:** Trees like Sundari and Gewa survive in tidal saline waters via specialized breathing roots (pneumatophores), stilt roots, and viviparous germination.\n- **Natural Cyclone Bio-Shield:** During catastrophic super-cyclones (Sidr, Aila, Remal), the dense mangrove root and canopy matrix absorbs 30–40% of tidal surge energy, saving millions of human lives across the lower Bengal delta."
+            }
+        ]
+    })
+
+    # 4.3 Japan: Meiji Restoration to Post-War Economic Miracle (English)
+    conversations.append({
+        "id": "lvl4_003_world_history_japan_evolution",
+        "topic": "Level 4: History of Japan: Sakoku, Meiji Restoration & Kaizen Quality",
         "conversations": [
             {
                 "from": "human",
@@ -189,10 +284,10 @@ def generate_all_conversations() -> List[Dict[str, Any]]:
         ]
     })
 
-    # 3.2 United Kingdom: Industrial Revolution & Institutional Law
+    # 4.4 United Kingdom: Industrial Revolution & Coal-Wage Dynamics (English)
     conversations.append({
-        "id": "world_history_002_uk_industrial_revolution",
-        "topic": "History of the United Kingdom: Industrial Revolution & Common Law",
+        "id": "lvl4_004_world_history_uk_industrial_revolution",
+        "topic": "Level 4: History of the UK: Industrial Revolution & Steam Power",
         "conversations": [
             {
                 "from": "human",
@@ -205,10 +300,10 @@ def generate_all_conversations() -> List[Dict[str, Any]]:
         ]
     })
 
-    # 3.3 United States: Constitutional Philosophy & Industrial Rise
+    # 4.5 USA: Constitutional Debates & Hamiltonian Industrial Rise (English)
     conversations.append({
-        "id": "world_history_003_usa_constitutional_democracy",
-        "topic": "History of the United States: Constitutional Philosophy & Industrial Rise",
+        "id": "lvl4_005_world_history_usa_constitutional_democracy",
+        "topic": "Level 4: History of the USA: Hamilton vs Jefferson & Constitutional Philosophy",
         "conversations": [
             {
                 "from": "human",
@@ -221,26 +316,10 @@ def generate_all_conversations() -> List[Dict[str, Any]]:
         ]
     })
 
-    # 3.4 Germany: Realpolitik, Unification & Social Market
+    # 4.6 Ancient Egypt: Nile Hydrology, Rhind Papyrus & Architecture (English)
     conversations.append({
-        "id": "world_history_004_germany_unification_social_market",
-        "topic": "History of Germany: Zollverein, Bismarck's Realpolitik & Second Industrial Revolution",
-        "conversations": [
-            {
-                "from": "human",
-                "value": "How did Otto von Bismarck engineer German unification in 1871 through 'Blood and Iron' (Blut und Eisen) and economic integration (Zollverein), and why did he introduce the world's first modern welfare state?"
-            },
-            {
-                "from": "gpt",
-                "value": "The creation of the unified German Empire in 1871 shifted the geopolitical and industrial balance of continental Europe.\n\n### 1. Economic Foundation: The *Zollverein* (Customs Union, 1834)\nBefore military unification, Prussia created a tariff-free customs union across German states, building dense railway networks that integrated coal in the Ruhr and steel in Silesia.\n\n### 2. Bismarck's Diplomatic & Military Realpolitik\nThrough three swift, isolated wars—against Denmark (1864), Austria (1866), and France (1870–71)—Bismarck unified Germany under Prussian leadership, proclaiming the German Empire at Versailles.\n\n### 3. The World's First Social Welfare State\nTo preempt socialist revolutionary sentiment, Bismarck pragmatically introduced:\n1. Health Insurance Act (1883)\n2. Accident Insurance (1884)\n3. Old Age & Disability Pension (1889)\nThis maintained social stability while German chemical (BASF, Bayer) and electrical (Siemens) giants led the Second Industrial Revolution."
-            }
-        ]
-    })
-
-    # 3.5 Ancient Egypt: Nile River Ecology, Architecture & Mathematics
-    conversations.append({
-        "id": "world_history_005_ancient_egypt_hydrology_science",
-        "topic": "Ancient Egyptian Civilization: Nile River Ecology, Architecture & Mathematics",
+        "id": "lvl4_006_world_history_ancient_egypt_geometry",
+        "topic": "Level 4: Ancient Egypt: Nile Hydrology, Surveying & Geometry",
         "conversations": [
             {
                 "from": "human",
@@ -253,46 +332,30 @@ def generate_all_conversations() -> List[Dict[str, Any]]:
         ]
     })
 
-    # 3.6 China: Dynastic Cycles, Silk Road & Four Inventions
+    # =========================================================================
+    # LEVEL 5: DEEP ACADEMIC STEM, MATHEMATICS & SCIENTIFIC REASONING (DEEP)
+    # =========================================================================
+
+    # 5.1 Physics: Mechanics, Energy Conservation & Thermodynamics (বাংলা ও গণিত)
     conversations.append({
-        "id": "world_history_006_china_silk_road_inventions",
-        "topic": "History of Imperial China: Dynastic Cycle, Silk Road & Great Inventions",
+        "id": "lvl5_001_nctb_physics_mechanics_thermodynamics",
+        "topic": "Level 5: NCTB Curriculum: Physics Mechanics & Thermodynamics (বলবিদ্যা ও শক্তি সংরক্ষণ)",
         "conversations": [
             {
                 "from": "human",
-                "value": "What were the 'Four Great Inventions' of ancient China and how did the Silk Road foster global exchange?"
+                "value": "নিউটনের গতির ৩টি সূত্র এবং কাজ-শক্তি উপপাদ্যের গাণিতিক সম্পর্কটি বুঝিয়ে দাও। একটি ১০ কেজি ভরের বস্তুকে ৫ মিটার ওপর থেকে ফেললে শক্তি সংরক্ষণের হিসাবটি দেখাও।"
             },
             {
                 "from": "gpt",
-                "value": "Imperial China's **Four Great Inventions** (四大發明) fundamentally shaped world history:\n\n1. **Papermaking (Cai Lun, 105 CE):** Spread across the Silk Road, enabling the Islamic Golden Age and European literacy.\n2. **Printing (Woodblock & Bi Sheng's Movable Type):** Democratized Confucian education and Buddhist scholarship.\n3. **Gunpowder (*Huoyao*):** Discovered by Daoist alchemists, revolutionizing global warfare.\n4. **Magnetic Compass (*Luo Pan*):** Guided maritime voyages from Admiral Zheng He to international navigation.\n\nThe 6,400 km Silk Road facilitated rich material and philosophical exchange between Chang'an, Central Asia, and the Mediterranean."
+                "value": "পদার্থবিজ্ঞানের মৌলিক ভিত্তি হলো শক্তির রূপান্তর এবং বলের ক্রিয়ায় বস্তুর গতির পরিবর্তন।\n\n### ১. নিউটনের গতির সূত্রাবলী\n1. **প্রথম সূত্র:** বাহ্যিক বল প্রয়োগ না করলে স্থির বস্তু চিরকাল স্থির এবং গতিশীল বস্তু সমবেগে সরলরেখায় চলে।\n2. **দ্বিতীয় সূত্র:** $F = m a = m \\frac{v - u}{t}$\n3. **তৃতীয় সূত্র:** প্রত্যেক ক্রিয়ার সমান ও বিপরীত প্রতিক্রিয়া আছে ($F_1 = -F_2$)।\n\n### ২. গাণিতিক সমাধান: ১০ কেজি ভরের বস্তু ৫ মিটার পতন\n- ভর, $m = 10\\text{ kg}$, উচ্চতা, $h = 5\\text{ m}$, $g = 9.8\\text{ ms}^{-2}$\n\n1. **শীর্ষবিন্দুতে বিভব শক্তি:**\n   $$E_p = mgh = 10 \\times 9.8 \\times 5 = \\mathbf{490\\text{ J}}, \\quad E_k = 0$$\n\n2. **মাটিতে স্পর্শের পূর্বমুহূর্তে গতিশক্তি:**\n   $$v^2 = 2gh = 2 \\times 9.8 \\times 5 = 98\\text{ m}^2\\text{s}^{-2}$$\n   $$E_k = \\frac{1}{2} m v^2 = \\frac{1}{2} \\times 10 \\times 98 = \\mathbf{490\\text{ J}}, \\quad E_p = 0$$\n\n3. **মাটিতে আঘাতের পর:** গতিশক্তি শব্দ, তাপ ও বস্তু বিকৃতিতে রূপান্তরিত হয়, যা তাপগতিবিদ্যার প্রথম সূত্র ($\\Delta Q = \\Delta U + \\Delta W$) নিশ্চিত করে।"
             }
         ]
     })
 
-    # =========================================================================
-    # STAGE 4: NCTB CURRICULUM STEM & ACADEMIC REASONING
-    # =========================================================================
-
-    # 4.1 Physics: Mechanics, Energy Conservation & Thermodynamics
+    # 5.2 Mathematics: Calculus & Optimization (বাংলা ও গণিত)
     conversations.append({
-        "id": "nctb_stem_001_physics_mechanics_thermo",
-        "topic": "NCTB Curriculum: Physics Mechanics & Thermodynamics (পদার্থবিজ্ঞান ও শক্তি সংরক্ষণশীলতা)",
-        "conversations": [
-            {
-                "from": "human",
-                "value": "নবম-দশম ও একাদশ শ্রেণির পদার্থবিজ্ঞান অনুযায়ী নিউটনের গতির সূত্রাবলী, কাজ-ক্ষমতা-শক্তি এবং তাপগতিবিদ্যার প্রথম সূত্রের মধ্যে গাণিতিক ও বাস্তব সংযোগটি ধাপে ধাপে বুঝিয়ে দাও। একটি ১০ কেজি ভরের বস্তুকে ৫ মিটার উঁচু থেকে ফেললে কীভাবে শক্তির রূপান্তর ঘটে?"
-            },
-            {
-                "from": "gpt",
-                "value": "পদার্থবিজ্ঞানের মৌলিক ভিত্তি হলো শক্তির রূপান্তর এবং বলের ক্রিয়ায় বস্তুর গতির পরিবর্তন।\n\n### ১. নিউটনের গতির তিনটি মৌলিক সূত্র\n1. **প্রথম সূত্র (জড়তা ও বল):** বাহ্যিক বল ব্যতীত স্থির বস্তু স্থির এবং গতিশীল বস্তু সমবেগে সরলরেখায় চলে।\n2. **দ্বিতীয় সূত্র (বল পরিমাপ):** $F = m a = m \\frac{v - u}{t}$\n3. **তৃতীয় সূত্র (প্রতিক্রিয়া):** প্রত্যেক ক্রিয়ার সমান ও বিপরীত প্রতিক্রিয়া আছে ($F_1 = -F_2$)।\n\n### ২. গাণিতিক সমাধান: ১০ কেজি ভরের বস্তু ৫ মিটার পতন\n- ভর, $m = 10\\text{ kg}$, উচ্চতা, $h = 5\\text{ m}$, $g = 9.8\\text{ ms}^{-2}$\n- **শীর্ষবিন্দুতে বিভব শক্তি:** $E_p = mgh = 10 \\times 9.8 \\times 5 = \\mathbf{490\\text{ J}}$ (গতিশক্তি $E_k = 0$)\n- **ভূমি স্পর্শের পূর্বমুহূর্তে গতিশক্তি:** $E_k = \\frac{1}{2} m v^2 = \\frac{1}{2} \\times 10 \\times (2gh) = \\mathbf{490\\text{ J}}$\n- **মাটিতে আঘাতের পর:** গতিশক্তি শব্দ, তাপ ও বস্তু বিকৃতিতে রূপান্তরিত হয়, যা তাপগতিবিদ্যার প্রথম সূত্র ($\\Delta Q = \\Delta U + \\Delta W$) নিশ্চিত করে।"
-            }
-        ]
-    })
-
-    # 4.2 Mathematics: Calculus & Dynamic Rates of Change
-    conversations.append({
-        "id": "nctb_stem_002_mathematics_calculus_optimization",
-        "topic": "NCTB Higher Mathematics: Differential Calculus & Real-World Optimization (ক্যালকুলাস ও অপটিমাইজেশন)",
+        "id": "lvl5_002_nctb_mathematics_calculus_optimization",
+        "topic": "Level 5: NCTB Mathematics: Differential Calculus & Optimization (ক্যালকুলাস ও অপটিমাইজেশন)",
         "conversations": [
             {
                 "from": "human",
@@ -300,7 +363,7 @@ def generate_all_conversations() -> List[Dict[str, Any]]:
             },
             {
                 "from": "gpt",
-                "value": "ক্যালকুলাস হলো পরিবর্তনের গণিত (Mathematics of Change)।\n\n### ১. অন্তরীকরণের জ্যামিতিক তাৎপর্য\n- কোনো ফাংশন $y = f(x)$-এর অন্তরজ $\\frac{dy}{dx}$ হলো ওই বক্ররেখার যেকোনো বিন্দুতে অঙ্কিত স্পর্শকের ঢাল (Slope of the tangent line)।\n\n### ২. চরম মান (Max/Min) নির্ণয়ের শর্তাবলী\n1. **প্রথম অন্তরজ পরীক্ষা (First Derivative Test):** চরম বিন্দুতে স্পর্শক এক্স-অক্ষের সমান্তরাল হয়, অর্থাৎ $\\frac{dy}{dx} = 0$।\n2. **দ্বিতীয় অন্তরজ পরীক্ষা (Second Derivative Test):**\n   - যদি $\\frac{d^2y}{dx^2} < 0$ হয় $\\to$ **গুরুমান (Maximum Value)**।\n   - যদি $\\frac{d^2y}{dx^2} > 0$ হয় $\\to$ **লঘুমান (Minimum Value)**।\n\n### বাস্তব প্রয়োগ:\nইঞ্জিনিয়ারিংয়ে সর্বনিম্ন খরচে সর্বোচ্চ ধারণক্ষমতার পাত্র তৈরি করতে অথবা এআই মডেলে লস মিনিমাইজ (Gradient Descent) করতে এই নীতি প্রত্যক্ষভাবে ব্যবহৃত হয়।"
+                "value": "ক্যালকুলাস হলো পরিবর্তনের গণিত (Mathematics of Change)।\n\n### ১. অন্তরীকরণের জ্যামিতিক তাৎপর্য\n- কোনো ফাংশন $y = f(x)$-এর অন্তরজ $\\frac{dy}{dx}$ হলো ওই বক্ররেখার যেকোনো বিন্দুতে অঙ্কিত স্পর্শকের ঢাল (Slope of the tangent line)।\n\n### ২. চরম মান (Max/Min) নির্ণয়ের শর্তাবলী\n1. **প্রথম অন্তরজ পরীক্ষা:** চরম বিন্দুতে স্পর্শক এক্স-অক্ষের সমান্তরাল হয়, অর্থাৎ $\\frac{dy}{dx} = 0$।\n2. **দ্বিতীয় অন্তরজ পরীক্ষা:**\n   - যদি $\\frac{d^2y}{dx^2} < 0$ হয় $\\to$ **গুরুমান (Maximum Value)**।\n   - যদি $\\frac{d^2y}{dx^2} > 0$ হয় $\\to$ **লঘুমান (Minimum Value)**।\n\n### বাস্তব প্রয়োগ:\nইঞ্জিনিয়ারিংয়ে সর্বনিম্ন খরচে সর্বোচ্চ ধারণক্ষমতার পাত্র তৈরি করতে অথবা এআই মডেলে লস মিনিমাইজ (Gradient Descent) করতে এই নীতি প্রত্যক্ষভাবে ব্যবহৃত হয়।"
             }
         ]
     })
@@ -311,9 +374,10 @@ def build_dataset_and_split(
     output_dir: str = "data",
     train_ratio: float = 0.90
 ) -> Tuple[str, str]:
-    """Generates conversations in pedagogical priority order and produces a clean 90/10 split."""
+    """Generates conversations in strict hierarchical progression and produces clean 90/10 split."""
     print("=" * 80)
-    print("THSA-2B: ORDERED SHAREGPT CONVERSATIONAL DATASET GENERATOR")
+    print("THSA-2B: FULL PROGRESSIVE CONVERSATIONAL DATASET GENERATOR")
+    print("STRUCTURED: LEVEL 1 (MICRO GREETINGS) -> LEVEL 5 (DEEP DISCUSSIONS)")
     print("=" * 80)
 
     conversations = generate_all_conversations()
@@ -323,9 +387,9 @@ def build_dataset_and_split(
     for idx, c in enumerate(conversations, 1):
         turns = len(c["conversations"])
         est_tokens = sum(len(turn["value"].split()) * 1.3 for turn in c["conversations"])
-        print(f"  [{idx:02d}] {c['id']:<50} | Turns: {turns:<2} | Est Tokens: ~{int(est_tokens):,}")
+        print(f"  [{idx:02d}] {c['id']:<52} | Turns: {turns:<2} | Est Tokens: ~{int(est_tokens):,}")
 
-    # Stratified 90/10 split preserving domain coverage
+    # Stratified 90/10 split
     n_train = max(int(total_convs * train_ratio), 1)
     if n_train == total_convs and total_convs > 1:
         n_train = total_convs - 1
