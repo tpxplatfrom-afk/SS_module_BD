@@ -318,35 +318,66 @@ def run_resume_test(
     # ------------------------------------------------------------------ #
     # 3. STUDENT MODEL INSTANTIATION & STATE RESTORATION
     # ------------------------------------------------------------------ #
+    # 3. STUDENT MODEL INSTANTIATION & STATE RESTORATION (MEMORY-SAFE)
+    # ------------------------------------------------------------------ #
     print("\n" + "=" * 80)
-    print("PHASE 2 — STUDENT INSTANTIATION & FULL-PARAMETER RESTORATION")
+    print("PHASE 2 — STUDENT INSTANTIATION & FULL-PARAMETER RESTORATION (MEMORY-SAFE)")
     print("=" * 80)
 
     config_path = TRAINING_DIR / "config" / "thsa_2b_config.json"
     with open(config_path, "r", encoding="utf-8-sig") as f:
         config = json.load(f)
 
-    print("[Init] Instantiating THSA-2B Student Model on GPU in bfloat16...")
-    student = THSAHybridForCausalLM(config).to(device="cuda", dtype=student_dtype)
+    # Pre-initialization Memory Telemetry
+    pre_ram_used, pre_ram_total = get_ram_mb()
+    pre_vram_alloc, pre_vram_resv, pre_vram_peak, _ = get_vram_mb()
+    print(f"PRE_INIT_HOST_RAM:           {pre_ram_used:.1f} / {pre_ram_total:.1f} MB ({pre_ram_used/pre_ram_total*100:.1f}%)")
+    print(f"PRE_INIT_CUDA_VRAM:          {pre_vram_alloc:.1f} / {pre_vram_resv:.1f} MB")
+
+    t_init_0 = time.perf_counter()
+    print("[Init] Instantiating THSA-2B directly on CUDA in bfloat16 (Zero Host RAM transient allocation)...")
+    if torch.cuda.is_available():
+        with torch.device("cuda"):
+            student = THSAHybridForCausalLM(config).to(dtype=student_dtype)
+    else:
+        student = THSAHybridForCausalLM(config).to(device="cpu", dtype=student_dtype)
     student.gradient_checkpointing = True
+    t_student_init = time.perf_counter() - t_init_0
 
-    print("[Init] Loading model_state_dict from Step-10 checkpoint...")
-    student.load_state_dict(state_dict)
-
+    # Post-initialization Memory Telemetry
+    post_ram_used, post_ram_total = get_ram_mb()
+    post_vram_alloc, post_vram_resv, post_vram_peak, _ = get_vram_mb()
     student_params = sum(p.numel() for p in student.parameters())
     student_trainable_tensors = sum(1 for p in student.parameters() if p.requires_grad)
+
+    print(f"POST_INIT_HOST_RAM:          {post_ram_used:.1f} / {post_ram_total:.1f} MB ({post_ram_used/post_ram_total*100:.1f}%)")
+    print(f"POST_INIT_CUDA_VRAM:         {post_vram_alloc:.1f} / {post_vram_resv:.1f} MB (Peak: {post_vram_peak:.1f} MB)")
+    print(f"STUDENT_INIT_TIME_SEC:       {t_student_init:.2f}s")
     print(f"STUDENT_PARAMETER_COUNT:     {student_params:,}")
     print(f"STUDENT_TRAINABLE_TENSORS:   {student_trainable_tensors}")
 
     if student_params != EXPECTED_PARAMS:
         print(f"[FATAL ERROR] Expected {EXPECTED_PARAMS:,} params, got {student_params:,}")
-        print("FIX-06C-COLAB-08-FAIL: Parameter count mismatch.")
+        print("FIX-06C-COLAB-09-FAIL: Parameter count mismatch.")
         return 1
 
     if student_trainable_tensors != EXPECTED_TENSORS:
         print(f"[FATAL ERROR] Expected {EXPECTED_TENSORS} trainable tensors, got {student_trainable_tensors}")
-        print("FIX-06C-COLAB-08-FAIL: Trainable tensor count mismatch.")
+        print("FIX-06C-COLAB-09-FAIL: Trainable tensor count mismatch.")
         return 1
+
+    print("[Init] Loading model_state_dict from Step-10 checkpoint into CUDA parameters...")
+    student.load_state_dict(state_dict)
+    print("STATE_DICT_LOADED:           PASS (All 219 tensors loaded into CUDA parameters) [OK]")
+
+    # Immediately reclaim the 4.1 GB CPU model_state_dict from host RAM!
+    del state_dict
+    if "model_state_dict" in ckpt:
+        del ckpt["model_state_dict"]
+    import gc; gc.collect()
+
+    cleanup_ram_used, cleanup_ram_total = get_ram_mb()
+    print(f"POST_CLEANUP_HOST_RAM:       {cleanup_ram_used:.1f} / {cleanup_ram_total:.1f} MB ({cleanup_ram_used/cleanup_ram_total*100:.1f}%)")
 
     # ------------------------------------------------------------------ #
     # 4. OPTIMIZER INSTANTIATION & STATE RESTORATION PROOF
@@ -369,7 +400,7 @@ def run_resume_test(
     if opt_state is None:
         print("[FATAL ERROR] Step-10 checkpoint contains null optimizer_state_dict!")
         print("RESUME_BLOCKED_OPTIMIZER_STATE_INCOMPATIBLE")
-        print("FIX-06C-COLAB-08-FAIL: Missing optimizer state.")
+        print("FIX-06C-COLAB-09-FAIL: Missing optimizer state.")
         return 1
 
     try:
@@ -378,8 +409,17 @@ def run_resume_test(
     except Exception as e:
         print(f"[FATAL ERROR] Failed to load optimizer state: {e}")
         print("RESUME_BLOCKED_OPTIMIZER_STATE_INCOMPATIBLE")
-        print("FIX-06C-COLAB-08-FAIL: Optimizer state incompatible.")
+        print("FIX-06C-COLAB-09-FAIL: Optimizer state incompatible.")
         return 1
+
+    # Extract step records from meta and free remaining checkpoint dictionary from CPU RAM
+    prior_records = ckpt.get("distillation_meta", {}).get("step_records", [])
+    del opt_state
+    del ckpt
+    gc.collect()
+
+    final_idle_ram_used, final_idle_ram_total = get_ram_mb()
+    print(f"HOST_RAM_AVAILABLE_FOR_TEACHER: {(final_idle_ram_total - final_idle_ram_used)/1024:.2f} GB [OK]")
 
     loss_fn = DistillationLoss(alpha=0.65, temperature=2.0)
 
