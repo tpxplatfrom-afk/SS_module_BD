@@ -263,10 +263,11 @@ def run_resume_test(
         return 1
 
     global_step = ckpt.get("global_step", -1)
-    print(f"CHECKPOINT_GLOBAL_STEP:      {global_step}")
-    if global_step != 10:
-        print(f"[FATAL ERROR] Expected global_step == 10, got {global_step}")
-        print("FIX-06C-COLAB-08-FAIL: global_step != 10.")
+    step10_global_step = global_step
+    print(f"CHECKPOINT_GLOBAL_STEP:      {step10_global_step}")
+    if step10_global_step != 10:
+        print(f"[FATAL ERROR] Expected global_step == 10, got {step10_global_step}")
+        print("FIX-06C-COLAB-10-FAIL: global_step != 10.")
         return 1
 
     for k in ("model_state_dict", "optimizer_state_dict", "config", "distillation_meta"):
@@ -308,15 +309,15 @@ def run_resume_test(
         return 1
     print(f"NaN/Inf SCAN:                CLEAN (219/219 tensors clean, 0 NaN, 0 Inf)")
 
-    meta_teacher = ckpt.get("distillation_meta", {}).get("teacher", "")
+    meta_dict = ckpt.get("distillation_meta", {})
+    meta_teacher = meta_dict.get("teacher", "")
+    prior_step_records = meta_dict.get("step_records", [])
     print(f"DISTILLATION_META_TEACHER:   {meta_teacher}")
     if AUTHORITATIVE_TEACHER not in meta_teacher:
         print(f"[WARNING] Distillation teacher ({meta_teacher}) does not match {AUTHORITATIVE_TEACHER}")
 
     print("CHECKPOINT_STEP10_VALIDATION: PASS")
 
-    # ------------------------------------------------------------------ #
-    # 3. STUDENT MODEL INSTANTIATION & STATE RESTORATION
     # ------------------------------------------------------------------ #
     # 3. STUDENT MODEL INSTANTIATION & STATE RESTORATION (MEMORY-SAFE)
     # ------------------------------------------------------------------ #
@@ -412,8 +413,7 @@ def run_resume_test(
         print("FIX-06C-COLAB-09-FAIL: Optimizer state incompatible.")
         return 1
 
-    # Extract step records from meta and free remaining checkpoint dictionary from CPU RAM
-    prior_records = ckpt.get("distillation_meta", {}).get("step_records", [])
+    # Free remaining checkpoint structures from CPU host RAM
     del opt_state
     del ckpt
     gc.collect()
@@ -473,14 +473,14 @@ def run_resume_test(
     # ------------------------------------------------------------------ #
     # 8. CONTROLLED RESUME: STEPS 11 THROUGH 30
     # ------------------------------------------------------------------ #
-    resume_start_step = ckpt.get("global_step", 10) + 1  # 11
-    resume_end_step = resume_start_step + 19             # 30
-    TOTAL_MAX_STEPS = resume_end_step                    # 30
+    resume_start_step = step10_global_step + 1  # 11
+    resume_end_step = resume_start_step + 19    # 30
+    TOTAL_MAX_STEPS = resume_end_step           # 30
 
     print("\n" + "=" * 80)
     print(f"PHASE 5 — CONTROLLED RESUME TRAINING: STEPS {resume_start_step}–{resume_end_step} (20 OPTIMIZER STEPS)")
     print("=" * 80)
-    print(f"RESUME_CHECKPOINT_GLOBAL_STEP: {ckpt.get('global_step', 10)}")
+    print(f"RESUME_CHECKPOINT_GLOBAL_STEP: {step10_global_step}")
     print(f"NEXT_OPTIMIZER_STEP:           {resume_start_step}")
     print(f"TARGET_FINAL_STEP:             {resume_end_step}")
     print(f"TOTAL_CONTINUATION_STEPS:      20")
@@ -673,8 +673,7 @@ def run_resume_test(
     tmp_path_30  = output_dir / "checkpoint_step_000030.pt.tmp"
 
     # Prior records from step 10
-    prior_records = ckpt.get("distillation_meta", {}).get("step_records", [])
-    all_30_records = prior_records + step_records
+    all_30_records = prior_step_records + step_records
 
     ckpt_30_dict = {
         "model_state_dict": student.state_dict(),
