@@ -116,7 +116,13 @@ class QwenTeacherWrapper(nn.Module):
     Wraps a Hugging Face Qwen causal LM as a frozen teacher.
     Generates teacher logits and hidden states under torch.no_grad().
     """
-    def __init__(self, model_name_or_path: str = "Qwen/Qwen2.5-7B-Instruct", device: str = "cuda", precision: str = "bfloat16"):
+    def __init__(
+        self,
+        model_name_or_path: str = "Qwen/Qwen2.5-7B-Instruct",
+        device: str = "cuda",
+        precision: str = "bfloat16",
+        max_gpu_memory_gb: Optional[float] = None
+    ):
         super().__init__()
         self.model_name = model_name_or_path
         self.device = device
@@ -132,18 +138,33 @@ class QwenTeacherWrapper(nn.Module):
             )
             
             # Load in bfloat16 or float16 to fit in GPU VRAM
-            if precision == "bfloat16" and torch.cuda.is_bf16_supported():
+            if precision == "bfloat16" and torch.cuda.is_available() and torch.cuda.is_bf16_supported():
                 dtype = torch.bfloat16
             elif precision == "float16":
                 dtype = torch.float16
             else:
                 dtype = torch.float32 if device == "cpu" else torch.float16
-                
+
+            # Compute memory map if on CUDA to prevent teacher from greedily stealing student backward headroom
+            max_memory = None
+            if device == "cuda" and torch.cuda.is_available():
+                total_gpu_gb = torch.cuda.get_device_properties(0).total_memory / (1024**3)
+                if max_gpu_memory_gb is not None:
+                    max_mem_str = f"{max_gpu_memory_gb:.1f}GB"
+                    max_memory = {0: max_mem_str, "cpu": "30GB"}
+                    print(f"[Teacher] Enforcing explicit teacher GPU memory limit: {max_mem_str} (Offload to CPU for student backward safety)")
+                elif total_gpu_gb <= 16.0:
+                    # On 15-16GB GPUs (Tesla T4, V100 16GB), allocate at most 4.0GB for teacher on GPU
+                    # to reserve 10.5GB exclusively for the 2.05B student model and activation checkpointing!
+                    max_memory = {0: "4.0GB", "cpu": "30GB"}
+                    print(f"[Teacher] Detected {total_gpu_gb:.2f} GB GPU. Capping teacher GPU memory to 4.0GB to guarantee student backward headroom.")
+
             self.teacher_model = AutoModelForCausalLM.from_pretrained(
                 model_name_or_path,
                 torch_dtype=dtype,
                 trust_remote_code=True,
-                device_map="auto" if device == "cuda" else None
+                device_map="auto" if device == "cuda" else None,
+                max_memory=max_memory
             )
             if device != "cuda":
                 self.teacher_model = self.teacher_model.to(device)
@@ -202,6 +223,7 @@ class DistillationTrainer:
         checkpoint_interval: int = 500,
         resume_checkpoint: Optional[str] = None,
         precision: str = "bfloat16",
+        max_teacher_gpu_memory_gb: Optional[float] = None,
         device: str = "cuda" if torch.cuda.is_available() else "cpu"
     ):
         self.device = device
@@ -216,6 +238,7 @@ class DistillationTrainer:
         self.checkpoint_interval = checkpoint_interval
         self.resume_checkpoint = resume_checkpoint
         self.precision = precision
+        self.max_teacher_gpu_memory_gb = max_teacher_gpu_memory_gb
         self.start_step = 0
         
         # 1. Load Student Config
@@ -256,7 +279,12 @@ class DistillationTrainer:
 
         # 4. Instantiate Teacher Model
         print("\n[Init] Instantiating Teacher Ensemble...")
-        self.teacher = QwenTeacherWrapper(teacher_model_name, device=self.device, precision=self.precision)
+        self.teacher = QwenTeacherWrapper(
+            teacher_model_name,
+            device=self.device,
+            precision=self.precision,
+            max_gpu_memory_gb=self.max_teacher_gpu_memory_gb
+        )
 
         # 5. Setup Loss, Optimizer & Scheduler
         self.loss_fn = DistillationLoss(alpha=self.alpha, temperature=self.temperature)
@@ -387,9 +415,15 @@ class DistillationTrainer:
             input_ids = torch.tensor(batch_tokens, dtype=torch.long, device=self.device)
             targets = input_ids.clone()
             
-            # Forward Passes
+            # Forward Passes: Teacher first under torch.no_grad()
+            with torch.no_grad():
+                teacher_logits = self.teacher(input_ids, student_vocab_size=vocab_size).detach()
+            
+            if self.device == "cuda":
+                torch.cuda.empty_cache()
+
+            # Forward Passes: Student
             student_logits = self.student(input_ids)
-            teacher_logits = self.teacher(input_ids, student_vocab_size=vocab_size)
             
             # Distillation Loss: CE + Soft KL
             loss = self.loss_fn(
@@ -398,6 +432,7 @@ class DistillationTrainer:
                 targets.view(-1)
             )
             loss_scaled = loss / self.grad_accum_steps
+            del teacher_logits # Immediately release teacher logits tensor
             
             # Backward Pass
             loss_scaled.backward()
