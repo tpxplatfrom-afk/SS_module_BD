@@ -67,6 +67,9 @@ static uint32_t compute_nano_crc32(const uint8_t* buffer, size_t length) {
 // Layer Pointer Routing Struct
 struct NanoLayerPointers {
     bool           is_gqa;
+    // Mixer Norm (RMSNorm FP32 [2560])
+    const float*   gamma_mixer;
+    
     // GQA Attention Weights (Ternary 2-bit packed)
     const uint8_t* w_q_packed;
     float          scale_q;
@@ -77,8 +80,16 @@ struct NanoLayerPointers {
     const uint8_t* w_out_packed;
     float          scale_out;
     
-    // State Block Weights (FP32)
-    const float*   conv_weights;
+    // State Block Weights
+    const uint8_t* w_state_in_proj;  // [5120, 2560] (Ternary 2-bit packed)
+    float          scale_state_in;
+    const float*   conv_weights;     // [4, 2560] (FP32)
+    const float*   conv_bias;        // [2560] (FP32)
+    const uint8_t* w_state_out_proj; // [2560, 2560] (Ternary 2-bit packed)
+    float          scale_state_out;
+    
+    // FFN Norm (RMSNorm FP32 [2560])
+    const float*   gamma_ffn;
     
     // FFN Weights (Ternary 2-bit packed)
     const uint8_t* w_gate_packed;
@@ -125,6 +136,10 @@ struct NanoEngineContext {
     int8_t*               ffn_act_int8;    // [6912]
     float*                ffn_out;         // [2560]
     float*                norm_out;        // [2560]
+    float*                state_in_proj_act; // [5120]
+    float*                state_conv_out;    // [2560]
+    float*                state_gated_act;   // [2560]
+    int8_t*               state_gated_int8;  // [2560]
     float*                logits;          // [65536]
     
     // Recurrent States & KV Caches (24 layers)
@@ -190,12 +205,19 @@ static NanoTokenId nano_forward_pass_single_token(
         const NanoLayerPointers& lp = ctx->layers[l];
         
         if (lp.is_gqa) {
-            // (A) GQA ATTENTION BLOCK
-            // 1. Quantize hidden state to INT8
-            float x_scale = 1.0f;
-            nano_neon_quantize_int8(ctx->h_state, ctx->h_state_int8, &x_scale, 2560);
+            // (A) COMPLETE GQA ATTENTION BLOCK
+            // 1. Mixer Pre-RMSNorm
+            if (lp.gamma_mixer) {
+                nano_neon_rmsnorm(ctx->h_state, lp.gamma_mixer, 2560, ctx->norm_out);
+            } else {
+                memcpy(ctx->norm_out, ctx->h_state, 2560 * sizeof(float));
+            }
             
-            // 2. Q, K, V Projections (Ternary GEMV)
+            // 2. Quantize normalized state to INT8
+            float x_scale = 1.0f;
+            nano_neon_quantize_int8(ctx->norm_out, ctx->h_state_int8, &x_scale, 2560);
+            
+            // 3. Q, K, V Projections (Ternary GEMV)
             float alpha_q = lp.scale_q * x_scale;
             float alpha_k = lp.scale_k * x_scale;
             float alpha_v = lp.scale_v * x_scale;
@@ -204,7 +226,7 @@ static NanoTokenId nano_forward_pass_single_token(
             nano_neon_gemv_ternary_int8(ctx->k_act, lp.w_k_packed, ctx->h_state_int8, &alpha_k, nullptr, 512, 2560);
             nano_neon_gemv_ternary_int8(ctx->v_act, lp.w_v_packed, ctx->h_state_int8, &alpha_v, nullptr, 512, 2560);
             
-            // 3. Append K, V to KV Cache at current sequence position
+            // 4. Append K, V to KV Cache at current sequence position
             size_t t_idx = current_seq_len < 10000 ? current_seq_len : 9999;
             for (size_t h = 0; h < 4; ++h) {
                 float k_head_scale = 1.0f;
@@ -218,7 +240,7 @@ static NanoTokenId nano_forward_pass_single_token(
                 ctx->kv_cache_v_scales[l][h * 10000 + t_idx] = v_head_scale;
             }
             
-            // 4. Compute GQA Attention
+            // 5. Compute GQA Attention
             nano_neon_gqa_attention_int4(
                 ctx->q_act,
                 ctx->kv_cache_k[l],
@@ -232,7 +254,7 @@ static NanoTokenId nano_forward_pass_single_token(
                 ctx->attn_out
             );
             
-            // 5. Out Projection & Residual Connection
+            // 6. Out Projection & Residual Connection
             float attn_out_scale = 1.0f;
             nano_neon_quantize_int8(ctx->attn_out, ctx->attn_out_int8, &attn_out_scale, 2560);
             float alpha_out = lp.scale_out * attn_out_scale;
@@ -243,23 +265,94 @@ static NanoTokenId nano_forward_pass_single_token(
             }
             ctx->stats.attention_execution_count++;
         } else {
-            // (B) 1D SHORT-CONV STATE BLOCK
-            nano_neon_short_conv_step(
-                ctx->h_state,
-                lp.conv_weights,
-                nullptr,
-                &ctx->state_contexts[l],
-                2560,
-                ctx->h_state_res
-            );
-            for (size_t i = 0; i < 2560; ++i) {
-                ctx->h_state[i] += ctx->h_state_res[i];
+            // (B) COMPLETE 1D SHORT-CONV STATE BLOCK
+            if (lp.w_state_in_proj && lp.w_state_out_proj) {
+                // 1. Mixer Pre-RMSNorm
+                if (lp.gamma_mixer) {
+                    nano_neon_rmsnorm(ctx->h_state, lp.gamma_mixer, 2560, ctx->norm_out);
+                } else {
+                    memcpy(ctx->norm_out, ctx->h_state, 2560 * sizeof(float));
+                }
+                
+                // 2. In-Projection (2560 -> 5120)
+                float in_norm_scale = 1.0f;
+                nano_neon_quantize_int8(ctx->norm_out, ctx->h_state_int8, &in_norm_scale, 2560);
+                float alpha_state_in = lp.scale_state_in * in_norm_scale;
+                nano_neon_gemv_ternary_int8(
+                    ctx->state_in_proj_act,
+                    lp.w_state_in_proj,
+                    ctx->h_state_int8,
+                    &alpha_state_in,
+                    nullptr,
+                    5120,
+                    2560
+                );
+                
+                // 3. Split [gate (2560), value (2560)]
+                const float* gate_stream = ctx->state_in_proj_act;
+                const float* value_stream = ctx->state_in_proj_act + 2560;
+                
+                // 4. Depthwise causal Conv1D on value_stream with conv_weights and conv_bias
+                nano_neon_short_conv_step(
+                    value_stream,
+                    lp.conv_weights,
+                    lp.conv_bias,
+                    &ctx->state_contexts[l],
+                    2560,
+                    ctx->state_conv_out
+                );
+                
+                // 5. Gated SiLU activation: silu(gate) * conv_out
+                for (size_t i = 0; i < 2560; ++i) {
+                    float g = gate_stream[i];
+                    float silu_g = g / (1.0f + expf(-g));
+                    ctx->state_gated_act[i] = silu_g * ctx->state_conv_out[i];
+                }
+                
+                // 6. Out-Projection (2560 -> 2560)
+                float gated_scale = 1.0f;
+                nano_neon_quantize_int8(ctx->state_gated_act, ctx->state_gated_int8, &gated_scale, 2560);
+                float alpha_state_out = lp.scale_state_out * gated_scale;
+                nano_neon_gemv_ternary_int8(
+                    ctx->h_state_res,
+                    lp.w_state_out_proj,
+                    ctx->state_gated_int8,
+                    &alpha_state_out,
+                    nullptr,
+                    2560,
+                    2560
+                );
+                
+                // 7. Residual Add
+                for (size_t i = 0; i < 2560; ++i) {
+                    ctx->h_state[i] += ctx->h_state_res[i];
+                }
+            } else {
+                // Backward-compatibility fallback for legacy Format 1 binaries
+                nano_neon_short_conv_step(
+                    ctx->h_state,
+                    lp.conv_weights,
+                    nullptr,
+                    &ctx->state_contexts[l],
+                    2560,
+                    ctx->h_state_res
+                );
+                for (size_t i = 0; i < 2560; ++i) {
+                    ctx->h_state[i] += ctx->h_state_res[i];
+                }
             }
         }
         
         // (C) FFN BLOCK (SwiGLU + Ternary Weights)
+        // 1. FFN Pre-RMSNorm
+        if (lp.gamma_ffn) {
+            nano_neon_rmsnorm(ctx->h_state, lp.gamma_ffn, 2560, ctx->norm_out);
+        } else {
+            memcpy(ctx->norm_out, ctx->h_state, 2560 * sizeof(float));
+        }
+        
         float ffn_in_scale = 1.0f;
-        nano_neon_quantize_int8(ctx->h_state, ctx->h_state_int8, &ffn_in_scale, 2560);
+        nano_neon_quantize_int8(ctx->norm_out, ctx->h_state_int8, &ffn_in_scale, 2560);
         
         float alpha_gate = lp.scale_gate * ffn_in_scale;
         float alpha_up   = lp.scale_up * ffn_in_scale;
@@ -549,60 +642,127 @@ NanoStatus nano_engine_init(
     }
     
     // 8. Map Real Tensor Pointers from Binary Manifest
-    // Tensor 0: Embedding Tokens
-    ctx->embed_tokens_ptr = (const int8_t*)(mmap_ptr + descriptors[0].offset);
-    ctx->embed_scale      = descriptors[0].scale;
-    
-    // Tensors 1 .. 120: 24 Backbone Layers
-    size_t curr_tensor_idx = 1;
-    for (size_t l = 0; l < 24; ++l) {
-        bool is_gqa = ((l + 1) % 3 == 0); // 24 / 8 = 3, every 3rd block is GQA
-        ctx->layers[l].is_gqa = is_gqa;
+    if (hdr->tensor_count == 219 || hdr->version == 0x0002) {
+        // Complete 219-Tensor Format 2 Mapping
+        ctx->embed_tokens_ptr = (const int8_t*)(mmap_ptr + descriptors[0].offset);
+        ctx->embed_scale      = descriptors[0].scale;
         
-        if (is_gqa) {
-            // Q, K, V, Out
-            ctx->layers[l].w_q_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
-            ctx->layers[l].scale_q      = descriptors[curr_tensor_idx].scale;
-            curr_tensor_idx++;
+        size_t curr_tensor_idx = 1;
+        for (size_t l = 0; l < 24; ++l) {
+            bool is_gqa = ((l + 1) % 3 == 0);
+            ctx->layers[l].is_gqa = is_gqa;
             
-            ctx->layers[l].w_k_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
-            ctx->layers[l].scale_k      = descriptors[curr_tensor_idx].scale;
-            curr_tensor_idx++;
+            // 1. Mixer RMSNorm
+            ctx->layers[l].gamma_mixer = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
             
-            ctx->layers[l].w_v_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
-            ctx->layers[l].scale_v      = descriptors[curr_tensor_idx].scale;
-            curr_tensor_idx++;
+            if (is_gqa) {
+                ctx->layers[l].w_q_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
+                ctx->layers[l].scale_q      = descriptors[curr_tensor_idx++].scale;
+                ctx->layers[l].w_k_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
+                ctx->layers[l].scale_k      = descriptors[curr_tensor_idx++].scale;
+                ctx->layers[l].w_v_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
+                ctx->layers[l].scale_v      = descriptors[curr_tensor_idx++].scale;
+                ctx->layers[l].w_out_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
+                ctx->layers[l].scale_out    = descriptors[curr_tensor_idx++].scale;
+                
+                ctx->layers[l].w_state_in_proj  = nullptr;
+                ctx->layers[l].scale_state_in   = 0.0f;
+                ctx->layers[l].conv_weights     = nullptr;
+                ctx->layers[l].conv_bias        = nullptr;
+                ctx->layers[l].w_state_out_proj = nullptr;
+                ctx->layers[l].scale_state_out  = 0.0f;
+            } else {
+                ctx->layers[l].w_state_in_proj  = mmap_ptr + descriptors[curr_tensor_idx].offset;
+                ctx->layers[l].scale_state_in   = descriptors[curr_tensor_idx++].scale;
+                ctx->layers[l].conv_weights     = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
+                ctx->layers[l].conv_bias        = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
+                ctx->layers[l].w_state_out_proj = mmap_ptr + descriptors[curr_tensor_idx].offset;
+                ctx->layers[l].scale_state_out  = descriptors[curr_tensor_idx++].scale;
+                
+                ctx->layers[l].w_q_packed   = nullptr;
+                ctx->layers[l].scale_q      = 0.0f;
+                ctx->layers[l].w_k_packed   = nullptr;
+                ctx->layers[l].scale_k      = 0.0f;
+                ctx->layers[l].w_v_packed   = nullptr;
+                ctx->layers[l].scale_v      = 0.0f;
+                ctx->layers[l].w_out_packed = nullptr;
+                ctx->layers[l].scale_out    = 0.0f;
+            }
             
-            ctx->layers[l].w_out_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
-            ctx->layers[l].scale_out    = descriptors[curr_tensor_idx].scale;
-            curr_tensor_idx++;
-        } else {
-            // State conv weights
-            ctx->layers[l].conv_weights = (const float*)(mmap_ptr + descriptors[curr_tensor_idx].offset);
-            curr_tensor_idx++;
+            // FFN RMSNorm
+            ctx->layers[l].gamma_ffn = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
+            
+            // FFN Projections
+            ctx->layers[l].w_gate_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
+            ctx->layers[l].scale_gate    = descriptors[curr_tensor_idx++].scale;
+            ctx->layers[l].w_up_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
+            ctx->layers[l].scale_up      = descriptors[curr_tensor_idx++].scale;
+            ctx->layers[l].w_down_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
+            ctx->layers[l].scale_down    = descriptors[curr_tensor_idx++].scale;
         }
         
-        // FFN: Gate, Up, Down
-        ctx->layers[l].w_gate_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
-        ctx->layers[l].scale_gate    = descriptors[curr_tensor_idx].scale;
-        curr_tensor_idx++;
+        // Root final norm & LM head
+        ctx->final_norm_gamma = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
+        ctx->lm_head_ptr      = (const int8_t*)(mmap_ptr + descriptors[curr_tensor_idx].offset);
+        ctx->lm_head_scale    = descriptors[curr_tensor_idx++].scale;
+    } else {
+        // Legacy 123-Descriptor Format 1 Mapping
+        ctx->embed_tokens_ptr = (const int8_t*)(mmap_ptr + descriptors[0].offset);
+        ctx->embed_scale      = descriptors[0].scale;
         
-        ctx->layers[l].w_up_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
-        ctx->layers[l].scale_up      = descriptors[curr_tensor_idx].scale;
-        curr_tensor_idx++;
+        size_t curr_tensor_idx = 1;
+        for (size_t l = 0; l < 24; ++l) {
+            bool is_gqa = ((l + 1) % 3 == 0);
+            ctx->layers[l].is_gqa = is_gqa;
+            ctx->layers[l].gamma_mixer = nullptr;
+            ctx->layers[l].gamma_ffn = nullptr;
+            
+            if (is_gqa) {
+                ctx->layers[l].w_q_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
+                ctx->layers[l].scale_q      = descriptors[curr_tensor_idx++].scale;
+                ctx->layers[l].w_k_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
+                ctx->layers[l].scale_k      = descriptors[curr_tensor_idx++].scale;
+                ctx->layers[l].w_v_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
+                ctx->layers[l].scale_v      = descriptors[curr_tensor_idx++].scale;
+                ctx->layers[l].w_out_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
+                ctx->layers[l].scale_out    = descriptors[curr_tensor_idx++].scale;
+                
+                ctx->layers[l].w_state_in_proj  = nullptr;
+                ctx->layers[l].scale_state_in   = 0.0f;
+                ctx->layers[l].conv_weights     = nullptr;
+                ctx->layers[l].conv_bias        = nullptr;
+                ctx->layers[l].w_state_out_proj = nullptr;
+                ctx->layers[l].scale_state_out  = 0.0f;
+            } else {
+                ctx->layers[l].w_state_in_proj  = nullptr;
+                ctx->layers[l].scale_state_in   = 0.0f;
+                ctx->layers[l].conv_weights     = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
+                ctx->layers[l].conv_bias        = nullptr;
+                ctx->layers[l].w_state_out_proj = nullptr;
+                ctx->layers[l].scale_state_out  = 0.0f;
+                
+                ctx->layers[l].w_q_packed   = nullptr;
+                ctx->layers[l].scale_q      = 0.0f;
+                ctx->layers[l].w_k_packed   = nullptr;
+                ctx->layers[l].scale_k      = 0.0f;
+                ctx->layers[l].w_v_packed   = nullptr;
+                ctx->layers[l].scale_v      = 0.0f;
+                ctx->layers[l].w_out_packed = nullptr;
+                ctx->layers[l].scale_out    = 0.0f;
+            }
+            
+            ctx->layers[l].w_gate_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
+            ctx->layers[l].scale_gate    = descriptors[curr_tensor_idx++].scale;
+            ctx->layers[l].w_up_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
+            ctx->layers[l].scale_up      = descriptors[curr_tensor_idx++].scale;
+            ctx->layers[l].w_down_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
+            ctx->layers[l].scale_down    = descriptors[curr_tensor_idx++].scale;
+        }
         
-        ctx->layers[l].w_down_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
-        ctx->layers[l].scale_down    = descriptors[curr_tensor_idx].scale;
-        curr_tensor_idx++;
+        ctx->final_norm_gamma = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
+        ctx->lm_head_ptr   = (const int8_t*)(mmap_ptr + descriptors[curr_tensor_idx].offset);
+        ctx->lm_head_scale = descriptors[curr_tensor_idx].scale;
     }
-    
-    // Tensor 121: Final RMSNorm Gamma
-    ctx->final_norm_gamma = (const float*)(mmap_ptr + descriptors[curr_tensor_idx].offset);
-    curr_tensor_idx++;
-    
-    // Tensor 122: LM Head Projection
-    ctx->lm_head_ptr   = (const int8_t*)(mmap_ptr + descriptors[curr_tensor_idx].offset);
-    ctx->lm_head_scale = descriptors[curr_tensor_idx].scale;
     
     // 9. Allocate Monolithic Static Memory Arena
     ctx->arena = nano_arena_create(&ctx->config);
@@ -612,21 +772,25 @@ NanoStatus nano_engine_init(
     }
     
     // 10. Allocate Working Scratchpad Buffers
-    ctx->h_state       = (float*)malloc(2560 * sizeof(float));
-    ctx->h_state_res   = (float*)malloc(2560 * sizeof(float));
-    ctx->h_state_int8  = (int8_t*)malloc(2560 * sizeof(int8_t));
-    ctx->q_act         = (float*)malloc(2560 * sizeof(float));
-    ctx->k_act         = (float*)malloc(512 * sizeof(float));
-    ctx->v_act         = (float*)malloc(512 * sizeof(float));
-    ctx->attn_out      = (float*)malloc(2560 * sizeof(float));
-    ctx->attn_out_int8 = (int8_t*)malloc(2560 * sizeof(int8_t));
-    ctx->gate_act      = (float*)malloc(6912 * sizeof(float));
-    ctx->up_act        = (float*)malloc(6912 * sizeof(float));
-    ctx->ffn_act       = (float*)malloc(6912 * sizeof(float));
-    ctx->ffn_act_int8  = (int8_t*)malloc(6912 * sizeof(int8_t));
-    ctx->ffn_out       = (float*)malloc(2560 * sizeof(float));
-    ctx->norm_out      = (float*)malloc(2560 * sizeof(float));
-    ctx->logits        = (float*)malloc(65536 * sizeof(float));
+    ctx->h_state          = (float*)malloc(2560 * sizeof(float));
+    ctx->h_state_res      = (float*)malloc(2560 * sizeof(float));
+    ctx->h_state_int8     = (int8_t*)malloc(2560 * sizeof(int8_t));
+    ctx->q_act            = (float*)malloc(2560 * sizeof(float));
+    ctx->k_act            = (float*)malloc(512 * sizeof(float));
+    ctx->v_act            = (float*)malloc(512 * sizeof(float));
+    ctx->attn_out         = (float*)malloc(2560 * sizeof(float));
+    ctx->attn_out_int8    = (int8_t*)malloc(2560 * sizeof(int8_t));
+    ctx->gate_act         = (float*)malloc(6912 * sizeof(float));
+    ctx->up_act           = (float*)malloc(6912 * sizeof(float));
+    ctx->ffn_act          = (float*)malloc(6912 * sizeof(float));
+    ctx->ffn_act_int8     = (int8_t*)malloc(6912 * sizeof(int8_t));
+    ctx->ffn_out          = (float*)malloc(2560 * sizeof(float));
+    ctx->norm_out         = (float*)malloc(2560 * sizeof(float));
+    ctx->state_in_proj_act = (float*)malloc(5120 * sizeof(float));
+    ctx->state_conv_out   = (float*)malloc(2560 * sizeof(float));
+    ctx->state_gated_act  = (float*)malloc(2560 * sizeof(float));
+    ctx->state_gated_int8 = (int8_t*)malloc(2560 * sizeof(int8_t));
+    ctx->logits           = (float*)malloc(65536 * sizeof(float));
     
     // 11. Allocate KV Cache Buffers (8 GQA Layers)
     for (size_t l = 0; l < 24; ++l) {
@@ -863,6 +1027,10 @@ void nano_engine_free(NanoEngineContext* ctx) {
     if (ctx->ffn_act_int8) free(ctx->ffn_act_int8);
     if (ctx->ffn_out) free(ctx->ffn_out);
     if (ctx->norm_out) free(ctx->norm_out);
+    if (ctx->state_in_proj_act) free(ctx->state_in_proj_act);
+    if (ctx->state_conv_out) free(ctx->state_conv_out);
+    if (ctx->state_gated_act) free(ctx->state_gated_act);
+    if (ctx->state_gated_int8) free(ctx->state_gated_int8);
     if (ctx->logits) free(ctx->logits);
     
     // Free KV cache arrays

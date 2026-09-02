@@ -136,6 +136,29 @@ NANO_API NanoEngineState nano_engine_get_state(const NanoEngineContext* ctx);
  */
 NANO_API void nano_engine_free(NanoEngineContext* ctx);
 
+/**
+ * @brief Encode text into token IDs using active context tokenizer.
+ */
+NANO_API NanoStatus nano_engine_encode(
+    const NanoEngineContext* ctx,
+    const char* text,
+    size_t text_len,
+    NanoTokenId* out_tokens,
+    size_t max_tokens,
+    size_t* out_num_tokens
+);
+
+/**
+ * @brief Decode single token ID into string using active context tokenizer.
+ */
+NANO_API NanoStatus nano_engine_decode_token(
+    const NanoEngineContext* ctx,
+    NanoTokenId token_id,
+    char* out_buf,
+    size_t buf_capacity,
+    size_t* out_bytes_written
+);
+
 #ifdef __cplusplus
 }
 #endif
