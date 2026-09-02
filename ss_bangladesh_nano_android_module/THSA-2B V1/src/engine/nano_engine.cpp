@@ -652,53 +652,58 @@ NanoStatus nano_engine_init(
             bool is_gqa = ((l + 1) % 3 == 0);
             ctx->layers[l].is_gqa = is_gqa;
             
-            // 1. Mixer RMSNorm
-            ctx->layers[l].gamma_mixer = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
+        if (is_gqa) {
+            // GQA: q, k, v, out, mixer_norm
+            ctx->layers[l].w_q_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
+            ctx->layers[l].scale_q      = descriptors[curr_tensor_idx++].scale;
+            ctx->layers[l].w_k_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
+            ctx->layers[l].scale_k      = descriptors[curr_tensor_idx++].scale;
+            ctx->layers[l].w_v_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
+            ctx->layers[l].scale_v      = descriptors[curr_tensor_idx++].scale;
+            ctx->layers[l].w_out_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
+            ctx->layers[l].scale_out    = descriptors[curr_tensor_idx++].scale;
             
-            if (is_gqa) {
-                ctx->layers[l].w_q_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
-                ctx->layers[l].scale_q      = descriptors[curr_tensor_idx++].scale;
-                ctx->layers[l].w_k_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
-                ctx->layers[l].scale_k      = descriptors[curr_tensor_idx++].scale;
-                ctx->layers[l].w_v_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
-                ctx->layers[l].scale_v      = descriptors[curr_tensor_idx++].scale;
-                ctx->layers[l].w_out_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
-                ctx->layers[l].scale_out    = descriptors[curr_tensor_idx++].scale;
-                
-                ctx->layers[l].w_state_in_proj  = nullptr;
-                ctx->layers[l].scale_state_in   = 0.0f;
-                ctx->layers[l].conv_weights     = nullptr;
-                ctx->layers[l].conv_bias        = nullptr;
-                ctx->layers[l].w_state_out_proj = nullptr;
-                ctx->layers[l].scale_state_out  = 0.0f;
-            } else {
-                ctx->layers[l].w_state_in_proj  = mmap_ptr + descriptors[curr_tensor_idx].offset;
-                ctx->layers[l].scale_state_in   = descriptors[curr_tensor_idx++].scale;
-                ctx->layers[l].conv_weights     = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
-                ctx->layers[l].conv_bias        = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
-                ctx->layers[l].w_state_out_proj = mmap_ptr + descriptors[curr_tensor_idx].offset;
-                ctx->layers[l].scale_state_out  = descriptors[curr_tensor_idx++].scale;
-                
-                ctx->layers[l].w_q_packed   = nullptr;
-                ctx->layers[l].scale_q      = 0.0f;
-                ctx->layers[l].w_k_packed   = nullptr;
-                ctx->layers[l].scale_k      = 0.0f;
-                ctx->layers[l].w_v_packed   = nullptr;
-                ctx->layers[l].scale_v      = 0.0f;
-                ctx->layers[l].w_out_packed = nullptr;
-                ctx->layers[l].scale_out    = 0.0f;
-            }
+            // Mixer RMSNorm
+            ctx->layers[l].gamma_mixer  = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
             
-            // FFN RMSNorm
-            ctx->layers[l].gamma_ffn = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
+            ctx->layers[l].w_state_in_proj  = nullptr;
+            ctx->layers[l].scale_state_in   = 0.0f;
+            ctx->layers[l].conv_weights     = nullptr;
+            ctx->layers[l].conv_bias        = nullptr;
+            ctx->layers[l].w_state_out_proj = nullptr;
+            ctx->layers[l].scale_state_out  = 0.0f;
+        } else {
+            // State: conv_weights, conv_bias, in_proj, out_proj, mixer_norm
+            ctx->layers[l].conv_weights     = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
+            ctx->layers[l].conv_bias        = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
+            ctx->layers[l].w_state_in_proj  = mmap_ptr + descriptors[curr_tensor_idx].offset;
+            ctx->layers[l].scale_state_in   = descriptors[curr_tensor_idx++].scale;
+            ctx->layers[l].w_state_out_proj = mmap_ptr + descriptors[curr_tensor_idx].offset;
+            ctx->layers[l].scale_state_out  = descriptors[curr_tensor_idx++].scale;
             
-            // FFN Projections
-            ctx->layers[l].w_gate_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
-            ctx->layers[l].scale_gate    = descriptors[curr_tensor_idx++].scale;
-            ctx->layers[l].w_up_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
-            ctx->layers[l].scale_up      = descriptors[curr_tensor_idx++].scale;
-            ctx->layers[l].w_down_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
-            ctx->layers[l].scale_down    = descriptors[curr_tensor_idx++].scale;
+            // Mixer RMSNorm
+            ctx->layers[l].gamma_mixer      = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
+            
+            ctx->layers[l].w_q_packed   = nullptr;
+            ctx->layers[l].scale_q      = 0.0f;
+            ctx->layers[l].w_k_packed   = nullptr;
+            ctx->layers[l].scale_k      = 0.0f;
+            ctx->layers[l].w_v_packed   = nullptr;
+            ctx->layers[l].scale_v      = 0.0f;
+            ctx->layers[l].w_out_packed = nullptr;
+            ctx->layers[l].scale_out    = 0.0f;
+        }
+        
+        // FFN: gate, up, down, ffn_norm
+        ctx->layers[l].w_gate_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
+        ctx->layers[l].scale_gate    = descriptors[curr_tensor_idx++].scale;
+        ctx->layers[l].w_up_packed   = mmap_ptr + descriptors[curr_tensor_idx].offset;
+        ctx->layers[l].scale_up      = descriptors[curr_tensor_idx++].scale;
+        ctx->layers[l].w_down_packed = mmap_ptr + descriptors[curr_tensor_idx].offset;
+        ctx->layers[l].scale_down    = descriptors[curr_tensor_idx++].scale;
+        
+        // FFN RMSNorm
+        ctx->layers[l].gamma_ffn     = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
         }
         
         // Root final norm & LM head

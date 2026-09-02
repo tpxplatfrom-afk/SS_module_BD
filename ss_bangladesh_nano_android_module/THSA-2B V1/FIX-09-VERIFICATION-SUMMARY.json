@@ -1,0 +1,67 @@
+{
+  "fix_id": "FIX-09-219-TENSOR-REPRESENTATION-FORENSIC",
+  "verdict": "FIX-09-PASS-READY-FOR-NANO-EXPORT",
+  "architecture": {
+    "model_id": "THSA-2B-V1-PRODUCTION",
+    "parameters": 2050296320,
+    "trainable_tensors": 219,
+    "total_blocks": 24,
+    "state_blocks": 16,
+    "gqa_blocks": 8,
+    "d_model": 2560,
+    "d_ffn": 6912,
+    "vocab_size": 65536
+  },
+  "quantization_categories": {
+    "fp32": {
+      "count": 81,
+      "parameters": 330240,
+      "raw_bytes": 1320960
+    },
+    "ternary": {
+      "count": 136,
+      "parameters": 1714421760,
+      "raw_bytes": 428605440
+    },
+    "int8": {
+      "count": 2,
+      "parameters": 335544320,
+      "raw_bytes": 335544320
+    },
+    "total": {
+      "count": 219,
+      "parameters": 2050296320,
+      "raw_bytes": 765470720
+    }
+  },
+  "binary_format": {
+    "version": 2,
+    "header_bytes": 64,
+    "descriptor_table_bytes": 7008,
+    "pre_payload_padding_bytes": 32,
+    "first_payload_offset": 7104,
+    "total_file_bytes": 765477824,
+    "total_size_mib": 730.0165405273438,
+    "total_size_mb": 765.477824,
+    "alignment_rule": "64-byte SIMD boundary",
+    "unaligned_tensors": 0
+  },
+  "checkpoint": {
+    "authoritative_step": 30,
+    "expected_sha256": "0d8d3f31830fd682324708795ab0ebd91b7213a0f28027290216323892f0e667",
+    "expected_size_bytes": 4106953961,
+    "manifest_sha256": "45f6c4c3478825ec6b7d8274ec9d861aa86d660ef3b13a3d67be9856e8fe1d75",
+    "immutability": "PASS"
+  },
+  "numerical_validation": {
+    "state_block_cosine": 1.0000001192092896,
+    "gqa_block_cosine": 1.0,
+    "ffn_block_cosine": 1.0,
+    "multi_block_cosine": 1.0000001192092896,
+    "status": "PASS"
+  },
+  "production_export": {
+    "model_nano_generated": false,
+    "status": "NOT_GENERATED"
+  }
+}

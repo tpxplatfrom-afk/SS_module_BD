@@ -122,7 +122,7 @@ def export_model_to_nano(
     embed_bytes, embed_scale = quantize_int8_tensor(embed_t)
     tensors.append(("embed_tokens", NANO_QUANT_INT8, (vocab_size, d_model), embed_scale, embed_bytes))
     
-    # (B) Backbone Layers (Ternary FFN + State/GQA)
+    # (B) Backbone Layers (9 tensors per layer * 24 layers = 216 tensors)
     for l_idx in range(total_blocks):
         is_gqa = ((l_idx + 1) % (total_blocks // gqa_blocks) == 0)
         
@@ -142,8 +142,18 @@ def export_model_to_nano(
                     raise ValueError(f"[FATAL ERROR] Shape mismatch for '{key}': expected [{out_dim}, {in_dim}], got {list(proj_t.shape)}")
                 data_bytes, scale = pack_ternary_tensor(proj_t)
                 tensors.append((f"layer_{l_idx}_attn_{proj_name}", NANO_QUANT_TERNARY_2BIT, (out_dim, in_dim), scale, data_bytes))
+            
+            # GQA Mixer RMSNorm (FP32)
+            mixer_norm_key = f"layers.{l_idx}.mixer.norm.weight"
+            if mixer_norm_key not in state_dict:
+                raise KeyError(f"[FATAL ERROR] Missing required mixer norm tensor '{mixer_norm_key}' in checkpoint.")
+            norm_t = state_dict[mixer_norm_key].detach().cpu().float().view(-1)
+            if norm_t.numel() != d_model:
+                raise ValueError(f"[FATAL ERROR] Shape mismatch for '{mixer_norm_key}': expected {d_model}, got {norm_t.numel()}")
+            norm_bytes = struct.pack(f"<{len(norm_t)}f", *norm_t.tolist())
+            tensors.append((f"layer_{l_idx}_mixer_norm", NANO_QUANT_FP32, (d_model,), 1.0, norm_bytes))
         else:
-            # 1D Short-Conv State weights (FP32)
+            # State Conv1D Weights (FP32)
             conv_key = f"layers.{l_idx}.mixer.conv1d.weight"
             if conv_key not in state_dict:
                 raise KeyError(f"[FATAL ERROR] Missing required state conv tensor '{conv_key}' in checkpoint.")
@@ -153,6 +163,46 @@ def export_model_to_nano(
                 raise ValueError(f"[FATAL ERROR] Shape mismatch for '{conv_key}': expected {expected_numel} elements, got {conv_t.numel()}")
             conv_bytes = struct.pack(f"<{len(conv_t)}f", *conv_t.tolist())
             tensors.append((f"layer_{l_idx}_state_conv_w", NANO_QUANT_FP32, (4, d_model), 1.0, conv_bytes))
+            
+            # State Conv1D Bias (FP32)
+            bias_key = f"layers.{l_idx}.mixer.conv1d.bias"
+            if bias_key not in state_dict:
+                raise KeyError(f"[FATAL ERROR] Missing required state conv bias tensor '{bias_key}' in checkpoint.")
+            bias_t = state_dict[bias_key].detach().cpu().float().view(-1)
+            if bias_t.numel() != d_model:
+                raise ValueError(f"[FATAL ERROR] Shape mismatch for '{bias_key}': expected {d_model}, got {bias_t.numel()}")
+            bias_bytes = struct.pack(f"<{len(bias_t)}f", *bias_t.tolist())
+            tensors.append((f"layer_{l_idx}_state_conv_b", NANO_QUANT_FP32, (d_model,), 1.0, bias_bytes))
+            
+            # State In-Projection (Ternary 2-bit, [5120, 2560])
+            in_key = f"layers.{l_idx}.mixer.in_proj.weight"
+            if in_key not in state_dict:
+                raise KeyError(f"[FATAL ERROR] Missing required state in_proj tensor '{in_key}' in checkpoint.")
+            in_t = state_dict[in_key]
+            if list(in_t.shape) != [2 * d_model, d_model]:
+                raise ValueError(f"[FATAL ERROR] Shape mismatch for '{in_key}': expected [{2 * d_model}, {d_model}], got {list(in_t.shape)}")
+            in_bytes, in_scale = pack_ternary_tensor(in_t)
+            tensors.append((f"layer_{l_idx}_state_in_proj", NANO_QUANT_TERNARY_2BIT, (2 * d_model, d_model), in_scale, in_bytes))
+            
+            # State Out-Projection (Ternary 2-bit, [2560, 2560])
+            out_key = f"layers.{l_idx}.mixer.out_proj.weight"
+            if out_key not in state_dict:
+                raise KeyError(f"[FATAL ERROR] Missing required state out_proj tensor '{out_key}' in checkpoint.")
+            out_t = state_dict[out_key]
+            if list(out_t.shape) != [d_model, d_model]:
+                raise ValueError(f"[FATAL ERROR] Shape mismatch for '{out_key}': expected [{d_model}, {d_model}], got {list(out_t.shape)}")
+            out_bytes, out_scale = pack_ternary_tensor(out_t)
+            tensors.append((f"layer_{l_idx}_state_out_proj", NANO_QUANT_TERNARY_2BIT, (d_model, d_model), out_scale, out_bytes))
+            
+            # State Mixer RMSNorm (FP32)
+            mixer_norm_key = f"layers.{l_idx}.mixer.norm.weight"
+            if mixer_norm_key not in state_dict:
+                raise KeyError(f"[FATAL ERROR] Missing required mixer norm tensor '{mixer_norm_key}' in checkpoint.")
+            norm_t = state_dict[mixer_norm_key].detach().cpu().float().view(-1)
+            if norm_t.numel() != d_model:
+                raise ValueError(f"[FATAL ERROR] Shape mismatch for '{mixer_norm_key}': expected {d_model}, got {norm_t.numel()}")
+            norm_bytes = struct.pack(f"<{len(norm_t)}f", *norm_t.tolist())
+            tensors.append((f"layer_{l_idx}_mixer_norm", NANO_QUANT_FP32, (d_model,), 1.0, norm_bytes))
             
         # FFN Weights (Gate, Up, Down)
         for ffn_name, out_dim, in_dim in [
@@ -168,6 +218,16 @@ def export_model_to_nano(
                 raise ValueError(f"[FATAL ERROR] Shape mismatch for '{key}': expected [{out_dim}, {in_dim}], got {list(ffn_t.shape)}")
             data_bytes, scale = pack_ternary_tensor(ffn_t)
             tensors.append((f"layer_{l_idx}_ffn_{ffn_name}", NANO_QUANT_TERNARY_2BIT, (out_dim, in_dim), scale, data_bytes))
+            
+        # FFN RMSNorm (FP32)
+        ffn_norm_key = f"layers.{l_idx}.ffn.norm.weight"
+        if ffn_norm_key not in state_dict:
+            raise KeyError(f"[FATAL ERROR] Missing required FFN norm tensor '{ffn_norm_key}' in checkpoint.")
+        fn_t = state_dict[ffn_norm_key].detach().cpu().float().view(-1)
+        if fn_t.numel() != d_model:
+            raise ValueError(f"[FATAL ERROR] Shape mismatch for '{ffn_norm_key}': expected {d_model}, got {fn_t.numel()}")
+        fn_bytes = struct.pack(f"<{len(fn_t)}f", *fn_t.tolist())
+        tensors.append((f"layer_{l_idx}_ffn_norm", NANO_QUANT_FP32, (d_model,), 1.0, fn_bytes))
             
     # (C) Final RMSNorm Gamma (FP32)
     norm_key = "final_norm.weight"
@@ -224,7 +284,7 @@ def export_model_to_nano(
     header = struct.pack(
         "<4sHHHHIIHHHHI I I I 20s",
         MAGIC_NANO,
-        config.get("format_version", 1),
+        config.get("format_version", 2),
         total_blocks,
         state_blocks,
         gqa_blocks,
