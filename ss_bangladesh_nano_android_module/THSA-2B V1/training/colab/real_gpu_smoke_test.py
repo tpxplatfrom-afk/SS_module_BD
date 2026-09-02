@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
-THSA-2B V1: Real GPU Smoke Test Script
-======================================
+THSA-2B V1: Real GPU 10-Step Smoke Test Script
+==============================================
 Executes a verified 10-step smoke training run on a physical CUDA GPU:
-  1. Instantiates production THSA-2B student model on CUDA
+  1. Instantiates production THSA-2B student model (2,050,296,320 parameters)
   2. Loads teacher model under torch.no_grad()
   3. Executes 10 real forward passes, backward passes, and optimizer updates
-  4. Saves and reloads smoke checkpoint
-  5. Verifies that student parameters demonstrably updated from initialization
+  4. Saves checkpoint to Google Drive or output directory
+  5. Reloads checkpoint into fresh model and verifies numerical output match
+  6. Verifies that student parameters demonstrably updated from initialization
 """
 
 import os
@@ -30,7 +31,7 @@ from distillation.qwen_teacher_distillation import DistillationTrainer
 
 def run_smoke_test():
     print("=" * 80)
-    print("THSA-2B V1: REAL GPU SMOKE TEST (10 STEPS)")
+    print("THSA-2B V1: REAL GPU 10-STEP SMOKE TEST")
     print("=" * 80)
 
     if not torch.cuda.is_available():
@@ -40,12 +41,20 @@ def run_smoke_test():
 
     config_path = str(TRAINING_DIR / "config" / "thsa_2b_config.json")
     corpus_path = str(MODULE_ROOT / "data" / "processed" / "clean_pretrain_corpus.txt")
-    smoke_output_dir = str(TRAINING_DIR / "checkpoints" / "smoke_test")
+    
+    # Check for Google Drive mount, otherwise use local checkpoints dir
+    drive_dir = Path("/content/drive/MyDrive/THSA-2B/checkpoints")
+    smoke_output_dir = str(drive_dir) if drive_dir.parent.exists() else str(TRAINING_DIR / "checkpoints" / "smoke_test")
 
-    # Use Qwen2.5-0.5B or 7B depending on available VRAM for quick smoke validation
     vram_gb = torch.cuda.get_device_properties(0).total_memory / (1024**3)
-    teacher_name = "Qwen/Qwen2.5-7B-Instruct" if vram_gb >= 24.0 else "Qwen/Qwen2.5-0.5B-Instruct"
-    print(f"[Smoke Test] Detected {vram_gb:.2f} GB VRAM. Using Teacher: {teacher_name}")
+    bf16_supported = torch.cuda.is_bf16_supported()
+    precision = "bfloat16" if bf16_supported else "float16"
+    teacher_name = "Qwen/Qwen2.5-7B-Instruct" if vram_gb >= 24.0 else "Qwen/Qwen2.5-1.5B-Instruct"
+
+    print(f"Device:              {torch.cuda.get_device_name(0)} ({vram_gb:.2f} GB VRAM)")
+    print(f"Precision:           {precision}")
+    print(f"Teacher Model:       {teacher_name}")
+    print(f"Output Directory:    {smoke_output_dir}")
 
     try:
         trainer = DistillationTrainer(
@@ -58,7 +67,7 @@ def run_smoke_test():
             grad_accum_steps=2,
             max_steps=10,
             checkpoint_interval=5,
-            precision="bfloat16" if torch.cuda.is_bf16_supported() else "float16",
+            precision=precision,
             device="cuda"
         )
         
@@ -71,9 +80,9 @@ def run_smoke_test():
         # Verify weights updated
         post_param_sample = trainer.student.lm_head.weight[:5, :5].clone().detach().cpu()
         delta = (post_param_sample - initial_param_sample).abs().sum().item()
-        print(f"\n[Validation] Parameter Update L1 Delta: {delta:.6f}")
+        print(f"\n[Validation] Parameter Update L1 Delta: {delta:.8f}")
 
-        if delta == 0.0:
+        if delta <= 0.0:
             print("[FATAL ERROR] Model parameters did NOT change after optimizer steps!")
             print("COLAB_REAL_GPU_SMOKE_BLOCKED")
             return 1

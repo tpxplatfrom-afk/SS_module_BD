@@ -44,10 +44,10 @@ class GQAttentionBlock(nn.Module):
         
         # Causal Attention Matrix
         scores = torch.matmul(q, k.transpose(-1, -2)) * self.scale
-        causal_mask = torch.triu(torch.full((S, S), float('-inf'), device=x.device), diagonal=1)
+        causal_mask = torch.triu(torch.full((S, S), float('-inf'), device=x.device, dtype=q.dtype), diagonal=1)
         scores = scores + causal_mask.unsqueeze(0).unsqueeze(0)
         
-        attn_weights = F.softmax(scores, dim=-1)
+        attn_weights = F.softmax(scores, dim=-1, dtype=torch.float32).to(dtype=v.dtype)
         context = torch.matmul(attn_weights, v).transpose(1, 2).contiguous().view(B, S, -1)
         
         y = self.out_proj(context)

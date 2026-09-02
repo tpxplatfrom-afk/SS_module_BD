@@ -3,7 +3,7 @@
 THSA-2B V1: Google Colab Preflight Verification Script
 ======================================================
 Validates all runtime prerequisites before initiating 2B training on GPU:
-  1. CUDA GPU detection & minimum VRAM check
+  1. CUDA GPU detection, VRAM check, CUDA version, and BF16/FP16 capability
   2. Architecture instantiation (2,050,296,320 parameters)
   3. SentencePiece tokenizer verification (65,536 vocabulary)
   4. Dataset corpus availability
@@ -39,14 +39,25 @@ def run_preflight():
     cuda_avail = torch.cuda.is_available()
     gpu_name = torch.cuda.get_device_name(0) if cuda_avail else "NONE"
     gpu_vram_gb = torch.cuda.get_device_properties(0).total_memory / (1024**3) if cuda_avail else 0.0
+    cuda_version = torch.version.cuda if cuda_avail else "N/A"
     bf16_supported = torch.cuda.is_bf16_supported() if cuda_avail else False
+    fp16_supported = cuda_avail
     
-    print(f"GPU:                 {gpu_name}")
+    print(f"GPU Name:            {gpu_name}")
     print(f"CUDA Available:      {cuda_avail}")
-    print(f"VRAM:                {gpu_vram_gb:.2f} GB")
-    print(f"BF16 Supported:      {bf16_supported}")
+    print(f"CUDA Version:        {cuda_version}")
+    print(f"GPU Total VRAM:      {gpu_vram_gb:.2f} GB")
     print(f"PyTorch Version:     {torch.__version__}")
     print(f"Python Version:      {sys.version.split()[0]}")
+    print(f"BF16 Supported:      {bf16_supported}")
+    print(f"FP16 Supported:      {fp16_supported}")
+    
+    if bf16_supported:
+        print("Precision Policy:    bfloat16 (Native Ampere / Ada / Hopper Tensor Core support)")
+    elif fp16_supported:
+        print("Precision Policy:    float16 (Native Turing T4 / Volta V100 Tensor Core support)")
+    else:
+        print("Precision Policy:    float32 (CPU Fallback)")
 
     if not cuda_avail:
         preflight_passed = False
@@ -58,11 +69,9 @@ def run_preflight():
     try:
         import transformers
         import sentencepiece
-        import peft
         import datasets
         print(f"Transformers:        {transformers.__version__}")
         print(f"SentencePiece:       {sentencepiece.__version__}")
-        print(f"PEFT:                {peft.__version__}")
         print(f"Datasets:            {datasets.__version__}")
     except ImportError as e:
         preflight_passed = False
