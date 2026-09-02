@@ -1,6 +1,6 @@
-﻿{
+{
   "model_id": "THSA-2B-V1-PRODUCTION",
-  "format_version": 1,
+  "format_version": 2,
   "total_blocks": 24,
   "state_blocks": 16,
   "gqa_blocks": 8,
