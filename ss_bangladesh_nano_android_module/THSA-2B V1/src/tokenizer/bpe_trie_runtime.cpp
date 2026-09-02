@@ -4,6 +4,7 @@
  * Features longest-prefix matching, byte-fallback, and sub-8MB memory footprint.
  */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>

@@ -7,7 +7,8 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Optimization & Compiler Flags
 if(MSVC)
-    add_compile_options(/O2 /W4 /utf-8)
+    add_compile_options(/W3 /utf-8)
+    add_compile_definitions(_CRT_SECURE_NO_WARNINGS NANO_BUILD_DLL)
 else()
     add_compile_options(-O3 -Wall -Wextra -Wpedantic)
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64" OR CMAKE_SYSTEM_PROCESSOR MATCHES "arm64" OR ANDROID_ABI MATCHES "arm64-v8a")
@@ -36,6 +37,14 @@ set(NANO_ENGINE_SRCS
 # Static Library Target
 add_library(nano_engine_static STATIC ${NANO_ENGINE_SRCS})
 
+# Shared Library Target (Android JNI or Host C API)
+if(ANDROID)
+    add_library(nano_engine SHARED ${NANO_ENGINE_SRCS} jni/nano_engine_jni.cpp)
+    target_link_libraries(nano_engine log)
+else()
+    add_library(nano_engine SHARED ${NANO_ENGINE_SRCS})
+endif()
+
 # Unit Test Executables
 add_executable(test_neon_kernels
     tests/unit/test_neon_kernels.cpp
@@ -51,6 +60,12 @@ add_executable(test_neural_forward_pass
     tests/unit/test_neural_forward_pass.cpp
     ${NANO_ENGINE_SRCS}
 )
+
+if(ANDROID)
+    target_link_libraries(test_neon_kernels log)
+    target_link_libraries(test_native_model_loader log)
+    target_link_libraries(test_neural_forward_pass log)
+endif()
 
 enable_testing()
 add_test(NAME TestNeonKernels COMMAND test_neon_kernels)
