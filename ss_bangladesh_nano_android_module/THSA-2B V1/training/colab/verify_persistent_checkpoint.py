@@ -51,7 +51,7 @@ def verify_fresh_runtime(checkpoint_path_str: str, manifest_path_str: str, check
             print("  drive.mount('/content/drive')")
             print("\nPERSISTENT_CHECKPOINT_VERIFICATION_FAIL: DRIVE_NOT_MOUNTED")
             return 1
-        print("DRIVE_MOUNT:              /content/drive/MyDrive mounted and accessible ✓")
+        print("DRIVE_MOUNT:              /content/drive/MyDrive mounted and accessible [OK]")
 
     # 2. Locate Checkpoint
     ckpt_path = Path(checkpoint_path_str)
@@ -82,36 +82,57 @@ def verify_fresh_runtime(checkpoint_path_str: str, manifest_path_str: str, check
     manifest_path = Path(manifest_path_str) if manifest_path_str else ckpt_path.parent / "checkpoint_step_000010.manifest.json"
     if not manifest_path.exists():
         print(f"[FATAL ERROR] Manifest file missing at: {manifest_path}")
+        print("To generate or repair the persistent manifest for the existing checkpoint, run:")
+        print("  python -u training/colab/generate_persistent_manifest.py")
         print("\nPERSISTENT_CHECKPOINT_VERIFICATION_FAIL: MANIFEST_MISSING")
         return 1
 
     with open(manifest_path, "r", encoding="utf-8") as f:
         manifest = json.load(f)
 
-    manifest_sha = manifest.get("sha256")
-    manifest_bytes = manifest.get("byte_size")
+    manifest_ckpt_sha = manifest.get("checkpoint_sha256") or manifest.get("sha256")
+    manifest_ckpt_bytes = manifest.get("checkpoint_byte_size") or manifest.get("byte_size")
     manifest_teacher = manifest.get("teacher")
     manifest_step = manifest.get("global_step")
+    manifest_params = manifest.get("student_parameter_count") or manifest.get("student_parameters")
+    manifest_tensors = manifest.get("state_dict_tensor_count") or manifest.get("student_tensors")
+
+    manifest_file_sha = compute_sha256(manifest_path)
+    manifest_file_size = os.path.getsize(manifest_path)
 
     print(f"MANIFEST_PATH:            {manifest_path}")
-    print(f"MANIFEST_SHA256:          {manifest_sha}")
-    print(f"MANIFEST_BYTE_SIZE:       {manifest_bytes:,} bytes")
+    print(f"MANIFEST_FILE_SHA256:     {manifest_file_sha}")
+    print(f"MANIFEST_FILE_BYTE_SIZE:  {manifest_file_size} bytes")
+    print(f"MANIFEST_CHECKPOINT_SHA:  {manifest_ckpt_sha}")
+    print(f"MANIFEST_CHECKPOINT_BYTES:{manifest_ckpt_bytes:,} bytes" if manifest_ckpt_bytes else "MANIFEST_CHECKPOINT_BYTES: None")
     print(f"MANIFEST_TEACHER:         {manifest_teacher}")
     print(f"MANIFEST_GLOBAL_STEP:     {manifest_step}")
+    print(f"MANIFEST_PARAMETERS:      {manifest_params:,}" if manifest_params else "MANIFEST_PARAMETERS: None")
+    print(f"MANIFEST_TENSORS:         {manifest_tensors}")
 
-    if manifest_sha != actual_sha256:
-        print(f"[FATAL ERROR] Checkpoint SHA-256 mismatch! Manifest={manifest_sha}, Actual={actual_sha256}")
-        print("\nPERSISTENT_CHECKPOINT_VERIFICATION_FAIL: MANIFEST_SHA256_MISMATCH")
+    if manifest_ckpt_sha != actual_sha256:
+        print(f"[FATAL ERROR] Checkpoint SHA-256 mismatch! Manifest={manifest_ckpt_sha}, Actual={actual_sha256}")
+        print("\nPERSISTENT_CHECKPOINT_VERIFICATION_FAIL: MANIFEST_CHECKPOINT_SHA256_MISMATCH")
         return 1
 
-    if manifest_bytes != byte_size:
-        print(f"[FATAL ERROR] Checkpoint byte size mismatch! Manifest={manifest_bytes}, Actual={byte_size}")
-        print("\nPERSISTENT_CHECKPOINT_VERIFICATION_FAIL: MANIFEST_BYTE_SIZE_MISMATCH")
+    if manifest_ckpt_bytes != byte_size:
+        print(f"[FATAL ERROR] Checkpoint byte size mismatch! Manifest={manifest_ckpt_bytes}, Actual={byte_size}")
+        print("\nPERSISTENT_CHECKPOINT_VERIFICATION_FAIL: MANIFEST_CHECKPOINT_BYTE_SIZE_MISMATCH")
         return 1
 
     if manifest_step != 10:
         print(f"[FATAL ERROR] Manifest global_step is {manifest_step} (expected 10)")
         print("\nPERSISTENT_CHECKPOINT_VERIFICATION_FAIL: MANIFEST_STEP_MISMATCH")
+        return 1
+
+    if manifest_params != EXPECTED_PARAMS:
+        print(f"[FATAL ERROR] Manifest student parameters is {manifest_params} (expected {EXPECTED_PARAMS})")
+        print("\nPERSISTENT_CHECKPOINT_VERIFICATION_FAIL: MANIFEST_PARAM_COUNT_MISMATCH")
+        return 1
+
+    if manifest_tensors != EXPECTED_TENSORS:
+        print(f"[FATAL ERROR] Manifest state dict tensors is {manifest_tensors} (expected {EXPECTED_TENSORS})")
+        print("\nPERSISTENT_CHECKPOINT_VERIFICATION_FAIL: MANIFEST_TENSOR_COUNT_MISMATCH")
         return 1
 
     # 5. Load Checkpoint Payload (CPU only)
@@ -136,7 +157,7 @@ def verify_fresh_runtime(checkpoint_path_str: str, manifest_path_str: str, check
             print(f"[FATAL ERROR] Checkpoint payload missing key: {k}")
             print("\nPERSISTENT_CHECKPOINT_VERIFICATION_FAIL: MISSING_CHECKPOINT_KEYS")
             return 1
-    print("CHECKPOINT_KEYS:          model_state_dict ✓  optimizer_state_dict ✓  config ✓  distillation_meta ✓")
+    print("CHECKPOINT_KEYS:          model_state_dict [OK]  optimizer_state_dict [OK]  config [OK]  distillation_meta [OK]")
 
     # 6. Parameter & Tensor Count Verification
     state_dict = ckpt["model_state_dict"]

@@ -542,7 +542,7 @@ def main(
             print(f"[FATAL] Missing required key '{k}' in checkpoint payload.")
             print("FIX-06C-COLAB-07-FAIL: missing checkpoint key.")
             return 1
-    print("CHECKPOINT_KEYS:             model_state_dict ✓  optimizer_state_dict ✓  config ✓  distillation_meta ✓")
+    print("CHECKPOINT_KEYS:             model_state_dict [OK]  optimizer_state_dict [OK]  config [OK]  distillation_meta [OK]")
 
     state_dict = loaded_ckpt["model_state_dict"]
     tensor_count = len(state_dict)
@@ -618,17 +618,28 @@ def main(
     manifest_tmp  = output_dir / "checkpoint_step_000010.manifest.json.tmp"
 
     manifest_data = {
-        "fix_id": "FIX-06C-COLAB-07",
-        "checkpoint": "checkpoint_step_000010.pt",
+        "schema_version": "FIX-06C-COLAB-07A-1",
+        "checkpoint_filename": final_ckpt_path.name,
+        "checkpoint_path": str(final_ckpt_path).replace("\\", "/"),
+        "checkpoint_byte_size": final_size,
+        "checkpoint_sha256": final_sha256,
         "global_step": 10,
-        "byte_size": final_size,
-        "sha256": final_sha256,
-        "student_parameters": EXPECTED_PARAMS,
-        "student_tensors": EXPECTED_TENSORS,
+        "student_parameter_count": EXPECTED_PARAMS,
+        "state_dict_tensor_count": EXPECTED_TENSORS,
         "teacher": AUTHORITATIVE_TEACHER,
         "precision": precision,
         "gpu": gpu_name,
         "cuda": str(torch.version.cuda) if torch.cuda.is_available() else "N/A",
+        "required_keys": [
+            "model_state_dict",
+            "optimizer_state_dict",
+            "config",
+            "distillation_meta"
+        ],
+        "nan_tensor_count": 0,
+        "inf_tensor_count": 0,
+        "manifest_schema": "FIX-06C-COLAB-07A",
+        "persistence_protocol": "atomic_manifest_write_fsync_sync_hash_verify",
         "timestamp_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "dataset_size": len(dataset),
         "tokenizer_vocab": vocab_sz,
@@ -654,12 +665,15 @@ def main(
     with open(manifest_path, "r", encoding="utf-8") as f:
         manifest_readback = json.load(f)
 
-    if manifest_readback.get("sha256") != final_sha256:
+    readback_sha = manifest_readback.get("checkpoint_sha256") or manifest_readback.get("sha256")
+    readback_bytes = manifest_readback.get("checkpoint_byte_size") or manifest_readback.get("byte_size")
+
+    if readback_sha != final_sha256:
         print("[FATAL] Checkpoint SHA256 in manifest does not match actual checkpoint SHA256!")
         print("FIX-06C-COLAB-07-FAIL: manifest sha256 mismatch.")
         return 1
 
-    if manifest_readback.get("byte_size") != final_size:
+    if readback_bytes != final_size:
         print("[FATAL] Checkpoint byte_size in manifest does not match actual checkpoint byte_size!")
         print("FIX-06C-COLAB-07-FAIL: manifest byte_size mismatch.")
         return 1
