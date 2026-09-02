@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file nano_config.h
  * @brief Versioned Model Scale Configuration struct and presets for THSA-2B V1.
  * Standard Compliance: C99 / C++17 compatible header.
@@ -18,7 +18,7 @@ extern "C" {
  * Drives all architectural dimensions dynamically without kernel recompilation.
  */
 typedef struct {
-    uint16_t  format_version;      /**< File format version (e.g. 0x0001 for V1.0) */
+    uint16_t  format_version;      /**< File format version (e.g. 0x0002 for V2, 0x0001 for legacy V1) */
     uint32_t  total_blocks;        /**< Total backbone blocks (24 for 2B, 28 for 3B) */
     uint32_t  state_blocks;        /**< Number of State/Short-Conv blocks (16 for 2B) */
     uint32_t  gqa_blocks;          /**< Number of GQA attention blocks (8 for 2B) */
@@ -49,7 +49,7 @@ typedef struct {
  */
 static inline NanoModelConfig nano_config_default_2b(void) {
     NanoModelConfig cfg;
-    cfg.format_version      = 0x0001;
+    cfg.format_version      = 0x0002;
     cfg.total_blocks        = 24;
     cfg.state_blocks        = 16;
     cfg.gqa_blocks          = 8;

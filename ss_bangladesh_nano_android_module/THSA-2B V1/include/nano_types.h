@@ -61,7 +61,7 @@ typedef enum {
 #pragma pack(push, 1)
 typedef struct {
     char      magic[4];            /**< "NANO" = 0x4E414E4F */
-    uint16_t  version;             /**< Format version (0x0001) */
+    uint16_t  version;             /**< Format version (0x0002 for V2 production, 0x0001 for legacy V1) */
     uint16_t  total_blocks;        /**< 24 */
     uint16_t  state_blocks;        /**< 16 */
     uint16_t  gqa_blocks;          /**< 8 */
@@ -74,7 +74,7 @@ typedef struct {
     uint32_t  vocab_size;          /**< 65536 */
     uint32_t  max_context;         /**< 10000 */
     uint32_t  crc32;               /**< Stored CRC32 checksum of descriptors + payload */
-    uint32_t  tensor_count;        /**< 123 */
+    uint32_t  tensor_count;        /**< 219 for V2 production, 123 for legacy V1 */
     uint8_t   reserved[20];        /**< Reserved padding */
 } NanoBinaryHeader;
 
@@ -82,7 +82,7 @@ typedef struct {
  * @brief 32-byte Tensor Descriptor entry in .nano manifest table.
  */
 typedef struct {
-    uint32_t  tensor_id;           /**< Numerical tensor ID */
+    uint32_t  tensor_id;           /**< Numerical tensor ID (0..218) */
     uint32_t  quant_type;          /**< NanoQuantType enum */
     uint64_t  offset;              /**< Absolute 64-byte aligned file offset */
     uint64_t  size_bytes;          /**< Byte size of raw tensor data */
@@ -90,6 +90,14 @@ typedef struct {
     uint32_t  pad;                 /**< Alignment pad */
 } NanoTensorDescriptor;
 #pragma pack(pop)
+
+#if defined(__cplusplus)
+static_assert(sizeof(NanoBinaryHeader) == 64, "NanoBinaryHeader ABI size must be exactly 64 bytes");
+static_assert(sizeof(NanoTensorDescriptor) == 32, "NanoTensorDescriptor ABI size must be exactly 32 bytes");
+#elif defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
+_Static_assert(sizeof(NanoBinaryHeader) == 64, "NanoBinaryHeader ABI size must be exactly 64 bytes");
+_Static_assert(sizeof(NanoTensorDescriptor) == 32, "NanoTensorDescriptor ABI size must be exactly 32 bytes");
+#endif
 
 /**
  * @brief Native Model State retained after successful loading.

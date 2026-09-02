@@ -36,9 +36,11 @@
 #ifdef __ANDROID__
 #include <android/log.h>
 #define NANO_LOGI(...) __android_log_print(ANDROID_LOG_INFO, "NanoEngineNative", __VA_ARGS__)
+#define NANO_LOGW(...) __android_log_print(ANDROID_LOG_WARN, "NanoEngineNative", __VA_ARGS__)
 #define NANO_LOGE(...) __android_log_print(ANDROID_LOG_ERROR, "NanoEngineNative", __VA_ARGS__)
 #else
 #define NANO_LOGI(...)
+#define NANO_LOGW(...)
 #define NANO_LOGE(...)
 #endif
 
@@ -522,7 +524,64 @@ NanoStatus nano_engine_init(
         return NANO_ERR_CORRUPT_MODEL;
     }
     
-    if (hdr->version != 0x0001) {
+    // Format Version & Architectural Contract Validation
+    if (hdr->version == 0x0002) {
+        // Strict V2 Production Contract
+        if (hdr->tensor_count != 219) {
+            NANO_LOGE("NANO Format V2 Error: tensor_count %u != 219", hdr->tensor_count);
+#ifdef _WIN32
+            UnmapViewOfFile(mmap_ptr);
+            CloseHandle(hMap);
+            CloseHandle(hFile);
+#else
+            munmap((void*)mmap_ptr, file_size);
+            close(fd);
+#endif
+            return NANO_ERR_INVALID_HEADER;
+        }
+        if (hdr->d_model != 2560 || hdr->d_ffn != 6912 ||
+            hdr->total_blocks != 24 || hdr->state_blocks != 16 || hdr->gqa_blocks != 8 ||
+            hdr->n_q != 20 || hdr->n_kv != 4 || hdr->d_head != 128 ||
+            hdr->vocab_size != 65536 || hdr->max_context != 10000) {
+            NANO_LOGE("NANO Format V2 Error: architectural dimension mismatch in header");
+#ifdef _WIN32
+            UnmapViewOfFile(mmap_ptr);
+            CloseHandle(hMap);
+            CloseHandle(hFile);
+#else
+            munmap((void*)mmap_ptr, file_size);
+            close(fd);
+#endif
+            return NANO_ERR_INVALID_HEADER;
+        }
+    } else if (hdr->version == 0x0001) {
+        // Explicit Legacy V1 Isolation
+        if (hdr->tensor_count != 123) {
+            NANO_LOGE("Legacy V1 Error: tensor_count %u != 123", hdr->tensor_count);
+#ifdef _WIN32
+            UnmapViewOfFile(mmap_ptr);
+            CloseHandle(hMap);
+            CloseHandle(hFile);
+#else
+            munmap((void*)mmap_ptr, file_size);
+            close(fd);
+#endif
+            return NANO_ERR_INVALID_HEADER;
+        }
+        if (hdr->d_model == 0 || hdr->vocab_size == 0) {
+#ifdef _WIN32
+            UnmapViewOfFile(mmap_ptr);
+            CloseHandle(hMap);
+            CloseHandle(hFile);
+#else
+            munmap((void*)mmap_ptr, file_size);
+            close(fd);
+#endif
+            return NANO_ERR_INVALID_HEADER;
+        }
+        NANO_LOGW("WARNING: Model loaded under LEGACY Format Version 1 (123 descriptors)");
+    } else {
+        NANO_LOGE("Unsupported NANO format version: 0x%04X", hdr->version);
 #ifdef _WIN32
         UnmapViewOfFile(mmap_ptr);
         CloseHandle(hMap);
@@ -533,8 +592,24 @@ NanoStatus nano_engine_init(
 #endif
         return NANO_ERR_UNSUPPORTED;
     }
+
+    NANO_LOGI("NANO_MODEL_HEADER_OK: magic=%.4s, version=0x%04X, tensors=%u, d_model=%u", hdr->magic, hdr->version, hdr->tensor_count, hdr->d_model);
+
+    // 5. Validate Descriptor Table & Offset Boundaries with Integer Overflow Guards
+    if (file_size < sizeof(NanoBinaryHeader)) {
+#ifdef _WIN32
+        UnmapViewOfFile(mmap_ptr);
+        CloseHandle(hMap);
+        CloseHandle(hFile);
+#else
+        munmap((void*)mmap_ptr, file_size);
+        close(fd);
+#endif
+        return NANO_ERR_TRUNCATED_FILE;
+    }
     
-    if (hdr->d_model == 0 || hdr->tensor_count == 0 || hdr->vocab_size == 0) {
+    // Check multiplication overflow: hdr->tensor_count * sizeof(NanoTensorDescriptor)
+    if (hdr->tensor_count > (SIZE_MAX - sizeof(NanoBinaryHeader)) / sizeof(NanoTensorDescriptor)) {
 #ifdef _WIN32
         UnmapViewOfFile(mmap_ptr);
         CloseHandle(hMap);
@@ -545,10 +620,7 @@ NanoStatus nano_engine_init(
 #endif
         return NANO_ERR_INVALID_HEADER;
     }
-
-    NANO_LOGI("NANO_MODEL_HEADER_OK: magic=%.4s, version=0x%04X, tensors=%u, d_model=%u", hdr->magic, hdr->version, hdr->tensor_count, hdr->d_model);
-
-    // 5. Validate Descriptor Table & Offset Boundaries
+    
     size_t desc_table_size = (size_t)hdr->tensor_count * sizeof(NanoTensorDescriptor);
     if (sizeof(NanoBinaryHeader) + desc_table_size > file_size) {
 #ifdef _WIN32
@@ -563,8 +635,81 @@ NanoStatus nano_engine_init(
     }
     
     const NanoTensorDescriptor* descriptors = (const NanoTensorDescriptor*)(mmap_ptr + sizeof(NanoBinaryHeader));
+    size_t min_payload_offset = sizeof(NanoBinaryHeader) + desc_table_size;
+    if (hdr->version == 0x0002) {
+        min_payload_offset = 7104; // Contract required offset: 64 + 7008 = 7072 -> aligned to 64 = 7104
+    }
+    
     for (uint32_t i = 0; i < hdr->tensor_count; ++i) {
-        if (descriptors[i].offset + descriptors[i].size_bytes > file_size) {
+        // Tensor ID sequence check for V2
+        if (hdr->version == 0x0002 && descriptors[i].tensor_id != i) {
+            NANO_LOGE("Descriptor error: tensor_id %u != index %u", descriptors[i].tensor_id, i);
+#ifdef _WIN32
+            UnmapViewOfFile(mmap_ptr);
+            CloseHandle(hMap);
+            CloseHandle(hFile);
+#else
+            munmap((void*)mmap_ptr, file_size);
+            close(fd);
+#endif
+            return NANO_ERR_INVALID_HEADER;
+        }
+
+        // Empty payload check
+        if (descriptors[i].size_bytes == 0) {
+            NANO_LOGE("Descriptor error: tensor %u size_bytes == 0", i);
+#ifdef _WIN32
+            UnmapViewOfFile(mmap_ptr);
+            CloseHandle(hMap);
+            CloseHandle(hFile);
+#else
+            munmap((void*)mmap_ptr, file_size);
+            close(fd);
+#endif
+            return NANO_ERR_INVALID_HEADER;
+        }
+
+        // 64-byte alignment check
+        if (descriptors[i].offset % 64 != 0) {
+            NANO_LOGE("Descriptor error: tensor %u offset %llu not 64-byte aligned", i, (unsigned long long)descriptors[i].offset);
+#ifdef _WIN32
+            UnmapViewOfFile(mmap_ptr);
+            CloseHandle(hMap);
+            CloseHandle(hFile);
+#else
+            munmap((void*)mmap_ptr, file_size);
+            close(fd);
+#endif
+            return NANO_ERR_INVALID_HEADER;
+        }
+
+        // Must not overlap header or descriptor table
+        if (descriptors[i].offset < min_payload_offset) {
+            NANO_LOGE("Descriptor error: tensor %u offset %llu inside descriptor table (min %zu)", i, (unsigned long long)descriptors[i].offset, min_payload_offset);
+#ifdef _WIN32
+            UnmapViewOfFile(mmap_ptr);
+            CloseHandle(hMap);
+            CloseHandle(hFile);
+#else
+            munmap((void*)mmap_ptr, file_size);
+            close(fd);
+#endif
+            return NANO_ERR_INVALID_HEADER;
+        }
+
+        // Safe overflow-proof boundary check: offset > file_size OR size_bytes > file_size - offset
+        if (descriptors[i].offset > file_size) {
+#ifdef _WIN32
+            UnmapViewOfFile(mmap_ptr);
+            CloseHandle(hMap);
+            CloseHandle(hFile);
+#else
+            munmap((void*)mmap_ptr, file_size);
+            close(fd);
+#endif
+            return NANO_ERR_TRUNCATED_FILE;
+        }
+        if (descriptors[i].size_bytes > file_size - descriptors[i].offset) {
 #ifdef _WIN32
             UnmapViewOfFile(mmap_ptr);
             CloseHandle(hMap);
@@ -642,7 +787,7 @@ NanoStatus nano_engine_init(
     }
     
     // 8. Map Real Tensor Pointers from Binary Manifest
-    if (hdr->tensor_count == 219 || hdr->version == 0x0002) {
+    if (hdr->version == 0x0002 && hdr->tensor_count == 219) {
         // Complete 219-Tensor Format 2 Mapping
         ctx->embed_tokens_ptr = (const int8_t*)(mmap_ptr + descriptors[0].offset);
         ctx->embed_scale      = descriptors[0].scale;
@@ -710,8 +855,8 @@ NanoStatus nano_engine_init(
         ctx->final_norm_gamma = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
         ctx->lm_head_ptr      = (const int8_t*)(mmap_ptr + descriptors[curr_tensor_idx].offset);
         ctx->lm_head_scale    = descriptors[curr_tensor_idx++].scale;
-    } else {
-        // Legacy 123-Descriptor Format 1 Mapping
+    } else if (hdr->version == 0x0001 && hdr->tensor_count == 123) {
+        // Explicit Legacy 123-Descriptor Format 1 Mapping
         ctx->embed_tokens_ptr = (const int8_t*)(mmap_ptr + descriptors[0].offset);
         ctx->embed_scale      = descriptors[0].scale;
         
@@ -767,6 +912,18 @@ NanoStatus nano_engine_init(
         ctx->final_norm_gamma = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
         ctx->lm_head_ptr   = (const int8_t*)(mmap_ptr + descriptors[curr_tensor_idx].offset);
         ctx->lm_head_scale = descriptors[curr_tensor_idx].scale;
+    } else {
+        NANO_LOGE("Unsupported model format or descriptor count combination: version=0x%04X, count=%u", hdr->version, hdr->tensor_count);
+        delete ctx;
+#ifdef _WIN32
+        UnmapViewOfFile(mmap_ptr);
+        CloseHandle(hMap);
+        CloseHandle(hFile);
+#else
+        munmap((void*)mmap_ptr, file_size);
+        close(fd);
+#endif
+        return NANO_ERR_UNSUPPORTED;
     }
     
     // 9. Allocate Monolithic Static Memory Arena

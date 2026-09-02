@@ -107,6 +107,53 @@ def export_model_to_nano(
     vocab_size   = config["vocab_size"]
     max_context  = config["max_context_tokens"]
     
+    # Strict Format V2 Pre-Serialization Contract Audit
+    format_version = config.get("format_version", 2)
+    if format_version != 2:
+        raise ValueError(f"[FATAL ERROR] Format version must be 0x0002 for THSA-2B production export, got {format_version}")
+
+    expected_keys = {"embed_tokens.weight", "final_norm.weight", "lm_head.weight"}
+    for l_idx in range(total_blocks):
+        is_gqa = ((l_idx + 1) % (total_blocks // gqa_blocks) == 0)
+        if is_gqa:
+            expected_keys.update({
+                f"layers.{l_idx}.mixer.q_proj.weight",
+                f"layers.{l_idx}.mixer.k_proj.weight",
+                f"layers.{l_idx}.mixer.v_proj.weight",
+                f"layers.{l_idx}.mixer.out_proj.weight",
+                f"layers.{l_idx}.mixer.norm.weight",
+            })
+        else:
+            expected_keys.update({
+                f"layers.{l_idx}.mixer.conv1d.weight",
+                f"layers.{l_idx}.mixer.conv1d.bias",
+                f"layers.{l_idx}.mixer.in_proj.weight",
+                f"layers.{l_idx}.mixer.out_proj.weight",
+                f"layers.{l_idx}.mixer.norm.weight",
+            })
+        expected_keys.update({
+            f"layers.{l_idx}.ffn.gate_proj.weight",
+            f"layers.{l_idx}.ffn.up_proj.weight",
+            f"layers.{l_idx}.ffn.down_proj.weight",
+            f"layers.{l_idx}.ffn.norm.weight",
+        })
+
+    if len(state_dict) != 219:
+        raise ValueError(f"[FATAL ERROR] Expected exactly 219 tensor keys in checkpoint, got {len(state_dict)}")
+
+    missing_keys = expected_keys - set(state_dict.keys())
+    extra_keys = set(state_dict.keys()) - expected_keys
+    if missing_keys:
+        raise KeyError(f"[FATAL ERROR] Checkpoint missing required keys: {sorted(list(missing_keys))[:5]} (total {len(missing_keys)})")
+    if extra_keys:
+        raise ValueError(f"[FATAL ERROR] Checkpoint contains unrecognized extra keys: {sorted(list(extra_keys))[:5]} (total {len(extra_keys)})")
+
+    total_params = sum(t.numel() for t in state_dict.values())
+    if total_params != 2050296320:
+        raise ValueError(f"[FATAL ERROR] Parameter count mismatch: expected 2,050,296,320, got {total_params}")
+
+    print(f"  --> Pre-serialization Contract Audit: 219 keys verified, {total_params:,} parameters exact.")
+
     # 1. Build Tensor Manifest from REAL Checkpoint
     tensors = []
     
@@ -250,6 +297,8 @@ def export_model_to_nano(
     tensors.append(("lm_head", NANO_QUANT_INT8, (vocab_size, d_model), lm_head_scale, lm_head_bytes))
     
     tensor_count = len(tensors)
+    if tensor_count != 219:
+        raise ValueError(f"[FATAL ERROR] Exported tensor count must be 219, got {tensor_count}")
     print(f"Extracted and quantized {tensor_count} verified tensors from checkpoint.")
     
     # 2. Serialize to Binary File with 64-byte Alignment
@@ -257,6 +306,10 @@ def export_model_to_nano(
     descriptor_table_size = tensor_count * 32
     raw_payload_start = header_size + descriptor_table_size
     payload_start = align_to(raw_payload_start, 64)
+    if payload_start != 7104:
+        raise ValueError(f"[FATAL ERROR] V2 first payload offset must be 7104, got {payload_start}")
+    if struct.calcsize("<IIQQfI") != 32:
+        raise ValueError(f"[FATAL ERROR] Descriptor ABI size must be 32 bytes, got {struct.calcsize('<IIQQfI')}")
     
     descriptors = []
     current_offset = payload_start
