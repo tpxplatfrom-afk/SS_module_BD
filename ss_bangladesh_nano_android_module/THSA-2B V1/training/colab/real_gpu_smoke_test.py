@@ -2,7 +2,8 @@
 """
 THSA-2B V1: Real GPU 10-Step Smoke Test Script
 ==============================================
-Executes a verified 10-step smoke training run on a physical CUDA GPU:
+Executes a verified 10-step smoke training run on a physical CUDA GPU with the
+authoritative production teacher (Qwen/Qwen2.5-7B-Instruct):
   1. Instantiates production THSA-2B student model (2,050,296,320 parameters)
   2. Loads teacher model under torch.no_grad()
   3. Executes 10 real forward passes, backward passes, and optimizer updates
@@ -15,6 +16,7 @@ import os
 import sys
 import time
 import json
+import argparse
 import torch
 from pathlib import Path
 
@@ -29,13 +31,14 @@ if str(MODULE_ROOT) not in sys.path:
 
 from distillation.qwen_teacher_distillation import DistillationTrainer
 
-def run_smoke_test():
+def run_smoke_test(teacher_model_name: str = "Qwen/Qwen2.5-7B-Instruct"):
     print("=" * 80)
     print("THSA-2B V1: REAL GPU 10-STEP SMOKE TEST")
     print("=" * 80)
 
     if not torch.cuda.is_available():
         print("[FATAL ERROR] Real GPU smoke test requires a CUDA-enabled GPU.")
+        print("REAL_GPU_EXECUTION_NOT_YET_PROVEN")
         print("COLAB_REAL_GPU_SMOKE_BLOCKED")
         return 1
 
@@ -49,17 +52,17 @@ def run_smoke_test():
     vram_gb = torch.cuda.get_device_properties(0).total_memory / (1024**3)
     bf16_supported = torch.cuda.is_bf16_supported()
     precision = "bfloat16" if bf16_supported else "float16"
-    teacher_name = "Qwen/Qwen2.5-7B-Instruct" if vram_gb >= 24.0 else "Qwen/Qwen2.5-1.5B-Instruct"
 
-    print(f"Device:              {torch.cuda.get_device_name(0)} ({vram_gb:.2f} GB VRAM)")
-    print(f"Precision:           {precision}")
-    print(f"Teacher Model:       {teacher_name}")
-    print(f"Output Directory:    {smoke_output_dir}")
+    print(f"Device:                 {torch.cuda.get_device_name(0)} ({vram_gb:.2f} GB VRAM)")
+    print(f"CUDA Version:           {torch.version.cuda}")
+    print(f"Precision:              {precision}")
+    print(f"Authoritative Teacher:  {teacher_model_name}")
+    print(f"Output Directory:       {smoke_output_dir}")
 
     try:
         trainer = DistillationTrainer(
             config_path=config_path,
-            teacher_model_name=teacher_name,
+            teacher_model_name=teacher_model_name,
             corpus_path=corpus_path,
             output_dir=smoke_output_dir,
             learning_rate=3e-4,
@@ -109,4 +112,7 @@ def run_smoke_test():
         return 1
 
 if __name__ == "__main__":
-    sys.exit(run_smoke_test())
+    parser = argparse.ArgumentParser(description="THSA-2B Real GPU 10-Step Smoke Test")
+    parser.add_argument("--teacher", type=str, default="Qwen/Qwen2.5-7B-Instruct", help="Authoritative teacher model")
+    args = parser.parse_args()
+    sys.exit(run_smoke_test(teacher_model_name=args.teacher))
