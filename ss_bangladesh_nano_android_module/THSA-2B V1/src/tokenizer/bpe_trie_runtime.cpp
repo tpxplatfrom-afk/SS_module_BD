@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file bpe_trie_runtime.cpp
  * @brief Compact C++ BPE Trie Tokenizer Runtime (V=65,536).
  * Features longest-prefix matching, byte-fallback, and sub-8MB memory footprint.
@@ -67,8 +67,6 @@ NanoStatus nano_tokenizer_create(
     const char* vocab_file_path,
     NanoTokenizer** out_tokenizer
 ) {
-    (void)vocab_file_path; // Optional disk vocabulary file
-    
     NanoTokenizer* tok = (NanoTokenizer*)malloc(sizeof(NanoTokenizer));
     if (!tok) return NANO_ERR_OOM;
     
@@ -76,24 +74,47 @@ NanoStatus nano_tokenizer_create(
     memset(tok->vocab_table, 0, sizeof(tok->vocab_table));
     memset(tok->vocab_lengths, 0, sizeof(tok->vocab_lengths));
     
-    // 1. Register Special Tokens (1..6)
-    const char* specials[] = {"<|bos|>", "<|eos|>", "<|unk|>", "<|pad|>", "<|im_start|>", "<|im_end|>"};
-    for (int i = 0; i < 6; ++i) {
-        NanoTokenId id = i + 1;
-        tok->vocab_table[id] = strdup(specials[i]);
-        tok->vocab_lengths[id] = strlen(specials[i]);
-        trie_insert(tok->root, specials[i], tok->vocab_lengths[id], id);
+    // 1. Register Standard Special Tokens (0..3)
+    const char* specials[] = {"<pad>", "<unk>", "<s>", "</s>"};
+    for (int i = 0; i < 4; ++i) {
+        tok->vocab_table[i] = strdup(specials[i]);
+        tok->vocab_lengths[i] = strlen(specials[i]);
+        trie_insert(tok->root, specials[i], tok->vocab_lengths[i], i);
     }
     
-    // 2. Register 256 Base Byte-Level Fallbacks (Tokens 100 .. 355)
+    // 2. Register 256 Base Byte-Level Fallbacks (Tokens 4 .. 259)
     for (int b = 0; b < 256; ++b) {
-        NanoTokenId id = 100 + b;
+        NanoTokenId id = 4 + b;
         char byte_str[2] = {(char)b, '\0'};
         tok->vocab_table[id] = (char*)malloc(2);
         tok->vocab_table[id][0] = (char)b;
         tok->vocab_table[id][1] = '\0';
         tok->vocab_lengths[id] = 1;
         trie_insert(tok->root, byte_str, 1, id);
+    }
+    
+    // 3. Load Disk Vocabulary if provided
+    if (vocab_file_path) {
+        FILE* fp = fopen(vocab_file_path, "r");
+        if (fp) {
+            char line[1024];
+            NanoTokenId line_id = 0;
+            while (fgets(line, sizeof(line), fp) && line_id < NANO_VOCAB_SIZE) {
+                char* tab = strchr(line, '\t');
+                if (tab) *tab = '\0';
+                char* nl = strpbrk(line, "\r\n");
+                if (nl) *nl = '\0';
+                
+                if (strlen(line) > 0 && line_id >= 260) {
+                    if (tok->vocab_table[line_id]) free(tok->vocab_table[line_id]);
+                    tok->vocab_table[line_id] = strdup(line);
+                    tok->vocab_lengths[line_id] = strlen(line);
+                    trie_insert(tok->root, line, tok->vocab_lengths[line_id], line_id);
+                }
+                line_id++;
+            }
+            fclose(fp);
+        }
     }
     
     *out_tokenizer = tok;

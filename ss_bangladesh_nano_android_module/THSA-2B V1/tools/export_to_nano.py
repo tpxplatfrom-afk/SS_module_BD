@@ -70,27 +70,30 @@ def align_to(offset: int, alignment: int = 64) -> int:
 def export_model_to_nano(
     config_path: str,
     output_nano_path: str,
-    checkpoint_path: str = None,
-    dry_run: bool = False
+    checkpoint_path: str
 ) -> str:
     print("=" * 80)
-    print("THSA-2B: MODEL EXPORTER & 64-BYTE ALIGNED .NANO SERIALIZER")
+    print("THSA-2B: STRICT MODEL EXPORTER & 64-BYTE ALIGNED .NANO SERIALIZER")
     print("=" * 80)
     
+    if not checkpoint_path or not os.path.exists(checkpoint_path):
+        raise FileNotFoundError(
+            f"[FATAL ERROR] Checkpoint path is mandatory and must exist: {checkpoint_path}. "
+            f"Synthetic or dummy exports are strictly prohibited."
+        )
+        
     with open(config_path, "r", encoding="utf-8-sig") as f:
         config = json.load(f)
         
-    state_dict = None
-    if checkpoint_path and os.path.exists(checkpoint_path):
-        import torch
-        print(f"Loading trained weights from checkpoint: {checkpoint_path}...")
-        ckpt = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
-        state_dict = ckpt.get("model_state_dict", ckpt)
-        print(f"  Loaded state_dict with {len(state_dict)} tensor keys.")
-    else:
-        print("No trained checkpoint provided; generating structured format scaffold.")
+    import torch
+    print(f"Loading trained weights from checkpoint: {checkpoint_path}...")
+    ckpt = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+    if not isinstance(ckpt, dict):
+        raise ValueError(f"[FATAL ERROR] Checkpoint is not a valid dict, got {type(ckpt)}")
         
-    print(f"Source Model Config: {config['model_id']}")
+    state_dict = ckpt.get("model_state_dict", ckpt)
+    print(f"  Successfully loaded state_dict with {len(state_dict)} tensor keys.")
+    print(f"Source Model Config: {config.get('model_id', 'UNKNOWN')}")
     print(f"Target Binary Path:  {output_nano_path}")
     
     total_blocks = config["total_blocks"]
@@ -104,17 +107,19 @@ def export_model_to_nano(
     vocab_size   = config["vocab_size"]
     max_context  = config["max_context_tokens"]
     
-    # 1. Build Tensor Manifest
-    # Tensors list of tuples: (name, quant_type, shape, scale, data_bytes)
+    # 1. Build Tensor Manifest from REAL Checkpoint
     tensors = []
     
     # (A) Token Embeddings (INT8 Sensitive Shield)
-    if state_dict and "embed_tokens.weight" in state_dict:
-        embed_bytes, embed_scale = quantize_int8_tensor(state_dict["embed_tokens.weight"])
-    else:
-        embed_size = vocab_size * d_model
-        embed_bytes = bytes([i % 127 for i in range(embed_size if not dry_run else 1024)])
-        embed_scale = 0.02
+    if "embed_tokens.weight" not in state_dict:
+        raise KeyError("[FATAL ERROR] Missing required tensor 'embed_tokens.weight' in checkpoint.")
+    embed_t = state_dict["embed_tokens.weight"]
+    if list(embed_t.shape) != [vocab_size, d_model]:
+        raise ValueError(
+            f"[FATAL ERROR] Architecture shape mismatch in 'embed_tokens.weight': "
+            f"expected [{vocab_size}, {d_model}], got {list(embed_t.shape)}"
+        )
+    embed_bytes, embed_scale = quantize_int8_tensor(embed_t)
     tensors.append(("embed_tokens", NANO_QUANT_INT8, (vocab_size, d_model), embed_scale, embed_bytes))
     
     # (B) Backbone Layers (Ternary FFN + State/GQA)
@@ -130,23 +135,23 @@ def export_model_to_nano(
                 ("out", d_model, n_q * d_head)
             ]:
                 key = f"layers.{l_idx}.mixer.{proj_name}_proj.weight"
-                if state_dict and key in state_dict:
-                    data_bytes, scale = pack_ternary_tensor(state_dict[key])
-                else:
-                    sz = (out_dim * in_dim) // 4
-                    data_bytes = bytes(sz if not dry_run else 64)
-                    scale = 0.04
+                if key not in state_dict:
+                    raise KeyError(f"[FATAL ERROR] Missing required GQA tensor '{key}' in checkpoint.")
+                proj_t = state_dict[key]
+                if list(proj_t.shape) != [out_dim, in_dim]:
+                    raise ValueError(f"[FATAL ERROR] Shape mismatch for '{key}': expected [{out_dim}, {in_dim}], got {list(proj_t.shape)}")
+                data_bytes, scale = pack_ternary_tensor(proj_t)
                 tensors.append((f"layer_{l_idx}_attn_{proj_name}", NANO_QUANT_TERNARY_2BIT, (out_dim, in_dim), scale, data_bytes))
         else:
             # 1D Short-Conv State weights (FP32)
             conv_key = f"layers.{l_idx}.mixer.conv1d.weight"
-            if state_dict and conv_key in state_dict:
-                import torch
-                conv_t = state_dict[conv_key].detach().cpu().float().view(-1)
-                conv_bytes = struct.pack(f"<{len(conv_t)}f", *conv_t.tolist())
-            else:
-                conv_w_size = 4 * d_model
-                conv_bytes = struct.pack(f"<{conv_w_size if not dry_run else 16}f", *([1.0] * (conv_w_size if not dry_run else 16)))
+            if conv_key not in state_dict:
+                raise KeyError(f"[FATAL ERROR] Missing required state conv tensor '{conv_key}' in checkpoint.")
+            conv_t = state_dict[conv_key].detach().cpu().float().view(-1)
+            expected_numel = 4 * d_model
+            if conv_t.numel() != expected_numel:
+                raise ValueError(f"[FATAL ERROR] Shape mismatch for '{conv_key}': expected {expected_numel} elements, got {conv_t.numel()}")
+            conv_bytes = struct.pack(f"<{len(conv_t)}f", *conv_t.tolist())
             tensors.append((f"layer_{l_idx}_state_conv_w", NANO_QUANT_FP32, (4, d_model), 1.0, conv_bytes))
             
         # FFN Weights (Gate, Up, Down)
@@ -156,35 +161,36 @@ def export_model_to_nano(
             ("down", d_model, d_ffn)
         ]:
             key = f"layers.{l_idx}.ffn.{ffn_name}_proj.weight"
-            if state_dict and key in state_dict:
-                data_bytes, scale = pack_ternary_tensor(state_dict[key])
-            else:
-                sz = (out_dim * in_dim) // 4
-                data_bytes = bytes(sz if not dry_run else 64)
-                scale = 0.035
+            if key not in state_dict:
+                raise KeyError(f"[FATAL ERROR] Missing required FFN tensor '{key}' in checkpoint.")
+            ffn_t = state_dict[key]
+            if list(ffn_t.shape) != [out_dim, in_dim]:
+                raise ValueError(f"[FATAL ERROR] Shape mismatch for '{key}': expected [{out_dim}, {in_dim}], got {list(ffn_t.shape)}")
+            data_bytes, scale = pack_ternary_tensor(ffn_t)
             tensors.append((f"layer_{l_idx}_ffn_{ffn_name}", NANO_QUANT_TERNARY_2BIT, (out_dim, in_dim), scale, data_bytes))
             
     # (C) Final RMSNorm Gamma (FP32)
     norm_key = "final_norm.weight"
-    if state_dict and norm_key in state_dict:
-        norm_t = state_dict[norm_key].detach().cpu().float().view(-1)
-        norm_bytes = struct.pack(f"<{len(norm_t)}f", *norm_t.tolist())
-    else:
-        norm_bytes = struct.pack(f"<{d_model if not dry_run else 16}f", *([1.0] * (d_model if not dry_run else 16)))
+    if norm_key not in state_dict:
+        raise KeyError(f"[FATAL ERROR] Missing required final norm tensor '{norm_key}' in checkpoint.")
+    norm_t = state_dict[norm_key].detach().cpu().float().view(-1)
+    if norm_t.numel() != d_model:
+        raise ValueError(f"[FATAL ERROR] Shape mismatch for '{norm_key}': expected {d_model}, got {norm_t.numel()}")
+    norm_bytes = struct.pack(f"<{len(norm_t)}f", *norm_t.tolist())
     tensors.append(("final_norm", NANO_QUANT_FP32, (d_model,), 1.0, norm_bytes))
     
     # (D) LM Head (INT8 Sensitive Shield)
     lm_head_key = "lm_head.weight"
-    if state_dict and lm_head_key in state_dict:
-        lm_head_bytes, lm_head_scale = quantize_int8_tensor(state_dict[lm_head_key])
-    else:
-        lm_head_size = d_model * vocab_size
-        lm_head_bytes = bytes([i % 127 for i in range(lm_head_size if not dry_run else 1024)])
-        lm_head_scale = 0.025
+    if lm_head_key not in state_dict:
+        raise KeyError(f"[FATAL ERROR] Missing required LM head tensor '{lm_head_key}' in checkpoint.")
+    lm_head_t = state_dict[lm_head_key]
+    if list(lm_head_t.shape) != [vocab_size, d_model]:
+        raise ValueError(f"[FATAL ERROR] Shape mismatch for '{lm_head_key}': expected [{vocab_size}, {d_model}], got {list(lm_head_t.shape)}")
+    lm_head_bytes, lm_head_scale = quantize_int8_tensor(lm_head_t)
     tensors.append(("lm_head", NANO_QUANT_INT8, (vocab_size, d_model), lm_head_scale, lm_head_bytes))
     
     tensor_count = len(tensors)
-    print(f"Generated Tensor Manifest: {tensor_count} tensors.")
+    print(f"Extracted and quantized {tensor_count} verified tensors from checkpoint.")
     
     # 2. Serialize to Binary File with 64-byte Alignment
     header_size = 64
@@ -252,16 +258,14 @@ def export_model_to_nano(
     return output_nano_path
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Export PyTorch model to .nano binary distribution format")
-    parser.add_argument("--config", type=str, default="training/config/proxy_350m_config.json", help="Path to architecture config JSON")
-    parser.add_argument("--output", type=str, default="models/model_trained.nano", help="Output .nano binary path")
-    parser.add_argument("--checkpoint", type=str, default=None, help="Optional path to trained PyTorch .pt checkpoint")
-    parser.add_argument("--dry_run", action="store_true", help="Generate small dry-run test artifact")
+    parser = argparse.ArgumentParser(description="Strict PyTorch model to .nano binary exporter")
+    parser.add_argument("--config", type=str, required=True, help="Path to architecture config JSON")
+    parser.add_argument("--output", type=str, required=True, help="Output .nano binary path")
+    parser.add_argument("--checkpoint", type=str, required=True, help="Path to trained PyTorch .pt checkpoint")
     args = parser.parse_args()
     
     export_model_to_nano(
         config_path=args.config,
         output_nano_path=args.output,
-        checkpoint_path=args.checkpoint,
-        dry_run=args.dry_run
+        checkpoint_path=args.checkpoint
     )

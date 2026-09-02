@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file nano_engine_jni.cpp
  * @brief Android JNI Native Bridge for THSA-2B On-Device AI Engine.
  * Features RAII local frame guards (PushLocalFrame), async cancellation, and typed error handling.
@@ -7,6 +7,18 @@
 #include <jni.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <string>
+
+#ifdef __ANDROID__
+#include <android/log.h>
+#define JNI_LOGI(...) __android_log_print(ANDROID_LOG_INFO, "NanoEngineJNI", __VA_ARGS__)
+#define JNI_LOGE(...) __android_log_print(ANDROID_LOG_ERROR, "NanoEngineJNI", __VA_ARGS__)
+#else
+#define JNI_LOGI(...)
+#define JNI_LOGE(...)
+#endif
+
 #include "../include/nano_engine.h"
 #include "../include/nano_types.h"
 #include "../include/nano_config.h"
@@ -36,12 +48,16 @@ Java_ai_nano_engine_NanoNative_nativeInit(
     jstring model_path_jstr
 ) {
     (void)clazz;
+    JNI_LOGI("NANO_NATIVE_LIBRARY_LOADED");
     if (!model_path_jstr) {
+        JNI_LOGE("NANO_NATIVE_INIT failed: null model path");
         throw_nano_exception(env, "Model path cannot be null", NANO_ERR_INVALID_PARAM);
         return 0;
     }
     
     const char* path_cstr = env->GetStringUTFChars(model_path_jstr, NULL);
+    JNI_LOGI("NANO_NATIVE_INIT: path=%s", path_cstr);
+    
     NanoEngineContext* ctx = NULL;
     NanoModelConfig config = nano_config_default_2b();
     
@@ -49,11 +65,88 @@ Java_ai_nano_engine_NanoNative_nativeInit(
     env->ReleaseStringUTFChars(model_path_jstr, path_cstr);
     
     if (status != NANO_SUCCESS || !ctx) {
+        JNI_LOGE("NANO_NATIVE_INIT failed: status=%d", status);
         throw_nano_exception(env, "Failed to initialize THSA-2B engine arena", status);
         return 0;
     }
     
+    JNI_LOGI("NANO_NATIVE_INIT_SUCCESS: handle=%p", (void*)ctx);
     return (jlong)ctx;
+}
+
+JNIEXPORT jintArray JNICALL
+Java_ai_nano_engine_NanoNative_nativeEncode(
+    JNIEnv* env,
+    jclass clazz,
+    jlong handle,
+    jstring text_jstr
+) {
+    (void)clazz;
+    NanoEngineContext* ctx = (NanoEngineContext*)handle;
+    if (!ctx || !text_jstr) {
+        return NULL;
+    }
+    
+    const char* text_cstr = env->GetStringUTFChars(text_jstr, NULL);
+    size_t text_len = strlen(text_cstr);
+    
+    JNI_LOGI("NANO_CAUSAL_TOKENIZE_BEGIN: prompt_chars=%zu", text_len);
+
+    NanoTokenId tokens[4096];
+    size_t num_tokens = 0;
+    
+    NanoStatus status = nano_engine_encode(
+        ctx,
+        text_cstr,
+        text_len,
+        tokens,
+        4096,
+        &num_tokens
+    );
+    
+    env->ReleaseStringUTFChars(text_jstr, text_cstr);
+    
+    JNI_LOGI("NANO_CAUSAL_TOKENIZE_RESULT: prompt_chars=%zu, token_count=%zu", text_len, num_tokens);
+
+    if (status != NANO_SUCCESS || num_tokens == 0) {
+        jintArray fallback = env->NewIntArray(1);
+        jint unk = NANO_TOKEN_UNK;
+        env->SetIntArrayRegion(fallback, 0, 1, &unk);
+        JNI_LOGI("NANO_CAUSAL_INPUT_TOKENS: [%d]", unk);
+        return fallback;
+    }
+    
+    std::string token_list_str = "[";
+    for (size_t i = 0; i < num_tokens; ++i) {
+        token_list_str += std::to_string(tokens[i]);
+        if (i + 1 < num_tokens) token_list_str += ", ";
+    }
+    token_list_str += "]";
+    JNI_LOGI("NANO_CAUSAL_INPUT_TOKENS: %s", token_list_str.c_str());
+
+    jintArray result = env->NewIntArray((jsize)num_tokens);
+    env->SetIntArrayRegion(result, 0, (jsize)num_tokens, (const jint*)tokens);
+    return result;
+}
+
+JNIEXPORT jstring JNICALL
+Java_ai_nano_engine_NanoNative_nativeDecodeToken(
+    JNIEnv* env,
+    jclass clazz,
+    jlong handle,
+    jint token_id
+) {
+    (void)clazz;
+    NanoEngineContext* ctx = (NanoEngineContext*)handle;
+    if (!ctx) return NULL;
+    
+    char buf[128] = {0};
+    size_t bytes_written = 0;
+    nano_engine_decode_token(ctx, (NanoTokenId)token_id, buf, sizeof(buf), &bytes_written);
+    if (bytes_written == 0) {
+        buf[0] = '\0';
+    }
+    return env->NewStringUTF(buf);
 }
 
 JNIEXPORT jint JNICALL
@@ -81,6 +174,9 @@ Java_ai_nano_engine_NanoNative_nativeGenerate(
     gen_cfg.temperature = temperature;
     gen_cfg.top_p = top_p;
     gen_cfg.max_output_tokens = max_output_tokens;
+    
+    JNI_LOGI("NANO_GENERATE_BEGIN: prompt_tokens=%d, temp=%.2f, top_p=%.2f, max_tokens=%d",
+             (int)num_prompt_tokens, temperature, top_p, max_output_tokens);
     
     // Lookup callback method: onToken(String token, int tokenId, boolean isEos) -> boolean
     jclass callback_class = env->GetObjectClass(token_callback_obj);
@@ -125,6 +221,7 @@ Java_ai_nano_engine_NanoNative_nativeGenerate(
     );
     
     env->ReleaseIntArrayElements(prompt_tokens_array, token_elems, JNI_ABORT);
+    JNI_LOGI("NANO_GENERATE_END: status=%d", status);
     return (jint)status;
 }
 

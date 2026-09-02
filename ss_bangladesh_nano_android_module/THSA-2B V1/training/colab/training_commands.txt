@@ -1,0 +1,42 @@
+================================================================================
+THSA-2B V1: GOOGLE COLAB FULL TRAINING EXECUTION COMMANDS
+================================================================================
+
+# 1. Mount Google Drive for Checkpoint Persistence:
+from google.colab import drive
+drive.mount('/content/drive')
+
+# 2. Create Drive Checkpoint Directory:
+!mkdir -p /content/drive/MyDrive/THSA-2B/checkpoints
+!mkdir -p /content/drive/MyDrive/THSA-2B/logs
+
+# 3. Clone Repository:
+!git clone https://github.com/tpxplatfrom-afk/SS_module_BD.git /content/SS_module_BD
+%cd /content/SS_module_BD/ss_bangladesh_nano_android_module/THSA-2B\ V1
+
+# 4. Run Environment Setup:
+!bash training/colab/setup_colab.sh
+
+# 5. Run Preflight Verification:
+!python training/colab/colab_preflight.py
+
+# 6. Run 10-Step Real GPU Smoke Test:
+!python training/colab/real_gpu_smoke_test.py
+
+# 7. Start Full Production Knowledge Distillation & QAT Training Run:
+!python training/distillation/qwen_teacher_distillation.py \
+    --config training/config/thsa_2b_config.json \
+    --teacher Qwen/Qwen2.5-7B-Instruct \
+    --corpus data/processed/clean_pretrain_corpus.txt \
+    --output_dir /content/drive/MyDrive/THSA-2B/checkpoints \
+    --steps 10000 \
+    --batch_size 1 \
+    --grad_accum 16 \
+    --checkpoint_interval 500 \
+    --precision bfloat16 \
+    --device cuda
+
+# 8. Verify Final Checkpoint:
+!python training/colab/verify_checkpoint.py \
+    --checkpoint /content/drive/MyDrive/THSA-2B/checkpoints/thsa_2b_trained_final.pt \
+    --output /content/drive/MyDrive/THSA-2B/THSA-2B-CHECKPOINT-MANIFEST.json

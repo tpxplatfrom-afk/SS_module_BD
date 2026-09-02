@@ -33,6 +33,15 @@
 #include "../../include/kernels/neon_state_update.h"
 #include "../../include/kernels/neon_norm_act.h"
 
+#ifdef __ANDROID__
+#include <android/log.h>
+#define NANO_LOGI(...) __android_log_print(ANDROID_LOG_INFO, "NanoEngineNative", __VA_ARGS__)
+#define NANO_LOGE(...) __android_log_print(ANDROID_LOG_ERROR, "NanoEngineNative", __VA_ARGS__)
+#else
+#define NANO_LOGI(...)
+#define NANO_LOGE(...)
+#endif
+
 // Forward declaration of arena
 typedef struct NanoMemoryArena NanoMemoryArena;
 extern "C" {
@@ -126,10 +135,39 @@ struct NanoEngineContext {
     float*                kv_cache_v_scales[24];
 };
 
+struct LogitRank {
+    NanoTokenId token_id;
+    float logit;
+};
+
+static void compute_top5_logits(const float* logits, size_t vocab_size, LogitRank top5[5]) {
+    for (int r = 0; r < 5; ++r) {
+        top5[r].token_id = -1;
+        top5[r].logit = -1e30f;
+    }
+    for (size_t v = 0; v < vocab_size; ++v) {
+        float val = logits[v];
+        if (val > top5[4].logit) {
+            top5[4].token_id = (NanoTokenId)v;
+            top5[4].logit = val;
+            for (int r = 3; r >= 0; --r) {
+                if (top5[r + 1].logit > top5[r].logit) {
+                    LogitRank tmp = top5[r];
+                    top5[r] = top5[r + 1];
+                    top5[r + 1] = tmp;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+}
+
 static NanoTokenId nano_forward_pass_single_token(
     NanoEngineContext* ctx,
     NanoTokenId input_token,
-    size_t current_seq_len
+    size_t current_seq_len,
+    bool compute_logits = true
 ) {
     if (!ctx) return NANO_TOKEN_UNK;
     if (input_token < 0 || input_token >= 65536) {
@@ -242,6 +280,11 @@ static NanoTokenId nano_forward_pass_single_token(
         ctx->stats.ffn_execution_count++;
     }
     
+    if (!compute_logits) {
+        ctx->stats.forward_pass_count++;
+        return input_token;
+    }
+
     // -------------------------------------------------------------
     // 3. FINAL RMSNORM
     // -------------------------------------------------------------
@@ -277,18 +320,24 @@ static NanoTokenId nano_forward_pass_single_token(
     ctx->stats.logits_generation_count++;
     ctx->stats.forward_pass_count++;
     
+    NANO_LOGI("NANO_CAUSAL_LOGITS_READY: step=%zu, vocab_size=65536", current_seq_len);
+
     // -------------------------------------------------------------
     // 5. REAL TOKEN SELECTION (Greedy Argmax over Logits Buffer)
     // -------------------------------------------------------------
-    NanoTokenId best_token = 0;
-    float max_logit = ctx->logits[0];
-    for (size_t v = 1; v < 65536; ++v) {
-        if (ctx->logits[v] > max_logit) {
-            max_logit = ctx->logits[v];
-            best_token = (NanoTokenId)v;
-        }
+    LogitRank top5[5];
+    compute_top5_logits(ctx->logits, 65536, top5);
+    NANO_LOGI("NANO_CAUSAL_LOGITS_TOP5: step=%zu", current_seq_len);
+    for (int r = 0; r < 5; ++r) {
+        NANO_LOGI("  rank=%d token_id=%d logit=%.4f", r, top5[r].token_id, top5[r].logit);
     }
     
+    NanoTokenId best_token = top5[0].token_id;
+    float max_logit = top5[0].logit;
+    
+    NANO_LOGI("NANO_CAUSAL_TOKEN_SELECTED: step=%zu, token_id=%d, logit=%.4f",
+              current_seq_len, best_token, max_logit);
+
     ctx->stats.sampling_count++;
     ctx->stats.last_selected_token_id = best_token;
     ctx->stats.last_max_logit = max_logit;
@@ -303,18 +352,13 @@ NanoStatus nano_engine_init(
     if (!out_ctx) return NANO_ERR_INVALID_PARAM;
     if (!model_path || model_path[0] == '\0') return NANO_ERR_INVALID_PARAM;
     
-    // 1. Check file existence & open binary handle
+    NANO_LOGI("NANO_NATIVE_INIT_BEGIN: path=%s", model_path);
+    
+    // 1. Open model binary file
 #ifdef _WIN32
-    HANDLE hFile = CreateFileA(
-        model_path,
-        GENERIC_READ,
-        FILE_SHARE_READ,
-        NULL,
-        OPEN_EXISTING,
-        FILE_ATTRIBUTE_NORMAL,
-        NULL
-    );
+    HANDLE hFile = CreateFileA(model_path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (hFile == INVALID_HANDLE_VALUE) {
+        NANO_LOGE("Failed to open model file: %s", model_path);
         return NANO_ERR_FILE_NOT_FOUND;
     }
     
@@ -327,6 +371,7 @@ NanoStatus nano_engine_init(
 #else
     int fd = open(model_path, O_RDONLY);
     if (fd < 0) {
+        NANO_LOGE("Failed to open model file: %s", model_path);
         return NANO_ERR_FILE_NOT_FOUND;
     }
     struct stat st;
@@ -336,6 +381,8 @@ NanoStatus nano_engine_init(
     }
     size_t file_size = (size_t)st.st_size;
 #endif
+
+    NANO_LOGI("NANO_MODEL_OPEN_OK: path=%s, size=%zu", model_path, file_size);
 
     // 2. Validate minimum file size for 64-byte header
     if (file_size < sizeof(NanoBinaryHeader)) {
@@ -406,6 +453,8 @@ NanoStatus nano_engine_init(
         return NANO_ERR_INVALID_HEADER;
     }
 
+    NANO_LOGI("NANO_MODEL_HEADER_OK: magic=%.4s, version=0x%04X, tensors=%u, d_model=%u", hdr->magic, hdr->version, hdr->tensor_count, hdr->d_model);
+
     // 5. Validate Descriptor Table & Offset Boundaries
     size_t desc_table_size = (size_t)hdr->tensor_count * sizeof(NanoTensorDescriptor);
     if (sizeof(NanoBinaryHeader) + desc_table_size > file_size) {
@@ -448,6 +497,8 @@ NanoStatus nano_engine_init(
 #endif
         return NANO_ERR_CHECKSUM_MISMATCH;
     }
+
+    NANO_LOGI("NANO_TENSOR_TABLE_OK: tensor_count=%u, crc32=0x%08X", hdr->tensor_count, hdr->crc32);
 
     // 7. Initialize Engine Context & Native Model State
     NanoEngineContext* ctx = new NanoEngineContext();
@@ -603,6 +654,7 @@ NanoStatus nano_engine_init(
     
     ctx->state = NANO_STATE_READY;
     *out_ctx = ctx;
+    NANO_LOGI("NANO_ENGINE_READY: context=%p", (void*)ctx);
     return NANO_SUCCESS;
 }
 
@@ -710,6 +762,11 @@ NanoStatus nano_engine_generate(
     
     ctx->cancel_requested.store(false);
     
+    int max_tokens = gen_config ? gen_config->max_output_tokens : 128;
+    if (max_tokens <= 0) max_tokens = 128;
+    
+    NANO_LOGI("NANO_GENERATE_BEGIN: prompt_tokens=%zu, max_tokens=%d", num_prompt_tokens, max_tokens);
+
     // -------------------------------------------------------------
     // 1. CHUNKED PREFILL (Real Forward Passes for Prompt Tokens)
     // -------------------------------------------------------------
@@ -722,7 +779,8 @@ NanoStatus nano_engine_generate(
             return NANO_ERR_CANCELLED;
         }
         last_prompt_token = prompt_tokens[p];
-        nano_forward_pass_single_token(ctx, last_prompt_token, ctx->active_kv_tokens);
+        bool is_last = (p == num_prompt_tokens - 1);
+        nano_forward_pass_single_token(ctx, last_prompt_token, ctx->active_kv_tokens, is_last);
         ctx->active_kv_tokens++;
     }
     
@@ -730,33 +788,39 @@ NanoStatus nano_engine_generate(
     // 2. AUTOREGRESSIVE DECODE LOOP (Real Neural Logits & Sampling)
     // -------------------------------------------------------------
     ctx->state = NANO_STATE_GENERATING;
-    int max_tokens = gen_config ? gen_config->max_output_tokens : 128;
-    if (max_tokens <= 0) max_tokens = 128;
     
     NanoTokenId curr_input = ctx->stats.last_selected_token_id;
     if (curr_input <= 0) curr_input = last_prompt_token;
     
     auto t_start = std::chrono::high_resolution_clock::now();
+    uint32_t step_tokens_emitted = 0;
     
     for (int step = 0; step < max_tokens; ++step) {
         if (ctx->cancel_requested.load()) {
             ctx->state = NANO_STATE_READY;
+            NANO_LOGI("NANO_CAUSAL_GENERATION_END: generated_token_count=%u, cancelled=true, duration_ms=%.2f",
+                      step_tokens_emitted, 0.0);
             return NANO_ERR_CANCELLED;
         }
         
+        NANO_LOGI("NANO_CAUSAL_FORWARD_BEGIN: step=%d, input_token=%d", step, curr_input);
+
         // Execute Real Neural Forward Pass
-        NanoTokenId emitted_id = nano_forward_pass_single_token(ctx, curr_input, ctx->active_kv_tokens);
+        NanoTokenId emitted_id = nano_forward_pass_single_token(ctx, curr_input, ctx->active_kv_tokens, true);
         ctx->active_kv_tokens++;
         ctx->total_tokens_emitted++;
+        step_tokens_emitted++;
         
         // Real Token Decoding via Tokenizer Trie/Byte Fallback
         char token_str[128] = {0};
         size_t bytes_written = 0;
         nano_tokenizer_decode_token(ctx->tokenizer, emitted_id, token_str, sizeof(token_str), &bytes_written);
         if (bytes_written == 0) {
-            snprintf(token_str, sizeof(token_str), "[tok_%d]", emitted_id);
+            token_str[0] = '\0';
         }
         
+        NANO_LOGI("NANO_CAUSAL_DECODE: step=%d, token_id=%d, text='%s'", step, emitted_id, token_str);
+
         bool is_eos = (emitted_id == NANO_TOKEN_EOS || emitted_id == NANO_TOKEN_IM_END || step == max_tokens - 1);
         
         bool keep_going = callback(token_str, emitted_id, is_eos, user_data);
@@ -768,8 +832,14 @@ NanoStatus nano_engine_generate(
     auto t_end = std::chrono::high_resolution_clock::now();
     double elapsed_s = std::chrono::duration<double>(t_end - t_start).count();
     if (elapsed_s > 0.001) {
-        ctx->last_tok_per_sec = (float)(ctx->total_tokens_emitted / elapsed_s);
+        ctx->last_tok_per_sec = (float)(step_tokens_emitted / elapsed_s);
     }
+    
+    NANO_LOGI("NANO_GENERATE_END: emitted=%u, tok/s=%.2f, time_ms=%.2f", step_tokens_emitted, ctx->last_tok_per_sec, elapsed_s * 1000.0);
+    NANO_LOGI("NANO_TOKEN_COUNT=%u", step_tokens_emitted);
+    NANO_LOGI("NANO_INFERENCE_MS=%.2f", elapsed_s * 1000.0);
+    NANO_LOGI("NANO_CAUSAL_GENERATION_END: generated_token_count=%u, cancelled=false, duration_ms=%.2f",
+              step_tokens_emitted, elapsed_s * 1000.0);
     
     ctx->state = NANO_STATE_READY;
     return NANO_SUCCESS;
@@ -840,3 +910,31 @@ void nano_engine_free(NanoEngineContext* ctx) {
     
     delete ctx;
 }
+
+NanoStatus nano_engine_encode(
+    const NanoEngineContext* ctx,
+    const char* text,
+    size_t text_len,
+    NanoTokenId* out_tokens,
+    size_t max_tokens,
+    size_t* out_num_tokens
+) {
+    if (!ctx || !ctx->tokenizer || !text || !out_tokens || !out_num_tokens) {
+        return NANO_ERR_INVALID_PARAM;
+    }
+    return nano_tokenizer_encode(ctx->tokenizer, text, text_len, out_tokens, max_tokens, out_num_tokens);
+}
+
+NanoStatus nano_engine_decode_token(
+    const NanoEngineContext* ctx,
+    NanoTokenId token_id,
+    char* out_buf,
+    size_t buf_capacity,
+    size_t* out_bytes_written
+) {
+    if (!ctx || !ctx->tokenizer || !out_buf || !out_bytes_written) {
+        return NANO_ERR_INVALID_PARAM;
+    }
+    return nano_tokenizer_decode_token(ctx->tokenizer, token_id, out_buf, buf_capacity, out_bytes_written);
+}
+
