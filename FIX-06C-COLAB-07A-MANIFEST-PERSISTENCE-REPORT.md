@@ -57,6 +57,7 @@ PERSISTENT_CHECKPOINT_VERIFICATION_FAIL: MANIFEST_MISSING
 | **Authoritative Teacher** | `Qwen/Qwen2.5-7B-Instruct` |
 | **Required Keys** | `["model_state_dict", "optimizer_state_dict", "config", "distillation_meta"]` |
 | **NaN / Inf Tensors** | `0 NaN, 0 Inf` |
+| **Repository Commit SHA** | `ea7b44c11e75e8cde9fe6988d3bf021adff0f736` |
 | **Manifest Path** | `/content/drive/MyDrive/THSA-2B/checkpoints/checkpoint_step_000010.manifest.json` |
 | **Manifest Schema** | `FIX-06C-COLAB-07A` (`FIX-06C-COLAB-07A-1`) |
 | **Persistence Protocol** | `atomic_manifest_write_fsync_sync_hash_verify` |
