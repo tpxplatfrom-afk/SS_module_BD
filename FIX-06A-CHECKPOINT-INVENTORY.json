@@ -1,0 +1,77 @@
+{
+  "inventory_count": 6,
+  "candidates": [
+    {
+      "path": "c:\\Users\\User\\Desktop\\SS_module_BD\\checkpoints\\thsa_trained_model.pt",
+      "filename": "thsa_trained_model.pt",
+      "type": "PyTorch Checkpoint (Corrupted/Stub)",
+      "size_bytes": 24576,
+      "sha256": "f1d5a8d630e612f4b8e6ca119db4a9920a044bf5171bb1993fc8f3005efc16b5",
+      "readable": false,
+      "error": "[Errno 22] Invalid argument / file truncated"
+    },
+    {
+      "path": "c:\\Users\\User\\Desktop\\SS_module_BD\\models\\core\\ss_bangladesh\\model\\model.safetensors",
+      "filename": "model.safetensors",
+      "type": "SafeTensors 70M Dense LLaMA",
+      "size_bytes": 286123304,
+      "sha256": "bb2f9e7cd79ef83546fd70ea97d8845cff17a7a8482580c3e63e36c4614119bb",
+      "readable": true,
+      "tensor_count": 93,
+      "d_model": 576,
+      "vocab_size": 16000
+    },
+    {
+      "path": "c:\\Users\\User\\Desktop\\SS_module_BD\\models\\sstutor_bengali_70m_edu\\model.safetensors",
+      "filename": "model.safetensors",
+      "type": "SafeTensors 70M Dense LLaMA",
+      "size_bytes": 217339624,
+      "sha256": "a44215f9bc3ebb0ca22e0021974a6fd556b0c8b88135211c59553190f6865c2c",
+      "readable": true,
+      "tensor_count": 93,
+      "d_model": 576,
+      "vocab_size": 1073
+    },
+    {
+      "path": "c:\\Users\\User\\Desktop\\SS_module_BD\\ss_bangladesh_nano_android_module\\THSA-2B V1\\training\\checkpoints\\thsa_distilled_student.pt",
+      "filename": "thsa_distilled_student.pt",
+      "type": "PyTorch Dict (350M Proxy Pilot)",
+      "size_bytes": 1180513254,
+      "sha256": "d6ad65b87dda3fa50f5d354252144249a51e84310ebde51f9d585df794e01a54",
+      "readable": true,
+      "tensor_count": 129,
+      "d_model": 1024,
+      "d_ffn": 2764,
+      "total_blocks": 14,
+      "vocab_size": 65536
+    },
+    {
+      "path": "c:\\Users\\User\\Desktop\\SS_module_BD\\ss_bangladesh_nano_android_module\\THSA-2B V1\\android\\src\\main\\assets\\model_trained.nano",
+      "filename": "model_trained.nano",
+      "type": "Binary .nano (Export of 350M proxy student)",
+      "size_bytes": 166728000,
+      "sha256": "966a2ecf3ca4d2c9100b9ab6d688379f92b35f8d0c6e821e40a249524f039c16",
+      "readable": true,
+      "tensor_count": 71,
+      "d_model": 1024,
+      "d_ffn": 2764,
+      "total_blocks": 14,
+      "vocab_size": 65536
+    },
+    {
+      "path": "c:\\Users\\User\\Desktop\\SS_module_BD\\ss_bangladesh_nano_android_module\\THSA-2B V1\\models\\model.nano",
+      "filename": "model.nano",
+      "type": "Binary .nano (Scaffold / Synthetic 2B placeholder)",
+      "size_bytes": 686176192,
+      "sha256": "638d51bd6813893145a2c64a46e33581c78b2a8134df0b580f4de1645e164791",
+      "readable": true,
+      "tensor_count": 123,
+      "d_model": 2560,
+      "d_ffn": 6912,
+      "total_blocks": 24,
+      "vocab_size": 65536,
+      "synthetic": true,
+      "zero_tensors": 121
+    }
+  ]
+}

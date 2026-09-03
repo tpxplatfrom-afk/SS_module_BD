@@ -21,6 +21,21 @@ android {
     versionName = "1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+    ndk {
+      abiFilters.addAll(setOf("armeabi-v7a", "arm64-v8a"))
+    }
+  }
+
+  androidResources {
+    noCompress += listOf("nano")
+  }
+
+  sourceSets {
+    getByName("main") {
+      jniLibs.srcDirs("src/main/jniLibs")
+      assets.srcDirs("src/main/assets", "../../THSA-2B V1/android/src/main/assets")
+    }
   }
 
   signingConfigs {

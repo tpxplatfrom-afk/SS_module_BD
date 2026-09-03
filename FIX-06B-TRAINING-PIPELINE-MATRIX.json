@@ -1,0 +1,31 @@
+{
+  "training_scripts": [
+    {
+      "script": "training/distillation/qwen_teacher_distillation.py",
+      "purpose": "Teacher-Student Knowledge Distillation from Qwen2.5-7B into THSA Hybrid Student",
+      "target_supported": "THSA-2B-V1-PRODUCTION (via --config training/config/thsa_2b_config.json)",
+      "distillation_teachers": [
+        "Qwen/Qwen2.5-7B-Instruct",
+        "Qwen/Qwen2.5-0.5B-Instruct"
+      ],
+      "loss": "Mixed Cross-Entropy + Soft KL Divergence (alpha=0.65, tau=2.0)",
+      "quantization_support": "Dynamic QAT Annealing (beta 1.0 -> 100.0) with TernaryLinear",
+      "mixed_precision": "FP16 AMP + Gradient Checkpointing",
+      "status": "READY_FOR_CLUSTER_EXECUTION"
+    },
+    {
+      "script": "training/train_qat.py",
+      "purpose": "Standalone QAT Trainer on 5-tier ShareGPT dataset",
+      "target_supported": "THSA-350M-PROXY & THSA-2B (configurable via --config)",
+      "loss": "DistillationLoss + CE Loss",
+      "status": "READY_FOR_EXECUTION"
+    },
+    {
+      "script": "training/train_foundation_sft.py",
+      "purpose": "Foundation SFT LoRA fine-tuning for Bengali ShareGPT",
+      "target_supported": "Qwen2.5 Base Models",
+      "status": "READY_FOR_EXECUTION"
+    }
+  ],
+  "executable_2b_command": "python training/distillation/qwen_teacher_distillation.py --config training/config/thsa_2b_config.json --teacher Qwen/Qwen2.5-7B-Instruct --corpus data/processed/clean_pretrain_corpus.txt --steps 10000 --batch_size 1 --grad_accum 16 --output_dir training/checkpoints"
+}

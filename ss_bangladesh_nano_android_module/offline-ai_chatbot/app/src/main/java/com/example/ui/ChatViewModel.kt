@@ -134,7 +134,7 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
         val cleanQuery = query.trim()
         if (cleanQuery.isBlank() || _uiState.value.isGenerating) return
 
-        val sessionId = _uiState.value.currentSessionId ?: return
+        val currentId = _uiState.value.currentSessionId
         val category = _uiState.value.selectedCategory ?: "General"
 
         _uiState.value = _uiState.value.copy(
@@ -144,8 +144,13 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
 
         viewModelScope.launch {
             try {
+                val activeSessionId = currentId ?: run {
+                    val s = repository.createNewSession()
+                    switchSession(s.id, s.title)
+                    s.id
+                }
                 repository.processUserMessage(
-                    sessionId = sessionId,
+                    sessionId = activeSessionId,
                     userText = cleanQuery,
                     category = category
                 )

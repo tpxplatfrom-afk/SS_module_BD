@@ -1,0 +1,220 @@
+name,shape,dtype,numel,requires_grad,trainable_status,layer,component_family
+embed_tokens.weight,"[65536, 2560]",float32,167772160,True,TRAINABLE,embedding,embedding
+layers.0.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,0,state_mixer
+layers.0.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,0,state_mixer
+layers.0.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,0,state_mixer
+layers.0.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,0,gqa_mixer
+layers.0.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,0,state_mixer
+layers.0.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,0,ffn
+layers.0.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,0,ffn
+layers.0.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,0,ffn
+layers.0.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,0,ffn
+layers.1.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,1,state_mixer
+layers.1.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,1,state_mixer
+layers.1.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,1,state_mixer
+layers.1.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,1,gqa_mixer
+layers.1.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,1,state_mixer
+layers.1.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,1,ffn
+layers.1.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,1,ffn
+layers.1.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,1,ffn
+layers.1.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,1,ffn
+layers.2.mixer.q_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,2,gqa_mixer
+layers.2.mixer.k_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,2,gqa_mixer
+layers.2.mixer.v_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,2,gqa_mixer
+layers.2.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,2,gqa_mixer
+layers.2.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,2,gqa_mixer
+layers.2.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,2,ffn
+layers.2.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,2,ffn
+layers.2.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,2,ffn
+layers.2.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,2,ffn
+layers.3.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,3,state_mixer
+layers.3.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,3,state_mixer
+layers.3.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,3,state_mixer
+layers.3.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,3,gqa_mixer
+layers.3.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,3,state_mixer
+layers.3.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,3,ffn
+layers.3.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,3,ffn
+layers.3.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,3,ffn
+layers.3.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,3,ffn
+layers.4.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,4,state_mixer
+layers.4.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,4,state_mixer
+layers.4.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,4,state_mixer
+layers.4.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,4,gqa_mixer
+layers.4.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,4,state_mixer
+layers.4.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,4,ffn
+layers.4.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,4,ffn
+layers.4.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,4,ffn
+layers.4.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,4,ffn
+layers.5.mixer.q_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,5,gqa_mixer
+layers.5.mixer.k_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,5,gqa_mixer
+layers.5.mixer.v_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,5,gqa_mixer
+layers.5.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,5,gqa_mixer
+layers.5.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,5,gqa_mixer
+layers.5.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,5,ffn
+layers.5.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,5,ffn
+layers.5.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,5,ffn
+layers.5.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,5,ffn
+layers.6.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,6,state_mixer
+layers.6.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,6,state_mixer
+layers.6.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,6,state_mixer
+layers.6.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,6,gqa_mixer
+layers.6.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,6,state_mixer
+layers.6.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,6,ffn
+layers.6.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,6,ffn
+layers.6.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,6,ffn
+layers.6.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,6,ffn
+layers.7.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,7,state_mixer
+layers.7.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,7,state_mixer
+layers.7.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,7,state_mixer
+layers.7.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,7,gqa_mixer
+layers.7.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,7,state_mixer
+layers.7.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,7,ffn
+layers.7.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,7,ffn
+layers.7.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,7,ffn
+layers.7.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,7,ffn
+layers.8.mixer.q_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,8,gqa_mixer
+layers.8.mixer.k_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,8,gqa_mixer
+layers.8.mixer.v_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,8,gqa_mixer
+layers.8.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,8,gqa_mixer
+layers.8.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,8,gqa_mixer
+layers.8.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,8,ffn
+layers.8.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,8,ffn
+layers.8.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,8,ffn
+layers.8.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,8,ffn
+layers.9.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,9,state_mixer
+layers.9.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,9,state_mixer
+layers.9.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,9,state_mixer
+layers.9.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,9,gqa_mixer
+layers.9.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,9,state_mixer
+layers.9.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,9,ffn
+layers.9.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,9,ffn
+layers.9.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,9,ffn
+layers.9.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,9,ffn
+layers.10.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,10,state_mixer
+layers.10.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,10,state_mixer
+layers.10.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,10,state_mixer
+layers.10.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,10,gqa_mixer
+layers.10.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,10,state_mixer
+layers.10.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,10,ffn
+layers.10.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,10,ffn
+layers.10.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,10,ffn
+layers.10.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,10,ffn
+layers.11.mixer.q_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,11,gqa_mixer
+layers.11.mixer.k_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,11,gqa_mixer
+layers.11.mixer.v_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,11,gqa_mixer
+layers.11.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,11,gqa_mixer
+layers.11.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,11,gqa_mixer
+layers.11.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,11,ffn
+layers.11.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,11,ffn
+layers.11.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,11,ffn
+layers.11.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,11,ffn
+layers.12.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,12,state_mixer
+layers.12.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,12,state_mixer
+layers.12.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,12,state_mixer
+layers.12.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,12,gqa_mixer
+layers.12.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,12,state_mixer
+layers.12.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,12,ffn
+layers.12.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,12,ffn
+layers.12.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,12,ffn
+layers.12.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,12,ffn
+layers.13.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,13,state_mixer
+layers.13.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,13,state_mixer
+layers.13.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,13,state_mixer
+layers.13.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,13,gqa_mixer
+layers.13.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,13,state_mixer
+layers.13.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,13,ffn
+layers.13.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,13,ffn
+layers.13.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,13,ffn
+layers.13.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,13,ffn
+layers.14.mixer.q_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,14,gqa_mixer
+layers.14.mixer.k_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,14,gqa_mixer
+layers.14.mixer.v_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,14,gqa_mixer
+layers.14.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,14,gqa_mixer
+layers.14.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,14,gqa_mixer
+layers.14.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,14,ffn
+layers.14.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,14,ffn
+layers.14.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,14,ffn
+layers.14.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,14,ffn
+layers.15.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,15,state_mixer
+layers.15.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,15,state_mixer
+layers.15.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,15,state_mixer
+layers.15.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,15,gqa_mixer
+layers.15.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,15,state_mixer
+layers.15.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,15,ffn
+layers.15.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,15,ffn
+layers.15.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,15,ffn
+layers.15.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,15,ffn
+layers.16.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,16,state_mixer
+layers.16.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,16,state_mixer
+layers.16.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,16,state_mixer
+layers.16.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,16,gqa_mixer
+layers.16.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,16,state_mixer
+layers.16.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,16,ffn
+layers.16.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,16,ffn
+layers.16.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,16,ffn
+layers.16.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,16,ffn
+layers.17.mixer.q_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,17,gqa_mixer
+layers.17.mixer.k_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,17,gqa_mixer
+layers.17.mixer.v_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,17,gqa_mixer
+layers.17.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,17,gqa_mixer
+layers.17.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,17,gqa_mixer
+layers.17.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,17,ffn
+layers.17.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,17,ffn
+layers.17.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,17,ffn
+layers.17.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,17,ffn
+layers.18.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,18,state_mixer
+layers.18.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,18,state_mixer
+layers.18.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,18,state_mixer
+layers.18.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,18,gqa_mixer
+layers.18.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,18,state_mixer
+layers.18.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,18,ffn
+layers.18.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,18,ffn
+layers.18.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,18,ffn
+layers.18.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,18,ffn
+layers.19.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,19,state_mixer
+layers.19.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,19,state_mixer
+layers.19.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,19,state_mixer
+layers.19.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,19,gqa_mixer
+layers.19.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,19,state_mixer
+layers.19.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,19,ffn
+layers.19.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,19,ffn
+layers.19.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,19,ffn
+layers.19.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,19,ffn
+layers.20.mixer.q_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,20,gqa_mixer
+layers.20.mixer.k_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,20,gqa_mixer
+layers.20.mixer.v_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,20,gqa_mixer
+layers.20.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,20,gqa_mixer
+layers.20.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,20,gqa_mixer
+layers.20.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,20,ffn
+layers.20.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,20,ffn
+layers.20.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,20,ffn
+layers.20.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,20,ffn
+layers.21.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,21,state_mixer
+layers.21.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,21,state_mixer
+layers.21.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,21,state_mixer
+layers.21.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,21,gqa_mixer
+layers.21.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,21,state_mixer
+layers.21.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,21,ffn
+layers.21.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,21,ffn
+layers.21.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,21,ffn
+layers.21.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,21,ffn
+layers.22.mixer.conv1d.weight,"[2560, 1, 4]",float32,10240,True,TRAINABLE,22,state_mixer
+layers.22.mixer.conv1d.bias,[2560],float32,2560,True,TRAINABLE,22,state_mixer
+layers.22.mixer.in_proj.weight,"[5120, 2560]",float32,13107200,True,TRAINABLE,22,state_mixer
+layers.22.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,22,gqa_mixer
+layers.22.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,22,state_mixer
+layers.22.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,22,ffn
+layers.22.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,22,ffn
+layers.22.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,22,ffn
+layers.22.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,22,ffn
+layers.23.mixer.q_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,23,gqa_mixer
+layers.23.mixer.k_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,23,gqa_mixer
+layers.23.mixer.v_proj.weight,"[512, 2560]",float32,1310720,True,TRAINABLE,23,gqa_mixer
+layers.23.mixer.out_proj.weight,"[2560, 2560]",float32,6553600,True,TRAINABLE,23,gqa_mixer
+layers.23.mixer.norm.weight,[2560],float32,2560,True,TRAINABLE,23,gqa_mixer
+layers.23.ffn.gate_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,23,ffn
+layers.23.ffn.up_proj.weight,"[6912, 2560]",float32,17694720,True,TRAINABLE,23,ffn
+layers.23.ffn.down_proj.weight,"[2560, 6912]",float32,17694720,True,TRAINABLE,23,ffn
+layers.23.ffn.norm.weight,[2560],float32,2560,True,TRAINABLE,23,ffn
+final_norm.weight,[2560],float32,2560,True,TRAINABLE,final_norm,final_norm
+lm_head.weight,"[65536, 2560]",float32,167772160,True,TRAINABLE,lm_head,lm_head

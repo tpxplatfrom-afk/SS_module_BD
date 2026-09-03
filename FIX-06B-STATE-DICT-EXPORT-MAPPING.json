@@ -1,0 +1,1480 @@
+{
+  "total_nano_tensors": 123,
+  "mappings": [
+    {
+      "nano_index": 0,
+      "nano_name": "embed_tokens",
+      "state_dict_key": "embed_tokens.weight",
+      "shape": [
+        65536,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_INT8 (2)",
+      "scale_source": "abs(w).max() / 127.0",
+      "transformation": "symmetric_int8_quantization"
+    },
+    {
+      "nano_index": 1,
+      "nano_name": "layer_0_state_conv_w",
+      "state_dict_key": "layers.0.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 2,
+      "nano_name": "layer_0_ffn_gate",
+      "state_dict_key": "layers.0.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 3,
+      "nano_name": "layer_0_ffn_up",
+      "state_dict_key": "layers.0.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 4,
+      "nano_name": "layer_0_ffn_down",
+      "state_dict_key": "layers.0.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 5,
+      "nano_name": "layer_1_state_conv_w",
+      "state_dict_key": "layers.1.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 6,
+      "nano_name": "layer_1_ffn_gate",
+      "state_dict_key": "layers.1.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 7,
+      "nano_name": "layer_1_ffn_up",
+      "state_dict_key": "layers.1.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 8,
+      "nano_name": "layer_1_ffn_down",
+      "state_dict_key": "layers.1.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 9,
+      "nano_name": "layer_2_attn_q",
+      "state_dict_key": "layers.2.mixer.q_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 10,
+      "nano_name": "layer_2_attn_k",
+      "state_dict_key": "layers.2.mixer.k_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 11,
+      "nano_name": "layer_2_attn_v",
+      "state_dict_key": "layers.2.mixer.v_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 12,
+      "nano_name": "layer_2_attn_out",
+      "state_dict_key": "layers.2.mixer.out_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 13,
+      "nano_name": "layer_2_ffn_gate",
+      "state_dict_key": "layers.2.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 14,
+      "nano_name": "layer_2_ffn_up",
+      "state_dict_key": "layers.2.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 15,
+      "nano_name": "layer_2_ffn_down",
+      "state_dict_key": "layers.2.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 16,
+      "nano_name": "layer_3_state_conv_w",
+      "state_dict_key": "layers.3.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 17,
+      "nano_name": "layer_3_ffn_gate",
+      "state_dict_key": "layers.3.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 18,
+      "nano_name": "layer_3_ffn_up",
+      "state_dict_key": "layers.3.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 19,
+      "nano_name": "layer_3_ffn_down",
+      "state_dict_key": "layers.3.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 20,
+      "nano_name": "layer_4_state_conv_w",
+      "state_dict_key": "layers.4.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 21,
+      "nano_name": "layer_4_ffn_gate",
+      "state_dict_key": "layers.4.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 22,
+      "nano_name": "layer_4_ffn_up",
+      "state_dict_key": "layers.4.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 23,
+      "nano_name": "layer_4_ffn_down",
+      "state_dict_key": "layers.4.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 24,
+      "nano_name": "layer_5_attn_q",
+      "state_dict_key": "layers.5.mixer.q_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 25,
+      "nano_name": "layer_5_attn_k",
+      "state_dict_key": "layers.5.mixer.k_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 26,
+      "nano_name": "layer_5_attn_v",
+      "state_dict_key": "layers.5.mixer.v_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 27,
+      "nano_name": "layer_5_attn_out",
+      "state_dict_key": "layers.5.mixer.out_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 28,
+      "nano_name": "layer_5_ffn_gate",
+      "state_dict_key": "layers.5.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 29,
+      "nano_name": "layer_5_ffn_up",
+      "state_dict_key": "layers.5.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 30,
+      "nano_name": "layer_5_ffn_down",
+      "state_dict_key": "layers.5.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 31,
+      "nano_name": "layer_6_state_conv_w",
+      "state_dict_key": "layers.6.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 32,
+      "nano_name": "layer_6_ffn_gate",
+      "state_dict_key": "layers.6.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 33,
+      "nano_name": "layer_6_ffn_up",
+      "state_dict_key": "layers.6.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 34,
+      "nano_name": "layer_6_ffn_down",
+      "state_dict_key": "layers.6.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 35,
+      "nano_name": "layer_7_state_conv_w",
+      "state_dict_key": "layers.7.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 36,
+      "nano_name": "layer_7_ffn_gate",
+      "state_dict_key": "layers.7.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 37,
+      "nano_name": "layer_7_ffn_up",
+      "state_dict_key": "layers.7.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 38,
+      "nano_name": "layer_7_ffn_down",
+      "state_dict_key": "layers.7.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 39,
+      "nano_name": "layer_8_attn_q",
+      "state_dict_key": "layers.8.mixer.q_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 40,
+      "nano_name": "layer_8_attn_k",
+      "state_dict_key": "layers.8.mixer.k_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 41,
+      "nano_name": "layer_8_attn_v",
+      "state_dict_key": "layers.8.mixer.v_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 42,
+      "nano_name": "layer_8_attn_out",
+      "state_dict_key": "layers.8.mixer.out_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 43,
+      "nano_name": "layer_8_ffn_gate",
+      "state_dict_key": "layers.8.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 44,
+      "nano_name": "layer_8_ffn_up",
+      "state_dict_key": "layers.8.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 45,
+      "nano_name": "layer_8_ffn_down",
+      "state_dict_key": "layers.8.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 46,
+      "nano_name": "layer_9_state_conv_w",
+      "state_dict_key": "layers.9.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 47,
+      "nano_name": "layer_9_ffn_gate",
+      "state_dict_key": "layers.9.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 48,
+      "nano_name": "layer_9_ffn_up",
+      "state_dict_key": "layers.9.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 49,
+      "nano_name": "layer_9_ffn_down",
+      "state_dict_key": "layers.9.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 50,
+      "nano_name": "layer_10_state_conv_w",
+      "state_dict_key": "layers.10.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 51,
+      "nano_name": "layer_10_ffn_gate",
+      "state_dict_key": "layers.10.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 52,
+      "nano_name": "layer_10_ffn_up",
+      "state_dict_key": "layers.10.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 53,
+      "nano_name": "layer_10_ffn_down",
+      "state_dict_key": "layers.10.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 54,
+      "nano_name": "layer_11_attn_q",
+      "state_dict_key": "layers.11.mixer.q_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 55,
+      "nano_name": "layer_11_attn_k",
+      "state_dict_key": "layers.11.mixer.k_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 56,
+      "nano_name": "layer_11_attn_v",
+      "state_dict_key": "layers.11.mixer.v_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 57,
+      "nano_name": "layer_11_attn_out",
+      "state_dict_key": "layers.11.mixer.out_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 58,
+      "nano_name": "layer_11_ffn_gate",
+      "state_dict_key": "layers.11.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 59,
+      "nano_name": "layer_11_ffn_up",
+      "state_dict_key": "layers.11.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 60,
+      "nano_name": "layer_11_ffn_down",
+      "state_dict_key": "layers.11.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 61,
+      "nano_name": "layer_12_state_conv_w",
+      "state_dict_key": "layers.12.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 62,
+      "nano_name": "layer_12_ffn_gate",
+      "state_dict_key": "layers.12.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 63,
+      "nano_name": "layer_12_ffn_up",
+      "state_dict_key": "layers.12.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 64,
+      "nano_name": "layer_12_ffn_down",
+      "state_dict_key": "layers.12.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 65,
+      "nano_name": "layer_13_state_conv_w",
+      "state_dict_key": "layers.13.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 66,
+      "nano_name": "layer_13_ffn_gate",
+      "state_dict_key": "layers.13.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 67,
+      "nano_name": "layer_13_ffn_up",
+      "state_dict_key": "layers.13.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 68,
+      "nano_name": "layer_13_ffn_down",
+      "state_dict_key": "layers.13.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 69,
+      "nano_name": "layer_14_attn_q",
+      "state_dict_key": "layers.14.mixer.q_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 70,
+      "nano_name": "layer_14_attn_k",
+      "state_dict_key": "layers.14.mixer.k_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 71,
+      "nano_name": "layer_14_attn_v",
+      "state_dict_key": "layers.14.mixer.v_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 72,
+      "nano_name": "layer_14_attn_out",
+      "state_dict_key": "layers.14.mixer.out_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 73,
+      "nano_name": "layer_14_ffn_gate",
+      "state_dict_key": "layers.14.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 74,
+      "nano_name": "layer_14_ffn_up",
+      "state_dict_key": "layers.14.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 75,
+      "nano_name": "layer_14_ffn_down",
+      "state_dict_key": "layers.14.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 76,
+      "nano_name": "layer_15_state_conv_w",
+      "state_dict_key": "layers.15.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 77,
+      "nano_name": "layer_15_ffn_gate",
+      "state_dict_key": "layers.15.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 78,
+      "nano_name": "layer_15_ffn_up",
+      "state_dict_key": "layers.15.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 79,
+      "nano_name": "layer_15_ffn_down",
+      "state_dict_key": "layers.15.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 80,
+      "nano_name": "layer_16_state_conv_w",
+      "state_dict_key": "layers.16.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 81,
+      "nano_name": "layer_16_ffn_gate",
+      "state_dict_key": "layers.16.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 82,
+      "nano_name": "layer_16_ffn_up",
+      "state_dict_key": "layers.16.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 83,
+      "nano_name": "layer_16_ffn_down",
+      "state_dict_key": "layers.16.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 84,
+      "nano_name": "layer_17_attn_q",
+      "state_dict_key": "layers.17.mixer.q_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 85,
+      "nano_name": "layer_17_attn_k",
+      "state_dict_key": "layers.17.mixer.k_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 86,
+      "nano_name": "layer_17_attn_v",
+      "state_dict_key": "layers.17.mixer.v_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 87,
+      "nano_name": "layer_17_attn_out",
+      "state_dict_key": "layers.17.mixer.out_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 88,
+      "nano_name": "layer_17_ffn_gate",
+      "state_dict_key": "layers.17.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 89,
+      "nano_name": "layer_17_ffn_up",
+      "state_dict_key": "layers.17.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 90,
+      "nano_name": "layer_17_ffn_down",
+      "state_dict_key": "layers.17.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 91,
+      "nano_name": "layer_18_state_conv_w",
+      "state_dict_key": "layers.18.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 92,
+      "nano_name": "layer_18_ffn_gate",
+      "state_dict_key": "layers.18.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 93,
+      "nano_name": "layer_18_ffn_up",
+      "state_dict_key": "layers.18.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 94,
+      "nano_name": "layer_18_ffn_down",
+      "state_dict_key": "layers.18.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 95,
+      "nano_name": "layer_19_state_conv_w",
+      "state_dict_key": "layers.19.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 96,
+      "nano_name": "layer_19_ffn_gate",
+      "state_dict_key": "layers.19.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 97,
+      "nano_name": "layer_19_ffn_up",
+      "state_dict_key": "layers.19.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 98,
+      "nano_name": "layer_19_ffn_down",
+      "state_dict_key": "layers.19.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 99,
+      "nano_name": "layer_20_attn_q",
+      "state_dict_key": "layers.20.mixer.q_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 100,
+      "nano_name": "layer_20_attn_k",
+      "state_dict_key": "layers.20.mixer.k_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 101,
+      "nano_name": "layer_20_attn_v",
+      "state_dict_key": "layers.20.mixer.v_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 102,
+      "nano_name": "layer_20_attn_out",
+      "state_dict_key": "layers.20.mixer.out_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 103,
+      "nano_name": "layer_20_ffn_gate",
+      "state_dict_key": "layers.20.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 104,
+      "nano_name": "layer_20_ffn_up",
+      "state_dict_key": "layers.20.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 105,
+      "nano_name": "layer_20_ffn_down",
+      "state_dict_key": "layers.20.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 106,
+      "nano_name": "layer_21_state_conv_w",
+      "state_dict_key": "layers.21.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 107,
+      "nano_name": "layer_21_ffn_gate",
+      "state_dict_key": "layers.21.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 108,
+      "nano_name": "layer_21_ffn_up",
+      "state_dict_key": "layers.21.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 109,
+      "nano_name": "layer_21_ffn_down",
+      "state_dict_key": "layers.21.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 110,
+      "nano_name": "layer_22_state_conv_w",
+      "state_dict_key": "layers.22.mixer.conv1d.weight",
+      "shape": [
+        4,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "flatten_float32"
+    },
+    {
+      "nano_index": 111,
+      "nano_name": "layer_22_ffn_gate",
+      "state_dict_key": "layers.22.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 112,
+      "nano_name": "layer_22_ffn_up",
+      "state_dict_key": "layers.22.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 113,
+      "nano_name": "layer_22_ffn_down",
+      "state_dict_key": "layers.22.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 114,
+      "nano_name": "layer_23_attn_q",
+      "state_dict_key": "layers.23.mixer.q_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 115,
+      "nano_name": "layer_23_attn_k",
+      "state_dict_key": "layers.23.mixer.k_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 116,
+      "nano_name": "layer_23_attn_v",
+      "state_dict_key": "layers.23.mixer.v_proj.weight",
+      "shape": [
+        512,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 117,
+      "nano_name": "layer_23_attn_out",
+      "state_dict_key": "layers.23.mixer.out_proj.weight",
+      "shape": [
+        2560,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 118,
+      "nano_name": "layer_23_ffn_gate",
+      "state_dict_key": "layers.23.ffn.gate_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 119,
+      "nano_name": "layer_23_ffn_up",
+      "state_dict_key": "layers.23.ffn.up_proj.weight",
+      "shape": [
+        6912,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 120,
+      "nano_name": "layer_23_ffn_down",
+      "state_dict_key": "layers.23.ffn.down_proj.weight",
+      "shape": [
+        2560,
+        6912
+      ],
+      "quant_type": "NANO_QUANT_TERNARY_2BIT (4)",
+      "scale_source": "abs(w).mean()",
+      "transformation": "ternary_ste_2bit_packing"
+    },
+    {
+      "nano_index": 121,
+      "nano_name": "final_norm",
+      "state_dict_key": "final_norm.weight",
+      "shape": [
+        2560
+      ],
+      "quant_type": "NANO_QUANT_FP32 (0)",
+      "scale_source": "1.0",
+      "transformation": "raw_float32"
+    },
+    {
+      "nano_index": 122,
+      "nano_name": "lm_head",
+      "state_dict_key": "lm_head.weight",
+      "shape": [
+        65536,
+        2560
+      ],
+      "quant_type": "NANO_QUANT_INT8 (2)",
+      "scale_source": "abs(w).max() / 127.0",
+      "transformation": "symmetric_int8_quantization"
+    }
+  ]
+}

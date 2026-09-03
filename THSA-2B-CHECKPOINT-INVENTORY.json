@@ -1,0 +1,48 @@
+{
+  "checkpoint_inventory": [
+    {
+      "path": "c:\\Users\\User\\Desktop\\SS_module_BD\\checkpoints\\thsa_trained_model.pt",
+      "file_size": 24576,
+      "sha256": "f1d5a8d630e612f4b8e6ca119db4a9920a044bf5171bb1993fc8f3005efc16b5",
+      "format": "PyTorch (Corrupted/Truncated)",
+      "readable": false,
+      "corrupted": true,
+      "parameter_count": 0,
+      "classification": "CORRUPT/STUB",
+      "rejection_reason": "24KB truncated fragment; unreadable by PyTorch"
+    },
+    {
+      "path": "c:\\Users\\User\\Desktop\\SS_module_BD\\models\\core\\ss_bangladesh\\model\\model.safetensors",
+      "file_size": 286123304,
+      "sha256": "bb2f9e7cd79ef83546fd70ea97d8845cff17a7a8482580c3e63e36c4614119bb",
+      "format": "SafeTensors",
+      "readable": true,
+      "corrupted": false,
+      "parameter_count": 70000000,
+      "classification": "WRONG ARCHITECTURE",
+      "rejection_reason": "70M Dense LLaMA model (d_model=576, vocab=16000); not THSA hybrid"
+    },
+    {
+      "path": "c:\\Users\\User\\Desktop\\SS_module_BD\\models\\sstutor_bengali_70m_edu\\model.safetensors",
+      "file_size": 217339624,
+      "sha256": "a44215f9bc3ebb0ca22e0021974a6fd556b0c8b88135211c59553190f6865c2c",
+      "format": "SafeTensors",
+      "readable": true,
+      "corrupted": false,
+      "parameter_count": 70000000,
+      "classification": "WRONG ARCHITECTURE",
+      "rejection_reason": "70M Dense LLaMA model (d_model=576, vocab=1073); not THSA hybrid"
+    },
+    {
+      "path": "c:\\Users\\User\\Desktop\\SS_module_BD\\ss_bangladesh_nano_android_module\\THSA-2B V1\\training\\checkpoints\\thsa_distilled_student.pt",
+      "file_size": 1180513254,
+      "sha256": "d6ad65b87dda3fa50f5d354252144249a51e84310ebde51f9d585df794e01a54",
+      "format": "PyTorch Dict (129 keys)",
+      "readable": true,
+      "corrupted": false,
+      "parameter_count": 350000000,
+      "classification": "PROXY",
+      "rejection_reason": "350M Proxy Pilot model (d_model=1024, 14 layers); mismatches production 2.0B target"
+    }
+  ]
+}

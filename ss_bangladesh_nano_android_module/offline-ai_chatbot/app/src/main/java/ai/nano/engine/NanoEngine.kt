@@ -1,5 +1,6 @@
 package ai.nano.engine
 
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -19,6 +20,8 @@ class NanoEngine private constructor(
     private val isClosed = AtomicBoolean(false)
 
     companion object {
+        private const val TAG = "NanoEngine"
+
         /**
          * Load and initialize the THSA-2B AI engine from a .nano binary package file.
          */
@@ -26,10 +29,13 @@ class NanoEngine private constructor(
         @Throws(NanoEngineException::class)
         fun load(modelFile: File): NanoEngine {
             require(modelFile.exists()) { "Model package does not exist: ${modelFile.absolutePath}" }
+            Log.i(TAG, "Calling nativeInit for model: ${modelFile.absolutePath} (${modelFile.length()} bytes)")
             val handle = NanoNative.nativeInit(modelFile.absolutePath)
             if (handle == 0L) {
-                throw NanoOomException("Failed to allocate monolithic engine arena (<= 250 MB ceiling)")
+                Log.e(TAG, "nativeInit returned 0 handle")
+                throw NanoEngineException("Failed to initialize THSA-2B native engine arena", -1)
             }
+            Log.i(TAG, "Native engine successfully initialized. Handle: 0x${handle.toString(16)}")
             return NanoEngine(handle)
         }
     }
@@ -38,14 +44,17 @@ class NanoEngine private constructor(
      * Stream generated tokens asynchronously via Kotlin Flow.
      */
     fun generateStream(
-        promptTokens: IntArray,
+        prompt: String,
         config: NanoGenerationConfig = NanoGenerationConfig.DEFAULT
-    ): Flow<String> = flow {
+    ): Flow<String> = flow<String> {
         check(!isClosed.get()) { "NanoEngine instance has been closed" }
 
+        val promptTokens = NanoNative.nativeEncode(nativeHandle, prompt)
+        Log.i(TAG, "Prompt encoded into ${promptTokens.size} tokens")
+
+        val collectedTokens = mutableListOf<String>()
         val callback = NativeTokenCallback { tokenStr, _, isEos ->
-            // Emit token into coroutine flow
-            // Note: In production integration, flow collector bridge delivers string
+            collectedTokens.add(tokenStr)
             !isEos
         }
 
@@ -58,6 +67,10 @@ class NanoEngine private constructor(
             callback
         )
 
+        for (tok in collectedTokens) {
+            emit(tok)
+        }
+
         if (status == -3) {
             throw NanoCancelledException("Generation was cancelled asynchronously")
         } else if (status != 0) {
@@ -66,19 +79,56 @@ class NanoEngine private constructor(
     }.flowOn(Dispatchers.Default)
 
     /**
-     * Universal 1-Line Developer Query API.
-     * Automatically handles Math, Science, English, CV, Essays, and Safety Guardrails.
-     * Returns a copy-paste friendly NanoResponse with .txt and .md export support.
+     * Universal Developer Query API.
+     * Runs prompt through tokenizer -> native THSA-2B engine -> token selection -> tokenizer decode.
      */
-    suspend fun ask(prompt: String): NanoResponse = withContext(Dispatchers.Default) {
+    suspend fun ask(
+        prompt: String,
+        config: NanoGenerationConfig = NanoGenerationConfig.DEFAULT
+    ): NanoResponse = withContext(Dispatchers.Default) {
         check(!isClosed.get()) { "NanoEngine instance has been closed" }
-        // In native engine, generates complete response and parses into copy-ready formats
-        val rawGenerated = "Output for: $prompt"
+        Log.i(TAG, "APP_INFERENCE_REQUEST: prompt='$prompt'")
+
+        val promptTokens = NanoNative.nativeEncode(nativeHandle, prompt)
+        Log.i(TAG, "Prompt encoded into ${promptTokens.size} tokens")
+
+        val outputBuilder = StringBuilder()
+        var tokenCount = 0
+
+        val callback = NativeTokenCallback { tokenStr, tokenId, isEos ->
+            outputBuilder.append(tokenStr)
+            tokenCount++
+            !isEos
+        }
+
+        val startTime = System.currentTimeMillis()
+        val status = NanoNative.nativeGenerate(
+            nativeHandle,
+            promptTokens,
+            config.temperature,
+            config.topP,
+            config.maxOutputTokens,
+            callback
+        )
+        val elapsedMs = System.currentTimeMillis() - startTime
+
+        if (status == -3) {
+            throw NanoCancelledException("Generation was cancelled asynchronously")
+        } else if (status != 0) {
+            throw NanoEngineException("Generation error occurred (status=$status)", status)
+        }
+
+        val generatedText = outputBuilder.toString().trim()
+        val cleanOutput = if (generatedText.isEmpty()) "..." else generatedText
+
+        Log.i(TAG, "NANO_TOKEN_COUNT: $tokenCount, NANO_INFERENCE_MS: $elapsedMs")
+        Log.i(TAG, "NANO_CAUSAL_FINAL_TEXT: generated_token_count=$tokenCount, text='$cleanOutput'")
+
         NanoResponse(
             prompt = prompt,
-            text = rawGenerated,
-            markdown = rawGenerated,
-            copyText = rawGenerated.replace(Regex("""[#*`$]"""), "").trim()
+            text = cleanOutput,
+            markdown = cleanOutput,
+            copyText = cleanOutput.replace(Regex("""[#*`$]"""), "").trim()
         )
     }
 
@@ -108,6 +158,8 @@ class NanoEngine private constructor(
             ?: throw NanoEngineException("Failed to retrieve telemetry", -1)
     }
 
+    val isModelLoaded: Boolean get() = !isClosed.get() && nativeHandle != 0L
+
     /**
      * Release all native engine static arenas, unmap model, and free handles (100% RAII).
      */
@@ -120,3 +172,4 @@ class NanoEngine private constructor(
         }
     }
 }
+

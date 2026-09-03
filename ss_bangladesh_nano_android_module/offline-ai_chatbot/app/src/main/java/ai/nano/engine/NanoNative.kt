@@ -1,4 +1,4 @@
-﻿package ai.nano.engine
+package ai.nano.engine
 
 /**
  * Low-level JNI bindings to libnano_engine.so.
@@ -10,6 +10,12 @@ internal object NanoNative {
 
     @JvmStatic
     external fun nativeInit(modelPath: String): Long
+
+    @JvmStatic
+    external fun nativeEncode(handle: Long, text: String): IntArray
+
+    @JvmStatic
+    external fun nativeDecodeToken(handle: Long, tokenId: Int): String
 
     @JvmStatic
     external fun nativeGenerate(

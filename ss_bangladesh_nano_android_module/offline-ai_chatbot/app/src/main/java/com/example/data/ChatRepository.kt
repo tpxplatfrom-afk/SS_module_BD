@@ -42,7 +42,7 @@ class ChatRepository(
         sessionId: String,
         userText: String,
         category: String = "General"
-    ): NanoResponse {
+    ): NanoResponse = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
         val userMsg = ChatMessageEntity(
             sessionId = sessionId,
             role = "user",
@@ -84,7 +84,7 @@ class ChatRepository(
             )
         }
 
-        return response
+        response
     }
 
     suspend fun clearSessionMessages(sessionId: String) {

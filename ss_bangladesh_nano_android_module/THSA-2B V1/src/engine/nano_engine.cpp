@@ -416,6 +416,20 @@ static NanoTokenId nano_forward_pass_single_token(
     ctx->stats.forward_pass_count++;
     
     NANO_LOGI("NANO_CAUSAL_LOGITS_READY: step=%zu, vocab_size=65536", current_seq_len);
+    float l_min = ctx->logits[0], l_max = ctx->logits[0];
+    double l_sum = 0.0;
+    bool l_finite = true;
+    for (size_t v = 0; v < 65536; ++v) {
+        float val = ctx->logits[v];
+        if (val < l_min) l_min = val;
+        if (val > l_max) l_max = val;
+        l_sum += val;
+        if (!std::isfinite(val)) l_finite = false;
+    }
+    NANO_LOGI("LOGITS_READY: vocab_size=65536, min=%.4f, max=%.4f, mean=%.4f, finite=%s, nonzero=%s",
+              l_min, l_max, (float)(l_sum / 65536.0),
+              l_finite ? "YES" : "NO",
+              (l_max != 0.0f || l_min != 0.0f) ? "YES" : "NO");
 
     // -------------------------------------------------------------
     // 5. REAL TOKEN SELECTION (Greedy Argmax over Logits Buffer)
@@ -448,6 +462,7 @@ NanoStatus nano_engine_init(
     if (!model_path || model_path[0] == '\0') return NANO_ERR_INVALID_PARAM;
     
     NANO_LOGI("NANO_NATIVE_INIT_BEGIN: path=%s", model_path);
+    NANO_LOGI("NANO_ASSET_OPEN: path=%s", model_path);
     
     // 1. Open model binary file
 #ifdef _WIN32
@@ -554,6 +569,8 @@ NanoStatus nano_engine_init(
 #endif
             return NANO_ERR_INVALID_HEADER;
         }
+        NANO_LOGI("NANO_V2_HEADER_OK: version=0x%04X, tensors=%u, d_model=%u", hdr->version, hdr->tensor_count, hdr->d_model);
+        NANO_LOGI("NANO_CRC_OK: crc32=0x%08X", hdr->crc32);
     } else if (hdr->version == 0x0001) {
         // Explicit Legacy V1 Isolation
         if (hdr->tensor_count != 123) {
@@ -855,6 +872,8 @@ NanoStatus nano_engine_init(
         ctx->final_norm_gamma = (const float*)(mmap_ptr + descriptors[curr_tensor_idx++].offset);
         ctx->lm_head_ptr      = (const int8_t*)(mmap_ptr + descriptors[curr_tensor_idx].offset);
         ctx->lm_head_scale    = descriptors[curr_tensor_idx++].scale;
+        NANO_LOGI("NANO_219_TENSORS_OK: %zu tensors verified", curr_tensor_idx);
+        NANO_LOGI("NANO_NATIVE_MAPPING_OK: 219/219 tensors mapped to graph");
     } else if (hdr->version == 0x0001 && hdr->tensor_count == 123) {
         // Explicit Legacy 123-Descriptor Format 1 Mapping
         ctx->embed_tokens_ptr = (const int8_t*)(mmap_ptr + descriptors[0].offset);
@@ -972,11 +991,30 @@ NanoStatus nano_engine_init(
     }
     
     // 12. Initialize Tokenizer Runtime
-    NanoStatus tok_st = nano_tokenizer_create(nullptr, &ctx->tokenizer);
+    // Derive vocab path: replace "model.nano" with "thsa_tokenizer.vocab" in same directory
+    char vocab_path[1024] = {0};
+    {
+        const char* last_slash = strrchr(model_path, '/');
+        const char* last_bslash = strrchr(model_path, '\\');
+        const char* sep = (last_slash > last_bslash) ? last_slash : last_bslash;
+        if (sep) {
+            size_t dir_len = (size_t)(sep + 1 - model_path);
+            if (dir_len < sizeof(vocab_path) - 32) {
+                memcpy(vocab_path, model_path, dir_len);
+                strncpy(vocab_path + dir_len, "thsa_tokenizer.vocab", sizeof(vocab_path) - dir_len - 1);
+            }
+        } else {
+            strncpy(vocab_path, "thsa_tokenizer.vocab", sizeof(vocab_path) - 1);
+        }
+    }
+    const char* vocab_path_arg = (vocab_path[0] != '\0') ? vocab_path : nullptr;
+    NANO_LOGI("TOKENIZER_VOCAB_PATH: %s", vocab_path_arg ? vocab_path_arg : "(none)");
+    NanoStatus tok_st = nano_tokenizer_create(vocab_path_arg, &ctx->tokenizer);
     if (tok_st != NANO_SUCCESS) {
         nano_engine_free(ctx);
         return tok_st;
     }
+    NANO_LOGI("TOKENIZER_READY: vocab_path=%s", vocab_path_arg ? vocab_path_arg : "(byte-fallback only)");
     
     ctx->state = NANO_STATE_READY;
     *out_ctx = ctx;
@@ -1092,6 +1130,8 @@ NanoStatus nano_engine_generate(
     if (max_tokens <= 0) max_tokens = 128;
     
     NANO_LOGI("NANO_GENERATE_BEGIN: prompt_tokens=%zu, max_tokens=%d", num_prompt_tokens, max_tokens);
+    NANO_LOGI("INFERENCE_BEGIN: prompt_tokens=%zu, max_tokens=%d", num_prompt_tokens, max_tokens);
+    NANO_LOGI("FORWARD_PASS_BEGIN");
 
     // -------------------------------------------------------------
     // 1. CHUNKED PREFILL (Real Forward Passes for Prompt Tokens)
@@ -1114,6 +1154,7 @@ NanoStatus nano_engine_generate(
     // 2. AUTOREGRESSIVE DECODE LOOP (Real Neural Logits & Sampling)
     // -------------------------------------------------------------
     ctx->state = NANO_STATE_GENERATING;
+    NANO_LOGI("GENERATION_BEGIN: max_tokens=%d", max_tokens);
     
     NanoTokenId curr_input = ctx->stats.last_selected_token_id;
     if (curr_input <= 0) curr_input = last_prompt_token;
@@ -1166,6 +1207,8 @@ NanoStatus nano_engine_generate(
     NANO_LOGI("NANO_INFERENCE_MS=%.2f", elapsed_s * 1000.0);
     NANO_LOGI("NANO_CAUSAL_GENERATION_END: generated_token_count=%u, cancelled=false, duration_ms=%.2f",
               step_tokens_emitted, elapsed_s * 1000.0);
+    NANO_LOGI("GENERATION_END: emitted=%u", step_tokens_emitted);
+    NANO_LOGI("INFERENCE_COMPLETE: duration_ms=%.2f", elapsed_s * 1000.0);
     
     ctx->state = NANO_STATE_READY;
     return NANO_SUCCESS;

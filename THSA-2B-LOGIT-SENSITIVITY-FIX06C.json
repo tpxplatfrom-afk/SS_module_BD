@@ -1,0 +1,5 @@
+{
+  "test_id": "FIX-06C-LOGIT-SENSITIVITY-GATE",
+  "status": "BLOCKED \u2014 REAL TRAINED 2B CHECKPOINT REQUIRED",
+  "note": "Logit sensitivity and autoregressive causal generation tests cannot be evaluated on un-trained/synthetic weights per Mandatory Rule 1 & Rule 19."
+}

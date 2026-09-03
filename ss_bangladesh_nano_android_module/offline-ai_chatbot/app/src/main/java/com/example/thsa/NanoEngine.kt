@@ -1,77 +1,49 @@
 package com.example.thsa
 
+import ai.nano.engine.NanoEngine as NativeNanoEngine
 import android.util.Log
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.io.File
-import java.io.RandomAccessFile
 
 /**
- * THSA-2.41B On-Device AI Engine.
- * Conforms to the exact plugin interface:
- *
- * val modelFile = File(context.filesDir, "model.nano")
- * val engine = NanoEngine.load(modelFile)
- * val response = engine.ask(userInput)
+ * THSA-2B Native On-Device AI Engine.
+ * Delegates 100% of inference directly to native C++ THSA-2B engine via JNI.
  */
 class NanoEngine private constructor(
-    private val modelFile: File,
-    private val modelSizeBytes: Long
+    private val nativeEngine: NativeNanoEngine,
+    private val modelFile: File
 ) {
     companion object {
         private const val TAG = "NanoEngine"
-        const val MODEL_NAME = "Shanto Nano"
+        const val MODEL_NAME = "THSA-2B V1"
         const val MODEL_VERSION = "v1.0.0"
         const val MODEL_PARAMS = "2.41 Billion"
 
-        /**
-         * Loads the AI Engine from the specified model file.
-         */
         @JvmStatic
         fun load(modelFile: File): NanoEngine {
-            Log.d(TAG, "Loading Shanto AI model from: ${modelFile.absolutePath}")
-            
-            // Ensure directory exists
-            modelFile.parentFile?.mkdirs()
-
-            // If the model file does not exist yet, write standard initialization headers
-            if (!modelFile.exists() || modelFile.length() == 0L) {
-                try {
-                    RandomAccessFile(modelFile, "rw").use { raf ->
-                        raf.setLength(1024 * 1024 * 2) // 2MB binary header structure
-                        raf.writeUTF("SHANTO_NANO_WEIGHTS_V1_0_0")
-                    }
-                    Log.d(TAG, "Initialized default on-device Shanto model structure at ${modelFile.absolutePath}")
-                } catch (e: Exception) {
-                    Log.w(TAG, "Warning initializing model header: ${e.message}")
-                }
-            }
-
-            val size = if (modelFile.exists()) modelFile.length() else 0L
-            return NanoEngine(modelFile, size)
+            Log.i(TAG, "Loading native THSA-2B model from: ${modelFile.absolutePath}")
+            val nativeEng = NativeNanoEngine.load(modelFile)
+            return NanoEngine(nativeEng, modelFile)
         }
     }
 
     /**
-     * Process ANY user input dynamically (Math, Essay, CV, Science, Grammar, Code, General).
+     * Process user input directly through native THSA-2B model forward pass.
      */
-    fun ask(userInput: String): NanoResponse {
-        return ReasoningProcessor.process(userInput)
-    }
-
-    /**
-     * Suspending version for coroutine-friendly asynchronous processing.
-     */
-    suspend fun askAsync(userInput: String): NanoResponse = withContext(Dispatchers.Default) {
-        ask(userInput)
+    suspend fun ask(userInput: String): NanoResponse {
+        val nativeResp = nativeEngine.ask(userInput)
+        return NanoResponse(
+            text = nativeResp.text,
+            copyText = nativeResp.copyText
+        )
     }
 
     val modelPath: String get() = modelFile.absolutePath
-    val isModelLoaded: Boolean get() = modelFile.exists()
+    val isModelLoaded: Boolean get() = nativeEngine.isModelLoaded
     val modelSizeFormatted: String
         get() {
-            val bytes = if (modelFile.exists()) modelFile.length() else modelSizeBytes
+            val bytes = if (modelFile.exists()) modelFile.length() else 0L
             val mb = bytes / (1024.0 * 1024.0)
             return if (mb >= 1.0) String.format("%.1f MB", mb) else "$bytes B"
         }
 }
+

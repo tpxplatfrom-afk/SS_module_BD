@@ -1,0 +1,37 @@
+{
+  "fix_id": "FIX-06C-REAL-2B-TRAINING-EXECUTION",
+  "timestamp": "2026-09-02T12:48:00+06:00",
+  "git_commit": "8c60acb",
+  "config_path": "ss_bangladesh_nano_android_module/THSA-2B V1/training/config/thsa_2b_config.json",
+  "config_sha256": "4301ef13ce2b988f000dc89d53c7f999908cf2611739c9bc40efb8b98b9514da",
+  "tokenizer_path": "ss_bangladesh_nano_android_module/THSA-2B V1/tokenizer/thsa_tokenizer.vocab",
+  "tokenizer_sha256": "03e07abb7907033ea3e4a90802c65ef4906f37ae1a1961efbbd2983796d19f85",
+  "dataset_paths": [
+    "ss_bangladesh_nano_android_module/THSA-2B V1/data/train_sharegpt.jsonl",
+    "ss_bangladesh_nano_android_module/THSA-2B V1/data/processed/clean_pretrain_corpus.txt"
+  ],
+  "dataset_sha256": {
+    "train_sharegpt.jsonl": "eb517906125b2cd56037a3c38db5dfd1a1dfbf8fcf3d07ec795290ebce2a37e1",
+    "clean_pretrain_corpus.txt": "a4feef964d6e7a346535565158a4fe00bc5d90956b63d9178ad3813fffafe200"
+  },
+  "teacher_model": "Qwen/Qwen2.5-7B-Instruct",
+  "teacher_revision": "main",
+  "python_version": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]",
+  "pytorch_version": "2.13.0+cpu",
+  "cuda_version": null,
+  "driver_version": null,
+  "gpu_model": null,
+  "gpu_vram": null,
+  "seed": 42,
+  "batch_size": 1,
+  "sequence_length": 512,
+  "dtype": "bfloat16 / float16",
+  "optimizer": "AdamW (lr=3e-4, weight_decay=0.01)",
+  "learning_rate": 0.0003,
+  "temperature": 2.0,
+  "training_steps": 0,
+  "checkpoint_path": null,
+  "checkpoint_size": null,
+  "checkpoint_sha256": null,
+  "status": "BLOCKED \u2014 GPU TRAINING ENVIRONMENT REQUIRED"
+}

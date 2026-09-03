@@ -1,0 +1,220 @@
+tensor_name,family,shape,numel,dtype,trainable
+embed_tokens.weight,embedding,"[65536, 2560]",167772160,float32,True
+layers.0.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.0.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.0.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.0.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.0.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.0.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.0.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.0.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.0.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.1.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.1.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.1.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.1.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.1.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.1.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.1.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.1.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.1.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.2.mixer.q_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.2.mixer.k_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.2.mixer.v_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.2.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.2.mixer.norm.weight,gqa_mixer,[2560],2560,float32,True
+layers.2.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.2.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.2.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.2.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.3.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.3.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.3.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.3.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.3.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.3.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.3.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.3.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.3.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.4.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.4.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.4.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.4.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.4.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.4.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.4.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.4.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.4.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.5.mixer.q_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.5.mixer.k_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.5.mixer.v_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.5.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.5.mixer.norm.weight,gqa_mixer,[2560],2560,float32,True
+layers.5.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.5.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.5.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.5.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.6.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.6.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.6.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.6.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.6.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.6.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.6.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.6.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.6.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.7.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.7.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.7.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.7.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.7.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.7.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.7.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.7.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.7.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.8.mixer.q_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.8.mixer.k_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.8.mixer.v_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.8.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.8.mixer.norm.weight,gqa_mixer,[2560],2560,float32,True
+layers.8.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.8.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.8.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.8.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.9.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.9.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.9.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.9.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.9.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.9.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.9.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.9.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.9.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.10.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.10.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.10.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.10.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.10.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.10.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.10.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.10.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.10.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.11.mixer.q_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.11.mixer.k_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.11.mixer.v_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.11.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.11.mixer.norm.weight,gqa_mixer,[2560],2560,float32,True
+layers.11.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.11.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.11.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.11.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.12.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.12.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.12.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.12.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.12.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.12.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.12.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.12.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.12.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.13.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.13.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.13.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.13.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.13.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.13.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.13.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.13.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.13.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.14.mixer.q_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.14.mixer.k_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.14.mixer.v_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.14.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.14.mixer.norm.weight,gqa_mixer,[2560],2560,float32,True
+layers.14.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.14.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.14.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.14.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.15.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.15.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.15.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.15.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.15.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.15.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.15.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.15.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.15.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.16.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.16.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.16.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.16.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.16.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.16.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.16.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.16.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.16.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.17.mixer.q_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.17.mixer.k_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.17.mixer.v_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.17.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.17.mixer.norm.weight,gqa_mixer,[2560],2560,float32,True
+layers.17.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.17.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.17.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.17.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.18.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.18.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.18.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.18.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.18.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.18.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.18.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.18.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.18.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.19.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.19.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.19.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.19.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.19.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.19.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.19.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.19.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.19.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.20.mixer.q_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.20.mixer.k_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.20.mixer.v_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.20.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.20.mixer.norm.weight,gqa_mixer,[2560],2560,float32,True
+layers.20.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.20.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.20.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.20.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.21.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.21.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.21.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.21.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.21.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.21.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.21.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.21.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.21.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.22.mixer.conv1d.weight,state_mixer,"[2560, 1, 4]",10240,float32,True
+layers.22.mixer.conv1d.bias,state_mixer,[2560],2560,float32,True
+layers.22.mixer.in_proj.weight,state_mixer,"[5120, 2560]",13107200,float32,True
+layers.22.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.22.mixer.norm.weight,state_mixer,[2560],2560,float32,True
+layers.22.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.22.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.22.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.22.ffn.norm.weight,ffn,[2560],2560,float32,True
+layers.23.mixer.q_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.23.mixer.k_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.23.mixer.v_proj.weight,gqa_mixer,"[512, 2560]",1310720,float32,True
+layers.23.mixer.out_proj.weight,gqa_mixer,"[2560, 2560]",6553600,float32,True
+layers.23.mixer.norm.weight,gqa_mixer,[2560],2560,float32,True
+layers.23.ffn.gate_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.23.ffn.up_proj.weight,ffn,"[6912, 2560]",17694720,float32,True
+layers.23.ffn.down_proj.weight,ffn,"[2560, 6912]",17694720,float32,True
+layers.23.ffn.norm.weight,ffn,[2560],2560,float32,True
+final_norm.weight,final_norm,[2560],2560,float32,True
+lm_head.weight,lm_head,"[65536, 2560]",167772160,float32,True

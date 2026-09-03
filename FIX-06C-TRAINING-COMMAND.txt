@@ -1,0 +1,26 @@
+================================================================================
+THSA-2B V1: PRODUCTION TRAINING & DISTILLATION EXECUTION COMMAND
+================================================================================
+
+# 1. Environment Setup (GPU Cluster / Google Colab A100/V100/T4):
+pip install torch>=2.1.0 transformers peft datasets sentencepiece psutil
+
+# 2. Production Qwen -> THSA-2B Knowledge Distillation & QAT Execution:
+python training/distillation/qwen_teacher_distillation.py \
+    --config training/config/thsa_2b_config.json \
+    --teacher Qwen/Qwen2.5-7B-Instruct \
+    --corpus data/processed/clean_pretrain_corpus.txt \
+    --output_dir training/checkpoints \
+    --steps 10000 \
+    --batch_size 1 \
+    --grad_accum 16 \
+    --device cuda
+
+# 3. Serialized Checkpoint Output Destination:
+#    training/checkpoints/thsa_distilled_student.pt
+
+# 4. Subsequent Strict Export to Production .nano Binary:
+python tools/export_to_nano.py \
+    --config training/config/thsa_2b_config.json \
+    --checkpoint training/checkpoints/thsa_distilled_student.pt \
+    --output models/model.nano

@@ -1,0 +1,20 @@
+{
+  "vocab_path": "tokenizer/thsa_tokenizer.vocab",
+  "model_path": "tokenizer/thsa_tokenizer.model",
+  "vocab_size": 65536,
+  "special_tokens": {
+    "0": "<pad>",
+    "1": "<unk>",
+    "2": "<s> (BOS)",
+    "3": "</s> (EOS)"
+  },
+  "byte_fallbacks": {
+    "range": "4..259",
+    "description": "256 raw byte tokens mapping byte b to token 4 + b"
+  },
+  "subwords": {
+    "range": "260..65535",
+    "description": "Bilingual Bengali/English SentencePiece BPE subwords"
+  },
+  "training_runtime_compatibility": "VERIFIED: Dataset loaders and SentencePiece runtime use matching token ID assignments (0..65535)."
+}

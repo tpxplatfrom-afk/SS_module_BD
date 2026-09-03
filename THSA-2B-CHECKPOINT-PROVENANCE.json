@@ -1,0 +1,33 @@
+{
+  "model_id": "THSA-2B-V1-PRODUCTION",
+  "architecture_spec": {
+    "d_model": 2560,
+    "d_ffn": 6912,
+    "vocab_size": 65536,
+    "total_blocks": 24,
+    "state_blocks": 16,
+    "gqa_blocks": 8,
+    "n_query_heads": 20,
+    "n_kv_heads": 4,
+    "head_dim": 128,
+    "conv_kernel": 4,
+    "total_trainable_parameters": 2050296320
+  },
+  "tokenizer_spec": {
+    "vocab_file": "tokenizer/thsa_tokenizer.vocab",
+    "model_file": "tokenizer/thsa_tokenizer.model",
+    "vocab_size": 65536,
+    "vocab_sha256": "38da062f6b39d1b09b40fa9ba7bfb1a45bb38ec0139eefcb737213d803328e30",
+    "format": "SentencePiece BPE"
+  },
+  "training_distillation_pipeline": {
+    "teacher_models": [
+      "Qwen/Qwen2.5-7B-Instruct",
+      "sarvamai/sarvam-1"
+    ],
+    "loss_formulation": "Mixed CE + Soft KL Divergence (alpha=0.65, tau=2.0)",
+    "quantization_aware_training": "Dynamic QAT Annealing (beta=1.0 -> 100.0) with BitNet STE",
+    "production_entrypoint": "python training/distillation/qwen_teacher_distillation.py --config training/config/thsa_2b_config.json"
+  },
+  "checkpoint_status": "BLOCKED \u2014 REAL TRAINED 2B CHECKPOINT REQUIRED"
+}

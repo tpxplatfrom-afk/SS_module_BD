@@ -1,0 +1,220 @@
+pytorch_key,shape,numel,trainable,nano_slot,nano_tensor_name,serialization_status,quantization_type,scale_source,transformation,reason_if_unserialized
+embed_tokens.weight,"[65536, 2560]",167772160,True,0,embed_tokens,SERIALIZED,NANO_QUANT_INT8 (2),abs(w).max() / 127.0,quantize_int8_tensor,N/A
+layers.0.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,1,layer_0_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.0.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.0.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.0.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.0.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.0.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,2,layer_0_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.0.ffn.up_proj.weight,"[6912, 2560]",17694720,True,3,layer_0_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.0.ffn.down_proj.weight,"[2560, 6912]",17694720,True,4,layer_0_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.0.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.1.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,5,layer_1_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.1.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.1.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.1.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.1.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.1.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,6,layer_1_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.1.ffn.up_proj.weight,"[6912, 2560]",17694720,True,7,layer_1_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.1.ffn.down_proj.weight,"[2560, 6912]",17694720,True,8,layer_1_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.1.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.2.mixer.q_proj.weight,"[2560, 2560]",6553600,True,9,layer_2_attn_q,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.2.mixer.k_proj.weight,"[512, 2560]",1310720,True,10,layer_2_attn_k,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.2.mixer.v_proj.weight,"[512, 2560]",1310720,True,11,layer_2_attn_v,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.2.mixer.out_proj.weight,"[2560, 2560]",6553600,True,12,layer_2_attn_out,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.2.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.2.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,13,layer_2_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.2.ffn.up_proj.weight,"[6912, 2560]",17694720,True,14,layer_2_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.2.ffn.down_proj.weight,"[2560, 6912]",17694720,True,15,layer_2_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.2.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.3.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,16,layer_3_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.3.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.3.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.3.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.3.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.3.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,17,layer_3_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.3.ffn.up_proj.weight,"[6912, 2560]",17694720,True,18,layer_3_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.3.ffn.down_proj.weight,"[2560, 6912]",17694720,True,19,layer_3_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.3.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.4.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,20,layer_4_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.4.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.4.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.4.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.4.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.4.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,21,layer_4_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.4.ffn.up_proj.weight,"[6912, 2560]",17694720,True,22,layer_4_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.4.ffn.down_proj.weight,"[2560, 6912]",17694720,True,23,layer_4_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.4.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.5.mixer.q_proj.weight,"[2560, 2560]",6553600,True,24,layer_5_attn_q,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.5.mixer.k_proj.weight,"[512, 2560]",1310720,True,25,layer_5_attn_k,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.5.mixer.v_proj.weight,"[512, 2560]",1310720,True,26,layer_5_attn_v,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.5.mixer.out_proj.weight,"[2560, 2560]",6553600,True,27,layer_5_attn_out,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.5.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.5.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,28,layer_5_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.5.ffn.up_proj.weight,"[6912, 2560]",17694720,True,29,layer_5_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.5.ffn.down_proj.weight,"[2560, 6912]",17694720,True,30,layer_5_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.5.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.6.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,31,layer_6_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.6.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.6.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.6.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.6.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.6.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,32,layer_6_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.6.ffn.up_proj.weight,"[6912, 2560]",17694720,True,33,layer_6_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.6.ffn.down_proj.weight,"[2560, 6912]",17694720,True,34,layer_6_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.6.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.7.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,35,layer_7_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.7.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.7.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.7.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.7.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.7.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,36,layer_7_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.7.ffn.up_proj.weight,"[6912, 2560]",17694720,True,37,layer_7_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.7.ffn.down_proj.weight,"[2560, 6912]",17694720,True,38,layer_7_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.7.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.8.mixer.q_proj.weight,"[2560, 2560]",6553600,True,39,layer_8_attn_q,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.8.mixer.k_proj.weight,"[512, 2560]",1310720,True,40,layer_8_attn_k,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.8.mixer.v_proj.weight,"[512, 2560]",1310720,True,41,layer_8_attn_v,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.8.mixer.out_proj.weight,"[2560, 2560]",6553600,True,42,layer_8_attn_out,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.8.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.8.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,43,layer_8_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.8.ffn.up_proj.weight,"[6912, 2560]",17694720,True,44,layer_8_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.8.ffn.down_proj.weight,"[2560, 6912]",17694720,True,45,layer_8_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.8.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.9.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,46,layer_9_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.9.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.9.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.9.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.9.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.9.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,47,layer_9_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.9.ffn.up_proj.weight,"[6912, 2560]",17694720,True,48,layer_9_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.9.ffn.down_proj.weight,"[2560, 6912]",17694720,True,49,layer_9_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.9.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.10.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,50,layer_10_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.10.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.10.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.10.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.10.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.10.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,51,layer_10_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.10.ffn.up_proj.weight,"[6912, 2560]",17694720,True,52,layer_10_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.10.ffn.down_proj.weight,"[2560, 6912]",17694720,True,53,layer_10_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.10.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.11.mixer.q_proj.weight,"[2560, 2560]",6553600,True,54,layer_11_attn_q,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.11.mixer.k_proj.weight,"[512, 2560]",1310720,True,55,layer_11_attn_k,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.11.mixer.v_proj.weight,"[512, 2560]",1310720,True,56,layer_11_attn_v,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.11.mixer.out_proj.weight,"[2560, 2560]",6553600,True,57,layer_11_attn_out,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.11.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.11.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,58,layer_11_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.11.ffn.up_proj.weight,"[6912, 2560]",17694720,True,59,layer_11_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.11.ffn.down_proj.weight,"[2560, 6912]",17694720,True,60,layer_11_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.11.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.12.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,61,layer_12_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.12.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.12.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.12.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.12.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.12.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,62,layer_12_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.12.ffn.up_proj.weight,"[6912, 2560]",17694720,True,63,layer_12_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.12.ffn.down_proj.weight,"[2560, 6912]",17694720,True,64,layer_12_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.12.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.13.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,65,layer_13_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.13.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.13.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.13.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.13.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.13.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,66,layer_13_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.13.ffn.up_proj.weight,"[6912, 2560]",17694720,True,67,layer_13_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.13.ffn.down_proj.weight,"[2560, 6912]",17694720,True,68,layer_13_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.13.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.14.mixer.q_proj.weight,"[2560, 2560]",6553600,True,69,layer_14_attn_q,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.14.mixer.k_proj.weight,"[512, 2560]",1310720,True,70,layer_14_attn_k,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.14.mixer.v_proj.weight,"[512, 2560]",1310720,True,71,layer_14_attn_v,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.14.mixer.out_proj.weight,"[2560, 2560]",6553600,True,72,layer_14_attn_out,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.14.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.14.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,73,layer_14_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.14.ffn.up_proj.weight,"[6912, 2560]",17694720,True,74,layer_14_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.14.ffn.down_proj.weight,"[2560, 6912]",17694720,True,75,layer_14_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.14.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.15.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,76,layer_15_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.15.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.15.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.15.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.15.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.15.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,77,layer_15_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.15.ffn.up_proj.weight,"[6912, 2560]",17694720,True,78,layer_15_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.15.ffn.down_proj.weight,"[2560, 6912]",17694720,True,79,layer_15_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.15.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.16.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,80,layer_16_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.16.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.16.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.16.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.16.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.16.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,81,layer_16_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.16.ffn.up_proj.weight,"[6912, 2560]",17694720,True,82,layer_16_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.16.ffn.down_proj.weight,"[2560, 6912]",17694720,True,83,layer_16_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.16.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.17.mixer.q_proj.weight,"[2560, 2560]",6553600,True,84,layer_17_attn_q,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.17.mixer.k_proj.weight,"[512, 2560]",1310720,True,85,layer_17_attn_k,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.17.mixer.v_proj.weight,"[512, 2560]",1310720,True,86,layer_17_attn_v,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.17.mixer.out_proj.weight,"[2560, 2560]",6553600,True,87,layer_17_attn_out,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.17.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.17.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,88,layer_17_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.17.ffn.up_proj.weight,"[6912, 2560]",17694720,True,89,layer_17_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.17.ffn.down_proj.weight,"[2560, 6912]",17694720,True,90,layer_17_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.17.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.18.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,91,layer_18_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.18.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.18.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.18.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.18.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.18.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,92,layer_18_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.18.ffn.up_proj.weight,"[6912, 2560]",17694720,True,93,layer_18_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.18.ffn.down_proj.weight,"[2560, 6912]",17694720,True,94,layer_18_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.18.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.19.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,95,layer_19_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.19.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.19.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.19.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.19.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.19.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,96,layer_19_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.19.ffn.up_proj.weight,"[6912, 2560]",17694720,True,97,layer_19_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.19.ffn.down_proj.weight,"[2560, 6912]",17694720,True,98,layer_19_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.19.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.20.mixer.q_proj.weight,"[2560, 2560]",6553600,True,99,layer_20_attn_q,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.20.mixer.k_proj.weight,"[512, 2560]",1310720,True,100,layer_20_attn_k,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.20.mixer.v_proj.weight,"[512, 2560]",1310720,True,101,layer_20_attn_v,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.20.mixer.out_proj.weight,"[2560, 2560]",6553600,True,102,layer_20_attn_out,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.20.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.20.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,103,layer_20_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.20.ffn.up_proj.weight,"[6912, 2560]",17694720,True,104,layer_20_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.20.ffn.down_proj.weight,"[2560, 6912]",17694720,True,105,layer_20_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.20.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.21.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,106,layer_21_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.21.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.21.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.21.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.21.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.21.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,107,layer_21_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.21.ffn.up_proj.weight,"[6912, 2560]",17694720,True,108,layer_21_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.21.ffn.down_proj.weight,"[2560, 6912]",17694720,True,109,layer_21_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.21.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.22.mixer.conv1d.weight,"[2560, 1, 4]",10240,True,110,layer_22_state_conv_w,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+layers.22.mixer.conv1d.bias,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Conv1D bias absorbed or zero-initialized in C++ runtime
+layers.22.mixer.in_proj.weight,"[5120, 2560]",13107200,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.22.mixer.out_proj.weight,"[2560, 2560]",6553600,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,State projection folded into 1D short conv state context
+layers.22.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.22.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,111,layer_22_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.22.ffn.up_proj.weight,"[6912, 2560]",17694720,True,112,layer_22_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.22.ffn.down_proj.weight,"[2560, 6912]",17694720,True,113,layer_22_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.22.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.23.mixer.q_proj.weight,"[2560, 2560]",6553600,True,114,layer_23_attn_q,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.23.mixer.k_proj.weight,"[512, 2560]",1310720,True,115,layer_23_attn_k,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.23.mixer.v_proj.weight,"[512, 2560]",1310720,True,116,layer_23_attn_v,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.23.mixer.out_proj.weight,"[2560, 2560]",6553600,True,117,layer_23_attn_out,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.23.mixer.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+layers.23.ffn.gate_proj.weight,"[6912, 2560]",17694720,True,118,layer_23_ffn_gate,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.23.ffn.up_proj.weight,"[6912, 2560]",17694720,True,119,layer_23_ffn_up,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.23.ffn.down_proj.weight,"[2560, 6912]",17694720,True,120,layer_23_ffn_down,SERIALIZED,NANO_QUANT_TERNARY_2BIT (4),abs(w).mean(),ternary_ste_2bit_packing,N/A
+layers.23.ffn.norm.weight,[2560],2560,True,UNSERIALIZED,N/A,AUXILIARY_TRAINING_ONLY,N/A,N/A,N/A,Pre-layer RMSNorm gamma normalized to unit scale in packed kernel
+final_norm.weight,[2560],2560,True,121,final_norm,SERIALIZED,NANO_QUANT_FP32 (0),1.0,raw_float32,N/A
+lm_head.weight,"[65536, 2560]",167772160,True,122,lm_head,SERIALIZED,NANO_QUANT_INT8 (2),abs(w).max() / 127.0,quantize_int8_tensor,N/A

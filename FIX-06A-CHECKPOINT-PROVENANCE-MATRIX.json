@@ -1,0 +1,58 @@
+{
+  "provenance_matrix": [
+    {
+      "candidate": "checkpoints/thsa_trained_model.pt",
+      "architecture": "Unknown (Corrupted stub)",
+      "parameter_count": 0,
+      "numerical_integrity": "CORRUPT",
+      "provenance": "Zero/truncated bytes written during aborted training or mock export",
+      "status": "REJECTED",
+      "rejection_reason": "Corrupted / truncated 24KB file; unreadable by PyTorch"
+    },
+    {
+      "candidate": "models/core/ss_bangladesh/model/model.safetensors",
+      "architecture": "Dense LLaMA (d_model=576, d_ffn=2304, layers=16, vocab=16000)",
+      "parameter_count": 70000000,
+      "numerical_integrity": "GENUINE_TRAINED_DENSE",
+      "provenance": "Phase 4 educational SSTutor Bengali 70M model",
+      "status": "REJECTED",
+      "rejection_reason": "Architecture mismatch (70M dense model vs 2.0B THSA ternary hybrid target)"
+    },
+    {
+      "candidate": "models/sstutor_bengali_70m_edu/model.safetensors",
+      "architecture": "Dense LLaMA (d_model=576, d_ffn=2304, layers=16, vocab=1073)",
+      "parameter_count": 70000000,
+      "numerical_integrity": "GENUINE_TRAINED_DENSE",
+      "provenance": "Phase 3 educational SSTutor Bengali 70M model",
+      "status": "REJECTED",
+      "rejection_reason": "Architecture mismatch (70M dense model, vocab=1073 vs 65536 required)"
+    },
+    {
+      "candidate": "ss_bangladesh_nano_android_module/THSA-2B V1/training/checkpoints/thsa_distilled_student.pt",
+      "architecture": "THSA-350M-PROXY-PILOT (d_model=1024, d_ffn=2764, layers=14, vocab=65536)",
+      "parameter_count": 350000000,
+      "numerical_integrity": "GENUINE_TRAINED_HYBRID",
+      "provenance": "Distilled from sarvam-1 & Qwen2.5-7B-Instruct using train_qat.py on proxy 350M config",
+      "status": "REJECTED_FOR_2B_TARGET",
+      "rejection_reason": "Architecture mismatch (350M proxy student: d_model=1024, 14 layers vs 2.0B target: d_model=2560, 24 layers)"
+    },
+    {
+      "candidate": "ss_bangladesh_nano_android_module/THSA-2B V1/android/src/main/assets/model_trained.nano",
+      "architecture": "THSA-350M-PROXY-PILOT (Binary .nano)",
+      "parameter_count": 350000000,
+      "numerical_integrity": "GENUINE_QUANTIZED_350M",
+      "provenance": "Export of thsa_distilled_student.pt using export_to_nano.py with proxy_350m_config.json",
+      "status": "REJECTED_FOR_2B_TARGET",
+      "rejection_reason": "Architecture mismatch (350M proxy student: 71 tensors, 166.7MB vs 2.0B target: 123 tensors, 686MB)"
+    },
+    {
+      "candidate": "ss_bangladesh_nano_android_module/THSA-2B V1/models/model.nano",
+      "architecture": "THSA-2B-V1-PRODUCTION (Scaffold/Synthetic)",
+      "parameter_count": 2000000000,
+      "numerical_integrity": "SYNTHETIC_DEGENERATE",
+      "provenance": "Exported by export_to_nano.py without checkpoint (121 zero tensors, 2 modulo tensors)",
+      "status": "REJECTED",
+      "rejection_reason": "121 of 123 tensors are all-zero bytes; embedding & LM head are synthetic modulo formulas"
+    }
+  ]
+}

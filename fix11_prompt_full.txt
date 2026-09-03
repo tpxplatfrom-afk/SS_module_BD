@@ -1,0 +1,702 @@
+<USER_REQUEST>
+# FIX-11 — ANDROID NATIVE RUNTIME INTEGRATION + PHYSICAL DEVICE VERIFICATION
+## THSA-2B V1 — STRICT FORENSIC EXECUTION
+
+DATE: 2026-09-03
+
+============================================================
+0. ABSOLUTE SCOPE
+============================================================
+
+WORK ONLY inside:
+
+ss_bangladesh_nano_android_module/THSA-2B V1
+
+NEVER touch:
+
+ss_bangladesh/
+
+The ss_bangladesh module is a separate project.
+
+No changes outside THSA-2B V1.
+
+============================================================
+1. FIX-11 OBJECTIVE
+============================================================
+
+Prove that the actual THSA-2B production Nano V2 model executes
+through the real Android application and native inference stack.
+
+Required execution chain:
+
+Android App
+    ↓
+Kotlin/Java API
+    ↓
+JNI
+    ↓
+Native Nano Engine
+    ↓
+Nano V2 Loader
+    ↓
+219 Tensor Runtime Mapping
+    ↓
+THSA-2B Native Graph
+    ↓
+Tokenizer
+    ↓
+Inference
+    ↓
+Logits
+    ↓
+Generation
+    ↓
+Android UI
+
+This FIX is NOT complete if only:
+
+- desktop tests pass
+- host C++ tests pass
+- APK builds
+- model loads on Windows
+- Python inference works
+- static inspection passes
+
+A REAL PHYSICAL ANDROID DEVICE execution is mandatory.
+
+============================================================
+2. AUTHORITATIVE PRODUCTION MODEL
+============================================================
+
+Production asset:
+
+android/src/main/assets/model.nano
+
+Expected size:
+
+765,477,824 bytes
+
+Expected SHA-256:
+
+0eeae45f90d8c74b9c0773b7c3870b5fa095829cebd4a093a2f1302b047d1d64
+
+Expected CRC:
+
+0x035F8E92
+
+Format:
+
+NANO V2
+version 0x0002
+
+219 tensors
+
+2,050,296,320 parameters
+
+DO NOT modify this file.
+
+DO NOT regenerate it.
+
+DO NOT quantize it again.
+
+DO NOT replace it.
+
+DO NOT use any legacy 686,176,192-byte Nano.
+
+============================================================
+3. LEGACY NANO POLICY
+============================================================
+
+The old V1 Nano files were removed.
+
+Confirm there is no remaining:
+
+- models/model.nano
+- tests/artifacts/model.nano
+
+If any legacy Nano remains, STOP and report it.
+
+The ONLY production Nano for Android must be:
+
+android/src/main/assets/model.nano
+
+============================================================
+4. CHECKPOINT POLICY
+============================================================
+
+The Step-30 checkpoint is NOT an Android runtime input.
+
+Do not copy it into APK/assets.
+
+Do not modify it.
+
+Do not retrain.
+
+Do not load it on Android.
+
+Android runtime must use:
+
+model.nano
+
+ONLY.
+
+============================================================
+5. FIRST — AUDIT EXISTING ANDROID ARCHITECTURE
+============================================================
+
+Inspect:
+
+android/
+
+including:
+
+- Gradle configuration
+- settings
+- module build files
+- AndroidManifest
+- Kotlin sources
+- JNI sources
+- CMake
+- native engine bridge
+- assets
+- existing tests
+
+Trace the actual call graph.
+
+Identify:
+
+A. App entry point
+B. User request entry point
+C. Kotlin inference API
+D. JNI function
+E. Native engine creation
+F. model.nano loading
+G. tokenizer initialization
+H. inference function
+I. logits retrieval
+J. generation loop
+K. UI response path
+
+Do not assume the intended path is active.
+
+Prove it from code.
+
+============================================================
+6. CRITICAL: REMOVE/REJECT ANY HARDCODED RESPONSE BYPASS
+============================================================
+
+Previous forensic audit found that the Android app had a
+ReasoningProcessor path containing hardcoded responses and that
+the JNI/native engine path was previously effectively unused.
+
+Therefore explicitly inspect:
+
+ReasoningProcessor.kt
+NanoEngine.kt
+NanoNative.kt
+JNI/native bridge
+all inference-related Kotlin classes
+
+Determine whether:
+
+NanoEngine.ask()
+    ↓
+actually reaches JNI
+    ↓
+native inference
+
+or whether it still returns hardcoded/static text.
+
+A hardcoded response path MUST NOT be used for production inference.
+
+If hardcoded fallback is used instead of real inference:
+
+FINAL_STATUS=FIX-11-BLOCKED-HARDCODED-INFERENCE-BYPASS
+
+Do not hide or work around this.
+
+============================================================
+7. MODEL ASSET INTEGRITY INSIDE APK
+============================================================
+
+Before inference, implement or use a runtime verification that
+reads:
+
+model.nano
+
+from Android AssetManager / packaged APK assets.
+
+Verify:
+
+size = 765477824
+
+SHA-256 =
+0eeae45f90d8c74b9c0773b7c3870b5fa095829cebd4a093a2f1302b047d1d64
+
+The runtime must report:
+
+ASSET_RUNTIME_SHA256=<actual>
+ASSET_RUNTIME_SIZE=<actual>
+ASSET_RUNTIME_INTEGRITY=PASS
+
+Do not trust only the source-tree file.
+
+The proof must come from the APK/runtime asset.
+
+============================================================
+8. APK PACKAGING VERIFICATION
+============================================================
+
+Build the Android APK.
+
+Verify the generated APK actually contains:
+
+assets/model.nano
+
+Verify its packaged byte size and SHA.
+
+Do NOT assume Gradle packaging is correct.
+
+Report:
+
+APK_ASSET_PRESENT=YES
+APK_ASSET_SIZE=765477824
+APK_ASSET_SHA256=0eeae45f...
+
+If APK packaging transforms the file unexpectedly, STOP.
+
+============================================================
+9. ABI / DEVICE REQUIREMENT
+============================================================
+
+Target physical device:
+
+itel A662L
+
+Android 12
+
+Previously observed ABI:
+
+armeabi-v7a
+
+First determine the actual device ABI using:
+
+adb shell getprop ro.product.cpu.abi
+
+and:
+
+adb shell getprop ro.product.cpu.abilist
+
+Do not assume.
+
+Report exact output.
+
+The APK/native library MUST actually contain the ABI required by
+the physical device.
+
+============================================================
+10. NATIVE BUILD
+============================================================
+
+Build the native Android library for the actual device ABI.
+
+Verify:
+
+- CMake configuration
+- compiler
+- NDK
+- ABI
+- native library produced
+- JNI symbols
+- no unresolved symbols
+
+Do not substitute host binaries.
+
+============================================================
+11. NANO V2 LOADER RUNTIME TEST
+============================================================
+
+On the physical device, load:
+
+assets/model.nano
+
+through the real native loader.
+
+The loader must verify:
+
+magic NANO
+version 0x0002
+tensor_count 219
+d_model 2560
+d_ffn 6912
+total_blocks 24
+state_blocks 16
+gqa_blocks 8
+n_q 20
+n_kv 4
+d_head 128
+vocab_size 65536
+max_context 10000
+
+Then verify:
+
+219/219 tensor descriptors
+
+and:
+
+219/219 native tensor mappings
+
+No legacy V1 loader may accept this file.
+
+============================================================
+12. NATIVE MEMORY / ALLOCATION
+============================================================
+
+The 765 MB model is large for the target Android device.
+
+Measure actual runtime memory.
+
+Report:
+
+- native allocation success/failure
+- Java heap
+- native heap
+- RSS if available
+- peak memory during model load
+- peak memory during inference
+
+Do not fake or estimate.
+
+If the device cannot allocate the production model:
+
+FINAL_STATUS=FIX-11-BLOCKED-DEVICE-MEMORY
+
+Do not replace the model with a smaller model.
+
+============================================================
+13. TOKENIZER
+============================================================
+
+Verify the Android runtime tokenizer used by the production path.
+
+Expected production vocabulary:
+
+65,536
+
+Do not silently fall back to:
+
+- 262-token special/byte fallback
+- [tok_%d]
+- toy tokenizer
+- synthetic tokenizer
+
+Verify that the actual Android inference path uses the intended
+65,536-token tokenizer assets/runtime.
+
+Report exact tokenizer initialization result.
+
+============================================================
+14. REAL INFERENCE TEST
+============================================================
+
+Run inference on the physical device.
+
+Do NOT use hardcoded answers.
+
+Use at least these deterministic prompts:
+
+TEST 1:
+"বাংলাদেশের রাজধানী কী?"
+
+TEST 2:
+"২ + ২ = ?"
+
+TEST 3:
+"পানি কত ডিগ্রি সেলসিয়াসে ফুটে?"
+
+Capture:
+
+- token IDs
+- generated token IDs
+- logits availability
+- logits dimensions
+- first-token top-k logits if practical
+- generated output
+- inference latency
+- memory usage
+- native log markers
+
+The purpose is to prove actual model execution, not linguistic
+quality.
+
+============================================================
+15. LOGITS PROOF — MANDATORY
+============================================================
+
+The runtime must expose enough forensic telemetry to prove that
+real logits were produced.
+
+At minimum:
+
+LOGITS_PRESENT=YES
+LOGITS_VOCAB_SIZE=65536
+LOGITS_FINITE=YES
+LOGITS_NONZERO=YES
+
+Report deterministic summary:
+
+logits_min
+logits_max
+logits_mean
+argmax_token_id
+
+Do NOT dump all 65,536 logits into the report.
+
+A small deterministic top-k sample is sufficient.
+
+If logits are unavailable because the app still uses hardcoded
+responses:
+
+FIX-11 is BLOCKED.
+
+============================================================
+16. NATIVE EXECUTION MARKERS
+============================================================
+
+Add temporary diagnostic logging if necessary.
+
+Required sequence:
+
+NANO_ASSET_OPEN
+NANO_V2_HEADER_OK
+NANO_CRC_OK
+NANO_219_TENSORS_OK
+NANO_NATIVE_MAPPING_OK
+TOKENIZER_READY
+INFERENCE_BEGIN
+FORWARD_PASS_BEGIN
+LOGITS_READY
+GENERATION_BEGIN
+GENERATION_END
+INFERENCE_COMPLETE
+
+Logs must come from the actual Android runtime.
+
+Do not fabricate these strings from Kotlin without corresponding
+native execution.
+
+============================================================
+17. DETERMINISTIC REPEAT TEST
+============================================================
+
+Run the same deterministic prompt at least twice on the physical
+device.
+
+Example:
+
+"২ + ২ = ?"
+
+Compare:
+
+- input token IDs
+- first-token argmax
+- logits summary
+- generated token IDs
+
+If runtime is deterministic, results should match.
+
+If not deterministic due a documented reason, report why.
+
+============================================================
+18. FAILURE POLICY
+============================================================
+
+STOP on:
+
+- wrong asset SHA
+- wrong asset size
+- wrong APK asset
+- wrong ABI
+- JNI failure
+- native loader failure
+- tensor mapping failure
+- tokenizer mismatch
+- hardcoded inference
+- logits unavailable
+- device OOM
+- crash during forward pass
+
+Do NOT substitute:
+
+- smaller model
+- old Nano
+- Python model
+- fake logits
+- hardcoded output
+- mock JNI
+- host executable
+
+============================================================
+19. TESTING SEPARATION
+============================================================
+
+Host tests are supplementary only.
+
+Physical Android execution is the authoritative FIX-11 proof.
+
+Clearly separate:
+
+HOST_TEST=PASS/FAIL
+
+from:
+
+ANDROID_DEVICE_RUNTIME=PASS/FAIL
+
+============================================================
+20. REQUIRED REPORT
+============================================================
+
+Create:
+
+FIX-11-ANDROID-NATIVE-RUNTIME-PHYSICAL-DEVICE-FORENSIC-REPORT.md
+
+Include:
+
+1. exact files modified
+2. exact call graph
+3. APK build evidence
+4. APK model asset SHA/size
+5. device model
+6. Android version
+7. ABI
+8. native compiler/NDK
+9. Nano V2 header verification
+10. 219 tensor runtime mapping
+11. tokenizer verification
+12. memory telemetry
+13. inference latency
+14. logits telemetry
+15. deterministic repeat result
+16. actual generated outputs
+17. native log evidence
+18. host vs device separation
+19. known limitations
+20. final status
+
+============================================================
+21. GIT SAFETY
+============================================================
+
+Before changes:
+
+git status --short
+
+After changes:
+
+git status --short
+git diff --stat
+
+Do not commit:
+
+- APKs
+- AABs
+- model.nano
+- checkpoints
+- generated binaries
+- device logs
+- temporary files
+
+unless the existing repository explicitly requires them.
+
+Do not modify .gitignore merely to track model.nano.
+
+============================================================
+22. REQUIRED FINAL MACHINE STATUS
+============================================================
+
+Print:
+
+DEVICE_MODEL=<actual>
+ANDROID_VERSION=<actual>
+DEVICE_ABI=<actual>
+
+APK_ASSET_PRESENT=YES
+APK_ASSET_SIZE=765477824
+APK_ASSET_SHA256=0eeae45f90d8c74b9c0773b7c3870b5fa095829cebd4a093a2f1302b047d1d64
+
+ASSET_RUNTIME_SIZE=<actual>
+ASSET_RUNTIME_SHA256=<actual>
+ASSET_RUNTIME_INTEGRITY=PASS
+
+NANO_VERSION=0x0002
+NANO_TENSORS=219/219
+NANO_PARAMETERS=2050296320/2050296320
+NATIVE_MAPPING=219/219
+
+TOKENIZER_VOCAB=65536
+TOKENIZER_RUNTIME=PASS
+
+LOGITS_PRESENT=YES
+LOGITS_VOCAB_SIZE=65536
+LOGITS_FINITE=YES
+LOGITS_NONZERO=YES
+
+PHYSICAL_DEVICE_INFERENCE=PASS
+
+HARDCODED_INFERENCE_BYPASS=NO
+
+CHECKPOINT_MODIFIED=NO
+CHECKPOINT_SHA256=0d8d3f31830fd682324708795ab0ebd91b7213a0f28027290216323892f0e667
+
+FINAL_STATUS=FIX-11-PASS-PHYSICAL-DEVICE-INFERENCE
+
+============================================================
+23. STRICT PASS CONDITION
+============================================================
+
+Only report:
+
+FIX-11-PASS-PHYSICAL-DEVICE-INFERENCE
+
+if ALL of these are proven:
+
+1. Correct model.nano is inside APK.
+2. APK asset SHA matches production SHA.
+3. Physical device loads the asset.
+4. Native V2 loader accepts it.
+5. 219/219 tensors map successfully.
+6. Actual tokenizer initializes.
+7. Actual native forward pass executes.
+8. Real logits are produced.
+9. Generation uses those logits.
+10. No hardcoded response bypass.
+11. Physical device inference completes.
+12. Repeat deterministic test completes.
+13. No checkpoint/model modification.
+14. No alternate model substitution.
+
+Otherwise report the exact blocker.
+
+DO NOT claim PASS merely because APK compilation succeeds.
+DO NOT claim PASS merely because the app opens.
+DO NOT claim PASS merely because a response appears on screen.
+
+The proof must demonstrate:
+
+REAL model.nano
+→ REAL Android asset
+→ REAL JNI
+→ REAL native engine
+→ REAL forward pass
+→ REAL logits
+→ REAL generation
+→ REAL physical device output.
+
+END FIX-11.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-03T01:46:15+06:00.
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from Claude Sonnet 4.6 (Thinking) to Gemini 3.8 Flash (High). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>
