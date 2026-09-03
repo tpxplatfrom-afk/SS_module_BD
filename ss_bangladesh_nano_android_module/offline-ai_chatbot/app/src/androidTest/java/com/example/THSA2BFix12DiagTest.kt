@@ -232,4 +232,61 @@ class THSA2BFix12DiagTest {
         engine.close()
         assertTrue("FIX-12 perf: forward pass took ${totalMs}ms (expected < 15000ms)", totalMs < 15000)
     }
+
+    // ─── test04: FIX-12C Layerwise intermediate hidden state checkpoint capture ─
+    @Test
+    fun test04_fix12c_layerwise() {
+        Log.i(TAG, "======== FIX12C TEST04: LAYERWISE HIDDEN STATE CAPTURE ========")
+        Log.i(TAG, "FIX12C_CAPTURE_BEGIN")
+
+        // Create fix12c directory tree on device
+        val fix12cBase = File(ctx.filesDir, "fix12c")
+        fix12cBase.mkdirs()
+        Log.i(TAG, "FIX12C_DIR: ${fix12cBase.absolutePath}")
+
+        val engine = loadNativeEngine()
+        val handle = engine.javaClass.getDeclaredField("nativeHandle")
+            .also { it.isAccessible = true }.getLong(engine)
+
+        PROMPTS.forEachIndexed { pi, (label, prompt, ids) ->
+            Log.i(TAG, "FIX12C_PROMPT_BEGIN: pi=$pi label=$label tokens=${ids.toList()}")
+
+            // Create per-prompt directory
+            val pDir = File(fix12cBase, "prompt_$pi")
+            pDir.mkdirs()
+
+            // Reset session state before each prompt
+            NanoNative.nativeResetSession(handle)
+
+            // Run single-token forward (generates checkpoints via native engine instrumentation)
+            var generatedToken = -1
+            val t0 = System.nanoTime()
+            NanoNative.nativeGenerate(
+                handle,
+                ids,
+                0.0f, 1.0f, 1,
+                ai.nano.engine.NativeTokenCallback { _, tokenId, _ ->
+                    generatedToken = tokenId
+                    false
+                }
+            )
+            val elapsedMs = (System.nanoTime() - t0) / 1_000_000L
+            Log.i(TAG, "FIX12C_PROMPT_DONE: pi=$pi label=$label argmax=$generatedToken elapsed_ms=$elapsedMs")
+        }
+
+        Log.i(TAG, "FIX12C_CAPTURE_COMPLETE")
+
+        // Count captured binary files
+        val allBins = fix12cBase.walkTopDown().filter { it.extension == "bin" }.toList()
+        Log.i(TAG, "FIX12C_TOTAL_BIN_FILES=${allBins.size}")
+        allBins.groupBy { it.parentFile?.name ?: "root" }.forEach { (dir, files) ->
+            Log.i(TAG, "FIX12C_DIR_$dir: ${files.size} files")
+        }
+
+        engine.close()
+
+        // Assert we got checkpoint files (at least 5 prompts × some checkpoints each)
+        assertTrue("FIX-12C: Expected at least 25 checkpoint bin files, got ${allBins.size}", allBins.size >= 25)
+        Log.i(TAG, "FIX12C_TEST04_PASS: total_bin_files=${allBins.size}")
+    }
 }

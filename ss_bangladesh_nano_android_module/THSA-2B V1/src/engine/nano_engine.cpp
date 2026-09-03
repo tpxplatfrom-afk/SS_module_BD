@@ -205,6 +205,46 @@ static void fix12_init() {
 // END FIX-12 DIAGNOSTIC INSTRUMENTATION
 // =============================================================================
 
+// =============================================================================
+// FIX-12C LAYERWISE INTERMEDIATE CHECKPOINT CAPTURE
+// =============================================================================
+static bool g_fix12c_enabled = true;
+static char g_fix12c_dir[512] = {0};
+
+static void fix12c_init() {
+    const char* dir = getenv("NANO_FIX12C_DIAG_PATH");
+#ifdef __ANDROID__
+    static char fallback[256];
+    if (!dir || !dir[0]) {
+        snprintf(fallback, sizeof(fallback),
+                 "/data/data/com.aistudio.offlineai.krvq/files/fix12c");
+        dir = fallback;
+    }
+#endif
+    if (!dir || !dir[0]) { g_fix12c_enabled = false; return; }
+    strncpy(g_fix12c_dir, dir, sizeof(g_fix12c_dir) - 1);
+    mkdir(g_fix12c_dir, 0777);
+    g_fix12c_enabled = true;
+    NANO_LOGI("FIX12C_INIT: enabled=YES dir=%s", g_fix12c_dir);
+}
+
+static void fix12c_dump_vec(int prompt_idx, const char* name, const float* data, size_t count) {
+    if (!g_fix12c_enabled || !g_fix12c_dir[0] || !data || count == 0) return;
+    char pdir[600];
+    snprintf(pdir, sizeof(pdir), "%s/prompt_%d", g_fix12c_dir, prompt_idx);
+    mkdir(pdir, 0777);
+    char path[650];
+    snprintf(path, sizeof(path), "%s/%s.bin", pdir, name);
+    FILE* fp = fopen(path, "wb");
+    if (fp) {
+        fwrite(data, sizeof(float), count, fp);
+        fclose(fp);
+    }
+}
+// =============================================================================
+// END FIX-12C INSTRUMENTATION
+// =============================================================================
+
 // IEEE 802.3 CRC32 Implementation (Matches Python zlib.crc32)
 static uint32_t compute_nano_crc32(const uint8_t* buffer, size_t length) {
     uint32_t crc = 0xFFFFFFFF;
@@ -361,6 +401,11 @@ static NanoTokenId nano_forward_pass_single_token(
         NANO_LOGI("FIX12_EMBED_READY: token_id=%d prompt=%d", input_token, g_fix12_prompt_idx);
         fix12_capture_checkpoint(1, ctx->h_state, 2560, "EMBED");
     }
+    // FIX-12C CKPT-01: Embedding output (only on last prompt token = compute_logits)
+    if (compute_logits) {
+        fix12c_dump_vec(g_fix12_prompt_idx, "ckpt01_embed", ctx->h_state, 2560);
+        NANO_LOGI("FIX12C_CKPT: prompt=%d name=ckpt01_embed dim=2560", g_fix12_prompt_idx);
+    }
 
     // -------------------------------------------------------------
     // 2. BACKBONE LAYERS (24 Layers: 16 State / 8 GQA)
@@ -368,6 +413,13 @@ static NanoTokenId nano_forward_pass_single_token(
     for (size_t l = 0; l < 24; ++l) {
         const NanoLayerPointers& lp = ctx->layers[l];
         long long t_layer_start = fix12_now_us();
+
+        // FIX-12C CKPT-02: Block input
+        if (compute_logits) {
+            char ckpt_name[64];
+            snprintf(ckpt_name, sizeof(ckpt_name), "ckpt02_block_%02zu_input", l);
+            fix12c_dump_vec(g_fix12_prompt_idx, ckpt_name, ctx->h_state, 2560);
+        }
 
         if (lp.is_gqa) {
 
@@ -377,6 +429,11 @@ static NanoTokenId nano_forward_pass_single_token(
                 nano_neon_rmsnorm(ctx->h_state, lp.gamma_mixer, 2560, ctx->norm_out);
             } else {
                 memcpy(ctx->norm_out, ctx->h_state, 2560 * sizeof(float));
+            }
+            // FIX-12C CKPT-11: GQA RMSNorm output
+            if (compute_logits) {
+                char n11[64]; snprintf(n11, sizeof(n11), "ckpt11_block_%02zu_gqa_norm", l);
+                fix12c_dump_vec(g_fix12_prompt_idx, n11, ctx->norm_out, 2560);
             }
             
             // 2. Quantize normalized state to INT8
@@ -391,6 +448,15 @@ static NanoTokenId nano_forward_pass_single_token(
             nano_neon_gemv_ternary_int8(ctx->q_act, lp.w_q_packed, ctx->h_state_int8, &alpha_q, nullptr, 2560, 2560);
             nano_neon_gemv_ternary_int8(ctx->k_act, lp.w_k_packed, ctx->h_state_int8, &alpha_k, nullptr, 512, 2560);
             nano_neon_gemv_ternary_int8(ctx->v_act, lp.w_v_packed, ctx->h_state_int8, &alpha_v, nullptr, 512, 2560);
+            // FIX-12C CKPT-12a/b/c: Q, K, V
+            if (compute_logits) {
+                char n12a[64]; snprintf(n12a, sizeof(n12a), "ckpt12a_block_%02zu_gqa_q", l);
+                fix12c_dump_vec(g_fix12_prompt_idx, n12a, ctx->q_act, 2560);
+                char n12b[64]; snprintf(n12b, sizeof(n12b), "ckpt12b_block_%02zu_gqa_k", l);
+                fix12c_dump_vec(g_fix12_prompt_idx, n12b, ctx->k_act, 512);
+                char n12c[64]; snprintf(n12c, sizeof(n12c), "ckpt12c_block_%02zu_gqa_v", l);
+                fix12c_dump_vec(g_fix12_prompt_idx, n12c, ctx->v_act, 512);
+            }
             
             // 4. Append K, V to KV Cache at current sequence position
             size_t t_idx = current_seq_len < 10000 ? current_seq_len : 9999;
@@ -419,15 +485,30 @@ static NanoTokenId nano_forward_pass_single_token(
                 128,
                 ctx->attn_out
             );
+            // FIX-12C CKPT-13: Attention output
+            if (compute_logits) {
+                char n13[64]; snprintf(n13, sizeof(n13), "ckpt13_block_%02zu_gqa_attention", l);
+                fix12c_dump_vec(g_fix12_prompt_idx, n13, ctx->attn_out, 2560);
+            }
             
             // 6. Out Projection & Residual Connection
             float attn_out_scale = 1.0f;
             nano_neon_quantize_int8(ctx->attn_out, ctx->attn_out_int8, &attn_out_scale, 2560);
             float alpha_out = lp.scale_out * attn_out_scale;
             nano_neon_gemv_ternary_int8(ctx->h_state_res, lp.w_out_packed, ctx->attn_out_int8, &alpha_out, nullptr, 2560, 2560);
+            // FIX-12C CKPT-14: GQA out projection
+            if (compute_logits) {
+                char n14[64]; snprintf(n14, sizeof(n14), "ckpt14_block_%02zu_gqa_out_proj", l);
+                fix12c_dump_vec(g_fix12_prompt_idx, n14, ctx->h_state_res, 2560);
+            }
             
             for (size_t i = 0; i < 2560; ++i) {
                 ctx->h_state[i] += ctx->h_state_res[i];
+            }
+            // FIX-12C CKPT-15: GQA residual
+            if (compute_logits) {
+                char n15[64]; snprintf(n15, sizeof(n15), "ckpt15_block_%02zu_gqa_residual", l);
+                fix12c_dump_vec(g_fix12_prompt_idx, n15, ctx->h_state, 2560);
             }
             ctx->stats.attention_execution_count++;
         } else {
@@ -438,6 +519,11 @@ static NanoTokenId nano_forward_pass_single_token(
                     nano_neon_rmsnorm(ctx->h_state, lp.gamma_mixer, 2560, ctx->norm_out);
                 } else {
                     memcpy(ctx->norm_out, ctx->h_state, 2560 * sizeof(float));
+                }
+                // FIX-12C CKPT-03: State RMSNorm output
+                if (compute_logits) {
+                    char n03[64]; snprintf(n03, sizeof(n03), "ckpt03_block_%02zu_state_norm", l);
+                    fix12c_dump_vec(g_fix12_prompt_idx, n03, ctx->norm_out, 2560);
                 }
                 
                 // 2. In-Projection (2560 -> 5120)
@@ -453,10 +539,22 @@ static NanoTokenId nano_forward_pass_single_token(
                     5120,
                     2560
                 );
+                // FIX-12C CKPT-04: State in_proj output [5120]
+                if (compute_logits) {
+                    char n04[64]; snprintf(n04, sizeof(n04), "ckpt04_block_%02zu_state_in_proj", l);
+                    fix12c_dump_vec(g_fix12_prompt_idx, n04, ctx->state_in_proj_act, 5120);
+                }
                 
                 // 3. Split [gate (2560), value (2560)]
                 const float* gate_stream = ctx->state_in_proj_act;
                 const float* value_stream = ctx->state_in_proj_act + 2560;
+                // FIX-12C CKPT-05a/b: Gate and Value
+                if (compute_logits) {
+                    char n05a[64]; snprintf(n05a, sizeof(n05a), "ckpt05a_block_%02zu_state_gate", l);
+                    fix12c_dump_vec(g_fix12_prompt_idx, n05a, gate_stream, 2560);
+                    char n05b[64]; snprintf(n05b, sizeof(n05b), "ckpt05b_block_%02zu_state_value", l);
+                    fix12c_dump_vec(g_fix12_prompt_idx, n05b, value_stream, 2560);
+                }
                 
                 // 4. Depthwise causal Conv1D on value_stream with conv_weights and conv_bias
                 nano_neon_short_conv_step(
@@ -467,12 +565,30 @@ static NanoTokenId nano_forward_pass_single_token(
                     2560,
                     ctx->state_conv_out
                 );
+                // FIX-12C CKPT-06: Conv1D output
+                if (compute_logits) {
+                    char n06[64]; snprintf(n06, sizeof(n06), "ckpt06_block_%02zu_state_conv", l);
+                    fix12c_dump_vec(g_fix12_prompt_idx, n06, ctx->state_conv_out, 2560);
+                }
                 
                 // 5. Gated SiLU activation: silu(gate) * conv_out
                 for (size_t i = 0; i < 2560; ++i) {
                     float g = gate_stream[i];
                     float silu_g = g / (1.0f + expf(-g));
                     ctx->state_gated_act[i] = silu_g * ctx->state_conv_out[i];
+                }
+                // FIX-12C CKPT-07/08: SiLU and Gated product (compute inline)
+                if (compute_logits) {
+                    // Compute silu(gate) separately for CKPT-07
+                    static float _silu_tmp[2560];
+                    for (size_t i = 0; i < 2560; ++i) {
+                        float g = gate_stream[i];
+                        _silu_tmp[i] = g / (1.0f + expf(-g));
+                    }
+                    char n07[64]; snprintf(n07, sizeof(n07), "ckpt07_block_%02zu_state_silu", l);
+                    fix12c_dump_vec(g_fix12_prompt_idx, n07, _silu_tmp, 2560);
+                    char n08[64]; snprintf(n08, sizeof(n08), "ckpt08_block_%02zu_state_gated", l);
+                    fix12c_dump_vec(g_fix12_prompt_idx, n08, ctx->state_gated_act, 2560);
                 }
                 
                 // 6. Out-Projection (2560 -> 2560)
@@ -488,10 +604,20 @@ static NanoTokenId nano_forward_pass_single_token(
                     2560,
                     2560
                 );
+                // FIX-12C CKPT-09: State out_proj
+                if (compute_logits) {
+                    char n09[64]; snprintf(n09, sizeof(n09), "ckpt09_block_%02zu_state_out_proj", l);
+                    fix12c_dump_vec(g_fix12_prompt_idx, n09, ctx->h_state_res, 2560);
+                }
                 
                 // 7. Residual Add
                 for (size_t i = 0; i < 2560; ++i) {
                     ctx->h_state[i] += ctx->h_state_res[i];
+                }
+                // FIX-12C CKPT-10: State residual
+                if (compute_logits) {
+                    char n10[64]; snprintf(n10, sizeof(n10), "ckpt10_block_%02zu_state_residual", l);
+                    fix12c_dump_vec(g_fix12_prompt_idx, n10, ctx->h_state, 2560);
                 }
             } else {
                 // Backward-compatibility fallback for legacy Format 1 binaries
@@ -516,6 +642,11 @@ static NanoTokenId nano_forward_pass_single_token(
         } else {
             memcpy(ctx->norm_out, ctx->h_state, 2560 * sizeof(float));
         }
+        // FIX-12C CKPT-16: FFN Pre-RMSNorm
+        if (compute_logits) {
+            char n16[64]; snprintf(n16, sizeof(n16), "ckpt16_block_%02zu_ffn_norm", l);
+            fix12c_dump_vec(g_fix12_prompt_idx, n16, ctx->norm_out, 2560);
+        }
         
         float ffn_in_scale = 1.0f;
         nano_neon_quantize_int8(ctx->norm_out, ctx->h_state_int8, &ffn_in_scale, 2560);
@@ -525,16 +656,38 @@ static NanoTokenId nano_forward_pass_single_token(
         
         nano_neon_gemv_ternary_int8(ctx->gate_act, lp.w_gate_packed, ctx->h_state_int8, &alpha_gate, nullptr, 6912, 2560);
         nano_neon_gemv_ternary_int8(ctx->up_act, lp.w_up_packed, ctx->h_state_int8, &alpha_up, nullptr, 6912, 2560);
+        // FIX-12C CKPT-17/18: Gate and Up projections
+        if (compute_logits) {
+            char n17[64]; snprintf(n17, sizeof(n17), "ckpt17_block_%02zu_ffn_gate", l);
+            fix12c_dump_vec(g_fix12_prompt_idx, n17, ctx->gate_act, 6912);
+            char n18[64]; snprintf(n18, sizeof(n18), "ckpt18_block_%02zu_ffn_up", l);
+            fix12c_dump_vec(g_fix12_prompt_idx, n18, ctx->up_act, 6912);
+        }
         
         nano_neon_swiglu(ctx->gate_act, ctx->up_act, 6912, ctx->ffn_act);
+        // FIX-12C CKPT-19: SwiGLU activation
+        if (compute_logits) {
+            char n19[64]; snprintf(n19, sizeof(n19), "ckpt19_block_%02zu_ffn_activation", l);
+            fix12c_dump_vec(g_fix12_prompt_idx, n19, ctx->ffn_act, 6912);
+        }
         
         float ffn_act_scale = 1.0f;
         nano_neon_quantize_int8(ctx->ffn_act, ctx->ffn_act_int8, &ffn_act_scale, 6912);
         float alpha_down = lp.scale_down * ffn_act_scale;
         
         nano_neon_gemv_ternary_int8(ctx->ffn_out, lp.w_down_packed, ctx->ffn_act_int8, &alpha_down, nullptr, 2560, 6912);
+        // FIX-12C CKPT-20: FFN Down projection
+        if (compute_logits) {
+            char n20[64]; snprintf(n20, sizeof(n20), "ckpt20_block_%02zu_ffn_down", l);
+            fix12c_dump_vec(g_fix12_prompt_idx, n20, ctx->ffn_out, 2560);
+        }
         for (size_t i = 0; i < 2560; ++i) {
             ctx->h_state[i] += ctx->ffn_out[i];
+        }
+        // FIX-12C CKPT-21: FFN Residual
+        if (compute_logits) {
+            char n21[64]; snprintf(n21, sizeof(n21), "ckpt21_block_%02zu_ffn_residual", l);
+            fix12c_dump_vec(g_fix12_prompt_idx, n21, ctx->h_state, 2560);
         }
         ctx->stats.ffn_execution_count++;
 
@@ -571,6 +724,10 @@ static NanoTokenId nano_forward_pass_single_token(
         NANO_LOGI("FIX12_RMSNORM_READY: prompt=%d", g_fix12_prompt_idx);
         fix12_capture_checkpoint(8, ctx->norm_out, 2560, "RMSNORM");
     }
+    // FIX-12C CKPT-22/23: Final RMSNorm (same vector for both)
+    fix12c_dump_vec(g_fix12_prompt_idx, "ckpt22_final_norm", ctx->norm_out, 2560);
+    fix12c_dump_vec(g_fix12_prompt_idx, "ckpt23_lm_head_input", ctx->norm_out, 2560);
+    NANO_LOGI("FIX12C_CKPT: prompt=%d name=ckpt22_final_norm dim=2560", g_fix12_prompt_idx);
 
     // -------------------------------------------------------------
     // 4. OUTPUT LOGITS COMPUTATION (LM Head - INT8 Projection)
@@ -627,6 +784,9 @@ static NanoTokenId nano_forward_pass_single_token(
                   g_fix12_timing.total_us, g_fix12_timing.embed_us, g_fix12_timing.lmhead_us);
         fix12_dump_logits(ctx->logits);
         fix12_write_perf();
+        // FIX-12C CKPT-24: Full logits
+        fix12c_dump_vec(g_fix12_prompt_idx, "ckpt24_logits", ctx->logits, 65536);
+        NANO_LOGI("FIX12C_CKPT: prompt=%d name=ckpt24_logits dim=65536", g_fix12_prompt_idx);
         // Advance prompt index for next call
         g_fix12_prompt_idx++;
         NANO_LOGI("FIX12_FORWARD_END: prompt_completed=%d", g_fix12_prompt_idx - 1);
@@ -664,6 +824,7 @@ NanoStatus nano_engine_init(
 
     // FIX-12: Initialize diagnostic mode (no-op if env var not set)
     fix12_init();
+    fix12c_init();
 
     NANO_LOGI("NANO_NATIVE_INIT_BEGIN: path=%s", model_path);
     NANO_LOGI("NANO_ASSET_OPEN: path=%s", model_path);
