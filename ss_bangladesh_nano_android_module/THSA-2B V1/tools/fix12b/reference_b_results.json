@@ -1,0 +1,1018 @@
+{
+  "fix_version": "FIX-12B",
+  "phase": "D-REFERENCE-B-FULL",
+  "nano_path": "C:\\Users\\User\\Desktop\\SS_module_BD\\ss_bangladesh_nano_android_module\\THSA-2B V1\\android\\src\\main\\assets\\model.nano",
+  "nano_sha256": "0eeae45f90d8c74b9c0773b7c3870b5fa095829cebd4a093a2f1302b047d1d64",
+  "nano_sha_ok": true,
+  "nano_size": 765477824,
+  "header": {
+    "version": 2,
+    "total_blocks": 24,
+    "state_blocks": 16,
+    "gqa_blocks": 8,
+    "d_model": 2560,
+    "d_ffn": 6912,
+    "n_q": 20,
+    "n_kv": 4,
+    "d_head": 128,
+    "vocab_size": 65536,
+    "max_context": 10000,
+    "crc32": "0x35f8e92",
+    "tensor_count": 219
+  },
+  "tensor_count": 219,
+  "out_dir": "C:\\Users\\User\\Desktop\\SS_module_BD\\ss_bangladesh_nano_android_module\\THSA-2B V1\\tools\\fix12b",
+  "prompts": [
+    {
+      "label": "TEST-A",
+      "prompt": "2+2=?",
+      "token_ids": [
+        360,
+        43226,
+        64782,
+        64792
+      ],
+      "logits_sha256": "47bab360e44253080e075b41016e58ceb6ba6cf257e7e4caef97dbd7f08d12db",
+      "logits_path": "C:\\Users\\User\\Desktop\\SS_module_BD\\ss_bangladesh_nano_android_module\\THSA-2B V1\\tools\\fix12b\\reference_b_logits_p0.bin",
+      "elapsed_s": 38.25927805900574,
+      "checkpoints": {
+        "CKPT1_EMBED": {
+          "label": "CKPT1_EMBED",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -2.978346586227417,
+          "max": 3.4601378440856934,
+          "mean": 0.011514402800821699,
+          "mean_abs": 0.8034247210161993,
+          "max_abs": 3.4601378440856934,
+          "l2_norm": 51.07775245391452,
+          "finite": true,
+          "nonzero": 2516,
+          "sha256": "e5c145da87f472c1d8fe47537891401dafe54765e16cd05ae703ee6ae9ebe7bd"
+        },
+        "CKPT2_STATE0": {
+          "label": "CKPT2_STATE0",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.0342016220092773,
+          "max": 3.5539166927337646,
+          "mean": 0.013108320058017852,
+          "mean_abs": 0.8342499530557689,
+          "max_abs": 3.5539166927337646,
+          "l2_norm": 52.888625941464745,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "51b7fd8c3b3e7f4c56ec427276b7f9a487d568cb71dd84dd80a268e36b5777b8"
+        },
+        "CKPT3_GQA2": {
+          "label": "CKPT3_GQA2",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.310021162033081,
+          "max": 3.6409575939178467,
+          "mean": 0.009176908757945057,
+          "mean_abs": 0.9076866616131156,
+          "max_abs": 3.6409575939178467,
+          "l2_norm": 57.37408575522105,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "09a77401d33a7ee7475f84203824bcc8133a06cd8b2557fc7fc1562eef116453"
+        },
+        "CKPT4_STATE3": {
+          "label": "CKPT4_STATE3",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.6035711765289307,
+          "max": 3.7409732341766357,
+          "mean": 0.007255015109694796,
+          "mean_abs": 0.9538219944639422,
+          "max_abs": 3.7409732341766357,
+          "l2_norm": 60.195590347801996,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "41850449a0ba4716cd7e907eb1b4b95501dfb290f5f6f7430728ccbfada414f2"
+        },
+        "CKPT5_GQA5": {
+          "label": "CKPT5_GQA5",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.8963193893432617,
+          "max": 3.9871163368225098,
+          "mean": 0.008482979028121918,
+          "mean_abs": 1.0419821795516326,
+          "max_abs": 3.9871163368225098,
+          "l2_norm": 65.68606988764807,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "04500b7b8791b4e1aaec710b5356a6a1c027944e1004e6311b7fc6f826311ac4"
+        },
+        "CKPT6_STATE12": {
+          "label": "CKPT6_STATE12",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -5.221740245819092,
+          "max": 5.023886680603027,
+          "mean": 0.013800882431314675,
+          "mean_abs": 1.3768586616297398,
+          "max_abs": 5.221740245819092,
+          "l2_norm": 86.81722675196625,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "52becb729bdb45bae1b924d9c1eac41f90a43fe596d1a2a7e03e297eb913ea97"
+        },
+        "CKPT7_FINAL_BLOCK": {
+          "label": "CKPT7_FINAL_BLOCK",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -7.036705017089844,
+          "max": 7.0105462074279785,
+          "mean": 0.009820482728537172,
+          "mean_abs": 1.8146163735153096,
+          "max_abs": 7.036705017089844,
+          "l2_norm": 114.2379582928175,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "0c7b953bb038d92759507b7877af41df500d69e1dbbfa7ec072875efcb22c835"
+        },
+        "CKPT8_RMSNORM": {
+          "label": "CKPT8_RMSNORM",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.116584062576294,
+          "max": 3.1049983501434326,
+          "mean": 0.004349530263371548,
+          "mean_abs": 0.803700684240485,
+          "max_abs": 3.116584062576294,
+          "l2_norm": 50.59643823009499,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "19102462b310ea1b6f535fb2f517ee7fb546aa1a3641e12e8ab24d0e7c53eec7"
+        },
+        "CKPT9_LOGITS": {
+          "label": "CKPT9_LOGITS",
+          "shape": [
+            65536
+          ],
+          "dtype": "float32",
+          "min": -3.3113150596618652,
+          "max": 14.20924186706543,
+          "mean": -0.6554142236709595,
+          "mean_abs": 0.8678388595581055,
+          "max_abs": 14.20924186706543,
+          "l2_norm": 265.59407759610446,
+          "finite": true,
+          "nonzero": 65536,
+          "argmax_id": 64792,
+          "top5_ids": [
+            64792,
+            40858,
+            6155,
+            18798,
+            12095
+          ],
+          "top10_ids": [
+            64792,
+            40858,
+            6155,
+            18798,
+            12095,
+            45220,
+            47730,
+            4924,
+            27793,
+            59604
+          ],
+          "top5_vals": [
+            14.20924186706543,
+            6.623017311096191,
+            6.298550605773926,
+            5.369904041290283,
+            5.365880012512207
+          ],
+          "top10_vals": [
+            14.20924186706543,
+            6.623017311096191,
+            6.298550605773926,
+            5.369904041290283,
+            5.365880012512207,
+            4.763490200042725,
+            4.595575332641602,
+            4.5690813064575195,
+            4.563913345336914,
+            4.3154191970825195
+          ]
+        }
+      }
+    },
+    {
+      "label": "TEST-B",
+      "prompt": "বাংলাদেশের রাজধানী কী?",
+      "token_ids": [
+        1620,
+        3715,
+        3101,
+        64792
+      ],
+      "logits_sha256": "47bab360e44253080e075b41016e58ceb6ba6cf257e7e4caef97dbd7f08d12db",
+      "logits_path": "C:\\Users\\User\\Desktop\\SS_module_BD\\ss_bangladesh_nano_android_module\\THSA-2B V1\\tools\\fix12b\\reference_b_logits_p1.bin",
+      "elapsed_s": 32.08957505226135,
+      "checkpoints": {
+        "CKPT1_EMBED": {
+          "label": "CKPT1_EMBED",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -2.978346586227417,
+          "max": 3.4601378440856934,
+          "mean": 0.011514402800821699,
+          "mean_abs": 0.8034247210161993,
+          "max_abs": 3.4601378440856934,
+          "l2_norm": 51.07775245391452,
+          "finite": true,
+          "nonzero": 2516,
+          "sha256": "e5c145da87f472c1d8fe47537891401dafe54765e16cd05ae703ee6ae9ebe7bd"
+        },
+        "CKPT2_STATE0": {
+          "label": "CKPT2_STATE0",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.0342016220092773,
+          "max": 3.5539166927337646,
+          "mean": 0.013108320058017852,
+          "mean_abs": 0.8342499530557689,
+          "max_abs": 3.5539166927337646,
+          "l2_norm": 52.888625941464745,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "51b7fd8c3b3e7f4c56ec427276b7f9a487d568cb71dd84dd80a268e36b5777b8"
+        },
+        "CKPT3_GQA2": {
+          "label": "CKPT3_GQA2",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.310021162033081,
+          "max": 3.6409575939178467,
+          "mean": 0.009176908757945057,
+          "mean_abs": 0.9076866616131156,
+          "max_abs": 3.6409575939178467,
+          "l2_norm": 57.37408575522105,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "09a77401d33a7ee7475f84203824bcc8133a06cd8b2557fc7fc1562eef116453"
+        },
+        "CKPT4_STATE3": {
+          "label": "CKPT4_STATE3",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.6035711765289307,
+          "max": 3.7409732341766357,
+          "mean": 0.007255015109694796,
+          "mean_abs": 0.9538219944639422,
+          "max_abs": 3.7409732341766357,
+          "l2_norm": 60.195590347801996,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "41850449a0ba4716cd7e907eb1b4b95501dfb290f5f6f7430728ccbfada414f2"
+        },
+        "CKPT5_GQA5": {
+          "label": "CKPT5_GQA5",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.8963193893432617,
+          "max": 3.9871163368225098,
+          "mean": 0.008482979028121918,
+          "mean_abs": 1.0419821795516326,
+          "max_abs": 3.9871163368225098,
+          "l2_norm": 65.68606988764807,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "04500b7b8791b4e1aaec710b5356a6a1c027944e1004e6311b7fc6f826311ac4"
+        },
+        "CKPT6_STATE12": {
+          "label": "CKPT6_STATE12",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -5.221740245819092,
+          "max": 5.023886680603027,
+          "mean": 0.013800882431314675,
+          "mean_abs": 1.3768586616297398,
+          "max_abs": 5.221740245819092,
+          "l2_norm": 86.81722675196625,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "52becb729bdb45bae1b924d9c1eac41f90a43fe596d1a2a7e03e297eb913ea97"
+        },
+        "CKPT7_FINAL_BLOCK": {
+          "label": "CKPT7_FINAL_BLOCK",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -7.036705017089844,
+          "max": 7.0105462074279785,
+          "mean": 0.009820482728537172,
+          "mean_abs": 1.8146163735153096,
+          "max_abs": 7.036705017089844,
+          "l2_norm": 114.2379582928175,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "0c7b953bb038d92759507b7877af41df500d69e1dbbfa7ec072875efcb22c835"
+        },
+        "CKPT8_RMSNORM": {
+          "label": "CKPT8_RMSNORM",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.116584062576294,
+          "max": 3.1049983501434326,
+          "mean": 0.004349530263371548,
+          "mean_abs": 0.803700684240485,
+          "max_abs": 3.116584062576294,
+          "l2_norm": 50.59643823009499,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "19102462b310ea1b6f535fb2f517ee7fb546aa1a3641e12e8ab24d0e7c53eec7"
+        },
+        "CKPT9_LOGITS": {
+          "label": "CKPT9_LOGITS",
+          "shape": [
+            65536
+          ],
+          "dtype": "float32",
+          "min": -3.3113150596618652,
+          "max": 14.20924186706543,
+          "mean": -0.6554142236709595,
+          "mean_abs": 0.8678388595581055,
+          "max_abs": 14.20924186706543,
+          "l2_norm": 265.59407759610446,
+          "finite": true,
+          "nonzero": 65536,
+          "argmax_id": 64792,
+          "top5_ids": [
+            64792,
+            40858,
+            6155,
+            18798,
+            12095
+          ],
+          "top10_ids": [
+            64792,
+            40858,
+            6155,
+            18798,
+            12095,
+            45220,
+            47730,
+            4924,
+            27793,
+            59604
+          ],
+          "top5_vals": [
+            14.20924186706543,
+            6.623017311096191,
+            6.298550605773926,
+            5.369904041290283,
+            5.365880012512207
+          ],
+          "top10_vals": [
+            14.20924186706543,
+            6.623017311096191,
+            6.298550605773926,
+            5.369904041290283,
+            5.365880012512207,
+            4.763490200042725,
+            4.595575332641602,
+            4.5690813064575195,
+            4.563913345336914,
+            4.3154191970825195
+          ]
+        }
+      }
+    },
+    {
+      "label": "TEST-C",
+      "prompt": "পানি কত ডিগ্রি সেলসিয়াসে ফুটে?",
+      "token_ids": [
+        4874,
+        6494,
+        4186,
+        4289,
+        1357,
+        263,
+        5821,
+        19591,
+        64792
+      ],
+      "logits_sha256": "47bab360e44253080e075b41016e58ceb6ba6cf257e7e4caef97dbd7f08d12db",
+      "logits_path": "C:\\Users\\User\\Desktop\\SS_module_BD\\ss_bangladesh_nano_android_module\\THSA-2B V1\\tools\\fix12b\\reference_b_logits_p2.bin",
+      "elapsed_s": 32.495291233062744,
+      "checkpoints": {
+        "CKPT1_EMBED": {
+          "label": "CKPT1_EMBED",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -2.978346586227417,
+          "max": 3.4601378440856934,
+          "mean": 0.011514402800821699,
+          "mean_abs": 0.8034247210161993,
+          "max_abs": 3.4601378440856934,
+          "l2_norm": 51.07775245391452,
+          "finite": true,
+          "nonzero": 2516,
+          "sha256": "e5c145da87f472c1d8fe47537891401dafe54765e16cd05ae703ee6ae9ebe7bd"
+        },
+        "CKPT2_STATE0": {
+          "label": "CKPT2_STATE0",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.0342016220092773,
+          "max": 3.5539166927337646,
+          "mean": 0.013108320058017852,
+          "mean_abs": 0.8342499530557689,
+          "max_abs": 3.5539166927337646,
+          "l2_norm": 52.888625941464745,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "51b7fd8c3b3e7f4c56ec427276b7f9a487d568cb71dd84dd80a268e36b5777b8"
+        },
+        "CKPT3_GQA2": {
+          "label": "CKPT3_GQA2",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.310021162033081,
+          "max": 3.6409575939178467,
+          "mean": 0.009176908757945057,
+          "mean_abs": 0.9076866616131156,
+          "max_abs": 3.6409575939178467,
+          "l2_norm": 57.37408575522105,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "09a77401d33a7ee7475f84203824bcc8133a06cd8b2557fc7fc1562eef116453"
+        },
+        "CKPT4_STATE3": {
+          "label": "CKPT4_STATE3",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.6035711765289307,
+          "max": 3.7409732341766357,
+          "mean": 0.007255015109694796,
+          "mean_abs": 0.9538219944639422,
+          "max_abs": 3.7409732341766357,
+          "l2_norm": 60.195590347801996,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "41850449a0ba4716cd7e907eb1b4b95501dfb290f5f6f7430728ccbfada414f2"
+        },
+        "CKPT5_GQA5": {
+          "label": "CKPT5_GQA5",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.8963193893432617,
+          "max": 3.9871163368225098,
+          "mean": 0.008482979028121918,
+          "mean_abs": 1.0419821795516326,
+          "max_abs": 3.9871163368225098,
+          "l2_norm": 65.68606988764807,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "04500b7b8791b4e1aaec710b5356a6a1c027944e1004e6311b7fc6f826311ac4"
+        },
+        "CKPT6_STATE12": {
+          "label": "CKPT6_STATE12",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -5.221740245819092,
+          "max": 5.023886680603027,
+          "mean": 0.013800882431314675,
+          "mean_abs": 1.3768586616297398,
+          "max_abs": 5.221740245819092,
+          "l2_norm": 86.81722675196625,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "52becb729bdb45bae1b924d9c1eac41f90a43fe596d1a2a7e03e297eb913ea97"
+        },
+        "CKPT7_FINAL_BLOCK": {
+          "label": "CKPT7_FINAL_BLOCK",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -7.036705017089844,
+          "max": 7.0105462074279785,
+          "mean": 0.009820482728537172,
+          "mean_abs": 1.8146163735153096,
+          "max_abs": 7.036705017089844,
+          "l2_norm": 114.2379582928175,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "0c7b953bb038d92759507b7877af41df500d69e1dbbfa7ec072875efcb22c835"
+        },
+        "CKPT8_RMSNORM": {
+          "label": "CKPT8_RMSNORM",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.116584062576294,
+          "max": 3.1049983501434326,
+          "mean": 0.004349530263371548,
+          "mean_abs": 0.803700684240485,
+          "max_abs": 3.116584062576294,
+          "l2_norm": 50.59643823009499,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "19102462b310ea1b6f535fb2f517ee7fb546aa1a3641e12e8ab24d0e7c53eec7"
+        },
+        "CKPT9_LOGITS": {
+          "label": "CKPT9_LOGITS",
+          "shape": [
+            65536
+          ],
+          "dtype": "float32",
+          "min": -3.3113150596618652,
+          "max": 14.20924186706543,
+          "mean": -0.6554142236709595,
+          "mean_abs": 0.8678388595581055,
+          "max_abs": 14.20924186706543,
+          "l2_norm": 265.59407759610446,
+          "finite": true,
+          "nonzero": 65536,
+          "argmax_id": 64792,
+          "top5_ids": [
+            64792,
+            40858,
+            6155,
+            18798,
+            12095
+          ],
+          "top10_ids": [
+            64792,
+            40858,
+            6155,
+            18798,
+            12095,
+            45220,
+            47730,
+            4924,
+            27793,
+            59604
+          ],
+          "top5_vals": [
+            14.20924186706543,
+            6.623017311096191,
+            6.298550605773926,
+            5.369904041290283,
+            5.365880012512207
+          ],
+          "top10_vals": [
+            14.20924186706543,
+            6.623017311096191,
+            6.298550605773926,
+            5.369904041290283,
+            5.365880012512207,
+            4.763490200042725,
+            4.595575332641602,
+            4.5690813064575195,
+            4.563913345336914,
+            4.3154191970825195
+          ]
+        }
+      }
+    },
+    {
+      "label": "TEST-D",
+      "prompt": "১২ × ৮ = ?",
+      "token_ids": [
+        2232,
+        15325,
+        1656,
+        1718,
+        2667
+      ],
+      "logits_sha256": "1ef8a91cdaafc82994d7dda64cc35dbc9d5c8b4ade592f0e56eebd54231db8bf",
+      "logits_path": "C:\\Users\\User\\Desktop\\SS_module_BD\\ss_bangladesh_nano_android_module\\THSA-2B V1\\tools\\fix12b\\reference_b_logits_p3.bin",
+      "elapsed_s": 34.82499814033508,
+      "checkpoints": {
+        "CKPT1_EMBED": {
+          "label": "CKPT1_EMBED",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.8105316162109375,
+          "max": 3.503937244415283,
+          "mean": 0.023815822461619972,
+          "mean_abs": 0.789104430237785,
+          "max_abs": 3.8105316162109375,
+          "l2_norm": 50.219384870441324,
+          "finite": true,
+          "nonzero": 2517,
+          "sha256": "57870a78f2b2426b0bbfc6c2f39bf715d40767281850347da9c7628bd15d2449"
+        },
+        "CKPT2_STATE0": {
+          "label": "CKPT2_STATE0",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.7881462574005127,
+          "max": 3.34098744392395,
+          "mean": 0.025433960877126082,
+          "mean_abs": 0.7909474192427297,
+          "max_abs": 3.7881462574005127,
+          "l2_norm": 50.323191588325074,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "6a28814964e066cebcf8b6a78b7f60f9101de2ebc1ec654619c3fd96b2b538ea"
+        },
+        "CKPT3_GQA2": {
+          "label": "CKPT3_GQA2",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.834462881088257,
+          "max": 3.3580334186553955,
+          "mean": 0.024646894434772547,
+          "mean_abs": 0.7942120085030183,
+          "max_abs": 3.834462881088257,
+          "l2_norm": 50.50023639550878,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "66adccda0aba66c7fc86122844b61ca9e2b67daf6e45c6d27c57028c5fa3d877"
+        },
+        "CKPT4_STATE3": {
+          "label": "CKPT4_STATE3",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.716606855392456,
+          "max": 3.4255855083465576,
+          "mean": 0.02564174776089203,
+          "mean_abs": 0.7958781329860358,
+          "max_abs": 3.716606855392456,
+          "l2_norm": 50.586476765044694,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "e661e83b67d2ac5ff61019756aa3f7ab85fd376c6dd9d5d1736086c50913c0f0"
+        },
+        "CKPT5_GQA5": {
+          "label": "CKPT5_GQA5",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.718423843383789,
+          "max": 3.3403677940368652,
+          "mean": 0.025235624841479877,
+          "mean_abs": 0.7961744398462542,
+          "max_abs": 3.718423843383789,
+          "l2_norm": 50.58355761096917,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "d1078d6c38682e1d99f1f7a7cccc1bcfed032b3fac8e4bd62126ab46f42bdca4"
+        },
+        "CKPT6_STATE12": {
+          "label": "CKPT6_STATE12",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.863175868988037,
+          "max": 3.479632616043091,
+          "mean": 0.027425842473166994,
+          "mean_abs": 0.8074953699615435,
+          "max_abs": 3.863175868988037,
+          "l2_norm": 51.14750175033373,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "17e7d9c6ce85022e15ebf232e1c2d7c81779255334e2d0876449a71d6be5dee7"
+        },
+        "CKPT7_FINAL_BLOCK": {
+          "label": "CKPT7_FINAL_BLOCK",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.958214282989502,
+          "max": 3.452540159225464,
+          "mean": 0.02321723744735209,
+          "mean_abs": 0.8235429687758369,
+          "max_abs": 3.958214282989502,
+          "l2_norm": 52.144586001429424,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "fcd4f232664155514afec1ff87da3750137b4d945a574f285ed18653ecc53da1"
+        },
+        "CKPT8_RMSNORM": {
+          "label": "CKPT8_RMSNORM",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.8406951427459717,
+          "max": 3.350034475326538,
+          "mean": 0.02252791843997102,
+          "mean_abs": 0.799092030263148,
+          "max_abs": 3.8406951427459717,
+          "l2_norm": 50.59641656937445,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "b646799d234e120ea5b456475ed7d6db0bfedb8c82d65c0af4ea810566cb1617"
+        },
+        "CKPT9_LOGITS": {
+          "label": "CKPT9_LOGITS",
+          "shape": [
+            65536
+          ],
+          "dtype": "float32",
+          "min": -3.3313755989074707,
+          "max": 2.6123204231262207,
+          "mean": -0.4041997194290161,
+          "mean_abs": 0.6010881662368774,
+          "max_abs": 3.3313755989074707,
+          "l2_norm": 190.47375119326972,
+          "finite": true,
+          "nonzero": 65536,
+          "argmax_id": 7313,
+          "top5_ids": [
+            7313,
+            3687,
+            17221,
+            825,
+            580
+          ],
+          "top10_ids": [
+            7313,
+            3687,
+            17221,
+            825,
+            580,
+            668,
+            2001,
+            10045,
+            41702,
+            21937
+          ],
+          "top5_vals": [
+            2.6123204231262207,
+            2.316441535949707,
+            2.282670259475708,
+            2.243044853210449,
+            2.0440735816955566
+          ],
+          "top10_vals": [
+            2.6123204231262207,
+            2.316441535949707,
+            2.282670259475708,
+            2.243044853210449,
+            2.0440735816955566,
+            2.0083365440368652,
+            1.9988363981246948,
+            1.9290835857391357,
+            1.9183173179626465,
+            1.9146455526351929
+          ]
+        }
+      }
+    },
+    {
+      "label": "TEST-E",
+      "prompt": "ঢাকা বাংলাদেশের রাজধানী।",
+      "token_ids": [
+        2829,
+        1620,
+        3715,
+        64705
+      ],
+      "logits_sha256": "ce71e87faf437d5906ff070af599f5c666029db2dc00a5b1dff105e1601de100",
+      "logits_path": "C:\\Users\\User\\Desktop\\SS_module_BD\\ss_bangladesh_nano_android_module\\THSA-2B V1\\tools\\fix12b\\reference_b_logits_p4.bin",
+      "elapsed_s": 34.51300311088562,
+      "checkpoints": {
+        "CKPT1_EMBED": {
+          "label": "CKPT1_EMBED",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.722933292388916,
+          "max": 3.9857285022735596,
+          "mean": 0.005184046228532679,
+          "mean_abs": 0.8045539192069555,
+          "max_abs": 3.9857285022735596,
+          "l2_norm": 51.14523693610406,
+          "finite": true,
+          "nonzero": 2510,
+          "sha256": "c6b1dc7b6fb180da7b6b6a3095f38385bc8a065231b783109eb6c643bc85dcf7"
+        },
+        "CKPT2_STATE0": {
+          "label": "CKPT2_STATE0",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -4.387805938720703,
+          "max": 4.469649791717529,
+          "mean": 0.0019468598715320696,
+          "mean_abs": 0.9253824124731181,
+          "max_abs": 4.469649791717529,
+          "l2_norm": 58.88613167466878,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "ab00545b3bc3050d024d857b170870529c496ca94d1ee63f19252c1b5a7f048c"
+        },
+        "CKPT3_GQA2": {
+          "label": "CKPT3_GQA2",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -5.501047134399414,
+          "max": 5.721917152404785,
+          "mean": -0.0030730608181329445,
+          "mean_abs": 1.165919389386545,
+          "max_abs": 5.721917152404785,
+          "l2_norm": 74.19157202457622,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "8a0864eba286a31404ffe8f7d1b837eda38cde56f767982d6ea00949f493349a"
+        },
+        "CKPT4_STATE3": {
+          "label": "CKPT4_STATE3",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -6.336906433105469,
+          "max": 6.324719429016113,
+          "mean": 0.000986911915242672,
+          "mean_abs": 1.3005716099534765,
+          "max_abs": 6.336906433105469,
+          "l2_norm": 82.75460251097847,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "9a7081dd1cf63f241ac761ed972d9299ebe8b3bf090060daa14effd99f623eb4"
+        },
+        "CKPT5_GQA5": {
+          "label": "CKPT5_GQA5",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -7.502383708953857,
+          "max": 7.248205661773682,
+          "mean": -0.003714795539781335,
+          "mean_abs": 1.536976632067308,
+          "max_abs": 7.502383708953857,
+          "l2_norm": 97.46085118561517,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "8a84d63f158ef0bd0e78e4e52d4cb6726be8db7ec4943090989216b147e1cf7b"
+        },
+        "CKPT6_STATE12": {
+          "label": "CKPT6_STATE12",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -10.103686332702637,
+          "max": 10.211928367614746,
+          "mean": -0.007359241895755986,
+          "mean_abs": 2.213275456365227,
+          "max_abs": 10.211928367614746,
+          "l2_norm": 139.93530182186362,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "9a9a2e320c704109f1f625505df93ec20a647f0b8b5efc79758721c6de3f2cbe"
+        },
+        "CKPT7_FINAL_BLOCK": {
+          "label": "CKPT7_FINAL_BLOCK",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -13.009190559387207,
+          "max": 13.61400318145752,
+          "mean": -0.021574713314475958,
+          "mean_abs": 3.041118802803976,
+          "max_abs": 13.61400318145752,
+          "l2_norm": 192.195179497517,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "a9c5243457bf5a6e89eb65d90be87ce8c580380f81b04c6a50eb81fc92a0cdad"
+        },
+        "CKPT8_RMSNORM": {
+          "label": "CKPT8_RMSNORM",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "min": -3.424741268157959,
+          "max": 3.5839617252349854,
+          "mean": -0.005679662010356879,
+          "mean_abs": 0.8005913443144663,
+          "max_abs": 3.5839617252349854,
+          "l2_norm": 50.596443966383724,
+          "finite": true,
+          "nonzero": 2560,
+          "sha256": "f075b91abfb32250162373e005957f627988ddda95301be2c5872e7adf711954"
+        },
+        "CKPT9_LOGITS": {
+          "label": "CKPT9_LOGITS",
+          "shape": [
+            65536
+          ],
+          "dtype": "float32",
+          "min": -5.254626750946045,
+          "max": 13.212152481079102,
+          "mean": -1.5275928974151611,
+          "mean_abs": 1.7132012844085693,
+          "max_abs": 13.212152481079102,
+          "l2_norm": 496.89067948772794,
+          "finite": true,
+          "nonzero": 65536,
+          "argmax_id": 64705,
+          "top5_ids": [
+            64705,
+            20517,
+            271,
+            17926,
+            3838
+          ],
+          "top10_ids": [
+            64705,
+            20517,
+            271,
+            17926,
+            3838,
+            37175,
+            5501,
+            785,
+            22043,
+            198
+          ],
+          "top5_vals": [
+            13.212152481079102,
+            5.425354957580566,
+            5.303927421569824,
+            5.113168239593506,
+            5.070904731750488
+          ],
+          "top10_vals": [
+            13.212152481079102,
+            5.425354957580566,
+            5.303927421569824,
+            5.113168239593506,
+            5.070904731750488,
+            4.9302568435668945,
+            4.89772367477417,
+            4.837965965270996,
+            4.766210556030273,
+            4.644916534423828
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -176,6 +176,17 @@ static void fix12_write_perf() {
 
 static void fix12_init() {
     const char* dir = getenv("NANO_FIX12_DIAG_PATH");
+#ifdef __ANDROID__
+    // FIX-12B: On Android, env vars cannot be set from Java.
+    // Always activate diagnostics to the app's private files directory.
+    static char fallback[256];
+    if (!dir || !dir[0]) {
+        // Use app-private files dir (accessible via adb pull)
+        snprintf(fallback, sizeof(fallback),
+                 "/data/data/com.aistudio.offlineai.krvq/files");
+        dir = fallback;
+    }
+#endif
     if (!dir || !dir[0]) { g_fix12_enabled = false; return; }
     strncpy(g_fix12_diag_dir, dir, sizeof(g_fix12_diag_dir) - 1);
     g_fix12_enabled = true;

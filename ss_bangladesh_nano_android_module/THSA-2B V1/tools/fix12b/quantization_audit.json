@@ -1,0 +1,2009 @@
+{
+  "header": {
+    "magic": "NANO",
+    "version": "0x2",
+    "total_blocks": 24,
+    "state_blocks": 16,
+    "gqa_blocks": 8,
+    "d_model": 2560,
+    "d_ffn": 6912,
+    "n_q": 20,
+    "n_kv": 4,
+    "d_head": 128,
+    "vocab_size": 65536,
+    "max_context": 10000,
+    "crc32": "0x035F8E92",
+    "tensor_count": 219
+  },
+  "total_params": 2050296320,
+  "summary": {
+    "FP32": {
+      "count": 81,
+      "params": 330240,
+      "bytes": 1320960
+    },
+    "INT8": {
+      "count": 2,
+      "params": 335544320,
+      "bytes": 335544320
+    },
+    "TERNARY": {
+      "count": 136,
+      "params": 1714421760,
+      "bytes": 428605440
+    }
+  },
+  "tensors": [
+    {
+      "tensor_id": 0,
+      "name": "embed_tokens.weight",
+      "quant_type": "INT8",
+      "params": 167772160,
+      "size_bytes": 167772160,
+      "scale": 0.04379921406507492,
+      "offset": 7104
+    },
+    {
+      "tensor_id": 1,
+      "name": "layer_00.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 167779264
+    },
+    {
+      "tensor_id": 2,
+      "name": "layer_00.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 167820224
+    },
+    {
+      "tensor_id": 3,
+      "name": "layer_00.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.009929869323968887,
+      "offset": 167830464
+    },
+    {
+      "tensor_id": 4,
+      "name": "layer_00.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009938222356140614,
+      "offset": 171107264
+    },
+    {
+      "tensor_id": 5,
+      "name": "layer_00.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 172745664
+    },
+    {
+      "tensor_id": 6,
+      "name": "layer_00.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009923861362040043,
+      "offset": 172755904
+    },
+    {
+      "tensor_id": 7,
+      "name": "layer_00.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009923608973622322,
+      "offset": 177179584
+    },
+    {
+      "tensor_id": 8,
+      "name": "layer_00.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006085806526243687,
+      "offset": 181603264
+    },
+    {
+      "tensor_id": 9,
+      "name": "layer_00.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 186026944
+    },
+    {
+      "tensor_id": 10,
+      "name": "layer_01.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 186037184
+    },
+    {
+      "tensor_id": 11,
+      "name": "layer_01.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 186078144
+    },
+    {
+      "tensor_id": 12,
+      "name": "layer_01.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.009933467023074627,
+      "offset": 186088384
+    },
+    {
+      "tensor_id": 13,
+      "name": "layer_01.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009935587644577026,
+      "offset": 189365184
+    },
+    {
+      "tensor_id": 14,
+      "name": "layer_01.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 191003584
+    },
+    {
+      "tensor_id": 15,
+      "name": "layer_01.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009921719320118427,
+      "offset": 191013824
+    },
+    {
+      "tensor_id": 16,
+      "name": "layer_01.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009921806864440441,
+      "offset": 195437504
+    },
+    {
+      "tensor_id": 17,
+      "name": "layer_01.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006083594635128975,
+      "offset": 199861184
+    },
+    {
+      "tensor_id": 18,
+      "name": "layer_01.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 204284864
+    },
+    {
+      "tensor_id": 19,
+      "name": "layer_02.gqa.q_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009912876412272453,
+      "offset": 204295104
+    },
+    {
+      "tensor_id": 20,
+      "name": "layer_02.gqa.k_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.00991277489811182,
+      "offset": 205933504
+    },
+    {
+      "tensor_id": 21,
+      "name": "layer_02.gqa.v_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.009892798960208893,
+      "offset": 206261184
+    },
+    {
+      "tensor_id": 22,
+      "name": "layer_02.gqa.o_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009898602031171322,
+      "offset": 206588864
+    },
+    {
+      "tensor_id": 23,
+      "name": "layer_02.gqa.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 208227264
+    },
+    {
+      "tensor_id": 24,
+      "name": "layer_02.gqa.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009924838319420815,
+      "offset": 208237504
+    },
+    {
+      "tensor_id": 25,
+      "name": "layer_02.gqa.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.00992687325924635,
+      "offset": 212661184
+    },
+    {
+      "tensor_id": 26,
+      "name": "layer_02.gqa.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006083203013986349,
+      "offset": 217084864
+    },
+    {
+      "tensor_id": 27,
+      "name": "layer_02.gqa.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 221508544
+    },
+    {
+      "tensor_id": 28,
+      "name": "layer_03.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 221518784
+    },
+    {
+      "tensor_id": 29,
+      "name": "layer_03.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 221559744
+    },
+    {
+      "tensor_id": 30,
+      "name": "layer_03.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.009935041889548302,
+      "offset": 221569984
+    },
+    {
+      "tensor_id": 31,
+      "name": "layer_03.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009932306595146656,
+      "offset": 224846784
+    },
+    {
+      "tensor_id": 32,
+      "name": "layer_03.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 226485184
+    },
+    {
+      "tensor_id": 33,
+      "name": "layer_03.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009924122132360935,
+      "offset": 226495424
+    },
+    {
+      "tensor_id": 34,
+      "name": "layer_03.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009922734461724758,
+      "offset": 230919104
+    },
+    {
+      "tensor_id": 35,
+      "name": "layer_03.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006082193925976753,
+      "offset": 235342784
+    },
+    {
+      "tensor_id": 36,
+      "name": "layer_03.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 239766464
+    },
+    {
+      "tensor_id": 37,
+      "name": "layer_04.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 239776704
+    },
+    {
+      "tensor_id": 38,
+      "name": "layer_04.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 239817664
+    },
+    {
+      "tensor_id": 39,
+      "name": "layer_04.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.009929489344358444,
+      "offset": 239827904
+    },
+    {
+      "tensor_id": 40,
+      "name": "layer_04.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009936563670635223,
+      "offset": 243104704
+    },
+    {
+      "tensor_id": 41,
+      "name": "layer_04.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 244743104
+    },
+    {
+      "tensor_id": 42,
+      "name": "layer_04.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009922086261212826,
+      "offset": 244753344
+    },
+    {
+      "tensor_id": 43,
+      "name": "layer_04.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009921767748892307,
+      "offset": 249177024
+    },
+    {
+      "tensor_id": 44,
+      "name": "layer_04.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006080201826989651,
+      "offset": 253600704
+    },
+    {
+      "tensor_id": 45,
+      "name": "layer_04.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 258024384
+    },
+    {
+      "tensor_id": 46,
+      "name": "layer_05.gqa.q_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.00992023665457964,
+      "offset": 258034624
+    },
+    {
+      "tensor_id": 47,
+      "name": "layer_05.gqa.k_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.009905754588544369,
+      "offset": 259673024
+    },
+    {
+      "tensor_id": 48,
+      "name": "layer_05.gqa.v_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.009883031249046326,
+      "offset": 260000704
+    },
+    {
+      "tensor_id": 49,
+      "name": "layer_05.gqa.o_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009897548705339432,
+      "offset": 260328384
+    },
+    {
+      "tensor_id": 50,
+      "name": "layer_05.gqa.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 261966784
+    },
+    {
+      "tensor_id": 51,
+      "name": "layer_05.gqa.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009921442717313766,
+      "offset": 261977024
+    },
+    {
+      "tensor_id": 52,
+      "name": "layer_05.gqa.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009921997785568237,
+      "offset": 266400704
+    },
+    {
+      "tensor_id": 53,
+      "name": "layer_05.gqa.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.00608057901263237,
+      "offset": 270824384
+    },
+    {
+      "tensor_id": 54,
+      "name": "layer_05.gqa.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 275248064
+    },
+    {
+      "tensor_id": 55,
+      "name": "layer_06.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 275258304
+    },
+    {
+      "tensor_id": 56,
+      "name": "layer_06.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 275299264
+    },
+    {
+      "tensor_id": 57,
+      "name": "layer_06.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.00992637313902378,
+      "offset": 275309504
+    },
+    {
+      "tensor_id": 58,
+      "name": "layer_06.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.00993395783007145,
+      "offset": 278586304
+    },
+    {
+      "tensor_id": 59,
+      "name": "layer_06.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 280224704
+    },
+    {
+      "tensor_id": 60,
+      "name": "layer_06.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009922758676111698,
+      "offset": 280234944
+    },
+    {
+      "tensor_id": 61,
+      "name": "layer_06.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009921754710376263,
+      "offset": 284658624
+    },
+    {
+      "tensor_id": 62,
+      "name": "layer_06.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006079196929931641,
+      "offset": 289082304
+    },
+    {
+      "tensor_id": 63,
+      "name": "layer_06.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 293505984
+    },
+    {
+      "tensor_id": 64,
+      "name": "layer_07.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 293516224
+    },
+    {
+      "tensor_id": 65,
+      "name": "layer_07.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 293557184
+    },
+    {
+      "tensor_id": 66,
+      "name": "layer_07.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.0099289920181036,
+      "offset": 293567424
+    },
+    {
+      "tensor_id": 67,
+      "name": "layer_07.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.00993336457759142,
+      "offset": 296844224
+    },
+    {
+      "tensor_id": 68,
+      "name": "layer_07.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 298482624
+    },
+    {
+      "tensor_id": 69,
+      "name": "layer_07.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009920540265738964,
+      "offset": 298492864
+    },
+    {
+      "tensor_id": 70,
+      "name": "layer_07.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009919477626681328,
+      "offset": 302916544
+    },
+    {
+      "tensor_id": 71,
+      "name": "layer_07.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.00607689144089818,
+      "offset": 307340224
+    },
+    {
+      "tensor_id": 72,
+      "name": "layer_07.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 311763904
+    },
+    {
+      "tensor_id": 73,
+      "name": "layer_08.gqa.q_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009924404323101044,
+      "offset": 311774144
+    },
+    {
+      "tensor_id": 74,
+      "name": "layer_08.gqa.k_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.00991617701947689,
+      "offset": 313412544
+    },
+    {
+      "tensor_id": 75,
+      "name": "layer_08.gqa.v_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.009880761615931988,
+      "offset": 313740224
+    },
+    {
+      "tensor_id": 76,
+      "name": "layer_08.gqa.o_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009894391521811485,
+      "offset": 314067904
+    },
+    {
+      "tensor_id": 77,
+      "name": "layer_08.gqa.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 315706304
+    },
+    {
+      "tensor_id": 78,
+      "name": "layer_08.gqa.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009917615912854671,
+      "offset": 315716544
+    },
+    {
+      "tensor_id": 79,
+      "name": "layer_08.gqa.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009917854331433773,
+      "offset": 320140224
+    },
+    {
+      "tensor_id": 80,
+      "name": "layer_08.gqa.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006074870005249977,
+      "offset": 324563904
+    },
+    {
+      "tensor_id": 81,
+      "name": "layer_08.gqa.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 328987584
+    },
+    {
+      "tensor_id": 82,
+      "name": "layer_09.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 328997824
+    },
+    {
+      "tensor_id": 83,
+      "name": "layer_09.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 329038784
+    },
+    {
+      "tensor_id": 84,
+      "name": "layer_09.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.00992562621831894,
+      "offset": 329049024
+    },
+    {
+      "tensor_id": 85,
+      "name": "layer_09.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009929157793521881,
+      "offset": 332325824
+    },
+    {
+      "tensor_id": 86,
+      "name": "layer_09.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 333964224
+    },
+    {
+      "tensor_id": 87,
+      "name": "layer_09.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009917541407048702,
+      "offset": 333974464
+    },
+    {
+      "tensor_id": 88,
+      "name": "layer_09.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009918591938912868,
+      "offset": 338398144
+    },
+    {
+      "tensor_id": 89,
+      "name": "layer_09.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.0060742758214473724,
+      "offset": 342821824
+    },
+    {
+      "tensor_id": 90,
+      "name": "layer_09.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 347245504
+    },
+    {
+      "tensor_id": 91,
+      "name": "layer_10.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 347255744
+    },
+    {
+      "tensor_id": 92,
+      "name": "layer_10.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 347296704
+    },
+    {
+      "tensor_id": 93,
+      "name": "layer_10.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.009927202016115189,
+      "offset": 347306944
+    },
+    {
+      "tensor_id": 94,
+      "name": "layer_10.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009929963387548923,
+      "offset": 350583744
+    },
+    {
+      "tensor_id": 95,
+      "name": "layer_10.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 352222144
+    },
+    {
+      "tensor_id": 96,
+      "name": "layer_10.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009917594492435455,
+      "offset": 352232384
+    },
+    {
+      "tensor_id": 97,
+      "name": "layer_10.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009917255491018295,
+      "offset": 356656064
+    },
+    {
+      "tensor_id": 98,
+      "name": "layer_10.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006073143798857927,
+      "offset": 361079744
+    },
+    {
+      "tensor_id": 99,
+      "name": "layer_10.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 365503424
+    },
+    {
+      "tensor_id": 100,
+      "name": "layer_11.gqa.q_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.00992033164948225,
+      "offset": 365513664
+    },
+    {
+      "tensor_id": 101,
+      "name": "layer_11.gqa.k_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.00991365872323513,
+      "offset": 367152064
+    },
+    {
+      "tensor_id": 102,
+      "name": "layer_11.gqa.v_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.009879917837679386,
+      "offset": 367479744
+    },
+    {
+      "tensor_id": 103,
+      "name": "layer_11.gqa.o_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.00989933218806982,
+      "offset": 367807424
+    },
+    {
+      "tensor_id": 104,
+      "name": "layer_11.gqa.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 369445824
+    },
+    {
+      "tensor_id": 105,
+      "name": "layer_11.gqa.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009914455935359001,
+      "offset": 369456064
+    },
+    {
+      "tensor_id": 106,
+      "name": "layer_11.gqa.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009916904382407665,
+      "offset": 373879744
+    },
+    {
+      "tensor_id": 107,
+      "name": "layer_11.gqa.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006074259988963604,
+      "offset": 378303424
+    },
+    {
+      "tensor_id": 108,
+      "name": "layer_11.gqa.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 382727104
+    },
+    {
+      "tensor_id": 109,
+      "name": "layer_12.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 382737344
+    },
+    {
+      "tensor_id": 110,
+      "name": "layer_12.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 382778304
+    },
+    {
+      "tensor_id": 111,
+      "name": "layer_12.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.009922240860760212,
+      "offset": 382788544
+    },
+    {
+      "tensor_id": 112,
+      "name": "layer_12.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009926948696374893,
+      "offset": 386065344
+    },
+    {
+      "tensor_id": 113,
+      "name": "layer_12.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 387703744
+    },
+    {
+      "tensor_id": 114,
+      "name": "layer_12.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009916293434798717,
+      "offset": 387713984
+    },
+    {
+      "tensor_id": 115,
+      "name": "layer_12.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.00992016214877367,
+      "offset": 392137664
+    },
+    {
+      "tensor_id": 116,
+      "name": "layer_12.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006072551943361759,
+      "offset": 396561344
+    },
+    {
+      "tensor_id": 117,
+      "name": "layer_12.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 400985024
+    },
+    {
+      "tensor_id": 118,
+      "name": "layer_13.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 400995264
+    },
+    {
+      "tensor_id": 119,
+      "name": "layer_13.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 401036224
+    },
+    {
+      "tensor_id": 120,
+      "name": "layer_13.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.00992188323289156,
+      "offset": 401046464
+    },
+    {
+      "tensor_id": 121,
+      "name": "layer_13.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009920943528413773,
+      "offset": 404323264
+    },
+    {
+      "tensor_id": 122,
+      "name": "layer_13.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 405961664
+    },
+    {
+      "tensor_id": 123,
+      "name": "layer_13.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.00991350132972002,
+      "offset": 405971904
+    },
+    {
+      "tensor_id": 124,
+      "name": "layer_13.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009914501570165157,
+      "offset": 410395584
+    },
+    {
+      "tensor_id": 125,
+      "name": "layer_13.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006070258095860481,
+      "offset": 414819264
+    },
+    {
+      "tensor_id": 126,
+      "name": "layer_13.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 419242944
+    },
+    {
+      "tensor_id": 127,
+      "name": "layer_14.gqa.q_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009923884645104408,
+      "offset": 419253184
+    },
+    {
+      "tensor_id": 128,
+      "name": "layer_14.gqa.k_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.009908763691782951,
+      "offset": 420891584
+    },
+    {
+      "tensor_id": 129,
+      "name": "layer_14.gqa.v_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.009877050295472145,
+      "offset": 421219264
+    },
+    {
+      "tensor_id": 130,
+      "name": "layer_14.gqa.o_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009899628348648548,
+      "offset": 421546944
+    },
+    {
+      "tensor_id": 131,
+      "name": "layer_14.gqa.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 423185344
+    },
+    {
+      "tensor_id": 132,
+      "name": "layer_14.gqa.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009912904351949692,
+      "offset": 423195584
+    },
+    {
+      "tensor_id": 133,
+      "name": "layer_14.gqa.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009916695766150951,
+      "offset": 427619264
+    },
+    {
+      "tensor_id": 134,
+      "name": "layer_14.gqa.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006070571485906839,
+      "offset": 432042944
+    },
+    {
+      "tensor_id": 135,
+      "name": "layer_14.gqa.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 436466624
+    },
+    {
+      "tensor_id": 136,
+      "name": "layer_15.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 436476864
+    },
+    {
+      "tensor_id": 137,
+      "name": "layer_15.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 436517824
+    },
+    {
+      "tensor_id": 138,
+      "name": "layer_15.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.009920481592416763,
+      "offset": 436528064
+    },
+    {
+      "tensor_id": 139,
+      "name": "layer_15.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009925157763063908,
+      "offset": 439804864
+    },
+    {
+      "tensor_id": 140,
+      "name": "layer_15.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 441443264
+    },
+    {
+      "tensor_id": 141,
+      "name": "layer_15.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009913306683301926,
+      "offset": 441453504
+    },
+    {
+      "tensor_id": 142,
+      "name": "layer_15.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009916136041283607,
+      "offset": 445877184
+    },
+    {
+      "tensor_id": 143,
+      "name": "layer_15.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006068050861358643,
+      "offset": 450300864
+    },
+    {
+      "tensor_id": 144,
+      "name": "layer_15.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 454724544
+    },
+    {
+      "tensor_id": 145,
+      "name": "layer_16.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 454734784
+    },
+    {
+      "tensor_id": 146,
+      "name": "layer_16.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 454775744
+    },
+    {
+      "tensor_id": 147,
+      "name": "layer_16.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.009920753538608551,
+      "offset": 454785984
+    },
+    {
+      "tensor_id": 148,
+      "name": "layer_16.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.00991749856621027,
+      "offset": 458062784
+    },
+    {
+      "tensor_id": 149,
+      "name": "layer_16.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 459701184
+    },
+    {
+      "tensor_id": 150,
+      "name": "layer_16.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009912176989018917,
+      "offset": 459711424
+    },
+    {
+      "tensor_id": 151,
+      "name": "layer_16.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009915458969771862,
+      "offset": 464135104
+    },
+    {
+      "tensor_id": 152,
+      "name": "layer_16.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006071545649319887,
+      "offset": 468558784
+    },
+    {
+      "tensor_id": 153,
+      "name": "layer_16.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 472982464
+    },
+    {
+      "tensor_id": 154,
+      "name": "layer_17.gqa.q_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009919267147779465,
+      "offset": 472992704
+    },
+    {
+      "tensor_id": 155,
+      "name": "layer_17.gqa.k_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.009903957135975361,
+      "offset": 474631104
+    },
+    {
+      "tensor_id": 156,
+      "name": "layer_17.gqa.v_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.009882229380309582,
+      "offset": 474958784
+    },
+    {
+      "tensor_id": 157,
+      "name": "layer_17.gqa.o_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009901146404445171,
+      "offset": 475286464
+    },
+    {
+      "tensor_id": 158,
+      "name": "layer_17.gqa.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 476924864
+    },
+    {
+      "tensor_id": 159,
+      "name": "layer_17.gqa.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009915441274642944,
+      "offset": 476935104
+    },
+    {
+      "tensor_id": 160,
+      "name": "layer_17.gqa.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009916716255247593,
+      "offset": 481358784
+    },
+    {
+      "tensor_id": 161,
+      "name": "layer_17.gqa.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006070395931601524,
+      "offset": 485782464
+    },
+    {
+      "tensor_id": 162,
+      "name": "layer_17.gqa.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 490206144
+    },
+    {
+      "tensor_id": 163,
+      "name": "layer_18.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 490216384
+    },
+    {
+      "tensor_id": 164,
+      "name": "layer_18.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 490257344
+    },
+    {
+      "tensor_id": 165,
+      "name": "layer_18.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.009922054596245289,
+      "offset": 490267584
+    },
+    {
+      "tensor_id": 166,
+      "name": "layer_18.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009917320683598518,
+      "offset": 493544384
+    },
+    {
+      "tensor_id": 167,
+      "name": "layer_18.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 495182784
+    },
+    {
+      "tensor_id": 168,
+      "name": "layer_18.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.00991145335137844,
+      "offset": 495193024
+    },
+    {
+      "tensor_id": 169,
+      "name": "layer_18.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009914222173392773,
+      "offset": 499616704
+    },
+    {
+      "tensor_id": 170,
+      "name": "layer_18.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006070239935070276,
+      "offset": 504040384
+    },
+    {
+      "tensor_id": 171,
+      "name": "layer_18.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 508464064
+    },
+    {
+      "tensor_id": 172,
+      "name": "layer_19.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 508474304
+    },
+    {
+      "tensor_id": 173,
+      "name": "layer_19.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 508515264
+    },
+    {
+      "tensor_id": 174,
+      "name": "layer_19.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.009918837808072567,
+      "offset": 508525504
+    },
+    {
+      "tensor_id": 175,
+      "name": "layer_19.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009921890683472157,
+      "offset": 511802304
+    },
+    {
+      "tensor_id": 176,
+      "name": "layer_19.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 513440704
+    },
+    {
+      "tensor_id": 177,
+      "name": "layer_19.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.00991388875991106,
+      "offset": 513450944
+    },
+    {
+      "tensor_id": 178,
+      "name": "layer_19.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.00991525687277317,
+      "offset": 517874624
+    },
+    {
+      "tensor_id": 179,
+      "name": "layer_19.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006069515366107225,
+      "offset": 522298304
+    },
+    {
+      "tensor_id": 180,
+      "name": "layer_19.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 526721984
+    },
+    {
+      "tensor_id": 181,
+      "name": "layer_20.gqa.q_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009913722053170204,
+      "offset": 526732224
+    },
+    {
+      "tensor_id": 182,
+      "name": "layer_20.gqa.k_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.009904016740620136,
+      "offset": 528370624
+    },
+    {
+      "tensor_id": 183,
+      "name": "layer_20.gqa.v_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.009900793433189392,
+      "offset": 528698304
+    },
+    {
+      "tensor_id": 184,
+      "name": "layer_20.gqa.o_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009907330386340618,
+      "offset": 529025984
+    },
+    {
+      "tensor_id": 185,
+      "name": "layer_20.gqa.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 530664384
+    },
+    {
+      "tensor_id": 186,
+      "name": "layer_20.gqa.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.00991035159677267,
+      "offset": 530674624
+    },
+    {
+      "tensor_id": 187,
+      "name": "layer_20.gqa.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009912023320794106,
+      "offset": 535098304
+    },
+    {
+      "tensor_id": 188,
+      "name": "layer_20.gqa.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006068099290132523,
+      "offset": 539521984
+    },
+    {
+      "tensor_id": 189,
+      "name": "layer_20.gqa.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 543945664
+    },
+    {
+      "tensor_id": 190,
+      "name": "layer_21.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 543955904
+    },
+    {
+      "tensor_id": 191,
+      "name": "layer_21.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 543996864
+    },
+    {
+      "tensor_id": 192,
+      "name": "layer_21.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.00991756934672594,
+      "offset": 544007104
+    },
+    {
+      "tensor_id": 193,
+      "name": "layer_21.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.00991346687078476,
+      "offset": 547283904
+    },
+    {
+      "tensor_id": 194,
+      "name": "layer_21.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 548922304
+    },
+    {
+      "tensor_id": 195,
+      "name": "layer_21.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009911144152283669,
+      "offset": 548932544
+    },
+    {
+      "tensor_id": 196,
+      "name": "layer_21.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.00991484709084034,
+      "offset": 553356224
+    },
+    {
+      "tensor_id": 197,
+      "name": "layer_21.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006067944690585136,
+      "offset": 557779904
+    },
+    {
+      "tensor_id": 198,
+      "name": "layer_21.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 562203584
+    },
+    {
+      "tensor_id": 199,
+      "name": "layer_22.state.conv1d.weight",
+      "quant_type": "FP32",
+      "params": 10240,
+      "size_bytes": 40960,
+      "scale": 1.0,
+      "offset": 562213824
+    },
+    {
+      "tensor_id": 200,
+      "name": "layer_22.state.conv1d.bias",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 562254784
+    },
+    {
+      "tensor_id": 201,
+      "name": "layer_22.state.in_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 13107200,
+      "size_bytes": 3276800,
+      "scale": 0.009921589866280556,
+      "offset": 562265024
+    },
+    {
+      "tensor_id": 202,
+      "name": "layer_22.state.out_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009914994239807129,
+      "offset": 565541824
+    },
+    {
+      "tensor_id": 203,
+      "name": "layer_22.state.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 567180224
+    },
+    {
+      "tensor_id": 204,
+      "name": "layer_22.state.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009913411922752857,
+      "offset": 567190464
+    },
+    {
+      "tensor_id": 205,
+      "name": "layer_22.state.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009910778142511845,
+      "offset": 571614144
+    },
+    {
+      "tensor_id": 206,
+      "name": "layer_22.state.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006065668538212776,
+      "offset": 576037824
+    },
+    {
+      "tensor_id": 207,
+      "name": "layer_22.state.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 580461504
+    },
+    {
+      "tensor_id": 208,
+      "name": "layer_23.gqa.q_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009919874370098114,
+      "offset": 580471744
+    },
+    {
+      "tensor_id": 209,
+      "name": "layer_23.gqa.k_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.00990858394652605,
+      "offset": 582110144
+    },
+    {
+      "tensor_id": 210,
+      "name": "layer_23.gqa.v_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 1310720,
+      "size_bytes": 327680,
+      "scale": 0.00989349465817213,
+      "offset": 582437824
+    },
+    {
+      "tensor_id": 211,
+      "name": "layer_23.gqa.o_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 6553600,
+      "size_bytes": 1638400,
+      "scale": 0.009915124624967575,
+      "offset": 582765504
+    },
+    {
+      "tensor_id": 212,
+      "name": "layer_23.gqa.mixer.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 584403904
+    },
+    {
+      "tensor_id": 213,
+      "name": "layer_23.gqa.ffn.gate_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009903023950755596,
+      "offset": 584414144
+    },
+    {
+      "tensor_id": 214,
+      "name": "layer_23.gqa.ffn.up_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.009902307763695717,
+      "offset": 588837824
+    },
+    {
+      "tensor_id": 215,
+      "name": "layer_23.gqa.ffn.down_proj.weight",
+      "quant_type": "TERNARY",
+      "params": 17694720,
+      "size_bytes": 4423680,
+      "scale": 0.006052214186638594,
+      "offset": 593261504
+    },
+    {
+      "tensor_id": 216,
+      "name": "layer_23.gqa.ffn.norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 597685184
+    },
+    {
+      "tensor_id": 217,
+      "name": "final_norm.weight",
+      "quant_type": "FP32",
+      "params": 2560,
+      "size_bytes": 10240,
+      "scale": 1.0,
+      "offset": 597695424
+    },
+    {
+      "tensor_id": 218,
+      "name": "lm_head.weight",
+      "quant_type": "INT8",
+      "params": 167772160,
+      "size_bytes": 167772160,
+      "scale": 0.0002921998093370348,
+      "offset": 597705664
+    }
+  ]
+}
