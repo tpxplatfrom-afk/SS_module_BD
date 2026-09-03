@@ -1,0 +1,125 @@
+{
+  "fix_version": "FIX-12",
+  "phase": "B",
+  "description": "Python SentencePiece tokenizer encoding",
+  "tokenizer_model_path": "C:\\Users\\User\\Desktop\\SS_module_BD\\ss_bangladesh_nano_android_module\\THSA-2B V1\\tokenizer\\thsa_tokenizer.model",
+  "tokenizer_model_size": 1708241,
+  "tokenizer_model_sha256": "1a8f9a3b9833a780408c1d172af120be438f77bc13945b499e0e6a1deb6d13e7",
+  "sp_vocab_size": 65536,
+  "vocab_file_lines": 65536,
+  "prompts": [
+    {
+      "label": "TEST-A",
+      "prompt": "2+2=?",
+      "token_count": 4,
+      "token_ids": [
+        360,
+        43226,
+        64782,
+        64792
+      ],
+      "pieces": [
+        "▁2",
+        "+2",
+        "=",
+        "?"
+      ],
+      "decoded": "2+2=?",
+      "token_ids_sha256": "80419d2aa30c02521d2d50da5085163ca1c553b9407bc12c596660223c181bbf",
+      "status": "OK"
+    },
+    {
+      "label": "TEST-B",
+      "prompt": "বাংলাদেশের রাজধানী কী?",
+      "token_count": 4,
+      "token_ids": [
+        1620,
+        3715,
+        3101,
+        64792
+      ],
+      "pieces": [
+        "▁বাংলাদেশের",
+        "▁রাজধানী",
+        "▁কী",
+        "?"
+      ],
+      "decoded": "বাংলাদেশের রাজধানী কী?",
+      "token_ids_sha256": "59f73de5c1ed2026a72c31d27c622b9a9e3ea90a25d6d2a5e17dd56e1b4967e7",
+      "status": "OK"
+    },
+    {
+      "label": "TEST-C",
+      "prompt": "পানি কত ডিগ্রি সেলসিয়াসে ফুটে?",
+      "token_count": 9,
+      "token_ids": [
+        4874,
+        6494,
+        4186,
+        4289,
+        1357,
+        263,
+        5821,
+        19591,
+        64792
+      ],
+      "pieces": [
+        "▁পানি",
+        "▁কত",
+        "▁ডিগ্রি",
+        "▁সেল",
+        "সি",
+        "য়",
+        "াসে",
+        "▁ফুটে",
+        "?"
+      ],
+      "decoded": "পানি কত ডিগ্রি সেলসিয়াসে ফুটে?",
+      "token_ids_sha256": "2d45e1beff7d93e717ad61be36814b14cc82974641c6137a857d5fa871c24eda",
+      "status": "OK"
+    },
+    {
+      "label": "TEST-D",
+      "prompt": "১২ × ৮ = ?",
+      "token_count": 5,
+      "token_ids": [
+        2232,
+        15325,
+        1656,
+        1718,
+        2667
+      ],
+      "pieces": [
+        "▁১২",
+        "▁×",
+        "▁৮",
+        "▁=",
+        "▁?"
+      ],
+      "decoded": "১২ × ৮ = ?",
+      "token_ids_sha256": "fb1e3c8e581538d62a33dc91f39ab00f34722538c4483ce02962243497cb4e0e",
+      "status": "OK"
+    },
+    {
+      "label": "TEST-E",
+      "prompt": "ঢাকা বাংলাদেশের রাজধানী।",
+      "token_count": 4,
+      "token_ids": [
+        2829,
+        1620,
+        3715,
+        64705
+      ],
+      "pieces": [
+        "▁ঢাকা",
+        "▁বাংলাদেশের",
+        "▁রাজধানী",
+        "।"
+      ],
+      "decoded": "ঢাকা বাংলাদেশের রাজধানী।",
+      "token_ids_sha256": "b30c75f901f3e1fd491318ff930014076bb03f1e5fce5f8308f05ece702a5a11",
+      "status": "OK"
+    }
+  ],
+  "all_prompts_encoded": true
+}

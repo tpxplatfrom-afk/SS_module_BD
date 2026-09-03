@@ -296,6 +296,30 @@ Java_ai_nano_engine_NanoNative_nativeFree(
     }
 }
 
+// FIX-12: Set diagnostic path from Kotlin before nativeInit
+// Writes global env var so fix12_init() picks it up in nano_engine_init()
+JNIEXPORT void JNICALL
+Java_ai_nano_engine_NanoNative_nativeSetDiagPath(
+    JNIEnv* env,
+    jclass clazz,
+    jstring diagPath
+) {
+    (void)clazz;
+    if (!diagPath) {
+        unsetenv("NANO_FIX12_DIAG_PATH");
+        return;
+    }
+    const char* path = env->GetStringUTFChars(diagPath, nullptr);
+    if (path && path[0] != '\0') {
+        setenv("NANO_FIX12_DIAG_PATH", path, 1);
+        __android_log_print(ANDROID_LOG_INFO, "NanoJNI",
+            "FIX12_DIAG_PATH_SET=%s", path);
+    } else {
+        unsetenv("NANO_FIX12_DIAG_PATH");
+    }
+    if (path) env->ReleaseStringUTFChars(diagPath, path);
+}
+
 #ifdef __cplusplus
 }
 #endif

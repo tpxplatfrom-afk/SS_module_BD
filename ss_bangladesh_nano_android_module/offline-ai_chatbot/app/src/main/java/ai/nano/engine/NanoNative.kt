@@ -38,6 +38,15 @@ internal object NanoNative {
 
     @JvmStatic
     external fun nativeFree(handle: Long)
+
+    /**
+     * FIX-12: Set diagnostic output directory before calling nativeInit.
+     * When set, nano_engine.cpp writes fix12_diag.bin, fix12_logits_pN.bin,
+     * and fix12_perf.txt to the specified path.
+     * Pass empty string "" to disable.
+     */
+    @JvmStatic
+    external fun nativeSetDiagPath(diagPath: String)
 }
 
 internal fun interface NativeTokenCallback {

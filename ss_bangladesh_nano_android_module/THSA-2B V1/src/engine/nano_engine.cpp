@@ -53,6 +53,147 @@ extern "C" {
     void nano_arena_destroy(NanoMemoryArena* arena);
 }
 
+// =============================================================================
+// FIX-12 DIAGNOSTIC INSTRUMENTATION (non-invasive, gated on env var)
+// Activated when NANO_FIX12_DIAG_PATH is set to a writable directory path.
+// Does NOT alter any inference math. Writes bounded binary capture files.
+// =============================================================================
+#include <time.h>
+#include <math.h>
+#include <string.h>
+#include <stdio.h>
+
+static char g_fix12_diag_dir[512] = {0};
+static bool g_fix12_enabled = false;
+static FILE* g_fix12_diag_fp  = nullptr;  // fix12_diag.bin
+static FILE* g_fix12_perf_fp  = nullptr;  // fix12_perf.txt
+static int   g_fix12_prompt_idx = 0;
+
+// 32-entry timing ring for per-layer performance
+static struct {
+    long long embed_us;
+    long long layer_us[24];
+    long long rmsnorm_us;
+    long long lmhead_us;
+    long long total_us;
+} g_fix12_timing;
+
+static long long fix12_now_us() {
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return (long long)ts.tv_sec * 1000000LL + ts.tv_nsec / 1000LL;
+}
+
+// FIX-12 checkpoint record (written to fix12_diag.bin)
+// 72 bytes per record: uint32 checkpoint_id, uint32 prompt_idx,
+//                      float min, max, mean, mean_abs, max_abs, l2_norm,
+//                      float sha_proxy[8] (first 32 bytes of h_state as float)
+// Total: 8*4 + 8*4 = 72 bytes
+static void fix12_capture_checkpoint(
+    uint32_t ckpt_id, const float* h_state, size_t dim, const char* label)
+{
+    if (!g_fix12_enabled || !g_fix12_diag_fp) return;
+
+    double sum = 0.0, sum_abs = 0.0, sum_sq = 0.0;
+    float  mn = h_state[0], mx = h_state[0];
+    for (size_t i = 0; i < dim; ++i) {
+        float v = h_state[i];
+        if (v < mn) mn = v;
+        if (v > mx) mx = v;
+        sum     += v;
+        sum_abs += (v < 0 ? -v : v);
+        sum_sq  += (double)v * v;
+    }
+    float mean_v    = (float)(sum / dim);
+    float mean_abs_v= (float)(sum_abs / dim);
+    float max_abs_v = (mn < 0 ? ((-mn) > mx ? -mn : mx) : mx);
+    float l2_v      = (float)sqrt(sum_sq);
+
+    // Header: ckpt_id(u32), prompt_idx(u32), dim(u32), pad(u32)
+    uint32_t hdr[4] = { ckpt_id, (uint32_t)g_fix12_prompt_idx, (uint32_t)dim, 0 };
+    fwrite(hdr, 4, 4, g_fix12_diag_fp);
+
+    // Stats: min, max, mean, mean_abs, max_abs, l2 (6 floats)
+    float stats[6] = { mn, mx, mean_v, mean_abs_v, max_abs_v, l2_v };
+    fwrite(stats, 4, 6, g_fix12_diag_fp);
+
+    // Proxy: first 8 floats of h_state (32 bytes fingerprint)
+    float proxy[8];
+    for (int i = 0; i < 8 && (size_t)i < dim; ++i) proxy[i] = h_state[i];
+    fwrite(proxy, 4, 8, g_fix12_diag_fp);
+    fflush(g_fix12_diag_fp);
+
+    NANO_LOGI("FIX12_CKPT_%02u [%s] prompt=%d dim=%zu min=%.4f max=%.4f mean=%.4f l2=%.4f",
+              ckpt_id, label, g_fix12_prompt_idx, dim, mn, mx, mean_v, l2_v);
+}
+
+static void fix12_dump_logits(const float* logits) {
+    if (!g_fix12_enabled || !g_fix12_diag_dir[0]) return;
+    char path[600];
+    snprintf(path, sizeof(path), "%s/fix12_logits_p%d.bin", g_fix12_diag_dir, g_fix12_prompt_idx);
+    FILE* fp = fopen(path, "wb");
+    if (!fp) { NANO_LOGE("FIX12: cannot write logits to %s", path); return; }
+    fwrite(logits, 4, 65536, fp);
+    fclose(fp);
+    // Log top-10
+    float top10_v[10]; int top10_id[10];
+    for (int r = 0; r < 10; ++r) { top10_v[r] = -1e30f; top10_id[r] = -1; }
+    for (int v = 0; v < 65536; ++v) {
+        if (logits[v] > top10_v[9]) {
+            top10_v[9] = logits[v]; top10_id[9] = v;
+            for (int r = 8; r >= 0; --r) {
+                if (top10_v[r+1] > top10_v[r]) {
+                    float tv = top10_v[r]; top10_v[r] = top10_v[r+1]; top10_v[r+1] = tv;
+                    int   ti = top10_id[r]; top10_id[r] = top10_id[r+1]; top10_id[r+1] = ti;
+                } else break;
+            }
+        }
+    }
+    NANO_LOGI("FIX12_LOGITS_READY: prompt=%d argmax=%d val=%.4f",
+              g_fix12_prompt_idx, top10_id[0], top10_v[0]);
+    NANO_LOGI("FIX12_TOP10_IDS: %d %d %d %d %d %d %d %d %d %d",
+              top10_id[0],top10_id[1],top10_id[2],top10_id[3],top10_id[4],
+              top10_id[5],top10_id[6],top10_id[7],top10_id[8],top10_id[9]);
+}
+
+static void fix12_write_perf() {
+    if (!g_fix12_enabled || !g_fix12_perf_fp) return;
+    fprintf(g_fix12_perf_fp,
+        "FIX12_PERF_BEGIN prompt=%d\n"
+        "FIX12_EMBED_US=%lld\n",
+        g_fix12_prompt_idx, g_fix12_timing.embed_us);
+    for (int l = 0; l < 24; ++l) {
+        fprintf(g_fix12_perf_fp, "FIX12_BLOCK_%02d_US=%lld\n", l, g_fix12_timing.layer_us[l]);
+    }
+    fprintf(g_fix12_perf_fp,
+        "FIX12_RMSNORM_US=%lld\n"
+        "FIX12_LMHEAD_US=%lld\n"
+        "FIX12_TOTAL_US=%lld\n"
+        "FIX12_PERF_END\n",
+        g_fix12_timing.rmsnorm_us, g_fix12_timing.lmhead_us, g_fix12_timing.total_us);
+    fflush(g_fix12_perf_fp);
+}
+
+static void fix12_init() {
+    const char* dir = getenv("NANO_FIX12_DIAG_PATH");
+    if (!dir || !dir[0]) { g_fix12_enabled = false; return; }
+    strncpy(g_fix12_diag_dir, dir, sizeof(g_fix12_diag_dir) - 1);
+    g_fix12_enabled = true;
+
+    char diag_path[600], perf_path[600];
+    snprintf(diag_path, sizeof(diag_path), "%s/fix12_diag.bin", dir);
+    snprintf(perf_path, sizeof(perf_path), "%s/fix12_perf.txt", dir);
+
+    g_fix12_diag_fp = fopen(diag_path, "wb");
+    g_fix12_perf_fp = fopen(perf_path, "w");
+
+    NANO_LOGI("FIX12_DIAG_INIT: enabled=YES dir=%s diag=%p perf=%p",
+              dir, (void*)g_fix12_diag_fp, (void*)g_fix12_perf_fp);
+}
+// =============================================================================
+// END FIX-12 DIAGNOSTIC INSTRUMENTATION
+// =============================================================================
+
 // IEEE 802.3 CRC32 Implementation (Matches Python zlib.crc32)
 static uint32_t compute_nano_crc32(const uint8_t* buffer, size_t length) {
     uint32_t crc = 0xFFFFFFFF;
@@ -190,23 +331,35 @@ static NanoTokenId nano_forward_pass_single_token(
     if (input_token < 0 || input_token >= 65536) {
         input_token = NANO_TOKEN_UNK;
     }
-    
+
+    long long t_total_start = fix12_now_us();
+
     // -------------------------------------------------------------
     // 1. EMBEDDING LOOKUP (INT8 Sensitive Shield)
     // -------------------------------------------------------------
+    long long t_embed_start = fix12_now_us();
     const int8_t* emb_row = ctx->embed_tokens_ptr + ((size_t)input_token * 2560);
     for (size_t i = 0; i < 2560; ++i) {
         ctx->h_state[i] = (float)emb_row[i] * ctx->embed_scale;
     }
     ctx->stats.embedding_execution_count++;
-    
+    g_fix12_timing.embed_us = fix12_now_us() - t_embed_start;
+
+    // FIX12 CKPT-1: Embedding output
+    if (g_fix12_enabled) {
+        NANO_LOGI("FIX12_EMBED_READY: token_id=%d prompt=%d", input_token, g_fix12_prompt_idx);
+        fix12_capture_checkpoint(1, ctx->h_state, 2560, "EMBED");
+    }
+
     // -------------------------------------------------------------
     // 2. BACKBONE LAYERS (24 Layers: 16 State / 8 GQA)
     // -------------------------------------------------------------
     for (size_t l = 0; l < 24; ++l) {
         const NanoLayerPointers& lp = ctx->layers[l];
-        
+        long long t_layer_start = fix12_now_us();
+
         if (lp.is_gqa) {
+
             // (A) COMPLETE GQA ATTENTION BLOCK
             // 1. Mixer Pre-RMSNorm
             if (lp.gamma_mixer) {
@@ -373,9 +526,23 @@ static NanoTokenId nano_forward_pass_single_token(
             ctx->h_state[i] += ctx->ffn_out[i];
         }
         ctx->stats.ffn_execution_count++;
+
+        // FIX-12: Record per-layer timing
+        g_fix12_timing.layer_us[l] = fix12_now_us() - t_layer_start;
+
+        // FIX-12: Checkpoint captures at required layers (after full block incl. FFN)
+        if (g_fix12_enabled) {
+            if (l == 0)  fix12_capture_checkpoint(2, ctx->h_state, 2560, "STATE0");
+            else if (l == 2)  fix12_capture_checkpoint(3, ctx->h_state, 2560, "GQA2");
+            else if (l == 3)  fix12_capture_checkpoint(4, ctx->h_state, 2560, "STATE3");
+            else if (l == 5)  fix12_capture_checkpoint(5, ctx->h_state, 2560, "GQA5");
+            else if (l == 12) fix12_capture_checkpoint(6, ctx->h_state, 2560, "STATE12");
+            else if (l == 23) fix12_capture_checkpoint(7, ctx->h_state, 2560, "FINAL_BLOCK");
+        }
     }
     
     if (!compute_logits) {
+        g_fix12_timing.total_us = fix12_now_us() - t_total_start;
         ctx->stats.forward_pass_count++;
         return input_token;
     }
@@ -383,12 +550,21 @@ static NanoTokenId nano_forward_pass_single_token(
     // -------------------------------------------------------------
     // 3. FINAL RMSNORM
     // -------------------------------------------------------------
+    long long t_norm_start = fix12_now_us();
     nano_neon_rmsnorm(ctx->h_state, ctx->final_norm_gamma, 2560, ctx->norm_out);
     ctx->stats.norm_execution_count++;
-    
+    g_fix12_timing.rmsnorm_us = fix12_now_us() - t_norm_start;
+
+    // FIX12 CKPT-8: Final RMSNorm output
+    if (g_fix12_enabled) {
+        NANO_LOGI("FIX12_RMSNORM_READY: prompt=%d", g_fix12_prompt_idx);
+        fix12_capture_checkpoint(8, ctx->norm_out, 2560, "RMSNORM");
+    }
+
     // -------------------------------------------------------------
     // 4. OUTPUT LOGITS COMPUTATION (LM Head - INT8 Projection)
     // -------------------------------------------------------------
+    long long t_lmhead_start = fix12_now_us();
     float norm_scale = 1.0f;
     nano_neon_quantize_int8(ctx->norm_out, ctx->h_state_int8, &norm_scale, 2560);
     float combined_scale = norm_scale * ctx->lm_head_scale;
@@ -412,6 +588,8 @@ static NanoTokenId nano_forward_pass_single_token(
         }
         ctx->logits[v] = (float)dot * combined_scale;
     }
+    g_fix12_timing.lmhead_us  = fix12_now_us() - t_lmhead_start;
+    g_fix12_timing.total_us   = fix12_now_us() - t_total_start;
     ctx->stats.logits_generation_count++;
     ctx->stats.forward_pass_count++;
     
@@ -430,6 +608,18 @@ static NanoTokenId nano_forward_pass_single_token(
               l_min, l_max, (float)(l_sum / 65536.0),
               l_finite ? "YES" : "NO",
               (l_max != 0.0f || l_min != 0.0f) ? "YES" : "NO");
+
+    // FIX12 CKPT-9: Logits dump + perf write
+    if (g_fix12_enabled) {
+        NANO_LOGI("FIX12_LOGITS_READY: prompt=%d total_us=%lld embed_us=%lld lmhead_us=%lld",
+                  g_fix12_prompt_idx,
+                  g_fix12_timing.total_us, g_fix12_timing.embed_us, g_fix12_timing.lmhead_us);
+        fix12_dump_logits(ctx->logits);
+        fix12_write_perf();
+        // Advance prompt index for next call
+        g_fix12_prompt_idx++;
+        NANO_LOGI("FIX12_FORWARD_END: prompt_completed=%d", g_fix12_prompt_idx - 1);
+    }
 
     // -------------------------------------------------------------
     // 5. REAL TOKEN SELECTION (Greedy Argmax over Logits Buffer)
@@ -460,9 +650,13 @@ NanoStatus nano_engine_init(
 ) {
     if (!out_ctx) return NANO_ERR_INVALID_PARAM;
     if (!model_path || model_path[0] == '\0') return NANO_ERR_INVALID_PARAM;
-    
+
+    // FIX-12: Initialize diagnostic mode (no-op if env var not set)
+    fix12_init();
+
     NANO_LOGI("NANO_NATIVE_INIT_BEGIN: path=%s", model_path);
     NANO_LOGI("NANO_ASSET_OPEN: path=%s", model_path);
+
     
     // 1. Open model binary file
 #ifdef _WIN32
