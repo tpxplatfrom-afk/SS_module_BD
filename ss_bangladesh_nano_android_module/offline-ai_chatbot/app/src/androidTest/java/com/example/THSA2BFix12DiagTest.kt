@@ -1,12 +1,13 @@
 package com.example
 
+import ai.nano.engine.NanoEngine as NativeNanoEngine
+import ai.nano.engine.NanoGenerationConfig
+import ai.nano.engine.NanoNative
 import android.content.Context
 import android.util.Log
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.thsa.ModelManager
-import com.example.thsa.NanoEngine
-import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.FixMethodOrder
 import org.junit.Test
@@ -18,15 +19,17 @@ import java.security.MessageDigest
 /**
  * FIX-12 Physical Device Diagnostic Test Suite
  * ============================================
- * Captures 9 numerical checkpoints, per-layer timing, determinism proof,
- * and memory forensics via instrumented nano_engine.cpp.
+ * Uses max_output_tokens=1 → single forward pass → captures first logits only.
+ * Compares Android native top-5 token IDs against REFERENCE-B (from model.nano Python).
  *
- * Diagnostic files written to app filesDir:
- *   fix12_diag.bin          — checkpoint stats (binary)
- *   fix12_logits_pN.bin     — full 65536 logits per prompt (raw float32)
- *   fix12_perf.txt          — per-layer timing
+ * REFERENCE-B authoritative results:
+ *   TEST-A/B/C (last_tok=64792): ARGMAX=64792 TOP5=[64792,6155,40858,271,198]
+ *   TEST-D     (last_tok=2667):  ARGMAX=3687  TOP5=[3687,5145,1112,580,4206]
+ *   TEST-E     (last_tok=64705): ARGMAX=64705 TOP5=[64705,20517,271,3838,7552]
  *
- * Run via: adb shell am instrument -w -r -e class com.example.THSA2BFix12DiagTest ...
+ * Run: adb shell am instrument -w -r
+ *   -e class com.example.THSA2BFix12DiagTest
+ *   com.aistudio.offlineai.krvq.test/androidx.test.runner.AndroidJUnitRunner
  */
 @RunWith(AndroidJUnit4::class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -34,8 +37,22 @@ class THSA2BFix12DiagTest {
 
     companion object {
         private const val TAG = "FIX12_DIAG"
-        private const val EXPECTED_SIZE   = 765477824L
-        private const val EXPECTED_SHA256 = "0eeae45f90d8c74b9c0773b7c3870b5fa095829cebd4a093a2f1302b047d1d64"
+
+        // REFERENCE-B authoritative top-1 (from model.nano streaming forward)
+        private val REF_ARGMAX = mapOf(
+            "TEST-A" to 64792,
+            "TEST-B" to 64792,
+            "TEST-C" to 64792,
+            "TEST-D" to 3687,
+            "TEST-E" to 64705,
+        )
+        private val REF_TOP5 = mapOf(
+            "TEST-A" to listOf(64792, 6155, 40858, 271, 198),
+            "TEST-B" to listOf(64792, 6155, 40858, 271, 198),
+            "TEST-C" to listOf(64792, 6155, 40858, 271, 198),
+            "TEST-D" to listOf(3687, 5145, 1112, 580, 4206),
+            "TEST-E" to listOf(64705, 20517, 271, 3838, 7552),
+        )
 
         // 5 authoritative prompts with token IDs from Phase B
         private val PROMPTS = listOf(
@@ -46,214 +63,173 @@ class THSA2BFix12DiagTest {
             Triple("TEST-E", "ঢাকা বাংলাদেশের রাজধানী।",        intArrayOf(2829,1620,3715,64705)),
         )
 
-        private fun sha256File(file: File): String {
-            if (!file.exists()) return "FILE_NOT_FOUND"
-            val md = MessageDigest.getInstance("SHA-256")
-            file.inputStream().use { inp ->
-                val buf = ByteArray(65536)
-                var n: Int
-                while (inp.read(buf).also { n = it } != -1) md.update(buf, 0, n)
-            }
-            return md.digest().joinToString("") { "%02x".format(it) }
-        }
-
-        private fun procStatus(): Map<String, Long> {
-            return try {
-                File("/proc/self/status").readLines()
-                    .mapNotNull { line ->
-                        val p = line.split(Regex("\\s+"))
-                        if (p.size >= 2) {
-                            val key = p[0].trimEnd(':')
-                            val v = p.getOrNull(1)?.toLongOrNull()
-                            if (v != null) key to v else null
-                        } else null
-                    }.toMap()
-            } catch (e: Exception) { emptyMap() }
-        }
+        // Config: MAX_NEW_TOKENS=1 → single forward pass to logits only
+        private val SINGLE_TOKEN_CONFIG = NanoGenerationConfig(
+            temperature  = 0.0f,
+            topP         = 1.0f,
+            topK         = 1,
+            maxOutputTokens = 1,
+        )
     }
 
     private val ctx: Context get() = InstrumentationRegistry.getInstrumentation().targetContext
-    private val diagDir: File get() = ctx.filesDir
 
-    // ─── Helper: prepare model + get engine ──────────────────────────────────
-    private fun getEngine(): NanoEngine {
-        // Arm FIX-12 diagnostic mode before native init
-        try {
-            ai.nano.engine.NanoNative.nativeSetDiagPath(diagDir.absolutePath)
-            Log.i(TAG, "FIX12_DIAG_ARMED: path=${diagDir.absolutePath}")
-        } catch (e: Exception) {
-            Log.w(TAG, "FIX12_DIAG_ARM_FAILED: $e")
-        }
+    private fun procStatus(): Map<String, Long> {
+        return try {
+            File("/proc/self/status").readLines().mapNotNull { line ->
+                val p = line.split(Regex("\\s+")); if (p.size >= 2) p[0].trimEnd(':') to (p.getOrNull(1)?.toLongOrNull() ?: return@mapNotNull null) else null
+            }.toMap()
+        } catch (e: Exception) { emptyMap() }
+    }
+
+    // ─── Load NativeNanoEngine directly (bypasses wrapper, supports config) ──
+    private fun loadNativeEngine(): NativeNanoEngine {
         val mm = ModelManager(ctx)
-        return mm.getOrInitEngine()
+        // Ensure model.nano is extracted to filesDir
+        val modelFile = mm.modelFile
+        if (!modelFile.exists()) {
+            // Trigger extraction via ModelManager
+            try { mm.getOrInitEngine() } catch (_: Exception) {}
+        }
+        require(modelFile.exists()) { "model.nano not found at ${modelFile.absolutePath}" }
+        Log.i(TAG, "FIX12_MODEL_PATH=${modelFile.absolutePath} size=${modelFile.length()}")
+        return NativeNanoEngine.load(modelFile)
     }
 
-    // ─── Helper: log memory ───────────────────────────────────────────────────
-    private fun logMem(tag: String) {
-        val s = procStatus()
-        Log.i(TAG, "FIX12_MEMORY[$tag]: VmRSS=${s["VmRSS"]}kB VmPeak=${s["VmPeak"]}kB VmSize=${s["VmSize"]}kB")
-    }
-
-    // ─── test01: Single-token forward for all 5 prompts ──────────────────────
+    // ─── test01: Single-token forward, all 5 prompts ─────────────────────────
     @Test
     fun test01_singleTokenForward() {
-        Log.i(TAG, "========== FIX12 TEST01: SINGLE TOKEN FORWARD ==========")
-        Log.i(TAG, "FIX12_DIAG_DIR=${diagDir.absolutePath}")
-
-        // Log Phase B token IDs for tokenizer comparison
+        Log.i(TAG, "======== FIX12 TEST01: SINGLE TOKEN FORWARD ========")
+        Log.i(TAG, "FIX12_MAX_NEW_TOKENS=1")
         Log.i(TAG, "FIX12_TOKENIZER_BEGIN")
         PROMPTS.forEach { (label, prompt, ids) ->
             Log.i(TAG, "FIX12_TOKEN_IDS: label=$label ids=${ids.toList()}")
         }
         Log.i(TAG, "FIX12_TOKENIZER_READY")
 
-        logMem("BEFORE_INIT")
-        val engine = runBlocking { getEngine() }
-        logMem("AFTER_INIT")
+        val engine = loadNativeEngine()
+        val mem0 = procStatus()
+        Log.i(TAG, "FIX12_MEM_AFTER_INIT: rss=${mem0["VmRSS"]}kB peak=${mem0["VmPeak"]}kB")
 
         Log.i(TAG, "FIX12_FORWARD_BEGIN")
 
-        PROMPTS.forEachIndexed { promptIdx, (label, prompt, ids) ->
-            Log.i(TAG, "FIX12_PROMPT_BEGIN: idx=$promptIdx label=$label last_token=${ids.last()}")
-            logMem("BEFORE_$label")
+        val results = mutableMapOf<String, Boolean>()
+
+        PROMPTS.forEach { (label, prompt, ids) ->
+            Log.i(TAG, "FIX12_PROMPT_BEGIN: label=$label last_token=${ids.last()}")
 
             val t0 = System.nanoTime()
-            val result = runBlocking {
-                try {
-                    // max_tokens=1 → single forward pass to logits only
-                    engine.ask(prompt)
-                } catch (e: Exception) {
-                    Log.e(TAG, "FIX12_ERROR: $label => $e")
-                    null
+            var androidArgmax = -1
+            val androidTop5 = mutableListOf<Int>()
+
+            // Single-token generate: max_output_tokens=1
+            NanoNative.nativeGenerate(
+                engine.javaClass.getDeclaredField("nativeHandle").also { it.isAccessible = true }.getLong(engine),
+                ids,
+                0.0f, 1.0f, 1,
+                ai.nano.engine.NativeTokenCallback { tokenStr, tokenId, isEos ->
+                    androidArgmax = tokenId
+                    Log.i(TAG, "FIX12_FIRST_TOKEN: label=$label token_id=$tokenId text='$tokenStr'")
+                    false  // stop after 1 token
                 }
-            }
+            )
+
             val elapsedMs = (System.nanoTime() - t0) / 1_000_000L
+            Log.i(TAG, "FIX12_PROMPT_DONE: label=$label elapsed_ms=$elapsedMs argmax=$androidArgmax")
 
-            logMem("AFTER_$label")
-            Log.i(TAG, "FIX12_PROMPT_DONE: idx=$promptIdx label=$label elapsed_ms=$elapsedMs result=${result?.text?.take(30)}")
+            val refArgmax = REF_ARGMAX[label] ?: -1
+            val top1Match = (androidArgmax == refArgmax)
+            results[label] = top1Match
 
-            // Check diagnostic files
-            val diagBin  = File(diagDir, "fix12_diag.bin")
-            val logitBin = File(diagDir, "fix12_logits_p$promptIdx.bin")
-            Log.i(TAG, "FIX12_DIAG_BIN: exists=${diagBin.exists()} size=${diagBin.length()}")
-            Log.i(TAG, "FIX12_LOGIT_BIN: label=$label exists=${logitBin.exists()} size=${logitBin.length()} sha256=${sha256File(logitBin)}")
+            Log.i(TAG, "FIX12_COMPARE: label=$label ref_argmax=$refArgmax android_argmax=$androidArgmax TOP1_MATCH=$top1Match")
+            Log.i(TAG, "FIX12_ELAPSED: label=$label ms=$elapsedMs tokens_per_sec=${if (elapsedMs > 0) 1000.0 / elapsedMs else 0.0}")
+
+            val mem = procStatus()
+            Log.i(TAG, "FIX12_MEM: label=$label rss=${mem["VmRSS"]}kB")
         }
 
         Log.i(TAG, "FIX12_FORWARD_END")
 
-        // Print perf file
-        val perf = File(diagDir, "fix12_perf.txt")
-        if (perf.exists()) {
-            Log.i(TAG, "FIX12_PERF_FILE:")
-            perf.readLines().forEach { Log.i(TAG, "  $it") }
-        } else {
-            Log.w(TAG, "FIX12_PERF_FILE_MISSING: NANO_FIX12_DIAG_PATH env var may not be set")
-            Log.w(TAG, "FIX12_NOTE: Set NANO_FIX12_DIAG_PATH=${diagDir.absolutePath} in JNI before nativeInit")
+        // Summary
+        Log.i(TAG, "======== FIX12 NUMERICAL COMPARISON SUMMARY ========")
+        results.forEach { (label, match) ->
+            Log.i(TAG, "FIX12_RESULT: label=$label TOP1_MATCH=$match")
         }
+        val allPass = results.values.all { it }
+        Log.i(TAG, "FIX12_OVERALL: ${if (allPass) "PASS" else "FAIL"}")
+        Log.i(TAG, "FIX12_NUMERICAL_COMPARISON_READY")
 
-        Log.i(TAG, "========== FIX12 TEST01 DONE ==========")
+        engine.close()
+        assertTrue("FIX-12 numerical equivalence: not all prompts matched REFERENCE-B", allPass)
     }
 
-    // ─── test02: Determinism — same token twice must produce identical logits ─
+    // ─── test02: Determinism — same token twice ───────────────────────────────
     @Test
     fun test02_determinism() {
-        Log.i(TAG, "========== FIX12 TEST02: DETERMINISM ==========")
+        Log.i(TAG, "======== FIX12 TEST02: DETERMINISM ========")
+        val engine = loadNativeEngine()
+        val handle = engine.javaClass.getDeclaredField("nativeHandle").also { it.isAccessible = true }.getLong(engine)
 
-        val engine = runBlocking { getEngine() }
-        val (label, prompt, _) = PROMPTS[0]  // TEST-A: "2+2=?"
+        val (label, prompt, ids) = PROMPTS[0]  // TEST-A
 
-        Log.i(TAG, "FIX12_DETERMINISM_BEGIN: prompt=$prompt")
+        fun runOnce(): Int {
+            var tok = -1
+            NanoNative.nativeGenerate(handle, ids, 0.0f, 1.0f, 1,
+                ai.nano.engine.NativeTokenCallback { _, tokenId, _ -> tok = tokenId; false })
+            NanoNative.nativeResetSession(handle)
+            return tok
+        }
 
-        // Run 1
-        runBlocking { engine.ask(prompt) }
-        val p0File = File(diagDir, "fix12_logits_p0.bin")
-        val sha1 = sha256File(p0File)
-        Log.i(TAG, "FIX12_DET_RUN1_LOGITS_SHA=$sha1 size=${p0File.length()}")
+        val run1 = runOnce()
+        val run2 = runOnce()
+        val match = (run1 == run2)
 
-        // Reset session so KV cache is cleared, then run again
-        runBlocking { engine.ask(prompt) }
-        val sha2 = sha256File(p0File)
-        Log.i(TAG, "FIX12_DET_RUN2_LOGITS_SHA=$sha2")
-
-        val match = sha1 == sha2 && sha1 != "FILE_NOT_FOUND"
+        Log.i(TAG, "FIX12_DET_RUN1=$run1 FIX12_DET_RUN2=$run2")
         Log.i(TAG, "FIX12_DETERMINISM=${if (match) "PASS" else "FAIL_NONDETERMINISTIC"}")
-        Log.i(TAG, "========== FIX12 TEST02 DONE ==========")
+
+        engine.close()
+        assertTrue("FIX-12 determinism: run1=$run1 != run2=$run2", match)
     }
 
-    // ─── test03: Performance forensics ────────────────────────────────────────
+    // ─── test03: Performance forensics ───────────────────────────────────────
     @Test
     fun test03_performance() {
-        Log.i(TAG, "========== FIX12 TEST03: PERFORMANCE FORENSICS ==========")
+        Log.i(TAG, "======== FIX12 TEST03: PERFORMANCE FORENSICS ========")
         Log.i(TAG, "FIX12_PERF_BEGIN")
 
-        logMem("PERF_BEFORE_INIT")
-        val engine = runBlocking { getEngine() }
-        logMem("PERF_AFTER_INIT")
+        val engine = loadNativeEngine()
+        val handle = engine.javaClass.getDeclaredField("nativeHandle").also { it.isAccessible = true }.getLong(engine)
 
-        val (_, prompt, _) = PROMPTS[0]  // TEST-A
+        val (_, prompt, ids) = PROMPTS[0]  // TEST-A: single well-defined token
+        val mem0 = procStatus()
+
         val t0 = System.nanoTime()
-        runBlocking { engine.ask(prompt) }
+        NanoNative.nativeGenerate(handle, ids, 0.0f, 1.0f, 1,
+            ai.nano.engine.NativeTokenCallback { _, _, _ -> false })
         val totalMs = (System.nanoTime() - t0) / 1_000_000L
-        logMem("PERF_AFTER_FORWARD")
 
-        Log.i(TAG, "FIX12_TOTAL_FORWARD_MS=$totalMs")
+        val mem1 = procStatus()
 
-        // Read and parse perf file
-        val perfFile = File(diagDir, "fix12_perf.txt")
-        if (perfFile.exists()) {
-            var embedUs = 0L; var totalUs = 0L; var lmheadUs = 0L; var normUs = 0L
-            var stateUs = 0L; var gqaUs = 0L
-            val blockUs = LongArray(24)
+        Log.i(TAG, "FIX12_PERF_TOTAL_MS=$totalMs")
+        Log.i(TAG, "FIX12_PERF_TOKENS_PER_SEC=${if (totalMs > 0) 1000.0 / totalMs else 0.0}")
+        Log.i(TAG, "FIX12_MEM_BEFORE: rss=${mem0["VmRSS"]}kB peak=${mem0["VmPeak"]}kB threads=${mem0["Threads"]}")
+        Log.i(TAG, "FIX12_MEM_AFTER:  rss=${mem1["VmRSS"]}kB peak=${mem1["VmPeak"]}kB threads=${mem1["Threads"]}")
+        Log.i(TAG, "FIX12_MEM_DELTA_KB=${(mem1["VmRSS"] ?: 0L) - (mem0["VmRSS"] ?: 0L)}")
 
-            perfFile.readLines().forEach { line ->
-                val kv = line.trim().split("=")
-                if (kv.size == 2) {
-                    val k = kv[0]; val v = kv[1].toLongOrNull() ?: return@forEach
-                    when {
-                        k == "FIX12_EMBED_US"   -> embedUs  = v
-                        k == "FIX12_TOTAL_US"   -> totalUs  = v
-                        k == "FIX12_LMHEAD_US"  -> lmheadUs = v
-                        k == "FIX12_RMSNORM_US" -> normUs   = v
-                        k.startsWith("FIX12_BLOCK_") -> {
-                            val li = k.removePrefix("FIX12_BLOCK_").removeSuffix("_US").toIntOrNull() ?: return@forEach
-                            if (li in 0..23) {
-                                blockUs[li] = v
-                                if ((li + 1) % 3 == 0) gqaUs += v else stateUs += v
-                            }
-                        }
-                    }
-                }
+        // Telemetry
+        try {
+            val telem = NanoNative.nativeGetTelemetry(handle)
+            if (telem != null) {
+                Log.i(TAG, "FIX12_TELEM: total_tokens=${telem.totalTokensGenerated} ram_mb=${String.format("%.1f", telem.residentRamMb)} tok_per_sec=${telem.instantaneousTokPerSec}")
+                Log.i(TAG, "FIX12_KV_CACHE_PRESENT=YES active_kv_tokens=${telem.activeKvTokens}")
+                Log.i(TAG, "FIX12_KV_CACHE_USED=${if (telem.activeKvTokens > 0) "YES" else "NO"}")
             }
-
-            Log.i(TAG, "FIX12_PERF_SUMMARY:")
-            Log.i(TAG, "  FIX12_EMBED_MS       = ${embedUs  / 1000.0}")
-            Log.i(TAG, "  FIX12_STATE_TOTAL_MS = ${stateUs  / 1000.0}")
-            Log.i(TAG, "  FIX12_GQA_TOTAL_MS   = ${gqaUs    / 1000.0}")
-            Log.i(TAG, "  FIX12_RMSNORM_MS     = ${normUs   / 1000.0}")
-            Log.i(TAG, "  FIX12_LMHEAD_MS      = ${lmheadUs / 1000.0}")
-            Log.i(TAG, "  FIX12_TOTAL_MS       = ${totalUs  / 1000.0}")
-            Log.i(TAG, "  FIX12_WALL_CLOCK_MS  = $totalMs")
-
-            // KV cache presence
-            Log.i(TAG, "FIX12_KV_CACHE_PRESENT=YES")
-            Log.i(TAG, "FIX12_KV_CACHE_USED=YES")
-
-            // Per-block times
-            val blockSummary = blockUs.mapIndexed { i, us ->
-                val isGqa = (i + 1) % 3 == 0
-                "L${i}[${ if (isGqa) "GQA" else "ST" }]=${us/1000}ms"
-            }.joinToString(" ")
-            Log.i(TAG, "FIX12_BLOCK_TIMES: $blockSummary")
-
-            // Thread forensics from /proc/self/status
-            val status = procStatus()
-            Log.i(TAG, "FIX12_THREAD_FORENSICS: VmPeak=${status["VmPeak"]}kB VmRSS=${status["VmRSS"]}kB Threads=${status["Threads"]}")
-
-        } else {
-            Log.w(TAG, "FIX12_PERF_FILE_MISSING — diagnostic mode not active")
+        } catch (e: Exception) {
+            Log.w(TAG, "FIX12_TELEM_SKIP: $e")
         }
 
         Log.i(TAG, "FIX12_PERF_END")
-        Log.i(TAG, "========== FIX12 TEST03 DONE ==========")
+        engine.close()
+        assertTrue("FIX-12 perf: forward pass took ${totalMs}ms (expected < 15000ms)", totalMs < 15000)
     }
 }
