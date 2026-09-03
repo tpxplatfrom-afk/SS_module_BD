@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 
 $ADB = "C:\Users\User\AppData\Local\Android\Sdk\platform-tools\adb.exe"
 $SCRIPT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Path
-$MODULE_ROOT = Split-Path -Parent $SCRIPT_DIR
+$MODULE_ROOT = Split-Path -Parent (Split-Path -Parent $SCRIPT_DIR)
 $APP_DIR = Join-Path $MODULE_ROOT "offline-ai_chatbot"
 $OUT_DIR = Join-Path $SCRIPT_DIR "fix12b"
 

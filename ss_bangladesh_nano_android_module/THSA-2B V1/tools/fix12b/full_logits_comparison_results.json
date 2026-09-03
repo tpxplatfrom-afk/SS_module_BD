@@ -1,0 +1,157 @@
+{
+  "has_ref_a": false,
+  "has_ref_b": true,
+  "has_android": true,
+  "results": {
+    "TEST-A": {
+      "label": "TEST-A",
+      "prompt": "2+2=?",
+      "B_vs_Android": {
+        "pair": "RefB_vs_Android",
+        "max_abs_error": 0.7817789316177368,
+        "mean_abs_error": 0.12798121580804056,
+        "rmse": 0.16050689114428693,
+        "cosine_similarity": 0.9956331742788596,
+        "top1_match": true,
+        "top1_1": 64792,
+        "top1_2": 64792,
+        "top5_1": [
+          64792,
+          6155,
+          40858,
+          271,
+          198
+        ],
+        "top5_2": [
+          64792,
+          40858,
+          6155,
+          271,
+          18798
+        ],
+        "top5_overlap": 4,
+        "top10_overlap": 8
+      }
+    },
+    "TEST-B": {
+      "label": "TEST-B",
+      "prompt": "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u09b0\u09be\u099c\u09a7\u09be\u09a8\u09c0 \u0995\u09c0?",
+      "B_vs_Android": {
+        "pair": "RefB_vs_Android",
+        "max_abs_error": 0.8184816539287567,
+        "mean_abs_error": 0.1634648387212314,
+        "rmse": 0.20125544592982375,
+        "cosine_similarity": 0.994629255863371,
+        "top1_match": true,
+        "top1_1": 64792,
+        "top1_2": 64792,
+        "top5_1": [
+          64792,
+          6155,
+          40858,
+          271,
+          198
+        ],
+        "top5_2": [
+          64792,
+          40858,
+          6155,
+          18798,
+          12095
+        ],
+        "top5_overlap": 3,
+        "top10_overlap": 7
+      }
+    },
+    "TEST-C": {
+      "label": "TEST-C",
+      "prompt": "\u09aa\u09be\u09a8\u09bf \u0995\u09a4 \u09a1\u09bf\u0997\u09cd\u09b0\u09bf \u09b8\u09c7\u09b2\u09b8\u09bf\u09af\u09bc\u09be\u09b8\u09c7 \u09ab\u09c1\u099f\u09c7?",
+      "B_vs_Android": {
+        "pair": "RefB_vs_Android",
+        "max_abs_error": 0.9738576412200928,
+        "mean_abs_error": 0.212592136509125,
+        "rmse": 0.2601232230448788,
+        "cosine_similarity": 0.9912720704557959,
+        "top1_match": true,
+        "top1_1": 64792,
+        "top1_2": 64792,
+        "top5_1": [
+          64792,
+          6155,
+          40858,
+          271,
+          198
+        ],
+        "top5_2": [
+          64792,
+          40858,
+          6155,
+          18798,
+          12095
+        ],
+        "top5_overlap": 3,
+        "top10_overlap": 7
+      }
+    },
+    "TEST-D": {
+      "label": "TEST-D",
+      "prompt": "\u09e7\u09e8 \u00d7 \u09ee = ?",
+      "B_vs_Android": {
+        "pair": "RefB_vs_Android",
+        "max_abs_error": 1.4616982340812683,
+        "mean_abs_error": 0.31042101640538544,
+        "rmse": 0.38204570011488825,
+        "cosine_similarity": 0.9761993974856191,
+        "top1_match": true,
+        "top1_1": 3687,
+        "top1_2": 3687,
+        "top5_1": [
+          3687,
+          5145,
+          1112,
+          580,
+          4206
+        ],
+        "top5_2": [
+          3687,
+          1112,
+          5145,
+          64705,
+          220
+        ],
+        "top5_overlap": 3,
+        "top10_overlap": 5
+      }
+    },
+    "TEST-E": {
+      "label": "TEST-E",
+      "prompt": "\u09a2\u09be\u0995\u09be \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u09b0\u09be\u099c\u09a7\u09be\u09a8\u09c0\u0964",
+      "B_vs_Android": {
+        "pair": "RefB_vs_Android",
+        "max_abs_error": 1.5685484409332275,
+        "mean_abs_error": 0.17061155840007258,
+        "rmse": 0.21443067652409917,
+        "cosine_similarity": 0.9967086670142569,
+        "top1_match": true,
+        "top1_1": 64705,
+        "top1_2": 64705,
+        "top5_1": [
+          64705,
+          20517,
+          271,
+          3838,
+          7552
+        ],
+        "top5_2": [
+          64705,
+          271,
+          20517,
+          17926,
+          3838
+        ],
+        "top5_overlap": 4,
+        "top10_overlap": 8
+      }
+    }
+  }
+}

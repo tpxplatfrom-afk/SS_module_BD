@@ -22,6 +22,9 @@ Computes for each prompt (all 65,536 dimensions):
 
 import os
 import sys
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 import json
 import struct
 import hashlib
@@ -114,17 +117,17 @@ def main():
         if v_b is not None and v_a is not None:
             comp_ab = compare_vectors(v_a, v_b, "RefA", "RefB")
             prompt_res["A_vs_B"] = comp_ab
-            print(f"  A ↔ B: Cosine={comp_ab['cosine_similarity']:.6f} MaxAbs={comp_ab['max_abs_error']:.4f} Top1={'MATCH' if comp_ab['top1_match'] else 'DIFF'} Top5Overlap={comp_ab['top5_overlap']}/5")
+            print(f"  A <-> B: Cosine={comp_ab['cosine_similarity']:.6f} MaxAbs={comp_ab['max_abs_error']:.4f} Top1={'MATCH' if comp_ab['top1_match'] else 'DIFF'} Top5Overlap={comp_ab['top5_overlap']}/5")
 
         if v_b is not None and v_and is not None:
             comp_band = compare_vectors(v_b, v_and, "RefB", "Android")
             prompt_res["B_vs_Android"] = comp_band
-            print(f"  B ↔ Android: Cosine={comp_band['cosine_similarity']:.6f} MaxAbs={comp_band['max_abs_error']:.4f} Top1={'MATCH' if comp_band['top1_match'] else 'DIFF'} Top5Overlap={comp_band['top5_overlap']}/5")
+            print(f"  B <-> Android: Cosine={comp_band['cosine_similarity']:.6f} MaxAbs={comp_band['max_abs_error']:.4f} Top1={'MATCH' if comp_band['top1_match'] else 'DIFF'} Top5Overlap={comp_band['top5_overlap']}/5")
 
         if v_a is not None and v_and is not None:
             comp_aand = compare_vectors(v_a, v_and, "RefA", "Android")
             prompt_res["A_vs_Android"] = comp_aand
-            print(f"  A ↔ Android: Cosine={comp_aand['cosine_similarity']:.6f} MaxAbs={comp_aand['max_abs_error']:.4f} Top1={'MATCH' if comp_aand['top1_match'] else 'DIFF'}")
+            print(f"  A <-> Android: Cosine={comp_aand['cosine_similarity']:.6f} MaxAbs={comp_aand['max_abs_error']:.4f} Top1={'MATCH' if comp_aand['top1_match'] else 'DIFF'}")
 
         results[label] = prompt_res
 

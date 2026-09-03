@@ -253,9 +253,8 @@ def nano_forward(nano_path, hdr, descs, token_ids):
             # Load conv1d weight [D,1,4] FP32
             conv_w = load_fp32_weight(nano_path, descs[base+0], (D, 1, 4))
             conv_b = load_fp32_weight(nano_path, descs[base+1], (D,))
-            # Single-token: conv is just the last 4 elements (no history → use 0-pad)
-            # Apply as: conv_out[d] = sum(conv_w[d,0,:] * [0,0,0,value_s[d]]) + conv_b[d]
-            conv_out = conv_w[:, 0, -1] * value_s + conv_b
+            # Single-token causal Conv1D:
+            conv_out = conv_w[:, 0, 0] * value_s + conv_b
             # SiLU gate
             gated = silu(gate_s) * conv_out
             # out_proj [D, D]
@@ -269,29 +268,15 @@ def nano_forward(nano_path, hdr, descs, token_ids):
             q = apply_weight(nano_path, descs[base+0], (NQ*DH, D), h_normed)
             k = apply_weight(nano_path, descs[base+1], (NKV*DH, D), h_normed)
             v = apply_weight(nano_path, descs[base+2], (NKV*DH, D), h_normed)
-            # Single-token self-attention (no KV history): just V pass through
             # Reshape q,k,v
-            q_ = q.reshape(NQ, DH)
             k_ = k.reshape(NKV, DH)
             v_ = v.reshape(NKV, DH)
             # Expand KV for GQA (NQ heads, each mapped to NKV groups)
-            # groups_per_kv = NQ // NKV = 5
             gpk = NQ // NKV
-            k_exp = np.repeat(k_, gpk, axis=0)  # [NQ, DH]
             v_exp = np.repeat(v_, gpk, axis=0)  # [NQ, DH]
-            # Attention: single token → score=q·k/sqrt(DH), no mask needed
-            scores = np.sum(q_ * k_exp, axis=-1) / np.sqrt(DH)  # [NQ]
-            attn   = np.exp(scores - scores.max())
-            attn  /= attn.sum()
-            # Weighted sum
-            attended = np.sum(attn[:, None] * v_exp, axis=0)  # [DH]
-            # Reshape back
-            attn_out = attended.reshape(-1)  # simplified single-head output
-            # Pad to D if needed
-            if attn_out.shape[0] < D:
-                attn_out = np.concatenate([attn_out, np.zeros(D - attn_out.shape[0], dtype=np.float32)])
-            elif attn_out.shape[0] > D:
-                attn_out = attn_out[:D]
+            # For sequence length 1: softmax over 1 element is identically 1.0
+            # So attended output for each of the 20 query heads is its corresponding v head
+            attn_out = v_exp.reshape(-1)  # [NQ * DH = 2560 = D]
             # out_proj [D, D]
             attn_proj = apply_weight(nano_path, descs[base+3], (D, D), attn_out)
             h = h + attn_proj

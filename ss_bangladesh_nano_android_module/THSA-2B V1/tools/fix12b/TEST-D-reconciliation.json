@@ -1,0 +1,43 @@
+{
+  "prompt_utf8_hex": "e0a7a7e0a7a820c39720e0a7ae203d203f",
+  "token_ids": [
+    2232,
+    15325,
+    1656,
+    1718,
+    2667
+  ],
+  "token_count": 5,
+  "last_token": 2667,
+  "model_nano_sha256": "0eeae45f90d8c74b9c0773b7c3870b5fa095829cebd4a093a2f1302b047d1d64",
+  "model_nano_size": 765477824,
+  "fix12_reference_b": {
+    "argmax": 3687,
+    "top5": [
+      3687,
+      5145,
+      1112,
+      580,
+      4206
+    ],
+    "logits_sha256": "dc8128af56a19ce5c9d9b22bab9703ed1ba47b2f2a26caa04804026e7eb71444",
+    "gqa_implementation": "full sequence-1 GQA expansion: repeat(v, NQ//NKV, axis=0) -> context shape [2560], out_proj [D, D]",
+    "conv1d_tap": "conv_w[:, 0, 0]"
+  },
+  "fix12b_reference_b": {
+    "argmax": 3687,
+    "top5": [
+      3687,
+      5145,
+      1112,
+      580,
+      4206
+    ],
+    "logits_sha256": "83b01652178b92a7b85868d3bf9fe73c79be223b4bb167430743859b9dde72a3",
+    "gqa_implementation": "erroneous single-head collapse: sum(attn * v_exp, axis=0) -> shape [128], zero-padded to [2560]",
+    "conv1d_tap": "conv_w[:, 0, -1]"
+  },
+  "discrepancy_cause": "GQA head dimensionality bug in fix12b_phase_d_reference_b_full.py: line 287 collapsed all 20 query heads into a single 128-dim head and padded with zeros instead of concatenating the 20 attended heads to 2560 dimensions. This caused distortion in GQA layers 2, 5, 8, 11, 14, 17, 20, 23. In addition, Conv1D tap indexing differed (tap 0 vs tap -1). When GQA heads are properly preserved, 3687 is in top ranks.",
+  "authoritative_model_source": "Android physical device execution and PyTorch Step-30 checkpoint",
+  "next_step": "Fix the GQA multi-head concatenation and Conv1D indexing in fix12b_phase_d_reference_b_full.py to perfectly mirror the native C++ engine and PyTorch GQAttentionBlock."
+}
