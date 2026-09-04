@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file neon_kv_cache.h
  * @brief Phase 2B: INT4 Grouped KV-Cache SIMD & Attention-Sink Rolling Window.
  * 20 Query heads share 4 KV heads (5:1 GQA ratio), packed at 4 bits per element.
@@ -55,6 +55,61 @@ void nano_neon_kv_dequantize_int4(
  * @param out_attn Output attention vector [N_Q * D_HEAD]
  */
 void nano_neon_gqa_attention_int4(
+    const float* q,
+    const uint8_t* k_cache,
+    const float* k_scales,
+    const uint8_t* v_cache,
+    const float* v_scales,
+    size_t seq_len,
+    size_t n_q,
+    size_t n_kv,
+    size_t d_head,
+    float* out_attn
+);
+
+/**
+ * @brief Authoritative scalar FP32 reference implementation of GQA attention
+ * @param q Query vector [n_q * d_head]
+ * @param k_cache_fp32 Uncompressed Key cache [n_kv, max_seq, d_head]
+ * @param v_cache_fp32 Uncompressed Value cache [n_kv, max_seq, d_head]
+ * @param seq_len Current valid sequence length
+ * @param max_seq Maximum sequence capacity (pitch per head in cache)
+ * @param n_q Number of Query heads (20)
+ * @param n_kv Number of KV heads (4)
+ * @param d_head Dimension per head (128)
+ * @param out_attn Output attention context vector [n_q * d_head]
+ */
+void nano_scalar_gqa_attention_fp32(
+    const float* q,
+    const float* k_cache_fp32,
+    const float* v_cache_fp32,
+    size_t seq_len,
+    size_t max_seq,
+    size_t n_q,
+    size_t n_kv,
+    size_t d_head,
+    float* out_attn
+);
+
+/**
+ * @brief Vectorized ARM NEON FP32 implementation of GQA attention
+ */
+void nano_neon_gqa_attention_fp32(
+    const float* q,
+    const float* k_cache_fp32,
+    const float* v_cache_fp32,
+    size_t seq_len,
+    size_t max_seq,
+    size_t n_q,
+    size_t n_kv,
+    size_t d_head,
+    float* out_attn
+);
+
+/**
+ * @brief Authoritative scalar INT4 reference implementation of GQA attention
+ */
+void nano_scalar_gqa_attention_int4(
     const float* q,
     const uint8_t* k_cache,
     const float* k_scales,

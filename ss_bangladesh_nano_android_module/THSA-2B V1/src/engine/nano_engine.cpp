@@ -32,6 +32,7 @@
 #include "../../include/kernels/neon_kv_cache.h"
 #include "../../include/kernels/neon_state_update.h"
 #include "../../include/kernels/neon_norm_act.h"
+#include "../../include/kernels/neon_gemv_int8.h"   /* FIX-A: ARMv7 NEON dense INT8 LM-head GEMV */
 
 #ifdef __ANDROID__
 #include <android/log.h>
@@ -277,7 +278,7 @@ struct NanoLayerPointers {
     // State Block Weights
     const uint8_t* w_state_in_proj;  // [5120, 2560] (Ternary 2-bit packed)
     float          scale_state_in;
-    const float*   conv_weights;     // [4, 2560] (FP32)
+    const float*   conv_weights;     // [2560, 4] (FP32, channel-major: W_0=t-3, W_1=t-2, W_2=t-1, W_3=t)
     const float*   conv_bias;        // [2560] (FP32)
     const uint8_t* w_state_out_proj; // [2560, 2560] (Ternary 2-bit packed)
     float          scale_state_out;
@@ -737,25 +738,28 @@ static NanoTokenId nano_forward_pass_single_token(
     nano_neon_quantize_int8(ctx->norm_out, ctx->h_state_int8, &norm_scale, 2560);
     float combined_scale = norm_scale * ctx->lm_head_scale;
     
-    for (size_t v = 0; v < 65536; ++v) {
-        const int8_t* lm_row = ctx->lm_head_ptr + (v * 2560);
-        int32_t dot = 0;
-        size_t d = 0;
-        for (; d + 8 <= 2560; d += 8) {
-            dot += (int32_t)ctx->h_state_int8[d + 0] * (int32_t)lm_row[d + 0]
-                 + (int32_t)ctx->h_state_int8[d + 1] * (int32_t)lm_row[d + 1]
-                 + (int32_t)ctx->h_state_int8[d + 2] * (int32_t)lm_row[d + 2]
-                 + (int32_t)ctx->h_state_int8[d + 3] * (int32_t)lm_row[d + 3]
-                 + (int32_t)ctx->h_state_int8[d + 4] * (int32_t)lm_row[d + 4]
-                 + (int32_t)ctx->h_state_int8[d + 5] * (int32_t)lm_row[d + 5]
-                 + (int32_t)ctx->h_state_int8[d + 6] * (int32_t)lm_row[d + 6]
-                 + (int32_t)ctx->h_state_int8[d + 7] * (int32_t)lm_row[d + 7];
-        }
-        for (; d < 2560; ++d) {
-            dot += (int32_t)ctx->h_state_int8[d] * (int32_t)lm_row[d];
-        }
-        ctx->logits[v] = (float)dot * combined_scale;
-    }
+    /* FIX-A: ARMv7 NEON dense INT8 LM-Head GEMV.
+     *
+     * Replaces the former scalar 8-way-unrolled loop.
+     * The scalar reference is preserved in:
+     *   nano_scalar_gemv_dense_int8_reference()  [neon_gemv_int8.cpp]
+     * for differential testing.
+     *
+     * Numerical contract (unchanged):
+     *   dot[v]    = SUM_{d=0}^{2559} int32(h_state_int8[d]) * int32(lm_head[v,d])
+     *   logits[v] = (float)dot[v] * combined_scale
+     *
+     * Accumulation: INT8×INT8 → INT32 → FP32 (no mid-stream FP32 accumulation).
+     * combined_scale = norm_scale * lm_head_scale (computed above, unchanged).
+     */
+    nano_neon_gemv_dense_int8(
+        ctx->lm_head_ptr,      /* row-major INT8 weight matrix [65536 × 2560] */
+        ctx->h_state_int8,     /* INT8 quantized activation [2560]             */
+        ctx->logits,           /* FP32 output logits [65536]                   */
+        65536,                 /* rows = vocab_size                             */
+        2560,                  /* cols = d_model                                */
+        combined_scale         /* norm_scale * lm_head_scale                   */
+    );
     g_fix12_timing.lmhead_us  = fix12_now_us() - t_lmhead_start;
     g_fix12_timing.total_us   = fix12_now_us() - t_total_start;
     ctx->stats.logits_generation_count++;

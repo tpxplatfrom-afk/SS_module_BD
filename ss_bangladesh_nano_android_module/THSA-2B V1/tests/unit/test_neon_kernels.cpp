@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file test_neon_kernels.cpp
  * @brief Phase 2 Unit Test Harness: Validates Bit-Exactness, Numerical Bounds, and Memory Arenas.
  */
@@ -129,10 +129,10 @@ static bool test_short_conv_state_block(void) {
     for (size_t i = 0; i < D_MODEL; ++i) {
         x_in[i] = 1.0f;
         bias[i] = 0.0f;
-        weights[0 * D_MODEL + i] = 0.1f;
-        weights[1 * D_MODEL + i] = 0.2f;
-        weights[2 * D_MODEL + i] = 0.3f;
-        weights[3 * D_MODEL + i] = 0.4f;
+        weights[i * 4 + 0] = 0.1f;
+        weights[i * 4 + 1] = 0.2f;
+        weights[i * 4 + 2] = 0.3f;
+        weights[i * 4 + 3] = 0.4f;
     }
     
     // Step 1: Initial token (history is zero, y = 0.4 * 1.0 = 0.4)

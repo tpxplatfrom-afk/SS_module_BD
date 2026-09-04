@@ -79,3 +79,10 @@ checkpoints/
 *.a
 build_host/
 build_arm64/
+build_armeabi_v7a_*/
+**/build_armeabi_v7a_*/
+fix12_build.log
+**/fix12_device_logcat.txt
+**/fix12c/
+artifacts/
+*.png

@@ -267,17 +267,17 @@ def main():
                     conv_w = load_fp32_weight(NANO_PATH, descs[base + 0], (D, 1, 4))
                     conv_b = load_fp32_weight(NANO_PATH, descs[base + 1], (D,))
 
-                    # Causal Conv1D using conv_state history
-                    # conv_w[:, 0, 0] is current token, [:, 0, 1] is t-1, [:, 0, 2] is t-2, [:, 0, 3] is t-3
-                    # (Matching PyTorch Conv1D kernel weight layout where last element aligns with current tap)
+                    # Causal Conv1D using conv_state history (PyTorch Conv1d exact equivalence)
                     s0 = conv_states[li][0] # t-3
                     s1 = conv_states[li][1] # t-2
                     s2 = conv_states[li][2] # t-1
-                    # In PyTorch: conv1d weights are flipped during cross-correlation: w[0]*s0 + w[1]*s1 + w[2]*s2 + w[3]*value_s
-                    # But in model.nano, conv_w[:, 0, 0] was exported as current token weight!
-                    # Verified from FIX-12B reconciliation: conv_out = conv_w[:, 0, 0] * value_s + conv_b
-                    conv_out = conv_w[:, 0, 0] * value_s + conv_b
-                    # Update state
+                    # In PyTorch F.conv1d(padding=3):
+                    # conv_w[:, 0, 0] = W_0 (t-3), conv_w[:, 0, 1] = W_1 (t-2), conv_w[:, 0, 2] = W_2 (t-1), conv_w[:, 0, 3] = W_3 (t)
+                    conv_out = (s0 * conv_w[:, 0, 0] +
+                                s1 * conv_w[:, 0, 1] +
+                                s2 * conv_w[:, 0, 2] +
+                                value_s * conv_w[:, 0, 3] + conv_b)
+                    # Update state FIFO
                     conv_states[li][0] = s1
                     conv_states[li][1] = s2
                     conv_states[li][2] = value_s
@@ -322,15 +322,39 @@ def main():
                         prompt_ckpts[f"ckpt12b_block_{li:02d}_gqa_k"] = dump_vector(p_dir, f"ckpt12b_block_{li:02d}_gqa_k", k)
                         prompt_ckpts[f"ckpt12c_block_{li:02d}_gqa_v"] = dump_vector(p_dir, f"ckpt12c_block_{li:02d}_gqa_v", v)
 
-                    # GQA Multi-head sequence-1 attention:
-                    # Repeat KV heads for 20 query heads (ratio 5)
-                    repeat_factor = NQ // NKV  # 20 // 4 = 5
-                    v_exp = v.reshape(NKV, DH).repeat(repeat_factor, axis=0).reshape(-1)
+                    # Update GQA KV cache
+                    kv_k[li].append(k.reshape(NKV, DH))
+                    kv_v[li].append(v.reshape(NKV, DH))
+                    seq_len_active = len(kv_k[li])
+
+                    # Multi-token causal GQA attention
+                    context = np.zeros(NQ * DH, dtype=np.float32)
+                    scale_attn = 1.0 / math.sqrt(DH)
+                    gqa_group_size = NQ // NKV
+
+                    for q_head in range(NQ):
+                        kv_head = q_head // gqa_group_size
+                        q_h = q[q_head * DH : (q_head + 1) * DH]
+                        scores = np.zeros(seq_len_active, dtype=np.float32)
+                        max_score = -1e9
+                        for past_t in range(seq_len_active):
+                            k_h = kv_k[li][past_t][kv_head]
+                            score = float(np.dot(q_h, k_h)) * scale_attn
+                            scores[past_t] = score
+                            if score > max_score:
+                                max_score = score
+                        exp_scores = np.exp(scores - max_score)
+                        attn_weights = exp_scores / (np.sum(exp_scores) + 1e-9)
+                        out_h = np.zeros(DH, dtype=np.float32)
+                        for past_t in range(seq_len_active):
+                            out_h += attn_weights[past_t] * kv_v[li][past_t][kv_head]
+                        context[q_head * DH : (q_head + 1) * DH] = out_h
+
                     if is_detailed:
-                        prompt_ckpts[f"ckpt13_block_{li:02d}_gqa_attention"] = dump_vector(p_dir, f"ckpt13_block_{li:02d}_gqa_attention", v_exp)
+                        prompt_ckpts[f"ckpt13_block_{li:02d}_gqa_attention"] = dump_vector(p_dir, f"ckpt13_block_{li:02d}_gqa_attention", context)
 
                     # slot 3: out_proj [D, D]
-                    gqa_out = apply_weight(NANO_PATH, descs[base + 3], (D, D), v_exp)
+                    gqa_out = apply_weight(NANO_PATH, descs[base + 3], (D, D), context)
                     if is_detailed:
                         prompt_ckpts[f"ckpt14_block_{li:02d}_gqa_out_proj"] = dump_vector(p_dir, f"ckpt14_block_{li:02d}_gqa_out_proj", gqa_out)
 
